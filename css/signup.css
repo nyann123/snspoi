@@ -1,0 +1,124 @@
+@font-face {
+  font-family: 'dqfont';
+  src: url("../DragonQuestFC.ttf");
+}
+
+/* 予定 */
+/* @media screen and (max-width:1070px){
+body{
+  display: none;
+}
+} */
+
+body{
+  background-color: #121212;
+  padding-top: 50px;
+}
+
+.signup_form{
+  color: #FFF;
+  max-width: 800px;
+  width: calc(100% - 100px);
+  padding: 10px 50px 50px 50px;;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.signup_form h2{
+  font-family: "dqfont";
+  color: #fff;
+  font-size: 50px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  vertical-align: middle;
+  width: 180px;
+  margin: 0 0 -20px;;
+  background-color: #121212;
+  position: relative;
+  top: -50px;
+}
+
+.form_inner {
+  position:relative;
+}
+
+.signup_form input{
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 16px;
+  width: 360px;
+  padding: 5px 10px;
+  margin: 2px 0 20px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: transparent;
+  display: inline-block;
+  outline: none;
+}
+
+.error{
+  border: #FF7763 solid 2px !important;
+}
+
+.js_error_message{
+  font-family: "dqfont";
+  color: #FF7763;
+  font-size: 28px;
+  margin-left: 10px;
+  vertical-align:middle;
+}
+
+.php_message{
+color: #FF7763;
+margin-top: 0;
+}
+
+#signup_btn{
+  font-family: 'dqfont';
+  color: #3FBFFF;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 5px;
+  letter-spacing: 0.08em;
+  width: 150px;
+  height: 40px;
+  padding: 5px 5px 20px;
+  margin: 0;
+  border: 2px solid #3FBFFF;
+  display: inline;
+}
+
+#signup_btn:hover{
+  cursor: pointer;
+}
+
+#signup_btn:disabled{
+  color: #b8b8b8;
+  border-color: #b8b8b8;
+  cursor: default;
+}
+
+.flash_cursor{
+  color: #fff;
+  font-family: "dqfont";
+  font-size: 50px;
+  float: left;
+  position: absolute;
+  left: -25px;
+
+  -webkit-animation-name: Flash1;/* 実行する名前 */
+  -webkit-animation-duration: 0.3s;/* 0.3秒かけて実行 */
+  -webkit-animation-iteration-count:infinite;/* 何回実行するか。infiniteで無限 */
+  -webkit-animation-timing-function:ease-in-out;/* イーズインアウト */
+  -webkit-animation-direction: alternate;/* alternateにするとアニメーションが反復 */
+  -webkit-animation-delay: 0s; /* 実行までの待ち時間 */
+}
+
+/* アニメーション */
+@keyframes Flash1{
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }
+}

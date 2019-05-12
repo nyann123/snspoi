@@ -1,0 +1,58 @@
+<?php
+require_once("config.php");
+
+function cheak_email_duplicate($email, $pdo){
+  $sql = "select * from users where email = :email limit 1";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(':email' => $email));
+  $user = $stmt->fetch();
+  return $user ? true : false;
+}
+
+// 送信されていればdb処理
+if(!empty($_POST)){
+
+  $error_messages = array();
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  // 名前のバリデーション
+  if ( empty($name) ){
+    $error_messages[] = 'なまえを入力してください';
+  }elseif( strlen($name) > 10 ){
+    $error_messages[] = 'なまえは10文字以内で入力してください';
+  }
+
+  // メールのバリデーション
+  if(!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)){
+    $error_messages[] = 'Emailの形式で入力してください';
+  }elseif ( cheak_email_duplicate( $email,$pdo ) ){
+    $error_messages[] = 'すでに登録済みのメールアドレスです';
+  }
+
+  // パスワードのバリデーション
+  if (preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i', $password)) {
+    $password = password_hash($password, PASSWORD_DEFAULT);
+  }else{
+    $error_messages[] = 'パスワードは半角英数字をそれぞれ1文字以上含んだ6文字以上で設定してください。';
+  }
+
+  if(empty($error_messages)){
+
+    try {
+      $sql = "insert into users(name,email,password,created_at) value(:name,:email,:password,:created_at)";
+      $stmt = $pdo->prepare($sql);
+      $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => $password , ':created_at' => date('Y-m-d H:i:s')));
+
+      $_SESSION['flash'] = '登録が完了しました';
+      header('Location:login_form.php');
+    } catch (\Exception $e) {
+      echo $e->getMessage() ;
+      $_SESSION['flash'] = 'error';
+    }
+  }else{
+    $_SESSION['flash'] = $error_messages;
+    header('Location:signup_form.php');
+  }
+}

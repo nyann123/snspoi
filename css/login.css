@@ -1,0 +1,116 @@
+@font-face {
+  font-family: 'dqfont';
+  src: url("../DragonQuestFC.ttf");
+}
+
+/* 予定 */
+/* @media screen and (max-width:1070px){
+body{
+  display: none;
+}
+} */
+
+.flash{
+  color: #FFF;
+}
+
+
+body{
+  background-color: #121212;
+  padding-top: 50px;
+}
+
+.login_form{
+  max-width: 800px;
+  width: calc(100% - 100px);
+  padding: 10px 50px 50px 50px;;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.login_form h2{
+  font-family: "dqfont";
+  color: #fff;
+  font-size: 50px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  width: 180px;
+  margin: 0 0 -20px;
+  background-color: #121212;
+  position: relative;
+  top: -50px;
+}
+
+.form_inner{
+  position:relative;
+}
+
+.login_form input{
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 16px;
+  width: 400px;
+  padding: 5px 10px;
+  margin: 0 0 20px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: transparent;
+  display: block;
+}
+
+.signup{
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 0 0 20px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.php_message{
+  color: #FF7763;
+  margin-top: 0;
+}
+
+#login_btn{
+  font-family: 'dqfont';
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 5px;
+  letter-spacing: 0.08em;
+  width: 150px;
+  height: 40px;
+  padding: 5px 5px 20px;
+  margin: 0;
+  border: 1px solid #fff;
+  display: inline;
+}
+
+#login_btn:hover{
+  cursor: pointer;
+}
+
+.flash_cursor{
+  color: #fff;
+  font-family: "dqfont";
+  font-size: 50px;
+  float: left;
+  position: absolute;
+  left: -25px;
+  top: -20px;
+
+  -webkit-animation-name: Flash1;/* 実行する名前 */
+  -webkit-animation-duration: 0.3s;/* 0.3秒かけて実行 */
+  -webkit-animation-iteration-count:infinite;/* 何回実行するか。infiniteで無限 */
+  -webkit-animation-timing-function:ease-in-out;/* イーズインアウト */
+  -webkit-animation-direction: alternate;/* alternateにするとアニメーションが反復 */
+  -webkit-animation-delay: 0s; /* 実行までの待ち時間 */
+}
+
+/* アニメーション */
+@keyframes Flash1{
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }
+}
