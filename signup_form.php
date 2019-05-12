@@ -28,15 +28,15 @@ require_once("signup_process.php");
           <span class="flash_cursor">｝</span>
 
           <label for="name">おなまえ</label><br>
-          <input id="name" type="text" name="name" value="<?php if (isset($name)) echo $name ?>">
+          <input id="name" type="text" name="name" value="<?php if (isset($oldname)) echo $oldname; ?>">
           <span class="js_error_message"></span><br>
 
           <label for="email">メールアドレス</label><br>
-          <input id="email" autocomplete="false" type="text" name="email" value="<?php if (isset($email)) echo $email?>">
+          <input id="email" autocomplete="false" type="text" name="email" value="<?php if (isset($oldemail)) echo $oldemail?>">
           <span class="js_error_message"></span> <br>
 
           <label for="password">パスワード</label><br>
-          <input id="password" autocomplete="flase" type="password" name="password" value="<?php if (isset($password)) echo $password ?>">
+          <input id="password" autocomplete="flase" type="password" name="password" value="<?php if (isset($oldpassword)) echo $oldpassword ?>">
           <span class="js_error_message"></span><br>
 
           <input id="signup_btn" type="submit" name="" value="とうろくする" >

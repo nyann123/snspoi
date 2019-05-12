@@ -9,13 +9,29 @@ function cheak_email_duplicate($email, $pdo){
   return $user ? true : false;
 }
 
+// 要修正
+if( isset($_SESSION['name']) ){
+  $oldname = $_SESSION['name'];
+}
+unset($_SESSION['name']);
+
+if( isset($_SESSION['email']) ){
+  $oldemail = $_SESSION['email'];
+}
+unset($_SESSION['email']);
+
+if( isset($_SESSION['password']) ){
+  $oldpassword = $_SESSION['password'];
+}
+unset($_SESSION['password']);
+
 // 送信されていればdb処理
 if(!empty($_POST)){
 
   $error_messages = array();
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $password = $_POST['password'];
+  $name = $_SESSION['name'] = $_POST['name'];
+  $email = $_SESSION['email'] = $_POST['email'];
+  $password = $_SESSION['password'] = $_POST['password'];
 
   // 名前のバリデーション
   if ( empty($name) ){

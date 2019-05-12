@@ -1,6 +1,6 @@
 <?php
 session_start();
-//フラッシュメッセージ表示用処理
+//フラッシュメッセージ用処理
 if( isset($_SESSION['flash']) ){
   $flash_messages = $_SESSION['flash'];
 }
