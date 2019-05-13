@@ -16,11 +16,6 @@ try {
   $error_messages[] = 'error';
 }
 
-
-
-
-
-
  ?>
 
 <!DOCTYPE html>
@@ -36,21 +31,23 @@ try {
       <a href="login_form.php">home</a>
       <a href="logout_process.php">ログアウト</a>
     </header>
-    <h2 class="mypage2">MyPage</h2>
-    <div class="mypage">
-      <div class="user_info">
-        ようこそ
-        <?php  echo $user['name']; ?>
-        さん
-      </div>
-      <div class="messages">
-        <form class ="post_form" action="#" method="post">
-          <textarea name="name" rows="8" cols="80"></textarea><br>
-          <input id="post_btn" type="submit" name="" value="投稿">
-        </form>
-        <?php foreach($user as $info): ?>
-        <p><?php echo $info ?></p>
-        <?php endforeach ?>
+    <div class="container">
+      <h2 class="top_title">まいぺーじ</h2> <!-- いらないかも-->
+      <div class ="mypage">
+        <div class="mypage_left">
+          ようこそ
+          <?php  echo $user['name']; ?>
+          さん
+        </div>
+        <div class="mypage_right">
+          <form class ="post_form" action="#" method="post">
+            <textarea name="name" rows="8" cols="80"></textarea><br>
+            <input id="post_btn" type="submit" name="" value="投稿">
+          </form>
+          <?php foreach($user as $info): ?>
+          <p><?php echo $info ?></p>
+          <?php endforeach ?>
+        </div>
       </div>
     </div>
   </body>

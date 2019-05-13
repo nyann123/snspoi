@@ -13,6 +13,7 @@ require_once('login_process.php');
   <body>
     <header>
       <a href="logout_process.php">ログアウト</a>
+      <a href="mypage.php">mypage</a>
     </header>
       <div class="login_form">
         <h2>ログイン</h2>

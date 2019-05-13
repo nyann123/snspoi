@@ -8,22 +8,29 @@ body{
   padding-top: 50px;
 }
 
-.mypage{
+.container{
   max-width: 1170px;
   width: 100%;
   margin: 0 auto;
   text-align: center;
+}
+.mypage{
   display: flex;
 }
 
-.mypage2{
-  /* font-family: "dqfont"; */
+
+.top_title{
+  max-width: 1170px;
+  font-family: "dqfont";
   color: #fff;
-  font-size: 30px;
+  font-size: 50px;
   letter-spacing: 0.08em;
+  margin: 0 auto;
+  vertical-align: middle;
+  width: 180px;
 }
 
-.user_info{
+.mypage_left{
   color:#fff;
   border: 2px solid #fff;
   border-radius: 8px;
@@ -34,7 +41,7 @@ body{
   margin-right: 10px;
 }
 
-.messages{
+.mypage_right{
   color: #fff;
   border: 2px solid #fff;
   border-radius: 8px;
@@ -43,30 +50,57 @@ body{
   padding: 10px;
 }
 
-.messages p{
+.mypage_right p{
   border: 2px solid #fff;
   border-radius: 8px;
 }
 
 .post_form{
   width: 100%;
-  height: 200px;
   border: 2px solid #fff;
   border-radius: 8px;
   box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.post_form input{
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 16px;
+  width: 400px;
+  padding: 5px 10px;
+  margin: 0 0 20px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: transparent;
+  display: block;
+}
+.post_form textarea{
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 16px;
+  width: 90%;
+  padding: 10px;
+  margin: 0 0 10px;
+  border-radius: 5px;
+  background-color: transparent;
+  resize: none;
 }
 
 #post_btn{
-  font-family: 'dqfont';
   color: #3FBFFF;
-  font-size: 38px;
+  font-size: 28px;
   font-weight: 400;
-  line-height: 5px;
   letter-spacing: 0.08em;
-  width: 150px;
+  width: 100px;
   height: 40px;
-  padding: 5px 5px 20px;
+  padding: 5px;
   margin: 0;
   border: 2px solid #3FBFFF;
   display: inline;
+  background-color: inherit;
+}
+
+#post_btn:hover{
+  cursor: pointer;
 }
