@@ -91,8 +91,8 @@ body{
 }
 
 .flash_cursor{
-  color: #fff;
   font-family: "dqfont";
+  color: #fff;
   font-size: 50px;
   float: left;
   position: absolute;
