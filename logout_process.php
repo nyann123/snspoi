@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['user'])) {
-  $_SESSION['user'] = array();
+  unset($_SESSION['user']);
   $_SESSION['flash'] = 'ログアウトしました';
   header('Location:login_form.php');
 

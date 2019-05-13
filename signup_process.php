@@ -9,7 +9,7 @@ function cheak_email_duplicate($email, $pdo){
   return $user ? true : false;
 }
 
-// 要修正
+// まとめたい
 if( isset($_SESSION['name']) ){
   $oldname = $_SESSION['name'];
 }

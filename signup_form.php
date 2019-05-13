@@ -39,7 +39,7 @@ require_once("signup_process.php");
           <input id="password" autocomplete="flase" type="password" name="password" value="<?php if (isset($oldpassword)) echo $oldpassword ?>">
           <span class="js_error_message"></span><br>
 
-          <input id="signup_btn" type="submit" name="" value="とうろくする" >
+          <input id="signup_btn" type="submit" name="" value="とうろくする" disabled>
         </form>
       </div>
     </div>

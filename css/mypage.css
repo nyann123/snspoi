@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'dqfont';
+  src: url("../DragonQuestFC.ttf");
+}
+
+body{
+  background-color: #121212;
+  padding-top: 50px;
+}
+
+h2{
+  /* font-family: "dqfont"; */
+  color: #fff;
+  font-size: 50px;
+  letter-spacing: 0.08em;
+
+}
