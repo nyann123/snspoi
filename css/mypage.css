@@ -14,10 +14,10 @@ body{
   margin: 0 auto;
   text-align: center;
 }
+
 .mypage{
   display: flex;
 }
-
 
 .top_title{
   max-width: 1170px;
@@ -46,14 +46,10 @@ body{
   border: 2px solid #fff;
   border-radius: 8px;
   width: 70%;
-  height: 1000px;
+  height: auto;
   padding: 10px;
 }
 
-.mypage_right p{
-  border: 2px solid #fff;
-  border-radius: 8px;
-}
 
 .post_form{
   width: 100%;
@@ -103,4 +99,31 @@ body{
 
 #post_btn:hover{
   cursor: pointer;
+}
+
+.posts_container{
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-top: 5px;
+}
+
+.user_name{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.post{
+  font-size: 18px;
+  font-weight: normal;
+  text-align: left;
+  letter-spacing: 0.06em;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 10px 0;
 }

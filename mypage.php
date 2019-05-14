@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])){
   header('Location:login_form.php');
 }
 
+//sessionからユーザー情報を取得
 try {
   $sql = "select * from users
           where id = :id";
@@ -17,6 +18,7 @@ try {
   echo $e->getMessage() . PHP_EOL;
 }
 
+//ログイン中のユーザーの投稿を取得
 try{
   $sql = "select post_content
           from users inner join posts on users.id = posts.user_id
@@ -65,23 +67,30 @@ if(!empty($_POST)){
     <div class="container">
       <h2 class="top_title">まいぺーじ</h2> <!-- いらないかも-->
       <div class ="mypage">
+
         <div class="mypage_left">
           ようこそ
           <?php  echo $user['name']; ?>
           さん
           <p>id = <?php echo $user['id'] ?></p>
         </div>
+        
         <div class="mypage_right">
           <form class ="post_form" action="#" method="post">
             <textarea name="content" rows="8" cols="80"></textarea><br>
             <input id="post_btn" type="submit" name="" value="投稿">
           </form>
 
-          <?php foreach($user_posts as $post): ?>
-            <?php foreach ($post as $key => $value): ?>
-              <p><?php echo $value ?></p>
-            <?php endforeach; ?>
-          <?php endforeach ?>
+            <?php foreach($user_posts as $post): ?>
+              <?php foreach ($post as $key => $value): ?>
+                <div class="posts_container">
+                  <div class="user_name">
+                    <?php echo $user['name']; ?>
+                  </div>
+                  <p class="post"><?php echo wordwrap($value, 60, "<br>\n", true)  ?></p>
+                </div>
+              <?php endforeach; ?>
+            <?php endforeach ?>
 
         </div>
       </div>
