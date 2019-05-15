@@ -20,7 +20,7 @@ try {
 
 //ログイン中のユーザーの投稿を取得
 try{
-  $sql = "select post_content
+  $sql = "select post_content,posts.created_at
           from users inner join posts on users.id = posts.user_id
           where :id = posts.user_id
           order by posts.created_at desc";
@@ -74,7 +74,7 @@ if(!empty($_POST)){
           さん
           <p>id = <?php echo $user['id'] ?></p>
         </div>
-        
+
         <div class="mypage_right">
           <form class ="post_form" action="#" method="post">
             <textarea name="content" rows="8" cols="80"></textarea><br>
@@ -82,14 +82,13 @@ if(!empty($_POST)){
           </form>
 
             <?php foreach($user_posts as $post): ?>
-              <?php foreach ($post as $key => $value): ?>
                 <div class="posts_container">
-                  <div class="user_name">
-                    <?php echo $user['name']; ?>
+                  <div class="post_data">
+                    <p class="post_user"><?php echo $user['name']; ?></p>
+                    <p class="post_date"><?php echo $post['created_at'] ?></p>
                   </div>
-                  <p class="post"><?php echo wordwrap($value, 60, "<br>\n", true)  ?></p>
+                  <p class ="post_content"><?php echo wordwrap($post['post_content'], 60, "<br>\n", true)  ?></p>
                 </div>
-              <?php endforeach; ?>
             <?php endforeach ?>
 
         </div>

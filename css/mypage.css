@@ -45,7 +45,7 @@ body{
   color: #fff;
   border: 2px solid #fff;
   border-radius: 8px;
-  width: 70%;
+  width: 80%;
   height: auto;
   padding: 10px;
 }
@@ -113,12 +113,21 @@ body{
   margin-top: 5px;
 }
 
-.user_name{
+.post_date,.post_user{
+  margin: 0;
+  text-align: left;
+}
+
+.post_user{
   font-size: 20px;
   font-weight: bold;
 }
 
-.post{
+.post_date{
+  color: #B8B8B8;
+}
+
+.post_content{
   font-size: 18px;
   font-weight: normal;
   text-align: left;
