@@ -18,11 +18,10 @@ try {
   echo $e->getMessage() . PHP_EOL;
 }
 
-//ログイン中のユーザーの投稿を取得
+//ユーザーの投稿を取得
 try{
-  $sql = "select post_content,posts.created_at
+  $sql = "select name,user_id,post_content,posts.created_at
           from users inner join posts on users.id = posts.user_id
-          where :id = posts.user_id
           order by posts.created_at desc";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(':id' => $user['id']));
@@ -35,11 +34,12 @@ if(!empty($_POST)){
 
   $post_content = $_POST['content'];
   $user_id = $user['id'];
+  $now = new DateTime('', new DateTimeZone('Asia/Tokyo'));
 
   try {
     $sql = "insert into posts(user_id,post_content,created_at) value(:user_id,:post_content,:created_at)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(':user_id' => $user_id , ':post_content' => $post_content , ':created_at' => date('Y-m-d H:i:s')));
+    $stmt->execute(array(':user_id' => $user_id , ':post_content' => $post_content , ':created_at' => $now->format('Y-m-d H:i:s')));
 
     $_SESSION['flash'] = '投稿しました';
     header('Location:mypage.php');
@@ -48,7 +48,7 @@ if(!empty($_POST)){
     $_SESSION['flash'] = 'error';
   }
 }
-
+var_dump($flash_messages)
  ?>
 
 <!DOCTYPE html>
@@ -65,7 +65,13 @@ if(!empty($_POST)){
       <a href="logout_process.php">ログアウト</a>
     </header>
     <div class="container">
-      <h2 class="top_title">まいぺーじ</h2> <!-- いらないかも-->
+
+      <?php if (isset($flash_messages)): ?>
+        <?php foreach ((array)$flash_messages as $error_message): ?>
+          <p class ="php_message"><?php echo $error_message?></p>
+        <?php endforeach ?>
+      <?php endif ?>
+
       <div class ="mypage">
 
         <div class="mypage_left">
@@ -81,15 +87,17 @@ if(!empty($_POST)){
             <input id="post_btn" type="submit" name="" value="投稿">
           </form>
 
-            <?php foreach($user_posts as $post): ?>
-                <div class="posts_container">
-                  <div class="post_data">
-                    <p class="post_user"><?php echo $user['name']; ?></p>
-                    <p class="post_date"><?php echo $post['created_at'] ?></p>
-                  </div>
-                  <p class ="post_content"><?php echo wordwrap($post['post_content'], 60, "<br>\n", true)  ?></p>
+          <?php foreach($user_posts as $post): ?>
+              <div class="posts_container">
+                <div class="post_data">
+                  <p class="post_user"><?php echo $post['name']; ?></p>
+                  <?php $time = new DateTime($post['created_at']) ?>
+                  <?php $post_date = $time->format('Y-m-d H:i') ?>
+                  <p class="post_date"><?php echo $post_date ?></p>
                 </div>
-            <?php endforeach ?>
+                <p class ="post_content"><?php echo wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
+              </div>
+          <?php endforeach ?>
 
         </div>
       </div>

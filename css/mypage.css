@@ -36,7 +36,7 @@ body{
   border-radius: 8px;
   min-width: 230px;
   width: 20%;
-  height: 400px;
+  height: 100px;
   padding: 10px;
   margin-right: 10px;
 }
@@ -50,7 +50,6 @@ body{
   padding: 10px;
 }
 
-
 .post_form{
   width: 100%;
   border: 2px solid #fff;
@@ -59,18 +58,6 @@ body{
   padding: 10px 0;
 }
 
-.post_form input{
-  color: #fff;
-  border: 2px solid #fff;
-  font-size: 16px;
-  width: 400px;
-  padding: 5px 10px;
-  margin: 0 0 20px;
-  height: 30px;
-  border-radius: 5px;
-  background-color: transparent;
-  display: block;
-}
 .post_form textarea{
   color: #fff;
   border: 2px solid #fff;
@@ -92,6 +79,7 @@ body{
   height: 40px;
   padding: 5px;
   margin: 0;
+  border-radius: 5px;
   border: 2px solid #3FBFFF;
   display: inline;
   background-color: inherit;
@@ -135,4 +123,9 @@ body{
   width: 100%;
   box-sizing: border-box;
   margin: 10px 0;
+}
+
+.php_message{
+  color: #FF7763;
+  margin-top: 0;
 }

@@ -34,6 +34,7 @@ if(!empty($_POST)){
     //パスワードでユーザー認証
     if (password_verify($_POST['password'], $user['password'])) {
       $_SESSION['user_id'] = $user['id'];
+      $_SESSION['flash'] = array("sucsess" => "ログインしました");
       header('Location:mypage.php');
     }else{
       $error_messages[] = "メールアドレス又はパスワードが間違っています。";
