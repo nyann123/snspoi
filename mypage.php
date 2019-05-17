@@ -17,7 +17,7 @@ try {
 
 //ユーザーの投稿を取得
 try{
-  $sql = "select user_id,name,post_content,posts.created_at
+  $sql = "select posts.id,user_id,name,post_content,posts.created_at
           from users inner join posts on users.id = posts.user_id
           order by posts.created_at desc";
   $stmt = $pdo->prepare($sql);
@@ -27,7 +27,7 @@ try{
   echo $e->getMessage() . PHP_EOL;
 }
 
-if(!empty($_POST)){
+if(!empty($_POST['post_content'])){
 
   $post_content = $_POST['content'];
   $user_id = $user['id'];
@@ -45,6 +45,18 @@ if(!empty($_POST)){
     echo $e->getMessage() ;
     $_SESSION['flash'] = 'error';
   }
+}
+
+if(!empty($_POST['delete'])){
+  $post_id = $_POST['post_id'];
+  $sql = "delete
+          from posts
+          where id = :id";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(':id' => $post_id));
+
+  $_SESSION['flash'] = '削除しました';
+  header('Location:mypage.php');
 }
  ?>
 
@@ -81,7 +93,7 @@ if(!empty($_POST)){
         <div class="mypage_right">
           <form class ="post_form" action="#" method="post">
             <textarea name="content" rows="8" cols="80"></textarea><br>
-            <input id="post_btn" type="submit" name="" value="投稿">
+            <input id="post_btn" type="submit" name="post_content" value="投稿">
           </form>
 
           <?php foreach($user_posts as $post): ?>
@@ -98,7 +110,14 @@ if(!empty($_POST)){
                   <?php $post_date = $time->format('Y-m-d H:i') ?>
                   <p class="post_date"><?php echo $post_date ?></p>
                 </div>
+
                 <p class ="post_content"><?php echo wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
+
+                <form class="" action="#" method="post">
+                  <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
+                  <input type="submit" name="delete" value="削除" method="post">
+                </form>
+
               </div>
           <?php endforeach ?>
 
