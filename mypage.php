@@ -27,6 +27,7 @@ try{
   echo $e->getMessage() . PHP_EOL;
 }
 
+//投稿
 if(!empty($_POST['post_content'])){
 
   $post_content = $_POST['content'];
@@ -47,6 +48,7 @@ if(!empty($_POST['post_content'])){
   }
 }
 
+//投稿削除
 if(!empty($_POST['delete'])){
   $post_id = $_POST['post_id'];
   $sql = "delete
@@ -56,6 +58,18 @@ if(!empty($_POST['delete'])){
   $stmt->execute(array(':id' => $post_id));
 
   $_SESSION['flash'] = '削除しました';
+  header('Location:mypage.php');
+}
+
+//お気に入り追加
+if(!empty($_POST['like'])){
+  $post_id = $_POST['post_id'];
+  $sql = "insert into likes(user_id,post_id)
+          value(:user_id,:post_id)";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute(array(':user_id' => $current_user['id'] , ':post_id' => $post_id));
+
+  $_SESSION['flash'] = 'いいねしました';
   header('Location:mypage.php');
 }
  ?>
@@ -117,7 +131,10 @@ if(!empty($_POST['delete'])){
                   <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
                   <input type="submit" name="delete" value="削除" method="post">
                 </form>
-
+                <form class="" action="#" method="post">
+                  <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
+                  <input type="submit" name="like" value="いいね" method="post">
+                </form>
               </div>
           <?php endforeach ?>
 
