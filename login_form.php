@@ -19,7 +19,7 @@ require_once('login_process.php');
         <h2>ログイン</h2>
 
         <?php if (isset($flash_messages)): ?>
-          <?php foreach ((array)$flash_messages as $error_message): ?>
+          <?php foreach (array($flash_messages) as $error_message): ?>
             <p class ="php_message"><?php echo $error_message?></p>
           <?php endforeach ?>
         <?php endif ?>

@@ -1,18 +1,18 @@
 <?php
 session_start();
-//フラッシュメッセージ用処理
+
+function cheak_logged_in(){
+  if (empty($_SESSION['user_id'])){
+    $_SESSION['flash'] = "ログインしてください";
+    header('Location:login_form.php');
+  }
+}
+
+// フラッシュメッセージ用処理
 if( isset($_SESSION['flash']) ){
   $flash_messages = $_SESSION['flash'];
 }
 unset($_SESSION['flash']);
-
-// 保留
-// function flash_message($flash){
-//   if( isset($_SESSION[$flash]) ){
-//     ${'old'.$flash} = $_SESSION[$flash];
-//   }
-//   unset($_SESSION[$flash]);
-// }
 
 error_reporting(E_ALL); //E_STRICTレベル以外のエラーを報告する
 ini_set('display_errors','On'); //画面にエラーを表示させるか

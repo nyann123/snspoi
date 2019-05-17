@@ -25,7 +25,7 @@ if( isset($_SESSION['password']) ){
 }
 unset($_SESSION['password']);
 
-// 送信されていればdb処理
+// 送信されていれば実行する
 if(!empty($_POST)){
 
   $error_messages = array();

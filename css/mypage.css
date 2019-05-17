@@ -101,14 +101,23 @@ body{
   margin-top: 5px;
 }
 
-.post_date,.post_user{
+.post_date{
+  margin: 0;
+}
+
+.post_user_name{
+  font-size: 20px;
+  font-weight: bold;
   margin: 0;
   text-align: left;
 }
 
-.post_user{
-  font-size: 20px;
-  font-weight: bold;
+.myself{
+  color:#3FBFFF;
+}
+
+.other{
+  color:#4FDF4B;
 }
 
 .post_date{

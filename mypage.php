@@ -1,30 +1,27 @@
 <?php
 require_once('config.php');
 
-//アクセス制限
-if (!isset($_SESSION['user_id'])){
-  $_SESSION['flash'] = "ログインしてください";
-  header('Location:login_form.php');
-}
+//ログインしているか確認
+cheak_logged_in();
 
-//sessionからユーザー情報を取得
+//sessionからユーザー情報を復元
 try {
   $sql = "select * from users
           where id = :id";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(':id' => $_SESSION['user_id']));
-  $user = $stmt->fetch(PDO::FETCH_ASSOC);
+  $current_user = $stmt->fetch(PDO::FETCH_ASSOC);
 } catch (\Exception $e) {
   echo $e->getMessage() . PHP_EOL;
 }
 
 //ユーザーの投稿を取得
 try{
-  $sql = "select name,user_id,post_content,posts.created_at
+  $sql = "select user_id,name,post_content,posts.created_at
           from users inner join posts on users.id = posts.user_id
           order by posts.created_at desc";
   $stmt = $pdo->prepare($sql);
-  $stmt->execute(array(':id' => $user['id']));
+  $stmt->execute();
   $user_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (\Exception $e) {
   echo $e->getMessage() . PHP_EOL;
@@ -37,9 +34,10 @@ if(!empty($_POST)){
   $now = new DateTime('', new DateTimeZone('Asia/Tokyo'));
 
   try {
-    $sql = "insert into posts(user_id,post_content,created_at) value(:user_id,:post_content,:created_at)";
+    $sql = "insert into posts(user_id,post_content,created_at)
+            value(:user_id,:post_content,:created_at)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(':user_id' => $user_id , ':post_content' => $post_content , ':created_at' => $now->format('Y-m-d H:i:s')));
+    $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content , ':created_at' => $now->format('Y-m-d H:i:s')));
 
     $_SESSION['flash'] = '投稿しました';
     header('Location:mypage.php');
@@ -48,7 +46,6 @@ if(!empty($_POST)){
     $_SESSION['flash'] = 'error';
   }
 }
-var_dump($flash_messages)
  ?>
 
 <!DOCTYPE html>
@@ -76,9 +73,9 @@ var_dump($flash_messages)
 
         <div class="mypage_left">
           ようこそ
-          <?php  echo $user['name']; ?>
+          <?php  echo $current_user['name']; ?>
           さん
-          <p>id = <?php echo $user['id'] ?></p>
+          <p>id = <?php echo $current_user['id'] ?></p>
         </div>
 
         <div class="mypage_right">
@@ -90,7 +87,13 @@ var_dump($flash_messages)
           <?php foreach($user_posts as $post): ?>
               <div class="posts_container">
                 <div class="post_data">
-                  <p class="post_user"><?php echo $post['name']; ?></p>
+
+                  <?php if ($current_user['id'] === $post['user_id']): ?>
+                    <p class="post_user_name myself"><?php echo $post['name']; ?></p>
+                  <?php else: ?>
+                    <p class="post_user_name other"><?php echo $post['name']; ?></p>
+                  <?php endif; ?>
+
                   <?php $time = new DateTime($post['created_at']) ?>
                   <?php $post_date = $time->format('Y-m-d H:i') ?>
                   <p class="post_date"><?php echo $post_date ?></p>
