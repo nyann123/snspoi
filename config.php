@@ -3,7 +3,7 @@ session_start();
 
 function cheak_logged_in(){
   if (empty($_SESSION['user_id'])){
-    $_SESSION['flash']['type'] = "error";
+    $_SESSION['flash']['type'] = "flash_error";
     $_SESSION['flash']['message'] = "ログインしてください";
     header('Location:login_form.php');
   }

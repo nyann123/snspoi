@@ -92,7 +92,7 @@ if(!empty($_POST['like'])){
 
       <?php if (isset($flash_messages)): ?>
         <?php foreach ((array)$flash_messages as $message): ?>
-          <p class ="php_message <?php echo $flash_type ?>"><?php echo $message?></p>
+          <p class ="flash_message <?php echo $flash_type ?>"><?php echo $message?></p>
         <?php endforeach ?>
       <?php endif ?>
 

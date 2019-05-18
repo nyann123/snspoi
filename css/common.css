@@ -1,7 +1,25 @@
+@font-face {
+  font-family: 'dqfont';
+  src: url("../DragonQuestFC.ttf");
+}
+
+body{
+  background-color: #121212;
+  padding-top: 50px;
+}
+
 .flash_error{
   color: #FF7763;
 }
 
 .flash_sucsess{
   color:#3FBFFF;
+}
+
+.flash_message{
+margin-top: 0;
+}
+
+.btn:hover{
+  cursor: pointer;
 }

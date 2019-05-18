@@ -1,23 +1,9 @@
-@font-face {
-  font-family: 'dqfont';
-  src: url("../DragonQuestFC.ttf");
-}
-
 /* 予定 */
 /* @media screen and (max-width:1070px){
 body{
   display: none;
 }
 } */
-
-.flash{
-  color: #FFF;
-}
-
-body{
-  background-color: #121212;
-  padding-top: 50px;
-}
 
 .login_form{
   max-width: 800px;
@@ -67,10 +53,6 @@ body{
   display: inline-block;
 }
 
-.php_message{
-  margin-top: 0;
-}
-
 #login_btn{
   font-family: 'dqfont';
   font-size: 38px;
@@ -83,10 +65,6 @@ body{
   margin: 0;
   border: 1px solid #fff;
   display: inline;
-}
-
-#login_btn:hover{
-  cursor: pointer;
 }
 
 .flash_cursor{

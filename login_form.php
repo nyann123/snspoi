@@ -22,7 +22,7 @@ require_once('login_process.php');
 
         <?php if (isset($flash_messages)): ?>
           <?php foreach ((array)$flash_messages as $message): ?>
-            <p class ="php_message <?php echo $flash_type ?>"><?php echo $message?></p>
+            <p class ="flash_message <?php echo $flash_type ?>"><?php echo $message?></p>
           <?php endforeach ?>
         <?php endif ?>
 
@@ -31,7 +31,7 @@ require_once('login_process.php');
           <form action="#" method="post">
             <input id="email" type="email" name="email" placeholder="メールアドレス">
             <input id="password" type="password" name="password" placeholder="パスワード">
-            <input id="login_btn" type="submit" name="" value="ログイン">
+            <input id="login_btn" class="btn" type="submit" name="" value="ログイン">
             <a href="signup_form.php" class="signup">新規登録はこちら</a>
           </form>
         </div>

@@ -20,7 +20,7 @@ require_once("signup_process.php");
 
       <?php if (isset($flash_messages)): ?>
         <?php foreach ((array)$flash_messages as $message): ?>
-          <p class ="php_message <?php echo $flash_type ?>"><?php echo $message?></p>
+          <p class ="flash_message <?php echo $flash_type ?>"><?php echo $message?></p>
         <?php endforeach ?>
       <?php endif ?>
 
@@ -40,7 +40,7 @@ require_once("signup_process.php");
           <input id="password" autocomplete="flase" type="password" name="password" value="<?php if (isset($oldpassword)) echo $oldpassword ?>">
           <span class="js_error_message"></span><br>
 
-          <input id="signup_btn" type="submit" name="" value="とうろくする" disabled>
+          <input id="signup_btn" class="btn" type="submit" name="" value="とうろくする" disabled>
         </form>
       </div>
     </div>

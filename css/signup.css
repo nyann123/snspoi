@@ -1,19 +1,9 @@
-@font-face {
-  font-family: 'dqfont';
-  src: url("../DragonQuestFC.ttf");
-}
-
 /* 予定 */
 /* @media screen and (max-width:1070px){
 body{
   display: none;
 }
 } */
-
-body{
-  background-color: #121212;
-  padding-top: 50px;
-}
 
 .signup_form{
   color: #FFF;
@@ -70,11 +60,6 @@ body{
   vertical-align:middle;
 }
 
-.php_message{
-color: #FF7763;
-margin-top: 0;
-}
-
 #signup_btn{
   font-family: 'dqfont';
   color: #3FBFFF;
@@ -88,10 +73,6 @@ margin-top: 0;
   margin: 0;
   border: 2px solid #3FBFFF;
   display: inline;
-}
-
-#signup_btn:hover{
-  cursor: pointer;
 }
 
 #signup_btn:disabled{
