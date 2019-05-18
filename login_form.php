@@ -6,6 +6,7 @@ require_once('login_process.php');
 <html lang="ja" dir="ltr">
   <head>
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/login.css">
     <meta charset="utf-8">
     <title>home</title>
@@ -18,9 +19,10 @@ require_once('login_process.php');
       <div class="login_form">
         <h2>ログイン</h2>
 
+
         <?php if (isset($flash_messages)): ?>
-          <?php foreach (array($flash_messages) as $error_message): ?>
-            <p class ="php_message"><?php echo $error_message?></p>
+          <?php foreach ((array)$flash_messages as $message): ?>
+            <p class ="php_message <?php echo $flash_type ?>"><?php echo $message?></p>
           <?php endforeach ?>
         <?php endif ?>
 

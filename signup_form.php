@@ -6,6 +6,7 @@ require_once("signup_process.php");
 <html lang="ja" dir="ltr">
   <head>
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/signup.css">
     <meta charset="utf-8">
     <title>signup</title>
@@ -18,8 +19,8 @@ require_once("signup_process.php");
       <h2>とうろく</h2>
 
       <?php if (isset($flash_messages)): ?>
-        <?php foreach ((array)$flash_messages as $error_message): ?>
-          <p class ="php_message"><?php echo $error_message?></p>
+        <?php foreach ((array)$flash_messages as $message): ?>
+          <p class ="php_message <?php echo $flash_type ?>"><?php echo $message?></p>
         <?php endforeach ?>
       <?php endif ?>
 

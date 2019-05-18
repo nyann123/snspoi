@@ -34,14 +34,16 @@ if(!empty($_POST)){
     //パスワードでユーザー認証
     if (password_verify($_POST['password'], $user['password'])) {
       $_SESSION['user_id'] = $user['id'];
-      $_SESSION['flash'] = array("sucsess" => "ログインしました");
+      $_SESSION['flash']['type'] = 'flash_sucsess';
+      $_SESSION['flash']['message'] = "ログインしました";
       header('Location:mypage.php');
     }else{
       $error_messages[] = "メールアドレス又はパスワードが間違っています。";
     }
 
   }else{
-    $_SESSION['flash'] = $error_messages;
+    $_SESSION['flash']['type'] = 'flash_error';
+    $_SESSION['flash']['message'] = $error_messages;
     header('Location:login_form.php');
   }
 }

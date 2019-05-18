@@ -61,8 +61,9 @@ if(!empty($_POST)){
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => $password , ':created_at' => date('Y-m-d H:i:s')));
 
-      $_SESSION['flash'] = '登録が完了しました';
-      
+      $_SESSION['flash']['type'] = "flash_sucsess";
+      $_SESSION['flash']['message'] = '登録が完了しました';
+
       unset($_SESSION['name']);
       unset($_SESSION['email']);
       unset($_SESSION['password']);
@@ -70,10 +71,10 @@ if(!empty($_POST)){
       header('Location:login_form.php');
     } catch (\Exception $e) {
       echo $e->getMessage() ;
-      $_SESSION['flash'] = 'error';
     }
   }else{
-    $_SESSION['flash'] = $error_messages;
+    $_SESSION['flash']['type'] = 'flash_error';
+    $_SESSION['flash']['message'] = $error_messages;
     header('Location:signup_form.php');
   }
 }
