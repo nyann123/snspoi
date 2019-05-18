@@ -40,7 +40,9 @@ if(!empty($_POST['post_content'])){
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content , ':created_at' => $now->format('Y-m-d H:i:s')));
 
-    $_SESSION['flash'] = '投稿しました';
+    $_SESSION['flash']['type'] = "flash_sucsess";
+    $_SESSION['flash']['message'] = '投稿しました';
+
     header('Location:mypage.php');
   } catch (\Exception $e) {
     echo $e->getMessage() ;
@@ -57,19 +59,21 @@ if(!empty($_POST['delete'])){
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(':id' => $post_id));
 
-  $_SESSION['flash'] = '削除しました';
+  $_SESSION['flash']['type'] = 'flash_error';
+  $_SESSION['flash']['message'] = '削除しました';
   header('Location:mypage.php');
 }
 
 //お気に入り追加
 if(!empty($_POST['like'])){
   $post_id = $_POST['post_id'];
-  $sql = "insert into likes(user_id,post_id)
+  $sql = "insert into favorite(user_id,post_id)
           value(:user_id,:post_id)";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array(':user_id' => $current_user['id'] , ':post_id' => $post_id));
 
-  $_SESSION['flash'] = 'いいねしました';
+  $_SESSION['flash']['type'] = 'flash_sucsess';
+  $_SESSION['flash']['message'] = 'お気に入りに登録しました';
   header('Location:mypage.php');
 }
  ?>
@@ -134,7 +138,7 @@ if(!empty($_POST['like'])){
                 </form>
                 <form class="" action="#" method="post">
                   <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
-                  <input type="submit" name="like" value="いいね" method="post">
+                  <input type="submit" name="like" value="お気に入り" method="post">
                 </form>
               </div>
           <?php endforeach ?>

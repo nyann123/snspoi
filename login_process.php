@@ -1,10 +1,16 @@
 <?php
 require_once('config.php');
 
+debug('「「「「「「「「「「「');
+debug('「　ログインページ 「');
+debug('「「「「「「「「「「「');
+debugLogStart();
+
+require_once('auth.php');
+
 // 送信されていればdb処理
 if(!empty($_POST)){
 
-  $error_messages = array();
   $email = $_POST['email'];
   $password = $_POST['password'];
 
@@ -22,7 +28,7 @@ if(!empty($_POST)){
 
     //DBからユーザーを取得
     try {
-      $sql = "select * from users where email = :email";
+      $sql = "select password,id from users where email = :email";
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(':email' => $email));
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -32,10 +38,12 @@ if(!empty($_POST)){
     }
 
     //パスワードでユーザー認証
-    if (password_verify($_POST['password'], $user['password'])) {
+    if (password_verify($password, $user['password'])) {
       $_SESSION['user_id'] = $user['id'];
+
       $_SESSION['flash']['type'] = 'flash_sucsess';
       $_SESSION['flash']['message'] = "ログインしました";
+      debug($_SESSION);
       header('Location:mypage.php');
     }else{
       $error_messages[] = "メールアドレス又はパスワードが間違っています。";

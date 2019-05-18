@@ -27,8 +27,6 @@ unset($_SESSION['password']);
 
 // 送信されていれば実行する
 if(!empty($_POST)){
-
-  $error_messages = array();
   $name = $_SESSION['name'] = $_POST['name'];
   $email = $_SESSION['email'] = $_POST['email'];
   $password = $_SESSION['password'] = $_POST['password'];
