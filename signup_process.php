@@ -62,6 +62,11 @@ if(!empty($_POST)){
       $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => $password , ':created_at' => date('Y-m-d H:i:s')));
 
       $_SESSION['flash'] = '登録が完了しました';
+      
+      unset($_SESSION['name']);
+      unset($_SESSION['email']);
+      unset($_SESSION['password']);
+
       header('Location:login_form.php');
     } catch (\Exception $e) {
       echo $e->getMessage() ;
