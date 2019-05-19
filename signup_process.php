@@ -68,7 +68,7 @@ if(!empty($_POST)){
 
       header('Location:login_form.php');
     } catch (\Exception $e) {
-      echo $e->getMessage() ;
+      error_log('エラー発生:' . $e->getMessage());
     }
   }else{
     $_SESSION['flash']['type'] = 'flash_error';

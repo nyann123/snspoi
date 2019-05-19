@@ -7,11 +7,11 @@ function move_cousor(id){
       $('.flash_cursor').css({'top':'45px'});
       break;
     case 'login_btn':
-      $('.flash_cursor').css({'top':'105px'});
+      $('.flash_cursor').css({'top':'145px'});
   }
 }
 
 
 $('input').on('focusin',function(){
-  move_cousor( $(this).attr('id') );      //選択中のフォームのidを取得して関数に渡す
+  move_cousor( $(this).attr('id') );      //フォームのidを取得して関数に渡す
 });

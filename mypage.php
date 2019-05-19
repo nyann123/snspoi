@@ -1,8 +1,12 @@
 <?php
 require_once('config.php');
 
-//ログインしているか確認
-cheak_logged_in();
+debug('「「「「「「「「「「「');
+debug('「　マイページ     「');
+debug('「「「「「「「「「「「');
+debugLogStart();
+
+require_once('auth.php');
 
 //sessionからユーザー情報を復元
 try {

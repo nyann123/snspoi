@@ -45,6 +45,20 @@ body{
   display: block;
 }
 
+#checkbox{
+  width: 18px;
+  height: 18px;
+  background-color: #f6f5f5;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#pass_save{
+  color: #fff;
+  vertical-align: top;
+}
+
+
 .signup{
   color: #fff;
   font-size: 16px;

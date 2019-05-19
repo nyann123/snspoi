@@ -31,6 +31,9 @@ require_once('login_process.php');
           <form action="#" method="post">
             <input id="email" type="email" name="email" placeholder="メールアドレス">
             <input id="password" type="password" name="password" placeholder="パスワード">
+            <label id="pass_save" for="checkbox">
+              <input id="checkbox" type="checkbox" name="pass_save">ログインを維持する
+            </label><br>
             <input id="login_btn" class="btn" type="submit" name="" value="ログイン">
             <a href="signup_form.php" class="signup">新規登録はこちら</a>
           </form>
