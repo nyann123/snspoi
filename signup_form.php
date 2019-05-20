@@ -5,10 +5,9 @@ $site_title = '新規登録';
 $css_title = 'signup';
 require_once('head.php');
  ?>
+
   <body>
-    <header>
-    </header>
-    <a href="login_form.php">login</a>
+    <?php require_once('header.php') ?>
     <div class="signup_form">
       <h2>とうろく</h2>
 

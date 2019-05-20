@@ -8,6 +8,7 @@ debugLogStart();
 
 require_once('auth.php');
 $page_id = $_GET['page_id'];
+
 //sessionからログインユーザー情報を復元
 try {
   $sql = "select * from users
@@ -86,11 +87,9 @@ if(!empty($_POST['like'])){
  $css_title = 'mypage';
  require_once('head.php');
   ?>
+
   <body>
-    <header>
-      <a href="login_form.php">home</a>
-      <a href="logout_process.php">ログアウト</a>
-    </header>
+    <?php require_once('header.php'); ?>
     <div class="container">
 
       <?php if (isset($flash_messages)): ?>

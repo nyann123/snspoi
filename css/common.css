@@ -5,7 +5,7 @@
 
 body{
   background-color: #121212;
-  padding-top: 50px;
+  /* padding-top: 50px; */
 }
 
 .flash_error{
@@ -22,4 +22,60 @@ margin-top: 0;
 
 .btn:hover{
   cursor: pointer;
+}
+
+.container{
+  max-width: 1170px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ///////////////////////// */
+/*        ヘッダー            */
+/* ///////////////////////// */
+
+header {
+  margin-bottom: 60px;
+  height: 40px;
+  padding: 0 0 10px;
+  background-color: #cdb47b;
+}
+
+header h1 {
+  float: left;
+  margin: 0;
+  padding-left: 15px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 50px;
+}
+
+header h1 a {
+  color: #000;
+  text-decoration: none;
+}
+
+#top-nav {
+  float: right;
+}
+
+#top-nav ul {
+  list-style: none;
+}
+
+#top-nav ul li {
+  float: right;
+}
+
+nav a {
+  padding: 10px 15px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+nav a:hover {
+  text-decoration: underline;
 }

@@ -6,10 +6,7 @@ $css_title = 'login';
 require('head.php');
 ?>
   <body>
-    <header>
-      <a href="logout_process.php">ログアウト</a>
-      <a href="mypage.php">mypage</a>
-    </header>
+    <?php require_once('header.php'); ?>
       <div class="login_form">
         <h2>ログイン</h2>
 
