@@ -68,6 +68,15 @@ try {
 }
 
 
+function cheak_logged_in(){
+  if (empty($_SESSION['user_id'])){
+    $_SESSION['flash'] = "ログインしてください";
+    $_SESSION['flash']['type'] = "error";
+    $_SESSION['flash']['message'] = "ログインしてください";
+    header('Location:login_form.php');
+  }
+}
+
 error_reporting(E_ALL); //E_STRICTレベル以外のエラーを報告する
 ini_set('display_errors','On'); //画面にエラーを表示させるか
 

@@ -2,15 +2,11 @@
 require_once("signup_process.php");
 ?>
 
-<!DOCTYPE html>
-<html lang="ja" dir="ltr">
-  <head>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/signup.css">
-    <meta charset="utf-8">
-    <title>signup</title>
-  </head>
+<?php
+$site_title = '新規登録';
+$css_title = 'signup';
+require_once('head.php');
+ ?>
   <body>
     <header>
     </header>

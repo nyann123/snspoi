@@ -2,12 +2,12 @@
 require_once('config.php');
 
 debug('「「「「「「「「「「「');
-debug('「　マイページ     「');
+debug('「　タイムライン    「');
 debug('「「「「「「「「「「「');
 debugLogStart();
 
 require_once('auth.php');
-$page_id = $_GET['page_id'];
+
 //sessionからログインユーザー情報を復元
 try {
   $sql = "select * from users
@@ -23,10 +23,9 @@ try {
 try{
   $sql = "SELECT posts.id,user_id,name,post_content,posts.created_at
           FROM users INNER JOIN posts ON users.id = posts.user_id
-          WHERE :id = posts.user_id
           ORDER BY posts.created_at DESC";
   $stmt = $pdo->prepare($sql);
-  $stmt->execute(array(':id' => $page_id));
+  $stmt->execute();
   $user_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (\Exception $e) {
   echo $e->getMessage() . PHP_EOL;
@@ -83,11 +82,11 @@ if(!empty($_POST['like'])){
 }
  ?>
 
- <?php
- $site_title = 'マイページ';
- $css_title = 'mypage';
- require_once('head.php');
-  ?>
+<?php
+$site_title = "たいむらいん";
+$css_title = 'mypage';
+require_once('head.php');
+ ?>
   <body>
     <header>
       <a href="login_form.php">home</a>
@@ -109,13 +108,10 @@ if(!empty($_POST['like'])){
           <p>id = <?php echo $current_user['id'] ?></p>
         </div>
           <div class="mypage_right">
-            <!-- 自分のページのみ投稿フォームを表示 -->
-          <?php if ($current_user['id'] === $_GET['page_id']): ?>
             <form class ="post_form" action="#" method="post">
               <textarea name="content" rows="8" cols="80"></textarea><br>
               <input id="post_btn" type="submit" name="post_content" value="投稿">
             </form>
-          <?php endif; ?>
 
           <?php if (empty($user_posts)): ?>
             <p>投稿がありません</p>
@@ -123,7 +119,6 @@ if(!empty($_POST['like'])){
 
           <?php foreach($user_posts as $post): ?>
             <!-- <?php var_dump($post)?> -->
-            <?php if ($_GET['page_id'] === $post['user_id']): ?>
               <div class="posts_container">
                 <div class="post_data">
                   <!-- ユーザーによって名前を色替え -->
@@ -150,10 +145,8 @@ if(!empty($_POST['like'])){
                   <input type="submit" name="like" value="お気に入り" method="post">
                 </form>
               </div>
-            <?php endif ?>
 
           <?php endforeach ?>
-
 
         </div>
       </div>

@@ -2,15 +2,11 @@
 require_once('login_process.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="ja" dir="ltr">
-  <head>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/login.css">
-    <meta charset="utf-8">
-    <title>home</title>
-  </head>
+<?php
+$site_title = 'ログイン';
+$css_title = 'login';
+require('head.php');
+?>
   <body>
     <header>
       <a href="logout_process.php">ログアウト</a>

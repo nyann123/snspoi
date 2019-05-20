@@ -8,17 +8,19 @@ debugLogStart();
 
 require_once('auth.php');
 
-//================================
-// ログイン処理
-//================================
-// 送信されていればdb処理
+//ログイン中ならマイページへ
+if (isset($_SESSION['user_id'])){
+  debug('!!!!!ログインユーザーはアクセスできません!!!!!');
+  header('Location:mypage.php');
+}
+
+// 送信されていればログイン処理
 if(!empty($_POST)){
   debug('POST送信があります。');
 
   $email = $_POST['email'];
   $password = $_POST['password'];
   $pass_save = (isset($_POST['pass_save'])) ? true : false;
-
   // メールのバリデーション
   if( empty($email) ){
     $error_messages[] = "メールアドレスを入力してください";
@@ -28,21 +30,17 @@ if(!empty($_POST)){
     $error_messages[] = "パスワードを入力してください";
   }
 
-
   if(empty($error_messages)){
-
     //emailでユーザー情報を取得
     try {
-      $sql = "select password,id from users where email = :email";
+      $sql = "SELECT password,id FROM users WHERE email = :email";
       $stmt = $pdo->prepare($sql);
       $stmt->execute(array(':email' => $email));
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
       debug('クエリ結果の中身：'.print_r($user,true));
-
     //パスワードでユーザー認証
     if (isset($user) && password_verify($password, $user['password'])) {
-
       //ログイン有効期限（デフォルトを１時間とする）
       $sesLimit = 60*60;
       $_SESSION['login_date'] = time();
@@ -64,8 +62,7 @@ if(!empty($_POST)){
 
       debug('ログイン成功');
       debug('セッション変数の中身：'.print_r($_SESSION,true));
-
-      header('Location:mypage.php');
+      header("Location:mypage.php?page_id=${user['id']}");
     }else{
       $error_messages[] = "メールアドレス又はパスワードが間違っています。";
     }
