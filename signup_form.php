@@ -1,8 +1,6 @@
 <?php
 require_once("signup_process.php");
-?>
 
-<?php
 $site_title = '新規登録';
 $css_title = 'signup';
 require_once('head.php');

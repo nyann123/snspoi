@@ -1,8 +1,6 @@
 <?php
 require_once('login_process.php');
-?>
 
-<?php
 $site_title = 'ログイン';
 $css_title = 'login';
 require('head.php');

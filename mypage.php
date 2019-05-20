@@ -81,9 +81,7 @@ if(!empty($_POST['like'])){
   $_SESSION['flash']['message'] = 'お気に入りに登録しました';
   header('Location:mypage.php');
 }
- ?>
 
- <?php
  $site_title = 'マイページ';
  $css_title = 'mypage';
  require_once('head.php');

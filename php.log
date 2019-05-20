@@ -4177,3 +4177,401 @@
 [20-May-2019 05:38:16 Europe/Berlin] debug：現在日時タイムスタンプ：1558323496
 [20-May-2019 05:38:16 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558327065
 [20-May-2019 05:38:16 Europe/Berlin] debug：ログイン済みユーザーです。
+[20-May-2019 05:42:30 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 05:42:30 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 05:42:30 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 05:42:30 Europe/Berlin] debug：セッションID：3gs0s79i4grm5dn5rtf6doppr1
+[20-May-2019 05:42:30 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 05:42:30 Europe/Berlin] debug：現在日時タイムスタンプ：1558323750
+[20-May-2019 05:42:30 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 05:42:36 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 05:42:36 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 05:42:36 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 05:42:36 Europe/Berlin] debug：セッションID：vqa9l7nqmonjtb04cfjpuah6rs
+[20-May-2019 05:42:36 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 05:42:36 Europe/Berlin] debug：現在日時タイムスタンプ：1558323756
+[20-May-2019 05:42:36 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 05:43:02 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 05:43:02 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 05:43:02 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 05:43:02 Europe/Berlin] debug：セッションID：tqhn7ikd5jbhj7vtul33p8f40e
+[20-May-2019 05:43:02 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 05:43:02 Europe/Berlin] debug：現在日時タイムスタンプ：1558323782
+[20-May-2019 05:43:02 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 05:43:02 Europe/Berlin] debug：POST送信があります。
+[20-May-2019 05:43:02 Europe/Berlin] debug：クエリ結果の中身：Array
+(
+    [password] => $2y$10$aVsBsgFKhZJ3ArO8G/S4QuYSDq9QhrZ.kYYktCNUsOONNnjrWKJkS
+    [id] => 13
+)
+
+[20-May-2019 05:43:02 Europe/Berlin] debug：ログイン保持にチェックはありません。
+[20-May-2019 05:43:02 Europe/Berlin] debug：ログイン成功
+[20-May-2019 05:43:02 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558323782
+    [login_limit] => 3600
+    [user_id] => 13
+    [flash] => Array
+        (
+            [type] => flash_sucsess
+            [message] => ログインしました
+        )
+
+)
+
+[20-May-2019 05:43:02 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 05:43:02 Europe/Berlin] debug：「　マイページ     「
+[20-May-2019 05:43:02 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 05:43:02 Europe/Berlin] debug：セッションID：otitvc0aeq4kotni95gnnh9sus
+[20-May-2019 05:43:02 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558323782
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[20-May-2019 05:43:02 Europe/Berlin] debug：現在日時タイムスタンプ：1558323782
+[20-May-2019 05:43:02 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558327382
+[20-May-2019 05:43:02 Europe/Berlin] debug：ログイン済みユーザーです。
+[20-May-2019 10:54:31 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:54:31 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 10:54:31 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:54:31 Europe/Berlin] debug：セッションID：rqt3ra1k6488rrukcfdt8kjuqf
+[20-May-2019 10:54:31 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558323782
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[20-May-2019 10:54:31 Europe/Berlin] debug：現在日時タイムスタンプ：1558342471
+[20-May-2019 10:54:31 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558327382
+[20-May-2019 10:54:31 Europe/Berlin] debug：ログイン有効期限オーバーです。
+[20-May-2019 10:54:31 Europe/Berlin] debug：!!!!!ログインユーザーはアクセスできません!!!!!
+[20-May-2019 10:54:31 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:54:31 Europe/Berlin] debug：「　マイページ     「
+[20-May-2019 10:54:31 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:54:31 Europe/Berlin] debug：セッションID：5bti0dnrvoe7oc06178jbk1l1t
+[20-May-2019 10:54:31 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 10:54:31 Europe/Berlin] debug：現在日時タイムスタンプ：1558342471
+[20-May-2019 10:54:31 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 10:54:31 Europe/Berlin] PHP Notice:  Undefined index: page_id in C:\xampp\htdocs\test\mypage.php on line 10
+[20-May-2019 10:54:31 Europe/Berlin] PHP Notice:  Undefined index: user_id in C:\xampp\htdocs\test\mypage.php on line 16
+[20-May-2019 10:54:31 Europe/Berlin] PHP Notice:  Undefined index: page_id in C:\xampp\htdocs\test\mypage.php on line 111
+[20-May-2019 10:54:31 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:54:31 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 10:54:31 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:54:31 Europe/Berlin] debug：セッションID：73h8f8h08jcnu1jd5q0ioa9sro
+[20-May-2019 10:54:31 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 10:54:31 Europe/Berlin] debug：現在日時タイムスタンプ：1558342471
+[20-May-2019 10:54:31 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 10:54:33 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:54:33 Europe/Berlin] debug：「　新規登録ページ 「
+[20-May-2019 10:54:33 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:54:33 Europe/Berlin] debug：セッションID：83clctkq7ipen85jnlggas9ea5
+[20-May-2019 10:54:33 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 10:54:33 Europe/Berlin] debug：現在日時タイムスタンプ：1558342473
+[20-May-2019 10:54:35 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:54:35 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 10:54:35 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:54:35 Europe/Berlin] debug：セッションID：v651ahb2tnpugl28o2arl5an39
+[20-May-2019 10:54:35 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 10:54:35 Europe/Berlin] debug：現在日時タイムスタンプ：1558342475
+[20-May-2019 10:54:35 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 10:55:20 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:55:20 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 10:55:20 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:55:20 Europe/Berlin] debug：セッションID：84maccnhledarg069j1q070cmk
+[20-May-2019 10:55:20 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 10:55:20 Europe/Berlin] debug：現在日時タイムスタンプ：1558342520
+[20-May-2019 10:55:20 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 10:55:20 Europe/Berlin] debug：POST送信があります。
+[20-May-2019 10:55:20 Europe/Berlin] debug：クエリ結果の中身：Array
+(
+    [password] => $2y$10$aVsBsgFKhZJ3ArO8G/S4QuYSDq9QhrZ.kYYktCNUsOONNnjrWKJkS
+    [id] => 13
+)
+
+[20-May-2019 10:55:20 Europe/Berlin] debug：ログイン保持にチェックはありません。
+[20-May-2019 10:55:20 Europe/Berlin] debug：ログイン成功
+[20-May-2019 10:55:20 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558342520
+    [login_limit] => 3600
+    [user_id] => 13
+    [flash] => Array
+        (
+            [type] => flash_sucsess
+            [message] => ログインしました
+        )
+
+)
+
+[20-May-2019 10:55:20 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:55:20 Europe/Berlin] debug：「　マイページ     「
+[20-May-2019 10:55:20 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 10:55:20 Europe/Berlin] debug：セッションID：agt8ppp6q8sa36p41hs89bgd00
+[20-May-2019 10:55:20 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558342520
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[20-May-2019 10:55:20 Europe/Berlin] debug：現在日時タイムスタンプ：1558342520
+[20-May-2019 10:55:20 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558346120
+[20-May-2019 10:55:20 Europe/Berlin] debug：ログイン済みユーザーです。
+[20-May-2019 12:23:23 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:23 Europe/Berlin] debug：「　ログアウトページ「
+[20-May-2019 12:23:23 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:23 Europe/Berlin] debug：セッションID：g5b57qmocam7dt08dq2mcbruur
+[20-May-2019 12:23:23 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558342520
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[20-May-2019 12:23:23 Europe/Berlin] debug：現在日時タイムスタンプ：1558347803
+[20-May-2019 12:23:23 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558346120
+[20-May-2019 12:23:23 Europe/Berlin] debug：ログイン有効期限オーバーです。
+[20-May-2019 12:23:23 Europe/Berlin] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in C:\xampp\htdocs\test\logout_process.php on line 13
+[20-May-2019 12:23:23 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:23 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 12:23:23 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:23 Europe/Berlin] debug：セッションID：voml5ln2abf96pb8ql06dtkpno
+[20-May-2019 12:23:23 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:23:23 Europe/Berlin] debug：現在日時タイムスタンプ：1558347803
+[20-May-2019 12:23:23 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:23:25 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:25 Europe/Berlin] debug：「　ログアウトページ「
+[20-May-2019 12:23:25 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:25 Europe/Berlin] debug：セッションID：8s6ai2dviomqvlk6l1ad3n4u9k
+[20-May-2019 12:23:25 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:23:25 Europe/Berlin] debug：現在日時タイムスタンプ：1558347805
+[20-May-2019 12:23:25 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:23:25 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:25 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 12:23:25 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:25 Europe/Berlin] debug：セッションID：rvsan5mstris61m4h9jb061mvt
+[20-May-2019 12:23:25 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:23:25 Europe/Berlin] debug：現在日時タイムスタンプ：1558347805
+[20-May-2019 12:23:25 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:23:27 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:27 Europe/Berlin] debug：「　ログアウトページ「
+[20-May-2019 12:23:27 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:27 Europe/Berlin] debug：セッションID：vetq76hqtnbgsteud03hk0oau5
+[20-May-2019 12:23:27 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:23:27 Europe/Berlin] debug：現在日時タイムスタンプ：1558347807
+[20-May-2019 12:23:27 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:23:27 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:27 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 12:23:27 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:27 Europe/Berlin] debug：セッションID：7dieshfmfmrpimlr5s1134o2u7
+[20-May-2019 12:23:27 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:23:27 Europe/Berlin] debug：現在日時タイムスタンプ：1558347807
+[20-May-2019 12:23:27 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:23:27 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:27 Europe/Berlin] debug：「　ログアウトページ「
+[20-May-2019 12:23:27 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:27 Europe/Berlin] debug：セッションID：pnak1q8340ddseohgob2m3pcik
+[20-May-2019 12:23:27 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:23:27 Europe/Berlin] debug：現在日時タイムスタンプ：1558347807
+[20-May-2019 12:23:27 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:23:27 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:27 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 12:23:27 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:27 Europe/Berlin] debug：セッションID：sfluccp8te1ds6mrl9t9a05lem
+[20-May-2019 12:23:27 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:23:27 Europe/Berlin] debug：現在日時タイムスタンプ：1558347807
+[20-May-2019 12:23:27 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:23:28 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:28 Europe/Berlin] debug：「　ログアウトページ「
+[20-May-2019 12:23:28 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:28 Europe/Berlin] debug：セッションID：lnpoqolb2evemc50617l9p7idq
+[20-May-2019 12:23:28 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:23:28 Europe/Berlin] debug：現在日時タイムスタンプ：1558347808
+[20-May-2019 12:23:28 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:23:28 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:28 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 12:23:28 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:23:28 Europe/Berlin] debug：セッションID：57rlhdcjujk9l5vaqseo96lsne
+[20-May-2019 12:23:28 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:23:28 Europe/Berlin] debug：現在日時タイムスタンプ：1558347808
+[20-May-2019 12:23:28 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:24:50 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:24:50 Europe/Berlin] debug：「　ログアウトページ「
+[20-May-2019 12:24:50 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:24:50 Europe/Berlin] debug：セッションID：qo5386ceinrf9v7jhmpartu2nd
+[20-May-2019 12:24:50 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:24:50 Europe/Berlin] debug：現在日時タイムスタンプ：1558347890
+[20-May-2019 12:24:50 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:24:50 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:24:50 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 12:24:50 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:24:50 Europe/Berlin] debug：セッションID：26phkbfb8rl85r6m2sgp63qe2e
+[20-May-2019 12:24:50 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:24:50 Europe/Berlin] debug：現在日時タイムスタンプ：1558347890
+[20-May-2019 12:24:50 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:25:07 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:25:07 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 12:25:07 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:25:07 Europe/Berlin] debug：セッションID：588jod058ne8tugv1e1fphsi6j
+[20-May-2019 12:25:07 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:25:07 Europe/Berlin] debug：現在日時タイムスタンプ：1558347907
+[20-May-2019 12:25:07 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:25:07 Europe/Berlin] debug：POST送信があります。
+[20-May-2019 12:25:07 Europe/Berlin] debug：クエリ結果の中身：Array
+(
+    [password] => $2y$10$aVsBsgFKhZJ3ArO8G/S4QuYSDq9QhrZ.kYYktCNUsOONNnjrWKJkS
+    [id] => 13
+)
+
+[20-May-2019 12:25:07 Europe/Berlin] debug：ログイン保持にチェックはありません。
+[20-May-2019 12:25:07 Europe/Berlin] debug：ログイン成功
+[20-May-2019 12:25:07 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558347907
+    [login_limit] => 3600
+    [user_id] => 13
+    [flash] => Array
+        (
+            [type] => flash_sucsess
+            [message] => ログインしました
+        )
+
+)
+
+[20-May-2019 12:25:07 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:25:07 Europe/Berlin] debug：「　マイページ     「
+[20-May-2019 12:25:07 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:25:07 Europe/Berlin] debug：セッションID：h10f2oq58tktsepasieiu60pe6
+[20-May-2019 12:25:07 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558347907
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[20-May-2019 12:25:07 Europe/Berlin] debug：現在日時タイムスタンプ：1558347907
+[20-May-2019 12:25:07 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558351507
+[20-May-2019 12:25:07 Europe/Berlin] debug：ログイン済みユーザーです。
+[20-May-2019 12:25:57 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:25:57 Europe/Berlin] debug：「　ログアウトページ「
+[20-May-2019 12:25:57 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:25:57 Europe/Berlin] debug：セッションID：nap8t75nc4lljt6iq026bg75rq
+[20-May-2019 12:25:57 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558347907
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[20-May-2019 12:25:57 Europe/Berlin] debug：現在日時タイムスタンプ：1558347957
+[20-May-2019 12:25:57 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558351507
+[20-May-2019 12:25:57 Europe/Berlin] debug：ログイン済みユーザーです。
+[20-May-2019 12:25:57 Europe/Berlin] debug：ログアウト成功
+[20-May-2019 12:25:57 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558347907
+    [login_limit] => 3600
+    [user_id] => 13
+    [flash] => Array
+        (
+            [type] => flash_sucsess
+            [message] => ログアウトしました
+        )
+
+)
+
+[20-May-2019 12:25:57 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:25:57 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 12:25:57 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:25:57 Europe/Berlin] debug：セッションID：7qp0teehsadhsq8ia84ubs5nng
+[20-May-2019 12:25:57 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:25:57 Europe/Berlin] debug：現在日時タイムスタンプ：1558347957
+[20-May-2019 12:25:57 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:26:11 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:26:11 Europe/Berlin] debug：「　ログアウトページ「
+[20-May-2019 12:26:11 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:26:11 Europe/Berlin] debug：セッションID：bnm4fj09f413dbb2b5pafpns1v
+[20-May-2019 12:26:11 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:26:11 Europe/Berlin] debug：現在日時タイムスタンプ：1558347971
+[20-May-2019 12:26:11 Europe/Berlin] debug：未ログインユーザーです。
+[20-May-2019 12:26:11 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:26:11 Europe/Berlin] debug：「　ログインページ 「
+[20-May-2019 12:26:11 Europe/Berlin] debug：「「「「「「「「「「「
+[20-May-2019 12:26:11 Europe/Berlin] debug：セッションID：bi84ragvib4hnvbl680tnb9r0p
+[20-May-2019 12:26:11 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[20-May-2019 12:26:11 Europe/Berlin] debug：現在日時タイムスタンプ：1558347971
+[20-May-2019 12:26:11 Europe/Berlin] debug：未ログインユーザーです。
