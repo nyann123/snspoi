@@ -9,29 +9,26 @@ debugLogStart();
 require_once('auth.php');
 $page_id = $_GET['page_id'];
 
-//sessionからログインユーザー情報を復元
-try {
-  $sql = "select * from users
-          where id = :id";
-  $stmt = $pdo->prepare($sql);
-  $stmt->execute(array(':id' => $_SESSION['user_id']));
-  $current_user = $stmt->fetch(PDO::FETCH_ASSOC);
-} catch (\Exception $e) {
-  echo $e->getMessage() . PHP_EOL;
-}
-
+//sessionからログイン中のユーザー情報を取得
+$current_user = get_user($_SESSION['user_id']);
 //ユーザーの投稿を取得
 try{
+  $dbh = dbConnect();
   $sql = "SELECT posts.id,user_id,name,post_content,posts.created_at
           FROM users INNER JOIN posts ON users.id = posts.user_id
           WHERE :id = posts.user_id
           ORDER BY posts.created_at DESC";
-  $stmt = $pdo->prepare($sql);
+  $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':id' => $page_id));
   $user_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (\Exception $e) {
   echo $e->getMessage() . PHP_EOL;
 }
+
+// お気に入り登録した投稿を取得
+$favorite_posts = get_favorite_post($page_id);
+// var_dump($user_posts);
+
 
 //投稿
 if(!empty($_POST['post_content'])){
@@ -72,15 +69,16 @@ if(!empty($_POST['delete'])){
 
 //お気に入り追加
 if(!empty($_POST['like'])){
+  $dbh = dbConnect();
   $post_id = $_POST['post_id'];
   $sql = "insert into favorite(user_id,post_id)
           value(:user_id,:post_id)";
-  $stmt = $pdo->prepare($sql);
+  $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':user_id' => $current_user['id'] , ':post_id' => $post_id));
 
   $_SESSION['flash']['type'] = 'flash_sucsess';
   $_SESSION['flash']['message'] = 'お気に入りに登録しました';
-  header('Location:mypage.php');
+  header("Location:mypage.php?page_id=${page_id}");
 }
 
  $site_title = 'マイページ';
@@ -106,6 +104,7 @@ if(!empty($_POST['like'])){
           <p>id = <?php echo $current_user['id'] ?></p>
         </div>
           <div class="mypage_right">
+
             <!-- 自分のページのみ投稿フォームを表示 -->
           <?php if ($current_user['id'] === $_GET['page_id']): ?>
             <form class ="post_form" action="#" method="post">
@@ -120,9 +119,9 @@ if(!empty($_POST['like'])){
 
           <?php foreach($user_posts as $post): ?>
             <!-- <?php var_dump($post)?> -->
-            <?php if ($_GET['page_id'] === $post['user_id']): ?>
               <div class="posts_container">
                 <div class="post_data">
+
                   <!-- ユーザーによって名前を色替え -->
                   <?php if ($current_user['id'] === $post['user_id']): ?>
                     <a href="mypage.php?page_id=<?php echo $post['user_id']?>"
@@ -147,7 +146,6 @@ if(!empty($_POST['like'])){
                   <input type="submit" name="like" value="お気に入り" method="post">
                 </form>
               </div>
-            <?php endif ?>
 
           <?php endforeach ?>
 

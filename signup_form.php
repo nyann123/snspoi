@@ -30,7 +30,7 @@ require_once('head.php');
           <span class="js_error_message"></span> <br>
 
           <label for="password">パスワード</label><br>
-          <input id="password" autocomplete="flase" type="password" name="password" value="<?php if (isset($oldpassword)) echo $oldpassword ?>">
+          <input id="password" autocomplete="flase" type="password" name="pass" value="<?php if (isset($oldpass)) echo $oldpass ?>">
           <span class="js_error_message"></span><br>
 
           <input id="signup_btn" class="btn" type="submit" name="" value="とうろくする" disabled>

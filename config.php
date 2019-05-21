@@ -55,17 +55,61 @@ $error_messages = array();
 //================================
 // データベース
 //================================
-define('DSN', 'mysql:host=localhost;dbname=hogetest');
-define('DB_USER', 'hoge');
-define('DB_PASS', 'hoge');
-
-//dbへの接続準備
-try {
-  $pdo = new PDO(DSN, DB_USER, DB_PASS);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (Exception $e) {
-  echo $e->getMessage() . PHP_EOL;
+function dbConnect(){
+  //DBへの接続準備
+  $dsn = 'mysql:host=localhost;dbname=hogetest';
+  $user = 'hoge';
+  $password = 'hoge';
+  $options = array(
+    // SQL実行失敗時にはエラーコードのみ設定
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
+    // デフォルトフェッチモードを連想配列形式に設定
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    // バッファードクエリを使う(一度に結果セットをすべて取得し、サーバー負荷を軽減)
+    // SELECTで得た結果に対してもrowCountメソッドを使えるようにする
+    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
+  );
+  // PDOオブジェクト生成（DBへ接続）
+  $dbh = new PDO($dsn, $user, $password, $options);
+  return $dbh;
 }
+
+function get_user($user_id){
+  try {
+    $dbh = dbConnect();
+    $sql = "SELECT *
+            FROM users
+            WHERE id = :id";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(array(':id' => $user_id));
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  } catch (\Exception $e) {
+   $e->getMessage() . PHP_EOL;
+  }
+}
+
+function get_post(){
+
+}
+
+function get_favorite_post($page_id){
+  try{
+    $dbh = dbConnect();
+    $sql = "SELECT  users.name,posts.id,posts.user_id,post_content,posts.created_at
+            FROM users INNER JOIN favorite ON users.id = favorite.user_id
+            INNER JOIN posts ON posts.id = favorite.post_id
+            WHERE favorite.user_id = :id
+            ORDER BY favorite.id DESC";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(array(':id' => $page_id));
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  } catch (\Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+  }
+}
+
+
+
 
 
 function cheak_logged_in(){

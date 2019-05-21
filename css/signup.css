@@ -52,6 +52,10 @@ body{
   border: #FF7763 solid 2px !important;
 }
 
+.err{
+  background-color: #500 !important;;
+}
+
 .js_error_message{
   font-family: "dqfont";
   color: #FF7763;
