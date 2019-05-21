@@ -12,19 +12,7 @@ $page_id = $_GET['page_id'];
 //sessionからログイン中のユーザー情報を取得
 $current_user = get_user($_SESSION['user_id']);
 //ユーザーの投稿を取得
-try{
-  $dbh = dbConnect();
-  $sql = "SELECT posts.id,user_id,name,post_content,posts.created_at
-          FROM users INNER JOIN posts ON users.id = posts.user_id
-          WHERE :id = posts.user_id
-          ORDER BY posts.created_at DESC";
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':id' => $page_id));
-  $user_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (\Exception $e) {
-  echo $e->getMessage() . PHP_EOL;
-}
-
+$user_posts = get_post($page_id);
 // お気に入り登録した投稿を取得
 $favorite_posts = get_favorite_post($page_id);
 // var_dump($user_posts);
@@ -38,9 +26,10 @@ if(!empty($_POST['post_content'])){
   $now = new DateTime('', new DateTimeZone('Asia/Tokyo'));
 
   try {
+    $dbh = dbConnect();
     $sql = "insert into posts(user_id,post_content,created_at)
             value(:user_id,:post_content,:created_at)";
-    $stmt = $pdo->prepare($sql);
+    $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content , ':created_at' => $now->format('Y-m-d H:i:s')));
 
     $_SESSION['flash']['type'] = "flash_sucsess";

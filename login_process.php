@@ -33,8 +33,9 @@ if(!empty($_POST)){
   if(empty($error_messages)){
     //emailでユーザー情報を取得
     try {
+      $dbh = dbConnect();
       $sql = "SELECT password,id FROM users WHERE email = :email";
-      $stmt = $pdo->prepare($sql);
+      $stmt = $dbh->prepare($sql);
       $stmt->execute(array(':email' => $email));
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
 

@@ -1,0 +1,280 @@
+[22-May-2019 01:21:45 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:21:45 Europe/Berlin] debug：「　マイページ     「
+[22-May-2019 01:21:45 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:21:45 Europe/Berlin] debug：セッションID：ce9bq64qr4d1eon0f56h71kg1h
+[22-May-2019 01:21:45 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558447174
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[22-May-2019 01:21:45 Europe/Berlin] debug：現在日時タイムスタンプ：1558480905
+[22-May-2019 01:21:45 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558450774
+[22-May-2019 01:21:45 Europe/Berlin] debug：ログイン有効期限オーバーです。
+[22-May-2019 01:21:45 Europe/Berlin] PHP Notice:  Undefined index: page_id in C:\xampp\htdocs\test\mypage.php on line 10
+[22-May-2019 01:21:45 Europe/Berlin] PHP Notice:  Undefined index: page_id in C:\xampp\htdocs\test\mypage.php on line 98
+[22-May-2019 01:21:45 Europe/Berlin] PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\test\mypage.php on line 109
+[22-May-2019 01:21:45 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:21:45 Europe/Berlin] debug：「　ログインページ 「
+[22-May-2019 01:21:45 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:21:45 Europe/Berlin] debug：セッションID：6ip8cg06eu3ib8kn1lobr1ip1o
+[22-May-2019 01:21:45 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[22-May-2019 01:21:45 Europe/Berlin] debug：現在日時タイムスタンプ：1558480905
+[22-May-2019 01:21:45 Europe/Berlin] debug：未ログインユーザーです。
+[22-May-2019 01:21:49 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:21:49 Europe/Berlin] debug：「　ログインページ 「
+[22-May-2019 01:21:49 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:21:49 Europe/Berlin] debug：セッションID：9r8i3cjcda92747o6r8reqv1el
+[22-May-2019 01:21:49 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[22-May-2019 01:21:49 Europe/Berlin] debug：現在日時タイムスタンプ：1558480909
+[22-May-2019 01:21:49 Europe/Berlin] debug：未ログインユーザーです。
+[22-May-2019 01:21:49 Europe/Berlin] debug：POST送信があります。
+[22-May-2019 01:21:49 Europe/Berlin] PHP Notice:  Undefined variable: pdo in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:21:49 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in C:\xampp\htdocs\test\login_process.php:37
+Stack trace:
+#0 C:\xampp\htdocs\test\login_form.php(2): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:22:22 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:22:22 Europe/Berlin] debug：「　ログインページ 「
+[22-May-2019 01:22:22 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:22:22 Europe/Berlin] debug：セッションID：qiie4o3r3qv60adsjrmus4rhq6
+[22-May-2019 01:22:22 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[22-May-2019 01:22:22 Europe/Berlin] debug：現在日時タイムスタンプ：1558480942
+[22-May-2019 01:22:22 Europe/Berlin] debug：未ログインユーザーです。
+[22-May-2019 01:22:22 Europe/Berlin] debug：POST送信があります。
+[22-May-2019 01:22:22 Europe/Berlin] PHP Notice:  Undefined variable: pdo in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:22:22 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in C:\xampp\htdocs\test\login_process.php:37
+Stack trace:
+#0 C:\xampp\htdocs\test\login_form.php(2): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:22:38 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:22:38 Europe/Berlin] debug：「　ログインページ 「
+[22-May-2019 01:22:38 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:22:38 Europe/Berlin] debug：セッションID：2vc43tcj1c6m2pqus9obknb3v3
+[22-May-2019 01:22:38 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[22-May-2019 01:22:38 Europe/Berlin] debug：現在日時タイムスタンプ：1558480958
+[22-May-2019 01:22:38 Europe/Berlin] debug：未ログインユーザーです。
+[22-May-2019 01:22:38 Europe/Berlin] debug：POST送信があります。
+[22-May-2019 01:22:38 Europe/Berlin] PHP Notice:  Undefined variable: pdo in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:22:38 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in C:\xampp\htdocs\test\login_process.php:37
+Stack trace:
+#0 C:\xampp\htdocs\test\login_form.php(2): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:23:18 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:23:18 Europe/Berlin] debug：「　ログインページ 「
+[22-May-2019 01:23:18 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:23:18 Europe/Berlin] debug：セッションID：epvpcl4vss0qbofnvskh36f399
+[22-May-2019 01:23:18 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[22-May-2019 01:23:18 Europe/Berlin] debug：現在日時タイムスタンプ：1558480998
+[22-May-2019 01:23:18 Europe/Berlin] debug：未ログインユーザーです。
+[22-May-2019 01:23:18 Europe/Berlin] debug：POST送信があります。
+[22-May-2019 01:23:18 Europe/Berlin] PHP Notice:  Undefined variable: pdo in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:23:18 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in C:\xampp\htdocs\test\login_process.php:37
+Stack trace:
+#0 C:\xampp\htdocs\test\login_form.php(2): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:23:19 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:23:19 Europe/Berlin] debug：「　ログインページ 「
+[22-May-2019 01:23:19 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:23:19 Europe/Berlin] debug：セッションID：um6lu4ka8tooo06lv8a5s2f393
+[22-May-2019 01:23:19 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[22-May-2019 01:23:19 Europe/Berlin] debug：現在日時タイムスタンプ：1558480999
+[22-May-2019 01:23:19 Europe/Berlin] debug：未ログインユーザーです。
+[22-May-2019 01:23:25 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:23:25 Europe/Berlin] debug：「　ログインページ 「
+[22-May-2019 01:23:25 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:23:25 Europe/Berlin] debug：セッションID：6u83bpha712e3pbj6qeq60iood
+[22-May-2019 01:23:25 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[22-May-2019 01:23:25 Europe/Berlin] debug：現在日時タイムスタンプ：1558481005
+[22-May-2019 01:23:25 Europe/Berlin] debug：未ログインユーザーです。
+[22-May-2019 01:23:25 Europe/Berlin] debug：POST送信があります。
+[22-May-2019 01:23:25 Europe/Berlin] PHP Notice:  Undefined variable: pdo in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:23:25 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in C:\xampp\htdocs\test\login_process.php:37
+Stack trace:
+#0 C:\xampp\htdocs\test\login_form.php(2): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:23:40 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:23:40 Europe/Berlin] debug：「　ログインページ 「
+[22-May-2019 01:23:40 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:23:40 Europe/Berlin] debug：セッションID：52l946l2010op38k33r6g8l68d
+[22-May-2019 01:23:40 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[22-May-2019 01:23:40 Europe/Berlin] debug：現在日時タイムスタンプ：1558481020
+[22-May-2019 01:23:40 Europe/Berlin] debug：未ログインユーザーです。
+[22-May-2019 01:23:40 Europe/Berlin] debug：POST送信があります。
+[22-May-2019 01:23:40 Europe/Berlin] PHP Notice:  Undefined variable: pdo in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:23:40 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in C:\xampp\htdocs\test\login_process.php:37
+Stack trace:
+#0 C:\xampp\htdocs\test\login_form.php(2): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\test\login_process.php on line 37
+[22-May-2019 01:24:01 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:24:01 Europe/Berlin] debug：「　ログインページ 「
+[22-May-2019 01:24:01 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:24:01 Europe/Berlin] debug：セッションID：2dois8789nb5fqqrnrf2j4tasb
+[22-May-2019 01:24:01 Europe/Berlin] debug：セッション変数の中身：Array
+(
+)
+
+[22-May-2019 01:24:01 Europe/Berlin] debug：現在日時タイムスタンプ：1558481041
+[22-May-2019 01:24:01 Europe/Berlin] debug：未ログインユーザーです。
+[22-May-2019 01:24:01 Europe/Berlin] debug：POST送信があります。
+[22-May-2019 01:24:01 Europe/Berlin] debug：クエリ結果の中身：Array
+(
+    [password] => $2y$10$aVsBsgFKhZJ3ArO8G/S4QuYSDq9QhrZ.kYYktCNUsOONNnjrWKJkS
+    [id] => 13
+)
+
+[22-May-2019 01:24:01 Europe/Berlin] debug：ログイン保持にチェックはありません。
+[22-May-2019 01:24:01 Europe/Berlin] debug：ログイン成功
+[22-May-2019 01:24:01 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558481041
+    [login_limit] => 3600
+    [user_id] => 13
+    [flash] => Array
+        (
+            [type] => flash_sucsess
+            [message] => ログインしました
+        )
+
+)
+
+[22-May-2019 01:24:01 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:24:01 Europe/Berlin] debug：「　マイページ     「
+[22-May-2019 01:24:01 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:24:01 Europe/Berlin] debug：セッションID：6ir5he7a1ggtvuoljlnp13fh6f
+[22-May-2019 01:24:01 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558481041
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[22-May-2019 01:24:01 Europe/Berlin] debug：現在日時タイムスタンプ：1558481041
+[22-May-2019 01:24:01 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558484641
+[22-May-2019 01:24:01 Europe/Berlin] debug：ログイン済みユーザーです。
+[22-May-2019 01:31:47 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:31:47 Europe/Berlin] debug：「　マイページ     「
+[22-May-2019 01:31:47 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:31:47 Europe/Berlin] debug：セッションID：p2h40hcdntri7mmt31isok1kqf
+[22-May-2019 01:31:47 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558481041
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[22-May-2019 01:31:47 Europe/Berlin] debug：現在日時タイムスタンプ：1558481507
+[22-May-2019 01:31:47 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558484641
+[22-May-2019 01:31:47 Europe/Berlin] debug：ログイン済みユーザーです。
+[22-May-2019 01:31:47 Europe/Berlin] debug：ユーザー情報を取得します
+[22-May-2019 01:31:47 Europe/Berlin] debug：ユーザー投稿を取得します
+[22-May-2019 01:31:47 Europe/Berlin] debug：お気に入り投稿を取得します
+[22-May-2019 01:39:22 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:39:22 Europe/Berlin] debug：「　マイページ     「
+[22-May-2019 01:39:22 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:39:22 Europe/Berlin] debug：セッションID：m7llq7udmc6u5jgbrs78fkmfvm
+[22-May-2019 01:39:22 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558481507
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[22-May-2019 01:39:22 Europe/Berlin] debug：現在日時タイムスタンプ：1558481962
+[22-May-2019 01:39:22 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558485107
+[22-May-2019 01:39:22 Europe/Berlin] debug：ログイン済みユーザーです。
+[22-May-2019 01:39:22 Europe/Berlin] debug：ユーザー情報を取得します
+[22-May-2019 01:39:22 Europe/Berlin] debug：成功
+[22-May-2019 01:39:22 Europe/Berlin] debug：ユーザー投稿を取得します
+[22-May-2019 01:39:22 Europe/Berlin] debug：お気に入り投稿を取得します
+[22-May-2019 01:39:53 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:39:53 Europe/Berlin] debug：「　マイページ     「
+[22-May-2019 01:39:53 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:39:53 Europe/Berlin] debug：セッションID：dls6fnq8lsg9vd7nbi5n7krfc2
+[22-May-2019 01:39:53 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558481962
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[22-May-2019 01:39:53 Europe/Berlin] debug：現在日時タイムスタンプ：1558481993
+[22-May-2019 01:39:53 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558485562
+[22-May-2019 01:39:53 Europe/Berlin] debug：ログイン済みユーザーです。
+[22-May-2019 01:39:53 Europe/Berlin] debug：ユーザー情報を取得します
+[22-May-2019 01:39:53 Europe/Berlin] debug：成功
+[22-May-2019 01:39:53 Europe/Berlin] debug：ユーザー投稿を取得します
+[22-May-2019 01:39:53 Europe/Berlin] debug：成功
+[22-May-2019 01:39:53 Europe/Berlin] debug：お気に入り投稿を取得します
+[22-May-2019 01:39:53 Europe/Berlin] debug：成功
+[22-May-2019 01:40:23 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:40:23 Europe/Berlin] debug：「　マイページ     「
+[22-May-2019 01:40:23 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:40:23 Europe/Berlin] debug：セッションID：rckjdpqh01gdtv1ns1nhcmicsc
+[22-May-2019 01:40:23 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558481993
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[22-May-2019 01:40:23 Europe/Berlin] debug：現在日時タイムスタンプ：1558482023
+[22-May-2019 01:40:23 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558485593
+[22-May-2019 01:40:23 Europe/Berlin] debug：ログイン済みユーザーです。
+[22-May-2019 01:40:23 Europe/Berlin] debug：ユーザー情報を取得します
+[22-May-2019 01:40:23 Europe/Berlin] debug：成功
+[22-May-2019 01:40:23 Europe/Berlin] debug：ユーザー投稿を取得します
+[22-May-2019 01:40:23 Europe/Berlin] debug：成功
+[22-May-2019 01:40:23 Europe/Berlin] debug：お気に入り投稿を取得します
+[22-May-2019 01:40:23 Europe/Berlin] debug：成功
+[22-May-2019 01:40:32 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:40:32 Europe/Berlin] debug：「　マイページ     「
+[22-May-2019 01:40:32 Europe/Berlin] debug：「「「「「「「「「「「
+[22-May-2019 01:40:32 Europe/Berlin] debug：セッションID：8a2kmnnjv32aasupkia2miisf6
+[22-May-2019 01:40:32 Europe/Berlin] debug：セッション変数の中身：Array
+(
+    [login_date] => 1558482023
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[22-May-2019 01:40:32 Europe/Berlin] debug：現在日時タイムスタンプ：1558482032
+[22-May-2019 01:40:32 Europe/Berlin] debug：ログイン期限日時タイムスタンプ：1558485623
+[22-May-2019 01:40:32 Europe/Berlin] debug：ログイン済みユーザーです。
+[22-May-2019 01:40:32 Europe/Berlin] debug：ユーザー情報を取得します
+[22-May-2019 01:40:32 Europe/Berlin] debug：成功
+[22-May-2019 01:40:32 Europe/Berlin] debug：ユーザー投稿を取得します
+[22-May-2019 01:40:32 Europe/Berlin] debug：成功
+[22-May-2019 01:40:32 Europe/Berlin] debug：お気に入り投稿を取得します
+[22-May-2019 01:40:32 Europe/Berlin] debug：成功

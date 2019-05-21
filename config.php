@@ -75,6 +75,7 @@ function dbConnect(){
 }
 
 function get_user($user_id){
+  debug('ユーザー情報を取得します');
   try {
     $dbh = dbConnect();
     $sql = "SELECT *
@@ -82,17 +83,44 @@ function get_user($user_id){
             WHERE id = :id";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $user_id));
+
+    if($stmt){
+      debug('成功');
+    }else{
+      debug('失敗しました');
+    }
+
     return $stmt->fetch(PDO::FETCH_ASSOC);
   } catch (\Exception $e) {
-   $e->getMessage() . PHP_EOL;
+    error_log('エラー発生:' . $e->getMessage());
   }
 }
 
-function get_post(){
+function get_post($page_id){
+  debug('ユーザー投稿を取得します');
+  try{
+    $dbh = dbConnect();
+    $sql = "SELECT posts.id,user_id,name,post_content,posts.created_at
+            FROM users INNER JOIN posts ON users.id = posts.user_id
+            WHERE :id = posts.user_id
+            ORDER BY posts.created_at DESC";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(array(':id' => $page_id));
 
+    if($stmt){
+      debug('成功');
+    }else{
+      debug('失敗しました');
+    }
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  } catch (\Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
 }
 
 function get_favorite_post($page_id){
+  debug('お気に入り投稿を取得します');
   try{
     $dbh = dbConnect();
     $sql = "SELECT  users.name,posts.id,posts.user_id,post_content,posts.created_at
@@ -102,9 +130,16 @@ function get_favorite_post($page_id){
             ORDER BY favorite.id DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $page_id));
+
+    if($stmt){
+      debug('成功');
+    }else{
+      debug('失敗しました');
+    }
+    
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   } catch (\Exception $e) {
-    echo $e->getMessage() . PHP_EOL;
+    error_log('エラー発生:' . $e->getMessage());
   }
 }
 
