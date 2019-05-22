@@ -5,7 +5,17 @@
 
 body{
   background-color: #121212;
-  /* padding-top: 50px; */
+}
+.message_slide{
+  background-color: #fff;
+  position: absolute;
+  top: 50px;;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  line-height: 30px;
+  margin: 0;
+  display: none;
 }
 
 .flash_error{

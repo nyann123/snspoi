@@ -44,16 +44,17 @@ if(!empty($_POST['post_content'])){
 
 //投稿削除
 if(!empty($_POST['delete'])){
+  $dbh = dbConnect();
   $post_id = $_POST['post_id'];
   $sql = "delete
           from posts
           where id = :id";
-  $stmt = $pdo->prepare($sql);
+  $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':id' => $post_id));
 
   $_SESSION['flash']['type'] = 'flash_error';
   $_SESSION['flash']['message'] = '削除しました';
-  header("Location:mypage.php");
+  header("Location:mypage.php?page_id=${page_id}");
 }
 
 //お気に入り追加
@@ -77,14 +78,16 @@ if(!empty($_POST['like'])){
 
   <body>
     <?php require_once('header.php'); ?>
+
+    <!-- フラッシュメッセージ -->
+    <?php if(isset($flash_messages)): ?>
+      <p id ="js_show_msg" class="message_slide <?php echo $flash_type ?>">
+        <?php echo $flash_messages ?>
+      </p>
+    <?php endif; ?>
+
+
     <div class="container">
-
-      <?php if (isset($flash_messages)): ?>
-        <?php foreach ((array)$flash_messages as $message): ?>
-          <p class ="flash_message <?php echo $flash_type ?>"><?php echo $message?></p>
-        <?php endforeach ?>
-      <?php endif ?>
-
       <div class ="mypage">
         <div class="mypage_left">
           ようこそ
@@ -142,5 +145,7 @@ if(!empty($_POST['like'])){
         </div>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="js/common.js"></script>
   </body>
 </html>

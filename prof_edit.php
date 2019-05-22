@@ -44,9 +44,9 @@ if(!empty($_POST)){
       // クエリ成功の場合
       if($stmt){
         debug('クエリ成功。');
-        $_SESSION['flash']['type'] = 'flash_sucsess'
-        $_SESSION['flash']['message'] = 'プロフィールの編集が完了しました'
-        
+        $_SESSION['flash']['type'] = 'flash_sucsess';
+        $_SESSION['flash']['message'] = 'プロフィールの編集が完了しました';
+
         header("Location:mypage.php?page_id=${user_id}");
 
       }else{
