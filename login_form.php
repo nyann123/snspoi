@@ -3,7 +3,7 @@ require_once('login_process.php');
 
 $site_title = 'ログイン';
 $css_title = 'login';
-require('head.php');
+require_once('head.php');
 ?>
   <body>
     <?php require_once('header.php'); ?>

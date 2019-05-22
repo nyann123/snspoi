@@ -17,36 +17,32 @@ require('auth.php');
 // post送信されていた場合
 if(!empty($_POST)){
   debug('POST送信があります。');
-  //例外処理
   try {
-    // DBへ接続
     $dbh = dbConnect();
-    // SQL文作成
-    $sql1 = 'UPDATE users SET  delete_flg = 1 WHERE id = :us_id';
-    $sql2 = 'UPDATE posts SET  delete_flg = 1 WHERE user_id = :us_id';
-    $sql3 = 'UPDATE like SET  delete_flg = 1 WHERE user_id = :us_id';
-    // データ流し込み
-    $data = array(':us_id' => $_SESSION['user_id']);
-    // クエリ実行
-    $stmt1 = queryPost($dbh, $sql1, $data);
-    $stmt2 = queryPost($dbh, $sql2, $data);
-    $stmt3 = queryPost($dbh, $sql3, $data);
+    //usersテーブル
+    $sql1 = 'UPDATE users SET  delete_flg = 1 WHERE id = :id';
+    $stmt1 = $dbh->prepare($sql1);
+    $stmt1->execute(array(':id' => $_SESSION['user_id']);
+    //postsテーブル
+    $sql2 = 'UPDATE posts SET  delete_flg = 1 WHERE user_id = :id';
+    $stmt2 = $dbh->prepare($sql2);
+    $stmt2->execute(array(':id' => $_SESSION['user_id']);
+    //favoriteテーブル
+    $sql3 = 'UPDATE favorite SET  delete_flg = 1 WHERE user_id = :id';
+    $stmt3 = $dbh->prepare($sql3);
+    $stmt3->execute(array(':id' => $_SESSION['user_id']);
 
-    // クエリ実行成功の場合（最悪userテーブルのみ削除成功していれば良しとする）
     if($stmt1){
      //セッション削除
       session_destroy();
       debug('セッション変数の中身：'.print_r($_SESSION,true));
-      debug('トップページへ遷移します。');
-      header("Location:index.php");
+      header("Location:login.php");
     }else{
       debug('クエリが失敗しました。');
-      $err_msg['common'] = MSG07;
     }
 
   } catch (Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
-    $err_msg['common'] = MSG07;
   }
 }
 

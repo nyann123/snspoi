@@ -10,7 +10,7 @@ require_once('auth.php');
 
 //ログイン中ならマイページへ
 if (isset($_SESSION['user_id'])){
-  debug('!!!!!ログインユーザーはアクセスできません!!!!!');
+  debug('ログインユーザーはアクセスできません');
   header('Location:mypage.php');
 }
 

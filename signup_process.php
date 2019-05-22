@@ -6,15 +6,29 @@ debug('「　新規登録ページ 「');
 debug('「「「「「「「「「「「');
 debugLogStart();
 
-function cheak_email_duplicate($email, $pdo){
-  $sql = "select * from users where email = :email limit 1";
-  $stmt = $pdo->prepare($sql);
+function cheak_email_duplicate($email){
+  $dbh = dbConnect();
+  $sql = "SELECT *
+          FROM users
+          WHERE email = :email LIMIT 1";
+  $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':email' => $email));
   $user = $stmt->fetch();
   return $user ? true : false;
 }
 
-//ログイン中ならマイページへ
+function cheak_delete_flg($email){
+  $dbh = dbConnect();
+  $sql = "SELECT *
+          FROM users
+          WHERE email = :email LIMIT 1
+          AND delete_flg = 1";
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':email' => $email));
+  $delete_user = $stmt->fetch();
+  return $delete_user ? true : false;
+}
+// ログイン中ならマイページへ
 if (isset($_SESSION['user_id'])){
   debug('ログイン中のユーザーはアクセスできません');
   header('Location:mypage.php');
@@ -44,30 +58,17 @@ if(!empty($_POST)){
   $email = $_SESSION['email'] = $_POST['email'];
   $pass = $_SESSION['pass'] = $_POST['pass'];
 
-  // 名前のバリデーション
-  if ( empty($name) ){
-    $error_messages['name'] = 'なまえを入力してください';
-  }elseif( strlen($name) > 10 ){
-    $error_messages['name'] = 'なまえは10文字以内で入力してください';
-  }
-  // メールのバリデーション
-  if(!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)){
-    $error_messages['email'] = 'Emailの形式で入力してください';
-  }elseif ( cheak_email_duplicate( $email,$pdo ) ){
-    $error_messages['email'] = 'すでに登録済みのメールアドレスです';
-  }
-  // パスワードのバリデーション
-  if (preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i', $pass)) {
-    $pass = password_hash($pass, PASSWORD_DEFAULT);
-  }else{
-    $error_messages['pass'] = 'パスワードは半角英数字をそれぞれ1文字以上含んだ6文字以上で設定してください。';
-  }
+  //入力のバリデーション
+  valid_name($name);
+  valid_email($email);
+  valid_password($pass);
 
   if(empty($error_messages)){
     try {
+      $dbh = dbConnect();
       $sql = 'INSERT INTO users(name,email,password,created_at)
               VALUES(:name,:email,:password,:created_at)';
-      $stmt = $pdo->prepare($sql);
+      $stmt = $dbh->prepare($sql);
       $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => $pass , ':created_at' => date('Y-m-d H:i:s')));
 
       //フォーム入力保持用のsession破棄
@@ -78,7 +79,7 @@ if(!empty($_POST)){
       $sesLimit = 60*60;
       $_SESSION['login_date'] = time();
       $_SESSION['login_limit'] = $sesLimit;
-      $_SESSION['user_id'] = $user_id = $pdo->lastInsertId();
+      $_SESSION['user_id'] = $user_id = $dbh->lastInsertId();
 
       $_SESSION['flash']['type'] = "flash_sucsess";
       $_SESSION['flash']['message'] = '登録が完了しました';

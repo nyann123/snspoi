@@ -47,10 +47,45 @@ function debugLogStart(){
 }
 
 //================================
+// 定数
+//================================
+//エラーメッセージを定数に設定
+define('MSG1','エラーが発生しました。しばらく経ってからやり直してください。');
+
+//================================
 // グローバル変数
 //================================
 //エラーメッセージ格納用の配列
 $error_messages = array();
+
+//================================
+// バリデーション関数
+//================================
+
+function valid_name($name){
+  global $error_messages;
+  if ( empty($name) ){
+    $error_messages['name'] = 'なまえを入力してください';
+  }elseif( strlen($name) > 10 ){
+    $error_messages['name'] = 'なまえは10文字以内で入力してください';
+  }
+}
+function valid_email($email){
+  global $error_messages;
+  if(!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)){
+    $error_messages['email'] = 'Emailの形式で入力してください';
+  }elseif ( cheak_email_duplicate( $email ) ){
+    $error_messages['email'] = 'すでに登録済みのメールアドレスです';
+  }
+}
+function valid_password($pass){
+  global $error_messages;
+  if (preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i', $pass)) {
+    $pass = password_hash($pass, PASSWORD_DEFAULT);
+  }else{
+    $error_messages['pass'] = 'パスワードは半角英数字をそれぞれ1文字以上含んだ6文字以上で設定してください。';
+  }
+}
 
 //================================
 // データベース
@@ -136,7 +171,7 @@ function get_favorite_post($page_id){
     }else{
       debug('失敗しました');
     }
-    
+
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
@@ -144,6 +179,33 @@ function get_favorite_post($page_id){
 }
 
 
+function get_form_data($str){
+  global $user;
+  // ユーザーデータがある場合
+  if(isset($user)){
+    //フォームのエラーがある場合
+    if(isset($error_messages[$str])){
+      //POSTにデータがある場合
+      if(isset($_POST[$str])){
+        return $_POST[$str];
+      }else{
+        //ない場合（基本ありえない）はDBの情報を表示
+        return $user[$str];
+      }
+    }else{
+      //POSTにデータがあり、DBの情報と違う場合
+      if(isset($_POST[$str]) && $_POST[$str] !== $user[$str]){
+        return $_POST[$str];
+      }else{
+        return $user[$str];
+      }
+    }
+  }else{
+    if(isset($_POST[$str])){
+      return $_POST[$str];
+    }
+  }
+}
 
 
 
