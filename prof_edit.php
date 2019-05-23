@@ -62,50 +62,35 @@ if(!empty($_POST)){
 }
 
 $site_title = 'プロフィール編集';
-// $css_title = ''
+$file_title = 'prof_edit';
 require_once('head.php');
 ?>
 
-<body class="page-profEdit page-2colum page-logined">
+<body>
+<?php require('header.php'); ?>
 
-  <!-- メニュー -->
-  <?php
-  require('header.php');
-  ?>
+<div class="prof_edit_form">
+  <h2>プロフィール編集</h2>
 
-  <!-- メインコンテンツ -->
-    <h1 class="page-title">プロフィール編集</h1>
-    <!-- Main -->
-    <section id="main" >
-      <div class="form-container">
-        <form action="" method="post" class="form">
-          <div class="area-msg">
-            <?php
-            if(!empty($err_msg['common'])) echo $err_msg['common'];
-            ?>
-          </div>
-          <label class="<?php if(!empty($err_msg['username'])) echo 'err'; ?>">
-            名前
-            <input type="text" name="username" value="<?php echo get_form_data('name'); ?>">
-          </label>
-          <div class="area-msg">
-            <?php
-            if(!empty($err_msg['username'])) echo $err_msg['username'];
-            ?>
-          </div>
-          <label class="<?php if(!empty($err_msg['email'])) echo 'err'; ?>">
-            Email
-            <input type="text" name="email" value="<?php echo get_form_data('email'); ?>">
-          </label>
-          <div class="area-msg">
-            <?php
-            if(!empty($error_messages['email'])) echo $error_messages['email'];
-            ?>
-          </div>
+  <?php if (isset($flash_messages)): ?>
+    <?php foreach ((array)$flash_messages as $message): ?>
+      <p class ="flash_message <?php echo $flash_type ?>"><?php echo $message?></p>
+    <?php endforeach ?>
+  <?php endif ?>
 
-          <div class="btn-container">
-            <input type="submit" class="btn btn-mid" value="変更する">
-          </div>
-        </form>
-      </div>
-    </section>
+  <div class="form_inner">
+    <form action="" method="post">
+      <label for="name">名前</label><br>
+      <input id="name" type="text" name="username" value="<?php echo get_form_data('name'); ?>">
+      <span class="js_error_message"></span><br>
+
+      <label for="email">Email</label><br>
+      <input id="email" type="email" name="email" value="<?php echo get_form_data('email'); ?>">
+      <span class="js_error_message"></span><br>
+
+      <input id="btn" type="submit"  value="変更する" disabled>
+    </form>
+  </div>
+  </div>
+
+<?php require_once('footer.php'); ?>

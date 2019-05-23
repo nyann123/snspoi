@@ -1,10 +1,3 @@
-/* 予定 */
-/* @media screen and (max-width:1070px){
-body{
-  display: none;
-}
-} */
-
 .signup_form{
   color: #FFF;
   max-width: 800px;
@@ -61,7 +54,6 @@ body{
   color: #FF7763;
   font-size: 28px;
   margin-left: 10px;
-  vertical-align:middle;
 }
 
 #signup_btn{

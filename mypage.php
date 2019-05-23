@@ -23,14 +23,13 @@ if(!empty($_POST['post_content'])){
 
   $post_content = $_POST['content'];
   $user_id = $user['id'];
-  $now = new DateTime('', new DateTimeZone('Asia/Tokyo'));
 
   try {
     $dbh = dbConnect();
     $sql = "insert into posts(user_id,post_content,created_at)
             value(:user_id,:post_content,:created_at)";
     $stmt = $dbh->prepare($sql);
-    $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content , ':created_at' => $now->format('Y-m-d H:i:s')));
+    $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content , ':created_at' => date('Y-m-d H:i:s')));
 
     $_SESSION['flash']['type'] = "flash_sucsess";
     $_SESSION['flash']['message'] = '投稿しました';
@@ -72,80 +71,78 @@ if(!empty($_POST['like'])){
 }
 
  $site_title = 'マイページ';
- $css_title = 'mypage';
+ $file_title = 'mypage';
  require_once('head.php');
   ?>
 
-  <body>
-    <?php require_once('header.php'); ?>
+<body>
+  <?php require_once('header.php'); ?>
 
-    <!-- フラッシュメッセージ -->
-    <?php if(isset($flash_messages)): ?>
-      <p id ="js_show_msg" class="message_slide <?php echo $flash_type ?>">
-        <?php echo $flash_messages ?>
-      </p>
-    <?php endif; ?>
+  <!-- フラッシュメッセージ -->
+  <?php if(isset($flash_messages)): ?>
+    <p id ="js_show_msg" class="message_slide <?php echo $flash_type ?>">
+      <?php echo $flash_messages ?>
+    </p>
+  <?php endif; ?>
 
 
-    <div class="container">
-      <div class ="mypage">
-        <div class="mypage_left">
-          ようこそ
-          <?php  echo $current_user['name']; ?>
-          さん
-          <p>id = <?php echo $current_user['id'] ?></p>
-        </div>
-          <div class="mypage_right">
+  <div class="container">
+    <div class ="mypage">
+      <div class="mypage_left">
+        ようこそ
+        <?php  echo $current_user['name']; ?>
+        さん
+        <p>id = <?php echo $current_user['id'] ?></p>
+      </div>
+        <div class="mypage_right">
 
-            <!-- 自分のページのみ投稿フォームを表示 -->
-          <?php if ($current_user['id'] === $_GET['page_id']): ?>
-            <form class ="post_form" action="#" method="post">
-              <textarea name="content" rows="8" cols="80"></textarea><br>
-              <input id="post_btn" type="submit" name="post_content" value="投稿">
-            </form>
-          <?php endif; ?>
+          <!-- 自分のページのみ投稿フォームを表示 -->
+        <?php if ($current_user['id'] === $_GET['page_id']): ?>
+          <form class ="post_form" action="#" method="post">
+            <textarea name="content" rows="8" cols="80"></textarea><br>
+            <input id="post_btn" type="submit" name="post_content" value="投稿">
+          </form>
+        <?php endif; ?>
 
-          <?php if (empty($user_posts)): ?>
-            <p>投稿がありません</p>
-          <?php endif; ?>
+        <!-- 投稿がなければ表示する -->
+        <?php if (empty($user_posts)): ?>
+          <p>投稿がありません</p>
+        <?php endif; ?>
 
-          <?php foreach($user_posts as $post): ?>
-            <!-- <?php var_dump($post)?> -->
-              <div class="posts_container">
-                <div class="post_data">
+        <?php foreach($user_posts as $post): ?>
+          <!-- <?php var_dump($post)?> -->
+            <div class="posts_container">
+              <div class="post_data">
 
-                  <!-- ユーザーによって名前を色替え -->
-                  <?php if ($current_user['id'] === $post['user_id']): ?>
-                    <a href="mypage.php?page_id=<?php echo $post['user_id']?>"
-                      class="post_user_name myself"><?php echo $post['name']; ?></a>
-                  <?php else: ?>
-                    <a href="mypage.php?page_id=<?php echo $post['user_id']?>"
-                      class="post_user_name other"><?php echo $post['name']; ?></a>
-                  <?php endif; ?>
+                <!-- ユーザーによって名前を色替え -->
+                <?php if ($current_user['id'] === $post['user_id']): ?>
+                  <a href="mypage.php?page_id=<?php echo $post['user_id']?>"
+                    class="post_user_name myself"><?php echo $post['name']; ?></a>
+                <?php else: ?>
+                  <a href="mypage.php?page_id=<?php echo $post['user_id']?>"
+                    class="post_user_name other"><?php echo $post['name']; ?></a>
+                <?php endif; ?>
 
-                  <?php $time = new DateTime($post['created_at']) ?>
-                  <?php $post_date = $time->format('Y-m-d H:i') ?>
-                  <p class="post_date"><?php echo $post_date ?></p>
-                </div>
-                <p class ="post_content"><?php echo wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
-
-                <form class="" action="#" method="post">
-                  <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
-                  <input type="submit" name="delete" value="削除" method="post">
-                </form>
-                <form class="" action="#" method="post">
-                  <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
-                  <input type="submit" name="like" value="お気に入り" method="post">
-                </form>
+                <?php $time = new DateTime($post['created_at']) ?>
+                <?php $post_date = $time->format('Y-m-d H:i') ?>
+                <p class="post_date"><?php echo $post_date ?></p>
               </div>
+              <p class ="post_content"><?php echo wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
 
-          <?php endforeach ?>
+              <form class="" action="#" method="post">
+                <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
+                <input type="submit" name="delete" value="削除" method="post">
+              </form>
+              <form class="" action="#" method="post">
+                <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
+                <input type="submit" name="like" value="お気に入り" method="post">
+              </form>
+            </div>
+
+        <?php endforeach ?>
 
 
-        </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="js/common.js"></script>
-  </body>
-</html>
+  </div>
+<?php require_once('footer.php'); ?>
