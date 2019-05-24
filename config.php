@@ -1,5 +1,8 @@
 <?php
-// ログ
+
+error_reporting(E_ALL); //E_STRICTレベル以外のエラーを報告する
+ini_set('display_errors','On'); //画面にエラーを表示させるか
+
 //================================
 //ログを取るか
 //================================
@@ -50,7 +53,7 @@ function debugLogStart(){
 // 定数
 //================================
 //エラーメッセージを定数に設定
-define('MSG1','エラーが発生しました。しばらく経ってからやり直してください。');
+define('ERR_MSG1','エラーが発生しました。しばらく経ってからやり直してください。');
 
 //================================
 // グローバル変数
@@ -62,6 +65,17 @@ $error_messages = array();
 // バリデーション関数
 //================================
 
+function cheak_email_duplicate($email){
+  $dbh = dbConnect();
+  $sql = "SELECT *
+          FROM users
+          WHERE email = :email LIMIT 1";
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':email' => $email));
+  $user = $stmt->fetch();
+  return $user ? true : false;
+}
+
 function valid_name($name){
   global $error_messages;
   if ( empty($name) ){
@@ -70,6 +84,7 @@ function valid_name($name){
     $error_messages['name'] = 'なまえは10文字以内で入力してください';
   }
 }
+
 function valid_email($email){
   global $error_messages;
   if(!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)){
@@ -78,6 +93,7 @@ function valid_email($email){
     $error_messages['email'] = 'すでに登録済みのメールアドレスです';
   }
 }
+
 function valid_password($pass){
   global $error_messages;
   if (preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i', $pass)) {
@@ -207,22 +223,22 @@ function get_form_data($str){
   }
 }
 
-
-
+//ログイン中ユーザーのアクセス制限
 function cheak_logged_in(){
-  if (empty($_SESSION['user_id'])){
-    $_SESSION['flash'] = "ログインしてください";
-    $_SESSION['flash']['type'] = "error";
-    $_SESSION['flash']['message'] = "ログインしてください";
-    header('Location:login_form.php');
+  if (isset($_SESSION['user_id'])){
+    debug('ログイン中のユーザーはアクセスできません');
+    header("Location:mypage.php?page_id=${_SESSION['user_id']}");
+    exit();
   }
 }
 
-error_reporting(E_ALL); //E_STRICTレベル以外のエラーを報告する
-ini_set('display_errors','On'); //画面にエラーを表示させるか
-
 
 // フラッシュメッセージ用処理
+function set_flash($type,$message){
+  $_SESSION['flash']['type'] = "flash_${type}";
+  $_SESSION['flash']['message'] = $message;
+}
+
 if( isset($_SESSION['flash']) ){
   $flash_messages = $_SESSION['flash']['message'];
   $flash_type = $_SESSION['flash']['type'];

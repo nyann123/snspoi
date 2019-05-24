@@ -2,7 +2,7 @@
 require_once('config.php');
 
 debug('「「「「「「「「「「「');
-debug('「　タイムライン    「');
+debug('「　タイムライン :未完成   「');
 debug('「「「「「「「「「「「');
 debugLogStart();
 

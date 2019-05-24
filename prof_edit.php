@@ -28,37 +28,41 @@ if(!empty($_POST)){
     valid_name($name);
   }
   if($user['email'] !== $email){
-    validEmail($email);
+    valid_email($email);
   }
+
+  //メッセージをsessionに格納（エラーが発生したら定数で上書きされる）
+  set_flash('error',$error_messages);
 
   if(empty($error_messages)){
     debug('バリデーションOKです。');
 
     try {
       $dbh = dbConnect();
-      $sql = 'UPDATE users  SET name = :u_name, email = :email WHERE id = :u_id';
+      $sql = 'UPDATE users  SET name = :name, email = :email WHERE id = :id';
       $stmt = $dbh->prepare($sql);
-      $stmt->execute(array(':u_name' => $name , ':email' => $email, ':u_id' => $user['id']));
+      $stmt->execute(array(':name' => $name , ':email' => $email, ':id' => $user['id']));
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
       // クエリ成功の場合
       if($stmt){
-        debug('クエリ成功。');
-        $_SESSION['flash']['type'] = 'flash_sucsess';
-        $_SESSION['flash']['message'] = 'プロフィールの編集が完了しました';
-
+        debug('クエリ成功しました');
+        set_flash('sucsess','プロフィールの編集が完了しました');
         header("Location:mypage.php?page_id=${user_id}");
-
+        exit();
       }else{
-        debug('クエリに失敗しました。');
-        $err_msg['common'] = MSG08;
+        debug('クエリ失敗しました。');
+        set_flash('error',ERR_MSG1);
       }
-
     } catch (Exception $e) {
       error_log('エラー発生:' . $e->getMessage());
-      $err_msg['common'] = MSG07;
+      set_flash('error',ERR_MSG1);
     }
   }
+  debug('プロフィール編集失敗');
+  debug(print_r($_SESSION['flash'],true));
+
+  header('Location:prof_edit.php');
 }
 
 $site_title = 'プロフィール編集';

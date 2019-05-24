@@ -4,7 +4,7 @@
 require('function.php');
 
 debug('「「「「「「「「「');
-debug('「　退会ページ　「');
+debug('「　退会ページ:未完成　「');
 debug('「「「「「「「「「');
 debugLogStart();
 
