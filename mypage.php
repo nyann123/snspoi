@@ -15,33 +15,47 @@ $current_user = get_user($_SESSION['user_id']);
 $user_posts = get_post($page_id);
 // お気に入り登録した投稿を取得
 $favorite_posts = get_favorite_post($page_id);
-// var_dump($user_posts);
+// var_dump($current_user);
 
 
 //投稿
-if(!empty($_POST['post_content'])){
-
+if(!empty($_POST['post_btn'])){
+  debug('投稿があります');
   $post_content = $_POST['content'];
-  $user_id = $user['id'];
 
-  try {
-    $dbh = dbConnect();
-    $sql = "insert into posts(user_id,post_content,created_at)
-            value(:user_id,:post_content,:created_at)";
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content , ':created_at' => date('Y-m-d H:i:s')));
+  //投稿の長さチェック
+  valid_post_length($post_content);
 
-    set_flash('sucsess','投稿しました');
+  if (empty($error_messages)){
+    debug('バリデーションＯＫ');
 
-    header("Location:mypage.php?page_id=${current_user['id']}");
-  } catch (\Exception $e) {
-    echo $e->getMessage() ;
-    $_SESSION['flash'] = 'error';
+    try {
+      $dbh = dbConnect();
+      $sql = "insert into posts(user_id,post_content,created_at)
+              value(:user_id,:post_content,:created_at)";
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content , ':created_at' => date('Y-m-d H:i:s')));
+
+      set_flash('sucsess','投稿しました');
+      debug('投稿成功');
+
+      header("Location:mypage.php?page_id=${current_user['id']}");
+      exit();
+
+    } catch (\Exception $e) {
+      echo $e->getMessage() ;
+      $_SESSION['flash'] = 'error';
+    }
   }
+  set_flash('error',$error_messages);
+
+  debug('投稿失敗');
+
+  header("Location:mypage.php?page_id=${current_user['id']}");
 }
 
 //投稿削除
-if(!empty($_POST['delete'])){
+if(!empty($_POST['delete_btn'])){
   $dbh = dbConnect();
   $post_id = $_POST['post_id'];
   $sql = "delete
@@ -55,7 +69,7 @@ if(!empty($_POST['delete'])){
 }
 
 //お気に入り追加
-if(!empty($_POST['like'])){
+if(!empty($_POST['favorite_btn'])){
   $dbh = dbConnect();
   $post_id = $_POST['post_id'];
   $sql = "insert into favorite(user_id,post_id)
@@ -96,7 +110,7 @@ if(!empty($_POST['like'])){
         <?php if ($current_user['id'] === $_GET['page_id']): ?>
           <form class ="post_form" action="#" method="post">
             <textarea class="text_area" placeholder="投稿する" name="content"></textarea><br>
-            <input class="btnnn"id="post_btn" type="submit" name="post_content" value="投稿">
+            <input id="post_btn" type="submit" name="post_btn" value="投稿" disabled>
           </form>
         <?php endif; ?>
 
@@ -127,11 +141,11 @@ if(!empty($_POST['like'])){
 
               <form class="" action="#" method="post">
                 <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
-                <input type="submit" name="delete" value="削除" method="post">
+                <input type="submit" name="delete_btn" value="削除" method="post">
               </form>
               <form class="" action="#" method="post">
                 <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
-                <input type="submit" name="like" value="お気に入り" method="post">
+                <input type="submit" name="favorite_btn" value="お気に入り" method="post">
               </form>
             </div>
 

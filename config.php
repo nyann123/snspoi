@@ -103,6 +103,15 @@ function valid_password($pass){
   }
 }
 
+function valid_post_length($post){
+  global $error_messages;
+  if (empty($post)){
+    $error_messages = '投稿の内容がありません';
+  }else if(strlen($post) >= 150){
+    $error_messages = '内容が長すぎます';
+  }
+}
+
 //================================
 // データベース
 //================================
