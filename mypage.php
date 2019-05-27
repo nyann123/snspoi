@@ -56,7 +56,6 @@ if(!empty($_POST['post_btn'])){
     }
   }
   set_flash('error',$error_messages);
-
   debug('投稿失敗');
 
   header("Location:mypage.php?page_id=${current_user['id']}");
@@ -64,6 +63,8 @@ if(!empty($_POST['post_btn'])){
 
 //投稿削除
 if(!empty($_POST['delete_btn'])){
+  debug('投稿削除のPOST送信があります');
+
   $dbh = dbConnect();
   $post_id = $_POST['post_id'];
   $sql = "delete
@@ -72,8 +73,18 @@ if(!empty($_POST['delete_btn'])){
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':id' => $post_id));
 
-  set_flash('error','削除しました');
-  header("Location:mypage.php?page_id=${page_id}");
+  if($stmt){
+    debug('クエリ成功しました');
+    set_flash('error','削除しました');
+    debug('削除成功')
+
+    header("Location:mypage.php?page_id=${current_user['id']}");
+    exit();
+  }else{
+    debug('クエリ失敗しました。');
+    set_flash('error',ERR_MSG1);
+    debug('削除失敗');
+  }
 }
 
 //お気に入り追加
