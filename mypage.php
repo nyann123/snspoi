@@ -31,8 +31,8 @@ if(!empty($_POST['post_btn'])){
 
     try {
       $dbh = dbConnect();
-      $sql = "insert into posts(user_id,post_content,created_at)
-              value(:user_id,:post_content,:created_at)";
+      $sql = "INSERT INTO posts(user_id,post_content,created_at)
+              VALUES(:user_id,:post_content,:created_at)";
       $stmt = $dbh->prepare($sql);
       $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content , ':created_at' => date('Y-m-d H:i:s')));
       if($stmt){
@@ -67,16 +67,17 @@ if(!empty($_POST['delete_btn'])){
 
   $dbh = dbConnect();
   $post_id = $_POST['post_id'];
-  $sql = "delete
-          from posts
-          where id = :id";
+
+  $sql = "DELETE
+          FROM posts
+          WHERE id = :id";
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':id' => $post_id));
 
   if($stmt){
     debug('クエリ成功しました');
     set_flash('error','削除しました');
-    debug('削除成功')
+    debug('削除成功');
 
     header("Location:mypage.php?page_id=${current_user['id']}");
     exit();
@@ -89,15 +90,36 @@ if(!empty($_POST['delete_btn'])){
 
 //お気に入り追加
 if(!empty($_POST['favorite_btn'])){
-  $dbh = dbConnect();
+  debug('お気に入り追加のPOST送信があります');
   $post_id = $_POST['post_id'];
-  $sql = "insert into favorite(user_id,post_id)
-          value(:user_id,:post_id)";
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':user_id' => $current_user['id'] , ':post_id' => $post_id));
 
-  set_flash('sucsess','お気に入りに登録しました');
-  header("Location:mypage.php?page_id=${page_id}");
+  //お気に入りの重複チェック
+  if(check_favolite_duplicate($current_user['id'],$post_id)){
+    debug('すでに登録済みです');
+    set_flash('error','すでにお気に入りに登録済みです');
+
+    header("Location:mypage.php?page_id=${page_id}");
+    exit();
+  }else{
+    $dbh = dbConnect();
+    $sql = "insert into favorite(user_id,post_id)
+            value(:user_id,:post_id)";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(array(':user_id' => $current_user['id'] , ':post_id' => $post_id));
+
+    if($stmt){
+      debug('クエリ成功しました');
+      set_flash('sucsess','お気に入りに登録しました');
+      debug('お気に入り登録成功');
+
+      header("Location:mypage.php?page_id=${page_id}");
+      exit();
+    }else{
+      debug('クエリ失敗しました。');
+      set_flash('error',ERR_MSG1);
+      debug('お気に入り登録失敗');
+    }
+  }
 }
 
  $site_title = 'マイページ';

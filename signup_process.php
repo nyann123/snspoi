@@ -6,7 +6,7 @@ debug('「　新規登録ページ 「');
 debug('「「「「「「「「「「「');
 debugLogStart();
 
-function cheak_delete_flg($email){
+function check_delete_flg($email){
   $dbh = dbConnect();
   $sql = "SELECT *
           FROM users
@@ -18,7 +18,7 @@ function cheak_delete_flg($email){
   return $delete_user ? true : false;
 }
 // ログイン中ならマイページへ
-cheak_logged_in();
+check_logged_in();
 
 // まとめたい
 if( isset($_SESSION['name']) ){
@@ -53,7 +53,7 @@ if(!empty($_POST)){
   set_flash('error',$error_messages);
 
   if(empty($error_messages)){
-    debug('バリデーションOK')
+    debug('バリデーションOK');
     try {
       $dbh = dbConnect();
       $sql = 'INSERT INTO users(name,email,password,created_at)

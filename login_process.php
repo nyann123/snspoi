@@ -9,7 +9,7 @@ debugLogStart();
 require_once('auth.php');
 
 //ログイン中ならマイページへ
-cheak_logged_in();
+check_logged_in();
 
 // 送信されていればログイン処理
 if(!empty($_POST)){
@@ -29,7 +29,7 @@ if(!empty($_POST)){
   }
 
   if(empty($error_messages)){
-    debug('バリデーションOK')
+    debug('バリデーションOK');
     //emailでユーザー情報を取得
     try {
       $dbh = dbConnect();

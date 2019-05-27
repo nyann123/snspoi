@@ -54,6 +54,7 @@ function debugLogStart(){
 //================================
 //エラーメッセージを定数に設定
 define('ERR_MSG1','エラーが発生しました。しばらく経ってからやり直してください。');
+define('ERR_MSG2','投稿が見つかりません');
 
 //================================
 // グローバル変数
@@ -65,7 +66,7 @@ $error_messages = array();
 // バリデーション関数
 //================================
 
-function cheak_email_duplicate($email){
+function check_email_duplicate($email){
   $dbh = dbConnect();
   $sql = "SELECT *
           FROM users
@@ -74,6 +75,18 @@ function cheak_email_duplicate($email){
   $stmt->execute(array(':email' => $email));
   $user = $stmt->fetch();
   return $user ? true : false;
+}
+
+//お気に入りの重複チェック
+function check_favolite_duplicate($user_id,$post_id){
+  $dbh = dbConnect();
+  $sql = "SELECT *
+          FROM favorite
+          WHERE user_id = :user_id AND post_id = :post_id";
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':user_id' => $user_id , ':post_id' => $post_id));
+  $favorite = $stmt->fetch();
+  return $favorite ? true : false;
 }
 
 function valid_name($name){
@@ -89,7 +102,7 @@ function valid_email($email){
   global $error_messages;
   if(!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)){
     $error_messages['email'] = 'Emailの形式で入力してください';
-  }elseif ( cheak_email_duplicate( $email ) ){
+  }elseif ( check_email_duplicate( $email ) ){
     $error_messages['email'] = 'すでに登録済みのメールアドレスです';
   }
 }
@@ -232,8 +245,11 @@ function get_form_data($str){
   }
 }
 
+//================================
+// その他
+//================================
 //ログイン中ユーザーのアクセス制限
-function cheak_logged_in(){
+function check_logged_in(){
   if (isset($_SESSION['user_id'])){
     debug('ログイン中のユーザーはアクセスできません');
     header("Location:mypage.php?page_id=${_SESSION['user_id']}");
