@@ -2,7 +2,7 @@
 require_once('login_process.php');
 
 $site_title = 'ログイン';
-$file_title = 'login';
+$css_file_title = $js_file_title = 'login';
 require_once('head.php');
 ?>
 

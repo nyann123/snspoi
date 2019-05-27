@@ -65,8 +65,8 @@
   margin: 0;
   border-radius: 5px;
   border: 2px solid #3FBFFF;
-  display: inline;
   background-color: inherit;
+  display: none;
 }
 
 #post_btn:hover{
@@ -118,4 +118,12 @@
   width: 100%;
   box-sizing: border-box;
   margin: 10px 0;
+}
+
+.text_area{
+  height: 18px;
+}
+
+.show_text_area{
+  height: 80px;
 }

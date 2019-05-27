@@ -31,8 +31,7 @@ if(!empty($_POST['post_content'])){
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content , ':created_at' => date('Y-m-d H:i:s')));
 
-    $_SESSION['flash']['type'] = "flash_sucsess";
-    $_SESSION['flash']['message'] = '投稿しました';
+    set_flash('sucsess','投稿しました');
 
     header("Location:mypage.php?page_id=${current_user['id']}");
   } catch (\Exception $e) {
@@ -51,8 +50,7 @@ if(!empty($_POST['delete'])){
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':id' => $post_id));
 
-  $_SESSION['flash']['type'] = 'flash_error';
-  $_SESSION['flash']['message'] = '削除しました';
+  set_flash('error','削除しました');
   header("Location:mypage.php?page_id=${page_id}");
 }
 
@@ -65,13 +63,12 @@ if(!empty($_POST['like'])){
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':user_id' => $current_user['id'] , ':post_id' => $post_id));
 
-  $_SESSION['flash']['type'] = 'flash_sucsess';
-  $_SESSION['flash']['message'] = 'お気に入りに登録しました';
+  set_flash('sucsess','お気に入りに登録しました');
   header("Location:mypage.php?page_id=${page_id}");
 }
 
  $site_title = 'マイページ';
- $file_title = 'mypage';
+ $css_file_title = 'mypage';
  require_once('head.php');
   ?>
 
@@ -95,12 +92,11 @@ if(!empty($_POST['like'])){
         <p>id = <?php echo $current_user['id'] ?></p>
       </div>
         <div class="mypage_right">
-
           <!-- 自分のページのみ投稿フォームを表示 -->
         <?php if ($current_user['id'] === $_GET['page_id']): ?>
           <form class ="post_form" action="#" method="post">
-            <textarea name="content" rows="8" cols="80"></textarea><br>
-            <input id="post_btn" type="submit" name="post_content" value="投稿">
+            <textarea class="text_area" placeholder="投稿する" name="content"></textarea><br>
+            <input class="btnnn"id="post_btn" type="submit" name="post_content" value="投稿">
           </form>
         <?php endif; ?>
 

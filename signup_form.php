@@ -2,7 +2,7 @@
 require_once("signup_process.php");
 
 $site_title = '新規登録';
-$file_title = 'signup';
+$css_file_title = $js_file_title = 'signup';
 require_once('head.php');
  ?>
 

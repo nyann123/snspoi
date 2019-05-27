@@ -18,6 +18,7 @@ if(!empty($_POST)){
   $email = $_POST['email'];
   $password = $_POST['password'];
   $pass_save = (isset($_POST['pass_save'])) ? true : false;
+  
   // メールのバリデーション
   if( empty($email) ){
     $error_messages['email'] = "メールアドレスを入力してください";
