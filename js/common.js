@@ -21,13 +21,13 @@ $('.text_area').on('focus',function(){
   $('#post_btn').show();
 });
 
-// //フォームに入力がなければ入力フォームとボタンを戻す
-// $('.text_area').on('focusout',function(){
-//   if ($('.text_area').val().length === 0){
-//     $('.text_area').toggleClass('show_text_area');
-//     $('#post_btn').hide();
-//   }
-// });
+//フォームに入力がなければ入力フォームとボタンを戻す
+$('.text_area').on('focusout',function(){
+  if ($('.text_area').val().length === 0){
+    $('.text_area').toggleClass('show_text_area');
+    $('#post_btn').hide();
+  }
+});
 
 //フォームに入力があるときだけ投稿ボタンを活性化
 $('.text_area').on('input',function(){

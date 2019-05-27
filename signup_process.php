@@ -53,6 +53,7 @@ if(!empty($_POST)){
   set_flash('error',$error_messages);
 
   if(empty($error_messages)){
+    debug('バリデーションOK')
     try {
       $dbh = dbConnect();
       $sql = 'INSERT INTO users(name,email,password,created_at)

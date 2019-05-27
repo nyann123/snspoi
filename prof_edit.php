@@ -35,7 +35,7 @@ if(!empty($_POST)){
   set_flash('error',$error_messages);
 
   if(empty($error_messages)){
-    debug('バリデーションOKです。');
+    debug('バリデーションOK');
 
     try {
       $dbh = dbConnect();

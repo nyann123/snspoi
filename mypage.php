@@ -20,14 +20,14 @@ $favorite_posts = get_favorite_post($page_id);
 
 //投稿
 if(!empty($_POST['post_btn'])){
-  debug('投稿があります');
+  debug('投稿のPOST送信があります');
   $post_content = $_POST['content'];
 
   //投稿の長さチェック
   valid_post_length($post_content);
 
   if (empty($error_messages)){
-    debug('バリデーションＯＫ');
+    debug('バリデーションOK');
 
     try {
       $dbh = dbConnect();
@@ -35,12 +35,20 @@ if(!empty($_POST['post_btn'])){
               value(:user_id,:post_content,:created_at)";
       $stmt = $dbh->prepare($sql);
       $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content , ':created_at' => date('Y-m-d H:i:s')));
+      if($stmt){
+        debug('クエリ成功しました');
+        set_flash('sucsess','投稿しました');
+        debug('投稿成功');
 
-      set_flash('sucsess','投稿しました');
-      debug('投稿成功');
-
-      header("Location:mypage.php?page_id=${current_user['id']}");
-      exit();
+        header("Location:mypage.php?page_id=${current_user['id']}");
+        exit();
+      }else{
+        debug('クエリ失敗しました。');
+        set_flash('error',ERR_MSG1);
+      }
+    } catch (Exception $e) {
+      error_log('エラー発生:' . $e->getMessage());
+      set_flash('error',ERR_MSG1);
 
     } catch (\Exception $e) {
       echo $e->getMessage() ;
