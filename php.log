@@ -5345,3 +5345,468 @@ Stack trace:
 [28-May-2019 20:29:15 Asia/Tokyo] debug：成功
 [28-May-2019 20:29:15 Asia/Tokyo] debug：お気に入り投稿を取得します
 [28-May-2019 20:29:15 Asia/Tokyo] debug：成功
+[28-May-2019 21:55:18 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:55:18 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 21:55:18 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:55:18 Asia/Tokyo] debug：セッションID：iit88qu6jcscksbea6bmum384p
+[28-May-2019 21:55:18 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559042955
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 21:55:18 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048118
+[28-May-2019 21:55:18 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559046555
+[28-May-2019 21:55:18 Asia/Tokyo] debug：ログイン有効期限オーバーです。
+[28-May-2019 21:55:18 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:55:18 Asia/Tokyo] debug：「　ログインページ 「
+[28-May-2019 21:55:18 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:55:18 Asia/Tokyo] debug：セッションID：dbvf1dc7jl6pncc1eepumafk2b
+[28-May-2019 21:55:18 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+)
+
+[28-May-2019 21:55:18 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048118
+[28-May-2019 21:55:18 Asia/Tokyo] debug：未ログインユーザーです。
+[28-May-2019 21:55:25 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:55:25 Asia/Tokyo] debug：「　ログインページ 「
+[28-May-2019 21:55:25 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:55:25 Asia/Tokyo] debug：セッションID：e0g339sstbqfa3s2btosfkb1lc
+[28-May-2019 21:55:25 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+)
+
+[28-May-2019 21:55:25 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048125
+[28-May-2019 21:55:25 Asia/Tokyo] debug：未ログインユーザーです。
+[28-May-2019 21:55:25 Asia/Tokyo] debug：POST送信があります。
+[28-May-2019 21:55:25 Asia/Tokyo] debug：バリデーションOK
+[28-May-2019 21:55:25 Asia/Tokyo] debug：クエリ結果の中身：Array
+(
+    [password] => $2y$10$aVsBsgFKhZJ3ArO8G/S4QuYSDq9QhrZ.kYYktCNUsOONNnjrWKJkS
+    [id] => 13
+)
+
+[28-May-2019 21:55:25 Asia/Tokyo] debug：ログイン保持にチェックはありません。
+[28-May-2019 21:55:25 Asia/Tokyo] debug：ログイン成功
+[28-May-2019 21:55:25 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048125
+    [login_limit] => 3600
+    [user_id] => 13
+    [flash] => Array
+        (
+            [type] => flash_sucsess
+            [message] => ログインしました
+        )
+
+)
+
+[28-May-2019 21:55:25 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:55:25 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 21:55:25 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:55:25 Asia/Tokyo] debug：セッションID：qfghfcd86sifghu3tl1j6u9l73
+[28-May-2019 21:55:25 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048125
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 21:55:25 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048125
+[28-May-2019 21:55:25 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559051725
+[28-May-2019 21:55:25 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 21:55:25 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 21:55:25 Asia/Tokyo] debug：成功
+[28-May-2019 21:55:25 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 21:55:25 Asia/Tokyo] debug：成功
+[28-May-2019 21:55:25 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 21:55:25 Asia/Tokyo] debug：成功
+[28-May-2019 21:55:53 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:55:53 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 21:55:53 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:55:53 Asia/Tokyo] debug：セッションID：h6v2cgtn3kc9an7dp8fhmvhsui
+[28-May-2019 21:55:53 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048125
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 21:55:53 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048153
+[28-May-2019 21:55:53 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559051725
+[28-May-2019 21:55:53 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 21:55:53 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 21:55:53 Asia/Tokyo] debug：成功
+[28-May-2019 21:55:53 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 21:55:53 Asia/Tokyo] debug：成功
+[28-May-2019 21:55:53 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 21:55:53 Asia/Tokyo] debug：成功
+[28-May-2019 21:55:55 Asia/Tokyo] debug：「「「「「「「「「「「「「「
+[28-May-2019 21:55:55 Asia/Tokyo] debug：「　プロフィール編集ページ「
+[28-May-2019 21:55:55 Asia/Tokyo] debug：「「「「「「「「「「「「「「
+[28-May-2019 21:55:55 Asia/Tokyo] debug：セッションID：4do809l98aashuep6375e7qtg7
+[28-May-2019 21:55:55 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048153
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 21:55:55 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048155
+[28-May-2019 21:55:55 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559051753
+[28-May-2019 21:55:55 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 21:55:55 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 21:55:55 Asia/Tokyo] debug：成功
+[28-May-2019 21:55:55 Asia/Tokyo] debug：取得したユーザー情報：Array
+(
+    [id] => 13
+    [name] => hoge
+    [email] => hoge@hogehoge
+    [password] => $2y$10$aVsBsgFKhZJ3ArO8G/S4QuYSDq9QhrZ.kYYktCNUsOONNnjrWKJkS
+    [created_at] => 2019-05-13 08:06:28
+    [delete_flg] => 0
+)
+
+[28-May-2019 21:56:04 Asia/Tokyo] debug：「「「「「「「「「「「「「「
+[28-May-2019 21:56:04 Asia/Tokyo] debug：「　プロフィール編集ページ「
+[28-May-2019 21:56:04 Asia/Tokyo] debug：「「「「「「「「「「「「「「
+[28-May-2019 21:56:04 Asia/Tokyo] debug：セッションID：qmhkr2a0ftn2nl5hm5s08l3fq3
+[28-May-2019 21:56:04 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048155
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 21:56:04 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048164
+[28-May-2019 21:56:04 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559051755
+[28-May-2019 21:56:04 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 21:56:04 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 21:56:04 Asia/Tokyo] debug：成功
+[28-May-2019 21:56:04 Asia/Tokyo] debug：取得したユーザー情報：Array
+(
+    [id] => 13
+    [name] => hoge
+    [email] => hoge@hogehoge
+    [password] => $2y$10$aVsBsgFKhZJ3ArO8G/S4QuYSDq9QhrZ.kYYktCNUsOONNnjrWKJkS
+    [created_at] => 2019-05-13 08:06:28
+    [delete_flg] => 0
+)
+
+[28-May-2019 21:56:06 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:56:06 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 21:56:06 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:56:06 Asia/Tokyo] debug：セッションID：i70lb06i21fripk32jgvipep2b
+[28-May-2019 21:56:06 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048164
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 21:56:06 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048166
+[28-May-2019 21:56:06 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559051764
+[28-May-2019 21:56:06 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 21:56:06 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 21:56:06 Asia/Tokyo] debug：成功
+[28-May-2019 21:56:06 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 21:56:06 Asia/Tokyo] debug：成功
+[28-May-2019 21:56:06 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 21:56:06 Asia/Tokyo] debug：成功
+[28-May-2019 21:57:51 Asia/Tokyo] debug：「「「「「「「「「「「「「「
+[28-May-2019 21:57:51 Asia/Tokyo] debug：「　プロフィール編集ページ「
+[28-May-2019 21:57:51 Asia/Tokyo] debug：「「「「「「「「「「「「「「
+[28-May-2019 21:57:51 Asia/Tokyo] debug：セッションID：3ejptdgaha82jh4h3sogo821lk
+[28-May-2019 21:57:51 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048166
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 21:57:51 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048271
+[28-May-2019 21:57:51 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559051766
+[28-May-2019 21:57:51 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 21:57:51 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 21:57:51 Asia/Tokyo] debug：成功
+[28-May-2019 21:57:51 Asia/Tokyo] debug：取得したユーザー情報：Array
+(
+    [id] => 13
+    [name] => hoge
+    [email] => hoge@hogehoge
+    [password] => $2y$10$aVsBsgFKhZJ3ArO8G/S4QuYSDq9QhrZ.kYYktCNUsOONNnjrWKJkS
+    [created_at] => 2019-05-13 08:06:28
+    [delete_flg] => 0
+)
+
+[28-May-2019 21:57:54 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:57:54 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 21:57:54 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:57:54 Asia/Tokyo] debug：セッションID：hdh9v4luj1r58t2qc10plc80ce
+[28-May-2019 21:57:54 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048271
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 21:57:54 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048274
+[28-May-2019 21:57:54 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559051871
+[28-May-2019 21:57:54 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 21:57:54 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 21:57:54 Asia/Tokyo] debug：成功
+[28-May-2019 21:57:54 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 21:57:54 Asia/Tokyo] debug：成功
+[28-May-2019 21:57:54 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 21:57:54 Asia/Tokyo] debug：成功
+[28-May-2019 21:58:20 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:58:20 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 21:58:20 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:58:20 Asia/Tokyo] debug：セッションID：kdqdsb98ifh8ima92km61hhfgr
+[28-May-2019 21:58:20 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048274
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 21:58:20 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048300
+[28-May-2019 21:58:20 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559051874
+[28-May-2019 21:58:20 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 21:58:20 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 21:58:20 Asia/Tokyo] debug：成功
+[28-May-2019 21:58:20 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 21:58:20 Asia/Tokyo] debug：成功
+[28-May-2019 21:58:20 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 21:58:20 Asia/Tokyo] debug：成功
+[28-May-2019 21:58:31 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:58:31 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 21:58:31 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 21:58:31 Asia/Tokyo] debug：セッションID：cbqis2n95fpvgp3575mvg6v9m8
+[28-May-2019 21:58:31 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048300
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 21:58:31 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048311
+[28-May-2019 21:58:31 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559051900
+[28-May-2019 21:58:31 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 21:58:31 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 21:58:31 Asia/Tokyo] debug：成功
+[28-May-2019 21:58:31 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 21:58:31 Asia/Tokyo] debug：成功
+[28-May-2019 21:58:31 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 21:58:31 Asia/Tokyo] debug：成功
+[28-May-2019 22:08:47 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:08:47 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 22:08:47 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:08:47 Asia/Tokyo] debug：セッションID：bv2oh4ovl0v050mdhcebbblflr
+[28-May-2019 22:08:47 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048311
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 22:08:47 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048927
+[28-May-2019 22:08:47 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559051911
+[28-May-2019 22:08:47 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 22:08:47 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 22:08:47 Asia/Tokyo] debug：成功
+[28-May-2019 22:08:47 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 22:08:47 Asia/Tokyo] debug：成功
+[28-May-2019 22:08:47 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 22:08:47 Asia/Tokyo] debug：成功
+[28-May-2019 22:08:56 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:08:56 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 22:08:56 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:08:56 Asia/Tokyo] debug：セッションID：mmbsnbdq7dm0kfeofsj0c5hrmc
+[28-May-2019 22:08:56 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048927
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 22:08:56 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048936
+[28-May-2019 22:08:56 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559052527
+[28-May-2019 22:08:56 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 22:08:56 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 22:08:56 Asia/Tokyo] debug：成功
+[28-May-2019 22:08:56 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 22:08:56 Asia/Tokyo] debug：成功
+[28-May-2019 22:08:56 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 22:08:56 Asia/Tokyo] debug：成功
+[28-May-2019 22:08:56 Asia/Tokyo] debug：投稿のPOST送信があります
+[28-May-2019 22:08:56 Asia/Tokyo] debug：バリデーションOK
+[28-May-2019 22:08:56 Asia/Tokyo] debug：クエリ成功しました
+[28-May-2019 22:08:56 Asia/Tokyo] debug：投稿成功
+[28-May-2019 22:08:56 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:08:56 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 22:08:56 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:08:56 Asia/Tokyo] debug：セッションID：7cru7sisu1otm0ggdpqqjlollk
+[28-May-2019 22:08:56 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048936
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 22:08:56 Asia/Tokyo] debug：現在日時タイムスタンプ：1559048936
+[28-May-2019 22:08:56 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559052536
+[28-May-2019 22:08:56 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 22:08:56 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 22:08:56 Asia/Tokyo] debug：成功
+[28-May-2019 22:08:56 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 22:08:56 Asia/Tokyo] debug：成功
+[28-May-2019 22:08:56 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 22:08:56 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:00 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:00 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 22:12:00 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:00 Asia/Tokyo] debug：セッションID：akj0gtqk4bt3h3s82gdv44am6q
+[28-May-2019 22:12:00 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559048936
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 22:12:00 Asia/Tokyo] debug：現在日時タイムスタンプ：1559049120
+[28-May-2019 22:12:00 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559052536
+[28-May-2019 22:12:00 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 22:12:00 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 22:12:00 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:00 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 22:12:00 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:00 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 22:12:00 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:01 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:01 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 22:12:01 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:01 Asia/Tokyo] debug：セッションID：apsvtuv6c7cspqvio82mlmcjpt
+[28-May-2019 22:12:01 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559049120
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 22:12:01 Asia/Tokyo] debug：現在日時タイムスタンプ：1559049121
+[28-May-2019 22:12:01 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559052720
+[28-May-2019 22:12:01 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 22:12:01 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 22:12:01 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:01 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 22:12:01 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:01 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 22:12:01 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:04 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:04 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 22:12:04 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:04 Asia/Tokyo] debug：セッションID：f84emcb8isvv1qkrmhb6nm36d1
+[28-May-2019 22:12:04 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559049121
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 22:12:04 Asia/Tokyo] debug：現在日時タイムスタンプ：1559049124
+[28-May-2019 22:12:04 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559052721
+[28-May-2019 22:12:04 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 22:12:04 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 22:12:04 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:04 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 22:12:04 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:04 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 22:12:04 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:04 Asia/Tokyo] debug：お気に入り追加のPOST送信があります
+[28-May-2019 22:12:04 Asia/Tokyo] debug：クエリ成功しました
+[28-May-2019 22:12:04 Asia/Tokyo] debug：お気に入り登録成功
+[28-May-2019 22:12:04 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:04 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 22:12:04 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:04 Asia/Tokyo] debug：セッションID：57j16dj14i0ekojs93sk371nrt
+[28-May-2019 22:12:04 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559049124
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 22:12:04 Asia/Tokyo] debug：現在日時タイムスタンプ：1559049124
+[28-May-2019 22:12:04 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559052724
+[28-May-2019 22:12:04 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 22:12:04 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 22:12:04 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:04 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 22:12:04 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:04 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 22:12:04 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:05 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:05 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 22:12:05 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:05 Asia/Tokyo] debug：セッションID：9vi2sa3248jl3i8alvc358ivm5
+[28-May-2019 22:12:05 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559049124
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 22:12:05 Asia/Tokyo] debug：現在日時タイムスタンプ：1559049125
+[28-May-2019 22:12:05 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559052724
+[28-May-2019 22:12:05 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 22:12:05 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 22:12:05 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:05 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 22:12:05 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:05 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 22:12:05 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:05 Asia/Tokyo] debug：投稿削除のPOST送信があります
+[28-May-2019 22:12:06 Asia/Tokyo] debug：クエリ成功しました
+[28-May-2019 22:12:06 Asia/Tokyo] debug：削除成功
+[28-May-2019 22:12:06 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:06 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 22:12:06 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:12:06 Asia/Tokyo] debug：セッションID：l2lu71l3q23jb9916n18bbccpr
+[28-May-2019 22:12:06 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559049125
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 22:12:06 Asia/Tokyo] debug：現在日時タイムスタンプ：1559049126
+[28-May-2019 22:12:06 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559052725
+[28-May-2019 22:12:06 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 22:12:06 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 22:12:06 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:06 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 22:12:06 Asia/Tokyo] debug：成功
+[28-May-2019 22:12:06 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 22:12:06 Asia/Tokyo] debug：成功
+[28-May-2019 22:57:47 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:57:47 Asia/Tokyo] debug：「　マイページ     「
+[28-May-2019 22:57:47 Asia/Tokyo] debug：「「「「「「「「「「「
+[28-May-2019 22:57:47 Asia/Tokyo] debug：セッションID：isufa1kfinssp28qjh5rovqbva
+[28-May-2019 22:57:47 Asia/Tokyo] debug：セッション変数の中身：Array
+(
+    [login_date] => 1559049126
+    [login_limit] => 3600
+    [user_id] => 13
+)
+
+[28-May-2019 22:57:47 Asia/Tokyo] debug：現在日時タイムスタンプ：1559051867
+[28-May-2019 22:57:47 Asia/Tokyo] debug：ログイン期限日時タイムスタンプ：1559052726
+[28-May-2019 22:57:47 Asia/Tokyo] debug：ログイン済みユーザーです。
+[28-May-2019 22:57:47 Asia/Tokyo] debug：ユーザー情報を取得します
+[28-May-2019 22:57:47 Asia/Tokyo] debug：成功
+[28-May-2019 22:57:47 Asia/Tokyo] debug：ユーザー投稿を取得します
+[28-May-2019 22:57:47 Asia/Tokyo] debug：成功
+[28-May-2019 22:57:47 Asia/Tokyo] debug：お気に入り投稿を取得します
+[28-May-2019 22:57:47 Asia/Tokyo] debug：成功

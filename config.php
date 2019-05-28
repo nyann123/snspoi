@@ -65,7 +65,6 @@ $error_messages = array();
 //================================
 // バリデーション関数
 //================================
-
 function check_email_duplicate($email){
   $dbh = dbConnect();
   $sql = "SELECT *

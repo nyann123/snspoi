@@ -20,110 +20,17 @@ $favorite_posts = get_favorite_post($page_id);
 
 //投稿
 if(!empty($_POST['post'])){
-  debug('投稿のPOST送信があります');
-  $post_content = $_POST['content'];
-
-  //投稿の長さチェック
-  valid_post_length($post_content);
-
-  if (empty($error_messages)){
-    debug('バリデーションOK');
-
-    try {
-      $dbh = dbConnect();
-      $sql = "INSERT INTO posts(user_id,post_content,created_at)
-              VALUES(:user_id,:post_content,:created_at)";
-      $stmt = $dbh->prepare($sql);
-      $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content , ':created_at' => date('Y-m-d H:i:s')));
-      if($stmt){
-        debug('クエリ成功しました');
-        set_flash('sucsess','投稿しました');
-        debug('投稿成功');
-
-        header("Location:mypage.php?page_id=${current_user['id']}");
-        exit();
-      }else{
-        debug('クエリ失敗しました。');
-        set_flash('error',ERR_MSG1);
-      }
-    } catch (Exception $e) {
-      error_log('エラー発生:' . $e->getMessage());
-      set_flash('error',ERR_MSG1);
-
-    } catch (\Exception $e) {
-      echo $e->getMessage() ;
-      $_SESSION['flash'] = 'error';
-    }
-  }
-  set_flash('error',$error_messages);
-  debug('投稿失敗');
-
-  header("Location:mypage.php?page_id=${current_user['id']}");
+  require_once('post_process.php');
 }
 
 //投稿削除
 if(!empty($_POST['delete'])){
-  debug('投稿削除のPOST送信があります');
-  $post_id = $_POST['post_id'];
-  $user_id = $_POST['user_id'];
-
-  //自分の投稿なら削除
-  if ($user_id === $current_user['id']) {
-    $dbh = dbConnect();
-    $sql = "DELETE
-            FROM posts
-            WHERE id = :id";
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute(array(':id' => $post_id));
-
-    if($stmt){
-      debug('クエリ成功しました');
-      set_flash('error','削除しました');
-      debug('削除成功');
-
-      header("Location:mypage.php?page_id=${current_user['id']}");
-      exit();
-    }else{
-      debug('クエリ失敗しました。');
-      set_flash('error',ERR_MSG1);
-      debug('削除失敗');
-    }
-  }
+  require_once('post_delete_process.php');
 }
 
 //お気に入り追加
 if(!empty($_POST['favorite'])){
-  debug('お気に入り追加のPOST送信があります');
-  $post_id = $_POST['post_id'];
-  var_dump($_POST);
-
-  //お気に入りの重複チェック
-  if(check_favolite_duplicate($current_user['id'],$post_id)){
-    debug('登録済みです');
-    set_flash('error','既に登録されています');
-
-    header("Location:mypage.php?page_id=${page_id}");
-    exit();
-  }else{
-    $dbh = dbConnect();
-    $sql = "insert into favorite(user_id,post_id)
-            value(:user_id,:post_id)";
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute(array(':user_id' => $current_user['id'] , ':post_id' => $post_id));
-
-    if($stmt){
-      debug('クエリ成功しました');
-      set_flash('sucsess','お気に入りに登録しました');
-      debug('お気に入り登録成功');
-
-      header("Location:mypage.php?page_id=${page_id}");
-      exit();
-    }else{
-      debug('クエリ失敗しました。');
-      set_flash('error',ERR_MSG1);
-      debug('お気に入り登録失敗');
-    }
-  }
+  require_once('post_favorite.php');
 }
 
  $site_title = 'マイページ';
