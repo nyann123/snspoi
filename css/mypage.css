@@ -54,6 +54,14 @@
   resize: none;
 }
 
+.text_area{
+  height: 18px;
+}
+
+.show_text_area{
+  height: 80px;
+}
+
 #post_btn{
   color: #3FBFFF;
   font-size: 28px;
@@ -126,10 +134,32 @@
   margin: 10px 0;
 }
 
-.text_area{
-  height: 18px;
+button{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0 5px;
 }
 
-.show_text_area{
-  height: 80px;
+button i{
+  color: #fff;
 }
+
+button i:hover{
+  cursor: pointer;
+}
+
+.far.fa-star:hover{
+  color: #CDB47B;
+}
+
+.fas.fa-star{
+  color: #CDB47B;
+}
+.fa-trash-alt:hover{
+  color: #FF7763;
+}
+
+
+<i class="fas fa-star"></i>

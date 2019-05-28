@@ -19,7 +19,7 @@ $favorite_posts = get_favorite_post($page_id);
 
 
 //投稿
-if(!empty($_POST['post_btn'])){
+if(!empty($_POST['post'])){
   debug('投稿のPOST送信があります');
   $post_content = $_POST['content'];
 
@@ -62,41 +62,45 @@ if(!empty($_POST['post_btn'])){
 }
 
 //投稿削除
-if(!empty($_POST['delete_btn'])){
+if(!empty($_POST['delete'])){
   debug('投稿削除のPOST送信があります');
-
-  $dbh = dbConnect();
   $post_id = $_POST['post_id'];
+  $user_id = $_POST['user_id'];
 
-  $sql = "DELETE
-          FROM posts
-          WHERE id = :id";
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':id' => $post_id));
+  //自分の投稿なら削除
+  if ($user_id === $current_user['id']) {
+    $dbh = dbConnect();
+    $sql = "DELETE
+            FROM posts
+            WHERE id = :id";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(array(':id' => $post_id));
 
-  if($stmt){
-    debug('クエリ成功しました');
-    set_flash('error','削除しました');
-    debug('削除成功');
+    if($stmt){
+      debug('クエリ成功しました');
+      set_flash('error','削除しました');
+      debug('削除成功');
 
-    header("Location:mypage.php?page_id=${current_user['id']}");
-    exit();
-  }else{
-    debug('クエリ失敗しました。');
-    set_flash('error',ERR_MSG1);
-    debug('削除失敗');
+      header("Location:mypage.php?page_id=${current_user['id']}");
+      exit();
+    }else{
+      debug('クエリ失敗しました。');
+      set_flash('error',ERR_MSG1);
+      debug('削除失敗');
+    }
   }
 }
 
 //お気に入り追加
-if(!empty($_POST['favorite_btn'])){
+if(!empty($_POST['favorite'])){
   debug('お気に入り追加のPOST送信があります');
   $post_id = $_POST['post_id'];
+  var_dump($_POST);
 
   //お気に入りの重複チェック
   if(check_favolite_duplicate($current_user['id'],$post_id)){
-    debug('すでに登録済みです');
-    set_flash('error','すでにお気に入りに登録済みです');
+    debug('登録済みです');
+    set_flash('error','既に登録されています');
 
     header("Location:mypage.php?page_id=${page_id}");
     exit();
@@ -151,7 +155,7 @@ if(!empty($_POST['favorite_btn'])){
         <?php if ($current_user['id'] === $_GET['page_id']): ?>
           <form class ="post_form" action="#" method="post">
             <textarea class="text_area" placeholder="投稿する" name="content"></textarea><br>
-            <input id="post_btn" type="submit" name="post_btn" value="投稿" disabled>
+            <input id="post_btn" type="submit" name="post" value="投稿" disabled>
           </form>
         <?php endif; ?>
 
@@ -182,11 +186,18 @@ if(!empty($_POST['favorite_btn'])){
 
               <form class="" action="#" method="post">
                 <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
-                <input type="submit" name="delete_btn" value="削除" method="post">
+                <input type="hidden" name="user_id" value="<?php echo $post['user_id']?>">
+                <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
               </form>
+
+
               <form class="" action="#" method="post">
                 <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
-                <input type="submit" name="favorite_btn" value="お気に入り" method="post">
+                <?php if (check_favolite_duplicate($current_user['id'],$post['id'])): ?>
+                  <button type="submit" name="favorite" value="favorite"><i class="fas fa-star"></i></button>
+                <?php else: ?>
+                  <button type="submit" name="favorite" value="favorite"><i class="far fa-star"></i></button>
+                <?php endif; ?>
               </form>
             </div>
 
