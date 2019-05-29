@@ -25,7 +25,7 @@ if(!empty($_POST['delete'])){
 
 //お気に入り追加
 if(!empty($_POST['favorite'])){
-  require_once('post_favorite.php');
+  require_once('post_favorite_process.php');
 }
 
  $site_title = 'マイページ';
