@@ -191,6 +191,28 @@ function get_post($page_id){
   }
 }
 
+function get_all_post(){
+  debug('全ての投稿を取得します');
+  try{
+    $dbh = dbConnect();
+    $sql = "SELECT posts.id,user_id,name,post_content,posts.created_at
+            FROM users INNER JOIN posts ON users.id = posts.user_id
+            ORDER BY posts.created_at DESC";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute();
+
+    if($stmt){
+      debug('成功');
+    }else{
+      debug('失敗しました');
+    }
+
+    return $user_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  } catch (\Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+  }
+}
+
 function get_favorite_post($page_id){
   debug('お気に入り投稿を取得します');
   try{

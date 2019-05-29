@@ -1,9 +1,12 @@
 <?php
 debug('投稿のPOST送信があります');
 $post_content = $_POST['content'];
+$prev_page = basename($_SERVER['HTTP_REFERER']);
 
 //投稿の長さチェック
 valid_post_length($post_content);
+
+set_flash('error',$error_messages);
 
 if (empty($error_messages)){
   debug('バリデーションOK');
@@ -19,7 +22,7 @@ if (empty($error_messages)){
       set_flash('sucsess','投稿しました');
       debug('投稿成功');
 
-      header("Location:mypage.php?page_id=${current_user['id']}");
+      header("Location:$prev_page");
       exit();
     }else{
       debug('クエリ失敗しました。');
@@ -28,13 +31,9 @@ if (empty($error_messages)){
   } catch (Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
     set_flash('error',ERR_MSG1);
-
-  } catch (\Exception $e) {
-    echo $e->getMessage() ;
-    $_SESSION['flash'] = 'error';
   }
 }
-set_flash('error',$error_messages);
 debug('投稿失敗');
 
-header("Location:mypage.php?page_id=${current_user['id']}");
+header("Location:$prev_page");
+exit();

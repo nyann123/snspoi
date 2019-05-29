@@ -2,26 +2,38 @@
 debug('投稿削除のPOST送信があります');
 $post_id = $_POST['post_id'];
 $user_id = $_POST['user_id'];
+$prev_page = basename($_SERVER['HTTP_REFERER']);
 
 //自分の投稿なら削除
 if ($user_id === $current_user['id']) {
-  $dbh = dbConnect();
-  $sql = "DELETE
-          FROM posts
-          WHERE id = :id";
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':id' => $post_id));
 
-  if($stmt){
-    debug('クエリ成功しました');
-    set_flash('error','削除しました');
-    debug('削除成功');
+  try {
+    $dbh = dbConnect();
+    $sql = "DELETE
+            FROM posts
+            WHERE id = :id";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(array(':id' => $post_id));
 
-    header("Location:mypage.php?page_id=${current_user['id']}");
-    exit();
-  }else{
-    debug('クエリ失敗しました。');
+    if($stmt){
+      debug('クエリ成功しました');
+      set_flash('error','削除しました');
+      debug('削除成功');
+
+      header("Location:$prev_page");
+      exit();
+    }else{
+      debug('クエリ失敗しました。');
+      set_flash('error',ERR_MSG1);
+    }
+  } catch (\Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
     set_flash('error',ERR_MSG1);
-    debug('削除失敗');
   }
+}else{
+  debug('削除失敗');
+  set_flash('error','他人の投稿は削除できません');
+
+  header("Location:$prev_page");
+  exit();
 }
