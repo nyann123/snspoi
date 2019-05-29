@@ -15,16 +15,12 @@ if ($user_id === $current_user['id']) {
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $post_id));
 
-    if($stmt){
-      debug('クエリ成功しました');
-      set_flash('error','削除しました');
+    if(query_result($stmt)){
       debug('削除成功');
+      set_flash('error','削除しました');
 
       header("Location:$prev_page");
       exit();
-    }else{
-      debug('クエリ失敗しました。');
-      set_flash('error',ERR_MSG1);
     }
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());

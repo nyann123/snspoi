@@ -13,16 +13,12 @@ if(check_favolite_duplicate($current_user['id'],$post_id)){
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':user_id' => $current_user['id'] , ':post_id' => $post_id));
 
-    if($stmt){
-      debug('クエリ成功しました');
+    if(query_result($stmt)){
       debug('お気に入り解除成功');
       set_flash('error','お気に入り解除しました');
 
       header("Location:$prev_page");
       exit();
-    }else{
-      debug('クエリ失敗しました。');
-      set_flash('error',ERR_MSG1);
     }
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
@@ -42,16 +38,12 @@ if(check_favolite_duplicate($current_user['id'],$post_id)){
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':user_id' => $current_user['id'] , ':post_id' => $post_id));
 
-    if($stmt){
-      debug('クエリ成功しました');
+    if(query_result($stmt)){
       debug('お気に入り登録成功');
       set_flash('sucsess','お気に入りに登録しました');
 
       header("Location:$prev_page");
       exit();
-    }else{
-      debug('クエリ失敗しました。');
-      set_flash('error',ERR_MSG1);
     }
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());

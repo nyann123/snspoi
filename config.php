@@ -146,6 +146,17 @@ function dbConnect(){
   return $dbh;
 }
 
+function query_result($stmt){
+  if($stmt){
+    debug('クエリ成功しました');
+    return true;
+  }else{
+    debug('クエリ失敗しました。');
+    set_flash('error',ERR_MSG1);
+    return false;
+  }
+}
+
 function get_user($user_id){
   debug('ユーザー情報を取得します');
   try {

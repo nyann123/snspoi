@@ -39,20 +39,18 @@ if(!empty($_POST)){
 
     try {
       $dbh = dbConnect();
-      $sql = 'UPDATE users  SET name = :name, email = :email WHERE id = :id';
+      $sql = 'UPDATE users
+              SET name = :name, email = :email
+              WHERE id = :id';
       $stmt = $dbh->prepare($sql);
       $stmt->execute(array(':name' => $name , ':email' => $email, ':id' => $user['id']));
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
       // クエリ成功の場合
-      if($stmt){
-        debug('クエリ成功しました');
+      if(query_result($stmt)){
         set_flash('sucsess','プロフィールの編集が完了しました');
         header("Location:mypage.php?page_id=${user_id}");
         exit();
-      }else{
-        debug('クエリ失敗しました。');
-        set_flash('error',ERR_MSG1);
       }
     } catch (Exception $e) {
       error_log('エラー発生:' . $e->getMessage());
