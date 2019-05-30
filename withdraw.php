@@ -31,38 +31,20 @@ if(!empty($_POST)){
 
 
 $site_title = '退会';
-$css_title = '';
+$css_file_title = 'withdraw';
 require('head.php');
 ?>
 
-  <body class="page-withdraw page-1colum">
-    <!-- メニュー -->
-    <?php
-    require('header.php');
-    ?>
+  <body>
+    <?php require('header.php'); ?>
 
-    <!-- メインコンテンツ -->
-    <div id="contents" class="site-width">
-      <!-- Main -->
-      <section id="main" >
-        <div class="form-container">
-          <form action="" method="post" class="form">
-            <h2 class="title">退会</h2>
-            <div class="area-msg">
-              <?php
-              if(!empty($err_msg['common'])) echo $err_msg['common'];
-              ?>
-            </div>
-            <div class="btn-container">
-              <input type="submit" class="btn btn-mid" value="退会する" name="submit">
-            </div>
-          </form>
-        </div>
-        <a href="mypage.php">&lt; マイページに戻る</a>
-      </section>
+    <div class="form_container">
+      <h2 class="page_title">退会</h2>
+      <form action="" method="post" class="form">
+        <input id="btn" class="btn normal"type="submit" class="btn btn-mid" value="退会する" name="submit">
+      </form>
+      <a href="mypage.php">&lt; マイページに戻る</a>
     </div>
 
     <!-- footer -->
-    <?php
-    require('footer.php');
-    ?>
+    <?php require('footer.php'); ?>

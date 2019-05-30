@@ -1,43 +1,3 @@
-.login_form{
-  max-width: 800px;
-  width: calc(100% - 100px);
-  padding: 10px 50px 50px 50px;;
-  border: 2px solid #fff;
-  border-radius: 8px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-.login_form h2{
-  font-family: "dqfont";
-  color: #fff;
-  font-size: 50px;
-  letter-spacing: 0.08em;
-  text-align: center;
-  width: 180px;
-  margin: 0 0 -20px;
-  background-color: #121212;
-  position: relative;
-  top: -50px;
-}
-
-.form_inner{
-  position:relative;
-}
-
-.login_form input{
-  color: #fff;
-  border: 2px solid #fff;
-  font-size: 16px;
-  width: 400px;
-  padding: 5px 10px;
-  margin: 0 0 20px;
-  height: 30px;
-  border-radius: 5px;
-  background-color: transparent;
-  display: block;
-}
-
 #checkbox{
   width: 18px;
   height: 18px;
@@ -51,7 +11,6 @@
   vertical-align: top;
 }
 
-
 .signup{
   color: #fff;
   font-size: 16px;
@@ -61,17 +20,8 @@
 }
 
 #login_btn{
-  font-family: 'dqfont';
-  font-size: 38px;
-  font-weight: 400;
-  line-height: 5px;
-  letter-spacing: 0.08em;
-  width: 150px;
-  height: 40px;
-  padding: 5px 5px 20px;
-  margin: 0;
-  border: 2px solid #fff;
-  display: inline;
+  color: #fff;
+  border-color: #fff;
 }
 
 .flash_cursor{

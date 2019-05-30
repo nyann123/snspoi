@@ -1,3 +1,7 @@
+/* ///////////////////////// */
+/*        共通          */
+/* ///////////////////////// */
+
 @font-face {
   font-family: 'dqfont';
   src: url("../DragonQuestFC.ttf");
@@ -32,8 +36,15 @@ body{
 margin-top: 0;
 }
 
-.btn:hover{
-  cursor: pointer;
+.js_error_message{
+  font-family: "dqfont";
+  color: #FF7763;
+  font-size: 28px;
+  margin-left: 10px;
+}
+
+.error{
+  border: #FF7763 solid 2px !important;
 }
 
 .container{
@@ -42,6 +53,114 @@ margin-top: 0;
   margin: 0 auto;
   text-align: center;
 }
+
+.form_container{
+  color: #FFF;
+  max-width: 800px;
+  width: calc(100% - 100px);
+  padding: 10px 50px 50px 50px;;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.form_container input{
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 16px;
+  width: 360px;
+  padding: 5px 10px;
+  margin: 2px 0 20px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: transparent;
+  display: inline-block;
+  outline: none;
+}
+
+/* dqフォント使用の場合 */
+.page_title.dq{
+  font-family: "dqfont";
+  color: #fff;
+  font-size: 50px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  width: 180px;
+  margin: 0 0 -20px;
+  background-color: #121212;
+  position: relative;
+  top: -50px;
+}
+
+/* dqフォント未使用の場合 */
+.page_title{
+  color: #fff;
+  font-size: 28px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  vertical-align: middle;
+  width: 280px;
+  margin: 0 0 10px;;
+  background-color: #121212;
+  position: relative;
+  top: -25px;
+}
+
+.form_inner {
+  position:relative;
+}
+
+/* dqフォント使用の場合 */
+.btn.dq{
+  font-family: 'dqfont';
+  color: #3FBFFF;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 5px;
+  letter-spacing: 0.08em;
+  width: 150px;
+  height: 40px;
+  padding: 5px 5px 20px;
+  margin: 0;
+  border: 2px solid #3FBFFF;
+  display: inline;
+}
+
+/* dqフォント未使用の場合 */
+.btn.normal{
+color: #3FBFFF;
+font-size: 20px;
+font-weight: bold;
+line-height: 5px;
+letter-spacing: 0.08em;
+width: 120px;
+height: 40px;
+margin: 0;
+border: 2px solid #3FBFFF;
+display: inline;
+}
+
+.btn:disabled{
+  color: #b8b8b8;
+  border-color: #b8b8b8;
+  cursor: default;
+}
+
+#btn:disabled{
+  color: #b8b8b8;
+  border-color: #b8b8b8;
+  cursor: default;
+}
+
+#btn{
+  cursor: pointer;
+}
+
+.btn:hover{
+  cursor: pointer;
+}
+
 
 /* ///////////////////////// */
 /*        ヘッダー            */

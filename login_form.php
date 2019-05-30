@@ -8,8 +8,8 @@ require_once('head.php');
 
 <body>
 <?php require_once('header.php'); ?>
-  <div class="login_form">
-    <h2>ログイン</h2>
+  <div class="form_container">
+    <h2 class="page_title dq">ログイン</h2>
 
 
     <?php if (isset($flash_messages)): ?>
@@ -22,11 +22,11 @@ require_once('head.php');
       <span class="flash_cursor">｝</span>
       <form action="#" method="post">
         <input id="email" type="email" name="email" placeholder="メールアドレス">
-        <input id="password" type="password" name="password" placeholder="パスワード">
+        <input id="password" type="password" name="password" placeholder="パスワード"><br>
         <label id="pass_save" for="checkbox">
           <input id="checkbox" type="checkbox" name="pass_save">ログインを維持する
         </label><br>
-        <input id="login_btn" class="btn" type="submit" name="" value="ログイン">
+        <input id="login_btn" class="btn dq" type="submit" name="" value="ログイン">
         <a href="signup_form.php" class="signup">新規登録はこちら</a>
       </form>
     </div>

@@ -8,8 +8,8 @@ require_once('head.php');
 
 <body>
   <?php require_once('header.php') ?>
-  <div class="signup_form">
-    <h2>とうろく</h2>
+  <div class="form_container">
+    <h2 class="page_title dq">とうろく</h2>
 
     <?php if (isset($flash_messages)): ?>
       <?php foreach ((array)$flash_messages as $message): ?>
@@ -33,7 +33,7 @@ require_once('head.php');
         <input id="password" autocomplete="flase" type="password" name="pass" value="<?php if (isset($oldpass)) echo $oldpass ?>">
         <span class="js_error_message"></span><br>
 
-        <input id="signup_btn" class="btn" type="submit" name="" value="とうろくする" disabled>
+        <input id="signup_btn" class="btn dq" type="submit" name="" value="とうろくする" disabled>
       </form>
     </div>
   </div>

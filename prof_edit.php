@@ -71,8 +71,8 @@ require_once('head.php');
 <body>
 <?php require('header.php'); ?>
 
-<div class="prof_edit_form">
-  <h2>プロフィール編集</h2>
+<div class="form_container">
+  <h2 class="page_title">プロフィール編集</h2>
 
   <?php if (isset($flash_messages)): ?>
     <?php foreach ((array)$flash_messages as $message): ?>
@@ -80,19 +80,17 @@ require_once('head.php');
     <?php endforeach ?>
   <?php endif ?>
 
-  <div class="form_inner">
-    <form action="" method="post">
-      <label for="name">名前</label><br>
-      <input id="name" type="text" name="username" value="<?php echo get_form_data('name'); ?>">
-      <span class="js_error_message"></span><br>
+  <form action="" method="post">
+    <label for="name">名前</label><br>
+    <input id="name" type="text" name="username" value="<?php echo get_form_data('name'); ?>">
+    <span class="js_error_message"></span><br>
 
-      <label for="email">Email</label><br>
-      <input id="email" type="email" name="email" value="<?php echo get_form_data('email'); ?>">
-      <span class="js_error_message"></span><br>
+    <label for="email">Email</label><br>
+    <input id="email" type="email" name="email" value="<?php echo get_form_data('email'); ?>">
+    <span class="js_error_message"></span><br>
 
-      <input id="btn" type="submit"  value="変更する" disabled>
-    </form>
-  </div>
-  </div>
+    <input id ="btn" class="btn normal" type="submit"  value="変更する" disabled>
+  </form>
+</div>
 
 <?php require_once('footer.php'); ?>
