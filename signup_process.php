@@ -53,49 +53,6 @@ if(!empty($_POST)){
 
   //エラーがなければ次の処理に進む
   if(empty($error_messages)){
-
-    //退会済みユーザーであれば復元処理
-    if ($removed_user = check_delete_flg($email)){
-      try {
-        $dbh = dbConnect();
-        //usersテーブル
-        $sql1 = 'UPDATE users SET  delete_flg = 0 WHERE id = :id';
-        $stmt1 = $dbh->prepare($sql1);
-        $stmt1->execute(array(':id' => $removed_user['id']));
-        //postsテーブル
-        $sql2 = 'UPDATE posts SET  delete_flg = 0 WHERE user_id = :id';
-        $stmt2 = $dbh->prepare($sql2);
-        $stmt2->execute(array(':id' => $removed_user['id']));
-        //favoriteテーブル
-        $sql3 = 'UPDATE favorite SET  delete_flg = 0 WHERE user_id = :id';
-        $stmt3 = $dbh->prepare($sql3);
-        $stmt3->execute(array(':id' => $removed_user['id']));
-
-        if(query_result($stmt1)){
-          //フォーム入力保持用のsession破棄
-          unset($_SESSION['name']);
-          unset($_SESSION['email']);
-          unset($_SESSION['pass']);
-
-          //登録したユーザーをログインさせる
-          $sesLimit = 60*60;
-          $_SESSION['login_date'] = time();
-          $_SESSION['login_limit'] = $sesLimit;
-          $_SESSION['user_id'] = $removed_user['id'];
-
-          set_flash('sucsess','登録されていたユーザーを復元しました');
-
-          debug('登録復元成功');
-          debug(print_r($_SESSION['flash'],true));
-          header("Location:mypage.php?page_id=${removed_user['id']}");
-          exit();
-        }
-      } catch (Exception $e) {
-        error_log('エラー発生:' . $e->getMessage());
-      }
-
-    //退会済みユーザーでなければ新規登録処理
-  }else{
     debug('バリデーションOK');
     try {
       $dbh = dbConnect();
@@ -104,7 +61,7 @@ if(!empty($_POST)){
       $stmt = $dbh->prepare($sql);
       $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => $pass , ':created_at' => date('Y-m-d H:i:s')));
 
-      if ($stmt) {
+      if (query_result($stmt)) {
         debug('クエリ成功しました');
 
         //フォーム入力保持用のsession破棄
@@ -124,16 +81,11 @@ if(!empty($_POST)){
         debug(print_r($_SESSION['flash'],true));
         header("Location:mypage.php?page_id=${new_user_id}");
         exit();
-      }else{
-        debug('クエリに失敗しました。');
-        set_flash('error',ERR_MSG1);
       }
-
     } catch (\Exception $e) {
       error_log('エラー発生:' . $e->getMessage());
       set_flash('error',ERR_MSG1);
     }
-  }
   }
   debug('新規登録失敗');
   debug(print_r($_SESSION['flash'],true));

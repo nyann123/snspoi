@@ -249,6 +249,22 @@ function get_favorite_post($page_id){
   }
 }
 
+function change_delete_flg($user,$flg){
+  $dbh = dbConnect();
+  $sql1 = 'UPDATE users SET  delete_flg = :flg WHERE id = :id';
+  $stmt1 = $dbh->prepare($sql1);
+  $stmt1->execute(array(':flg' => $flg , ':id' => $user['id']));
+  //postsテーブル
+  $sql2 = 'UPDATE posts SET  delete_flg = :flg WHERE user_id = :id';
+  $stmt2 = $dbh->prepare($sql2);
+  $stmt2->execute(array(':flg' => $flg , ':id' => $user['id']));
+  //favoriteテーブル
+  $sql3 = 'UPDATE favorite SET  delete_flg = :flg WHERE user_id = :id';
+  $stmt3 = $dbh->prepare($sql3);
+  $stmt3->execute(array(':flg' => $flg , ':id' => $user['id']));
+
+  return $stmt1;
+}
 
 function get_form_data($str){
   global $user;
@@ -281,6 +297,23 @@ function get_form_data($str){
 //================================
 // その他
 //================================
+//ユーザーをログインさせる
+function login($user,$pass_save){
+  //ログイン有効期限（デフォルトを１時間とする）
+  $sesLimit = 60*60;
+  $_SESSION['login_date'] = time();
+  // ログイン保持にチェックがある場合
+  if($pass_save){
+    debug('ログイン保持にチェックがあります。');
+    $_SESSION['login_limit'] = $sesLimit * 24 * 30;
+  }else{
+    debug('ログイン保持にチェックはありません。');
+    $_SESSION['login_limit'] = $sesLimit;
+  }
+
+  $_SESSION['user_id'] = $user['id'];
+  debug('ログイン成功');
+}
 //ログイン中ユーザーのアクセス制限
 function check_logged_in(){
   if (isset($_SESSION['user_id'])){
@@ -289,8 +322,6 @@ function check_logged_in(){
     exit();
   }
 }
-
-
 // フラッシュメッセージ用処理
 function set_flash($type,$message){
   $_SESSION['flash']['type'] = "flash_${type}";

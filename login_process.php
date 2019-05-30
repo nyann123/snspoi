@@ -30,37 +30,50 @@ if(!empty($_POST)){
 
   if(empty($error_messages)){
     debug('バリデーションOK');
+
     //emailでユーザー情報を取得
     try {
       $dbh = dbConnect();
-      $sql = "SELECT password,id FROM users WHERE email = :email";
+      $sql = "SELECT password,id,delete_flg
+              FROM users
+              WHERE email = :email";
       $stmt = $dbh->prepare($sql);
       $stmt->execute(array(':email' => $email));
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
       debug('クエリ結果の中身：'.print_r($user,true));
+
       //パスワードでユーザー認証
       if (isset($user) && password_verify($password, $user['password'])) {
-        //ログイン有効期限（デフォルトを１時間とする）
-        $sesLimit = 60*60;
-        $_SESSION['login_date'] = time();
 
-        // ログイン保持にチェックがある場合
-        if($pass_save){
-          debug('ログイン保持にチェックがあります。');
-          $_SESSION['login_limit'] = $sesLimit * 24 * 30;
+        //delete_flgが1ならユーザー復元処理
+        if($user['delete_flg']){
+          debug('ユーザー情報を復元します');
+          try {
+            if(query_result(change_delete_flg($user,0)));
+
+            // ログインさせる
+            login($user,$pass_save);
+            set_flash('sucsess','登録されていたユーザーを復元しました');
+
+            debug('セッション変数の中身：'.print_r($_SESSION,true));
+
+            header("Location:mypage.php?page_id=${user['id']}");
+            exit();
+          } catch (\Exception $e) {
+            error_log('エラー発生:' . $e->getMessage());
+            $error_messages = ERR_MSG1;
+          }
         }else{
-          debug('ログイン保持にチェックはありません。');
-          $_SESSION['login_limit'] = $sesLimit;
+          // ログインさせる
+          login($user,$pass_save);
+          set_flash('sucsess','ログインしました');
+
+          debug('セッション変数の中身：'.print_r($_SESSION,true));
+
+          header("Location:mypage.php?page_id=${user['id']}");
+          exit();
         }
-
-        $_SESSION['user_id'] = $user['id'];
-        set_flash('sucsess',"ログインしました");
-
-        debug('ログイン成功');
-        debug('セッション変数の中身：'.print_r($_SESSION,true));
-        header("Location:mypage.php?page_id=${user['id']}");
-        exit();
       }else{
         $error_messages[] = "メールアドレス又はパスワードが間違っています。";
       }
