@@ -43,7 +43,7 @@ require('head.php');
       <form action="" method="post" class="form">
         <input id="btn" class="btn normal"type="submit" class="btn btn-mid" value="退会する" name="submit">
       </form>
-      <a href="mypage.php">&lt; マイページに戻る</a>
+      <a href="mypage.php?page_id=<?php echo $user['id'] ?>"></a>
     </div>
 
     <!-- footer -->

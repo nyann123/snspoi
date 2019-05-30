@@ -16,7 +16,7 @@
             <ul id="child" class="close">
               <li><a href="prof_edit.php">プロフィール編集</a></li>
               <li><a href="logout_process.php">ログアウト</a></li>
-              <li>test</li>
+              <li><a href="withdraw.php">退会</a></li>
               <li>test</li>
             </ul>
           </li>
