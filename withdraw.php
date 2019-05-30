@@ -1,7 +1,7 @@
 <?php
 
 //共通変数・関数ファイルを読込み
-require('function.php');
+require('config.php');
 
 debug('「「「「「「「「「');
 debug('「　退会ページ:未完成　「');
@@ -22,23 +22,21 @@ if(!empty($_POST)){
     //usersテーブル
     $sql1 = 'UPDATE users SET  delete_flg = 1 WHERE id = :id';
     $stmt1 = $dbh->prepare($sql1);
-    $stmt1->execute(array(':id' => $_SESSION['user_id']);
+    $stmt1->execute(array(':id' => $_SESSION['user_id']));
     //postsテーブル
     $sql2 = 'UPDATE posts SET  delete_flg = 1 WHERE user_id = :id';
     $stmt2 = $dbh->prepare($sql2);
-    $stmt2->execute(array(':id' => $_SESSION['user_id']);
+    $stmt2->execute(array(':id' => $_SESSION['user_id']));
     //favoriteテーブル
     $sql3 = 'UPDATE favorite SET  delete_flg = 1 WHERE user_id = :id';
     $stmt3 = $dbh->prepare($sql3);
-    $stmt3->execute(array(':id' => $_SESSION['user_id']);
+    $stmt3->execute(array(':id' => $_SESSION['user_id']));
 
-    if($stmt1){
+    if(query_result($stmt1)){
      //セッション削除
       session_destroy();
       debug('セッション変数の中身：'.print_r($_SESSION,true));
-      header("Location:login.php");
-    }else{
-      debug('クエリが失敗しました。');
+      header("Location:login_form.php");
     }
 
   } catch (Exception $e) {

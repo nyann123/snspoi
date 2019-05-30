@@ -69,7 +69,7 @@ function check_email_duplicate($email){
   $dbh = dbConnect();
   $sql = "SELECT *
           FROM users
-          WHERE email = :email LIMIT 1";
+          WHERE email = :email AND delete_flg = 0 LIMIT 1";
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':email' => $email));
   $user = $stmt->fetch();
@@ -185,7 +185,7 @@ function get_post($page_id){
     $dbh = dbConnect();
     $sql = "SELECT posts.id,user_id,name,post_content,posts.created_at
             FROM users INNER JOIN posts ON users.id = posts.user_id
-            WHERE :id = posts.user_id
+            WHERE :id = posts.user_id AND posts.delete_flg = 0
             ORDER BY posts.created_at DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $page_id));
@@ -208,6 +208,7 @@ function get_all_post(){
     $dbh = dbConnect();
     $sql = "SELECT posts.id,user_id,name,post_content,posts.created_at
             FROM users INNER JOIN posts ON users.id = posts.user_id
+            WHERE posts.delete_flg = 0
             ORDER BY posts.created_at DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
@@ -231,7 +232,7 @@ function get_favorite_post($page_id){
     $sql = "SELECT  users.name,posts.id,posts.user_id,post_content,posts.created_at
             FROM users INNER JOIN favorite ON users.id = favorite.user_id
             INNER JOIN posts ON posts.id = favorite.post_id
-            WHERE favorite.user_id = :id
+            WHERE favorite.user_id = :id AND delete_flg = 0
             ORDER BY favorite.id DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $page_id));

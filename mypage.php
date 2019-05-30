@@ -6,7 +6,7 @@ debug('「　マイページ     「');
 debug('「「「「「「「「「「「');
 debugLogStart();
 
-require_once('auth.php');
+// require_once('auth.php');
 $page_id = $_GET['page_id'];
 
 //sessionからログイン中のユーザー情報を取得
