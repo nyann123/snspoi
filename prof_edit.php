@@ -63,6 +63,8 @@ if(!empty($_POST)){
   header('Location:prof_edit.php');
 }
 
+debug('------------------------------');
+
 $site_title = 'プロフィール編集';
 $css_file_title = $js_file_title =  'prof_edit';
 require_once('head.php');

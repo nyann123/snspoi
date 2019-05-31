@@ -89,3 +89,4 @@ if(!empty($_POST)){
 
   header('Location:login_form.php');
 }
+debug('------------------------------');

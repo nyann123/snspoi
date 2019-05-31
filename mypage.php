@@ -7,31 +7,36 @@ debug('「「「「「「「「「「「');
 debugLogStart();
 
 require_once('auth.php');
-$page_id = $_GET['page_id'];
+$page_user = $_GET['page_id'];
 
 //sessionからログイン中のユーザー情報を取得
 $current_user = get_user($_SESSION['user_id']);
 //ユーザーの投稿を取得
-$user_posts = get_post($page_id);
+$user_posts = get_post($page_user);
 // お気に入り登録した投稿を取得
-$favorite_posts = get_favorite_post($page_id);
-// var_dump($current_user);
+$favorite_posts = get_favorite_post($page_user);
 
+//フォロー機能
+if(!empty($_POST['folo'])){
+  require_once('follow_process.php');
+}
 
-//投稿
+//投稿機能
 if(!empty($_POST['post'])){
   require_once('post_process.php');
 }
 
-//投稿削除
+//投稿削除機能
 if(!empty($_POST['delete'])){
   require_once('post_delete_process.php');
 }
 
-//お気に入り追加
+//お気に入り追加機能
 if(!empty($_POST['favorite'])){
   require_once('post_favorite_process.php');
 }
+
+debug('------------------------------');
 
  $site_title = 'マイページ';
  $css_file_title = 'mypage';
@@ -59,7 +64,7 @@ if(!empty($_POST['favorite'])){
       </div>
         <div class="mypage_right">
           <!-- 自分のページのみ投稿フォームを表示 -->
-        <?php if ($current_user['id'] === $_GET['page_id']): ?>
+        <?php if ($current_user['id'] === $page_user): ?>
           <form class ="post_form" action="#" method="post">
             <textarea class="text_area" placeholder="投稿する" name="content"></textarea><br>
             <input id="post_btn" type="submit" name="post" value="投稿" disabled>
@@ -97,7 +102,6 @@ if(!empty($_POST['favorite'])){
                 <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
               </form>
 
-
               <form class="" action="#" method="post">
                 <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
                 <?php if (check_favolite_duplicate($current_user['id'],$post['id'])): ?>
@@ -105,6 +109,10 @@ if(!empty($_POST['favorite'])){
                 <?php else: ?>
                   <button type="submit" name="favorite" value="favorite"><i class="far fa-star"></i></button>
                 <?php endif; ?>
+              </form>
+
+              <form class="" action="#" method="post">
+                <input type="submit" name="folo" value="folo">
               </form>
             </div>
 

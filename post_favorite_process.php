@@ -23,7 +23,7 @@ try{
 
   if(query_result($stmt)){
     debug("お気に入り${action}成功");
-    set_flash("${flash_type}","お気に入り${action}しました");
+    set_flash("$flash_type","お気に入り${action}しました");
 
     header("Location:$prev_page");
     exit();

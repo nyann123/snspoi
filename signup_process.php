@@ -92,3 +92,4 @@ if(!empty($_POST)){
 
   header('Location:signup_form.php');
 }
+debug('------------------------------');

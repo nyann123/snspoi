@@ -28,6 +28,8 @@ if(!empty($_POST['favorite'])){
   require_once('post_favorite_process.php');
 }
 
+debug('------------------------------');
+
  $site_title = 'マイページ';
  $css_file_title = 'mypage';
  require_once('head.php');

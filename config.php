@@ -166,13 +166,7 @@ function get_user($user_id){
             WHERE id = :id";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $user_id));
-
-    if($stmt){
-      debug('成功');
-    }else{
-      debug('失敗しました');
-    }
-
+    query_result($stmt);
     return $stmt->fetch(PDO::FETCH_ASSOC);
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
@@ -189,13 +183,7 @@ function get_post($page_id){
             ORDER BY posts.created_at DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $page_id));
-
-    if($stmt){
-      debug('成功');
-    }else{
-      debug('失敗しました');
-    }
-
+    query_result($stmt);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
@@ -212,13 +200,7 @@ function get_all_post(){
             ORDER BY posts.created_at DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
-
-    if($stmt){
-      debug('成功');
-    }else{
-      debug('失敗しました');
-    }
-
+    query_result($stmt);
     return $user_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
   } catch (\Exception $e) {
     echo $e->getMessage() . PHP_EOL;
@@ -236,13 +218,7 @@ function get_favorite_post($page_id){
             ORDER BY favorite.id DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $page_id));
-
-    if($stmt){
-      debug('成功');
-    }else{
-      debug('失敗しました');
-    }
-
+    query_result($stmt);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
@@ -264,6 +240,17 @@ function change_delete_flg($user,$flg){
   $stmt3->execute(array(':flg' => $flg , ':id' => $user['id']));
 
   return $stmt1;
+}
+
+function check_follow($follow_user,$followed_user){
+  $dbh = dbConnect();
+  $sql = "SELECT follow_id,followed_id
+          FROM follows
+          WHERE :follow_id =follow_id AND :followed_id = followed_id";
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':follow_id' => $follow_user, ':followed_id' => $followed_user));
+  $follow = $stmt->fetch();
+  return $follow ? true : false;
 }
 
 function get_form_data($str){

@@ -4,7 +4,7 @@
 require('config.php');
 
 debug('「「「「「「「「「');
-debug('「　退会ページ:未完成　「');
+debug('「　退会ページ  「');
 debug('「「「「「「「「「');
 debugLogStart();
 
@@ -22,13 +22,14 @@ if(!empty($_POST)){
       session_destroy();
       debug('セッション変数の中身：'.print_r($_SESSION,true));
       header("Location:login_form.php");
+      exit();
     }
 
   } catch (Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-
+debug('------------------------------');
 
 $site_title = '退会';
 $css_file_title = 'withdraw';
