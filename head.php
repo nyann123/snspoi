@@ -8,6 +8,6 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/common.css">
     <?php if (isset($css_file_title)): ?>
-    <link rel="stylesheet" href="css/<?php echo $css_file_title?>.css">
+      <link rel="stylesheet" href="css/<?php echo $css_file_title?>.css">
     <?php endif ?>
   </head>

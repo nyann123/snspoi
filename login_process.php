@@ -27,7 +27,7 @@ if(!empty($_POST)){
   if ( empty($password) ) {
     $error_messages['pass'] = "パスワードを入力してください";
   }
-
+  //バリデーションエラーがなければ処理を続ける
   if(empty($error_messages)){
     debug('バリデーションOK');
 

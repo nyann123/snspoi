@@ -11,7 +11,6 @@ require_once('head.php');
   <div class="form_container">
     <h2 class="page_title dq">ログイン</h2>
 
-
     <?php if (isset($flash_messages)): ?>
       <?php foreach ((array)$flash_messages as $message): ?>
         <p class ="flash_message <?php echo $flash_type ?>"><?php echo $message?></p>

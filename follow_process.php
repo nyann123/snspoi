@@ -21,11 +21,13 @@ if(check_follow($current_user['id'],$page_user)){
 try {
   $dbh = dbConnect();
   $dbh->beginTransaction();
+  //followsテーブル
   $stmt1 = $dbh->prepare($sql1);
   $stmt1->execute(array(':follow_id' => $current_user['id'] , ':followed_id' => $page_user));
-
+  //followersテーブル
   $stmt2 = $dbh->prepare($sql2);
   $stmt2->execute(array(':follow_id' => $current_user['id'] , ':followed_id' => $page_user));
+  // 全てのクエリが成功していたら結果を保存する
   if (query_result($stmt1) && query_result($stmt2)) {
     $dbh->commit();
   }
@@ -34,7 +36,6 @@ try {
   error_log('エラー発生:' . $e->getMessage());
   set_flash('error',ERR_MSG1);
 }
-
 
 debug("フォロー${action}成功");
 set_flash("$flash_type","フォロー${action}しました");

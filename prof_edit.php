@@ -46,7 +46,6 @@ if(!empty($_POST)){
       $stmt->execute(array(':name' => $name , ':email' => $email, ':id' => $user['id']));
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      // クエリ成功の場合
       if(query_result($stmt)){
         set_flash('sucsess','プロフィールの編集が完了しました');
         header("Location:mypage.php?page_id=${user_id}");

@@ -65,7 +65,8 @@ $error_messages = array();
 //================================
 // バリデーション関数
 //================================
-function check_email_duplicate($email){
+//メールアドレスの重複チェック
+function check_emai　l_duplicate($email){
   $dbh = dbConnect();
   $sql = "SELECT *
           FROM users
@@ -73,9 +74,8 @@ function check_email_duplicate($email){
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':email' => $email));
   $user = $stmt->fetch();
-  return $user ? true : false;
+  return $user;
 }
-
 //お気に入りの重複チェック
 function check_favolite_duplicate($user_id,$post_id){
   $dbh = dbConnect();
@@ -85,9 +85,9 @@ function check_favolite_duplicate($user_id,$post_id){
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':user_id' => $user_id , ':post_id' => $post_id));
   $favorite = $stmt->fetch();
-  return $favorite ? true : false;
+  return $favorite;
 }
-
+// 名前のバリデーション
 function valid_name($name){
   global $error_messages;
   if ( empty($name) ){
@@ -96,7 +96,7 @@ function valid_name($name){
     $error_messages['name'] = 'なまえは10文字以内で入力してください';
   }
 }
-
+// メールアドレスのバリデーション
 function valid_email($email){
   global $error_messages;
   if(!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)){
@@ -105,7 +105,7 @@ function valid_email($email){
     $error_messages['email'] = 'すでに登録済みのメールアドレスです';
   }
 }
-
+// パスワードのバリデーション
 function valid_password($pass){
   global $error_messages;
   if (preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i', $pass)) {
@@ -114,7 +114,7 @@ function valid_password($pass){
     $error_messages['pass'] = 'パスワードは半角英数字をそれぞれ1文字以上含んだ6文字以上で設定してください。';
   }
 }
-
+// 投稿内容のバリデーション
 function valid_post_length($post){
   global $error_messages;
   if (empty($post)){
@@ -127,6 +127,7 @@ function valid_post_length($post){
 //================================
 // データベース
 //================================
+// データベースの接続準備
 function dbConnect(){
   //DBへの接続準備
   $dsn = 'mysql:host=localhost;dbname=hogetest';
@@ -156,7 +157,7 @@ function query_result($stmt){
     return false;
   }
 }
-
+// ユーザー情報を取得する
 function get_user($user_id){
   debug('ユーザー情報を取得します');
   try {
@@ -172,7 +173,7 @@ function get_user($user_id){
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-
+// ユーザーの投稿を取得する
 function get_post($page_id){
   debug('ユーザー投稿を取得します');
   try{
@@ -189,7 +190,7 @@ function get_post($page_id){
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-
+// 全ての投稿を取得する
 function get_all_post(){
   debug('全ての投稿を取得します');
   try{
@@ -206,7 +207,7 @@ function get_all_post(){
     echo $e->getMessage() . PHP_EOL;
   }
 }
-
+// お気に入り登録されている投稿を取得する
 function get_favorite_post($page_id){
   debug('お気に入り投稿を取得します');
   try{
@@ -224,9 +225,11 @@ function get_favorite_post($page_id){
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-
+// delete_flgを変更する
 function change_delete_flg($user,$flg){
   $dbh = dbConnect();
+  $dbh->beginTransaction();
+
   $sql1 = 'UPDATE users SET  delete_flg = :flg WHERE id = :id';
   $stmt1 = $dbh->prepare($sql1);
   $stmt1->execute(array(':flg' => $flg , ':id' => $user['id']));
@@ -239,7 +242,12 @@ function change_delete_flg($user,$flg){
   $stmt3 = $dbh->prepare($sql3);
   $stmt3->execute(array(':flg' => $flg , ':id' => $user['id']));
 
-  return $stmt1;
+  if (query_result($stmt1) && query_result($stmt2) && query_result($stmt3)) {
+    $dbh->commit();
+    return $stmt1;
+  }else{
+    $dbh->rollback();
+  }
 }
 
 function check_follow($follow_user,$followed_user){
@@ -250,7 +258,7 @@ function check_follow($follow_user,$followed_user){
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':follow_id' => $follow_user, ':followed_id' => $followed_user));
   $follow = $stmt->fetch();
-  return $follow ? true : false;
+  return $follow;
 }
 
 function get_form_data($str){
@@ -314,7 +322,7 @@ function set_flash($type,$message){
   $_SESSION['flash']['type'] = "flash_${type}";
   $_SESSION['flash']['message'] = $message;
 }
-
+//セッション内容を1回だけ取得する
 if( isset($_SESSION['flash']) ){
   $flash_messages = $_SESSION['flash']['message'];
   $flash_type = $_SESSION['flash']['type'];
