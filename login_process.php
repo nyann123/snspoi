@@ -53,7 +53,7 @@ if(!empty($_POST)){
             if(query_result(change_delete_flg($user,0)));
 
             // ログインさせる
-            login($user,$pass_save);
+            login($user['id'],$pass_save);
             set_flash('sucsess','登録されていたユーザーを復元しました');
 
             debug('セッション変数の中身：'.print_r($_SESSION,true));
@@ -66,7 +66,7 @@ if(!empty($_POST)){
           }
         }else{
           // ログインさせる
-          login($user,$pass_save);
+          login($user['id'],$pass_save);
           set_flash('sucsess','ログインしました');
 
           debug('セッション変数の中身：'.print_r($_SESSION,true));

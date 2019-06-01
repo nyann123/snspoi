@@ -11,13 +11,13 @@ debugLogStart();
 //ログイン認証
 require('auth.php');
 
-$user = get_user($_SESSION['user_id']);
+$current_user = get_user($_SESSION['user_id']);
 
 // post送信されていた場合
 if(!empty($_POST)){
   debug('POST送信があります。');
   try {
-    if(query_result(change_delete_flg($user,1))){
+    if(query_result(change_delete_flg($current_user,1))){
      //セッション削除
       session_destroy();
       debug('セッション変数の中身：'.print_r($_SESSION,true));

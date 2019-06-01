@@ -19,21 +19,10 @@ function check_delete_flg($email){
 // ログイン中ならマイページへ
 check_logged_in();
 
-// まとめたい
-if( isset($_SESSION['name']) ){
-  $oldname = $_SESSION['name'];
-}
-unset($_SESSION['name']);
-
-if( isset($_SESSION['email']) ){
-  $oldemail = $_SESSION['email'];
-}
-unset($_SESSION['email']);
-
-if( isset($_SESSION['pass']) ){
-  $oldpass = $_SESSION['pass'];
-}
-unset($_SESSION['pass']);
+//エラー発生時の入力保持
+set_old_form_data('name');
+set_old_form_data('email');
+set_old_form_data('pass');
 
 // 送信されていれば登録処理
 if(!empty($_POST)){

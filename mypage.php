@@ -6,10 +6,10 @@ debug('「　マイページ     「');
 debug('「「「「「「「「「「「');
 debugLogStart();
 
-require_once('auth.php');
+// require_once('auth.php');
 $page_user = $_GET['page_id'];
 
-//sessionからログイン中のユーザー情報を取得
+//ログイン中のユーザー情報を取得
 $current_user = get_user($_SESSION['user_id']);
 //ユーザーの投稿を取得
 $user_posts = get_post($page_user);

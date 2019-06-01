@@ -10,24 +10,27 @@ debugLogStart();
 //ログイン認証
 require('auth.php');
 
-// DBからユーザーデータを取得
-$user = get_user($_SESSION['user_id']);
-debug('取得したユーザー情報：'.print_r($user,true));
+//エラー発生時の入力保持
+set_old_form_data('name');
+set_old_form_data('email');
+
+//ログイン中のユーザー情報を取得
+$current_user = get_user($_SESSION['user_id']);
+debug('取得したユーザー情報：'.print_r($current_user,true));
 
 // post送信されていた場合
 if(!empty($_POST)){
   debug('POST送信があります。');
   debug('POST情報：'.print_r($_POST,true));
 
-  $name = $_POST['username'];
-  $email = $_POST['email'];
-  $user_id = $user['id'];
+  $name = $_SESSION['name'] = $_POST['name'];
+  $email = $_SESSION['email'] = $_POST['email'];
 
   //DBの情報と入力情報が異なる場合にバリデーションを行う
-  if($user['name'] !== $name){
+  if($current_user['name'] !== $name){
     valid_name($name);
   }
-  if($user['email'] !== $email){
+  if($current_user['email'] !== $email){
     valid_email($email);
   }
 
@@ -43,12 +46,12 @@ if(!empty($_POST)){
               SET name = :name, email = :email
               WHERE id = :id';
       $stmt = $dbh->prepare($sql);
-      $stmt->execute(array(':name' => $name , ':email' => $email, ':id' => $user['id']));
+      $stmt->execute(array(':name' => $name , ':email' => $email, ':id' => $current_user['id']));
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
       if(query_result($stmt)){
         set_flash('sucsess','プロフィールの編集が完了しました');
-        header("Location:mypage.php?page_id=${user_id}");
+        header("Location:mypage.php?page_id=${current_user['id']}");
         exit();
       }
     } catch (Exception $e) {
@@ -83,7 +86,7 @@ require_once('head.php');
 
   <form action="" method="post">
     <label for="name">名前</label><br>
-    <input id="name" type="text" name="username" value="<?php echo get_form_data('name'); ?>">
+    <input id="name" type="text" name="name" value="<?php echo get_form_data('name'); ?>">
     <span class="js_error_message"></span><br>
 
     <label for="email">Email</label><br>

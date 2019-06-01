@@ -66,7 +66,7 @@ $error_messages = array();
 // バリデーション関数
 //================================
 //メールアドレスの重複チェック
-function check_emai　l_duplicate($email){
+function check_email_duplicate($email){
   $dbh = dbConnect();
   $sql = "SELECT *
           FROM users
@@ -162,9 +162,9 @@ function get_user($user_id){
   debug('ユーザー情報を取得します');
   try {
     $dbh = dbConnect();
-    $sql = "SELECT *
+    $sql = "SELECT id,name,email,delete_flg
             FROM users
-            WHERE id = :id";
+            WHERE id = :id AND delete_flg = 0 ";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $user_id));
     query_result($stmt);
@@ -178,10 +178,10 @@ function get_post($page_id){
   debug('ユーザー投稿を取得します');
   try{
     $dbh = dbConnect();
-    $sql = "SELECT posts.id,user_id,name,post_content,posts.created_at
-            FROM users INNER JOIN posts ON users.id = posts.user_id
-            WHERE :id = posts.user_id AND posts.delete_flg = 0
-            ORDER BY posts.created_at DESC";
+    $sql = "SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
+            FROM users u INNER JOIN posts p ON u.id = p.user_id
+            WHERE :id = p.user_id AND p.delete_flg = 0
+            ORDER BY p.created_at DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $page_id));
     query_result($stmt);
@@ -195,10 +195,10 @@ function get_all_post(){
   debug('全ての投稿を取得します');
   try{
     $dbh = dbConnect();
-    $sql = "SELECT posts.id,user_id,name,post_content,posts.created_at
-            FROM users INNER JOIN posts ON users.id = posts.user_id
-            WHERE posts.delete_flg = 0
-            ORDER BY posts.created_at DESC";
+    $sql = "SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
+            FROM users u INNER JOIN posts p ON u.id = p.user_id
+            WHERE p.delete_flg = 0
+            ORDER BY p.created_at DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
     query_result($stmt);
@@ -212,11 +212,11 @@ function get_favorite_post($page_id){
   debug('お気に入り投稿を取得します');
   try{
     $dbh = dbConnect();
-    $sql = "SELECT  users.name,posts.id,posts.user_id,post_content,posts.created_at
-            FROM users INNER JOIN favorite ON users.id = favorite.user_id
-            INNER JOIN posts ON posts.id = favorite.post_id
-            WHERE favorite.user_id = :id AND delete_flg = 0
-            ORDER BY favorite.id DESC";
+    $sql = "SELECT  u.name,p.id,p.user_id,p.post_content,p.created_at
+            FROM users u INNER JOIN favorite f ON u.id = f.user_id
+            INNER JOIN posts p ON p.id = f.post_id
+            WHERE f.user_id = :id AND p.delete_flg = 0
+            ORDER BY f.id DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $page_id));
     query_result($stmt);
@@ -224,6 +224,12 @@ function get_favorite_post($page_id){
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
   }
+}
+
+function get_follow_user_post(){
+  debug('');
+  $dbh = dbConnect();
+  $sql = "SELECT ";
 }
 // delete_flgを変更する
 function change_delete_flg($user,$flg){
@@ -261,31 +267,23 @@ function check_follow($follow_user,$followed_user){
   return $follow;
 }
 
+function set_old_form_data($str){
+  global ${'old'.$str};
+  if(isset($_SESSION[$str])){
+    ${'old'.$str} = $_SESSION[$str];
+  }
+  unset($_SESSION[$str]);
+}
+
 function get_form_data($str){
-  global $user;
-  // ユーザーデータがある場合
-  if(isset($user)){
-    //フォームのエラーがある場合
-    if(isset($error_messages[$str])){
-      //POSTにデータがある場合
-      if(isset($_POST[$str])){
-        return $_POST[$str];
-      }else{
-        //ない場合（基本ありえない）はDBの情報を表示
-        return $user[$str];
-      }
-    }else{
-      //POSTにデータがあり、DBの情報と違う場合
-      if(isset($_POST[$str]) && $_POST[$str] !== $user[$str]){
-        return $_POST[$str];
-      }else{
-        return $user[$str];
-      }
-    }
+  global $current_user;
+  global ${'old'.$str};
+  //入力フォームにエラーがあれば送信したデータを表示
+  //なければDBのデーターを表示
+  if(isset(${'old'.$str}) && ${'old'.$str} !== $current_user[$str]){
+    return ${'old'.$str};
   }else{
-    if(isset($_POST[$str])){
-      return $_POST[$str];
-    }
+    return $current_user[$str];
   }
 }
 
@@ -293,7 +291,7 @@ function get_form_data($str){
 // その他
 //================================
 //ユーザーをログインさせる
-function login($user,$pass_save){
+function login($user_id,$pass_save){
   //ログイン有効期限（デフォルトを１時間とする）
   $sesLimit = 60*60;
   $_SESSION['login_date'] = time();
@@ -305,8 +303,7 @@ function login($user,$pass_save){
     debug('ログイン保持にチェックはありません。');
     $_SESSION['login_limit'] = $sesLimit;
   }
-
-  $_SESSION['user_id'] = $user['id'];
+  $_SESSION['user_id'] = $user_id;
   debug('ログイン成功');
 }
 //ログイン中ユーザーのアクセス制限
