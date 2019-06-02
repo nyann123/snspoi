@@ -214,47 +214,62 @@ nav a:hover {
   line-height: 50px;
 }
 
-#toggle_menu{
+
+.toggle_menu{
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
   position: relative;
 }
 
-#toggle_menu:hover{
+.toggle_menu:hover{
   cursor: pointer;
 }
 
-#child{
-  position: absolute;
-  padding: 0;
-  z-index: 10;
+.toggle_menu i{
+  color: #555;
+  font-size: 18px;
 }
 
-#child li{
-  color: #fff;
+
+.child{
+  position: absolute;
+  top :53px;
+  width: 100%;
+  padding: 0;
+  z-index: 10;
+  display: none;
+}
+
+.child li{
   font-weight: bold;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 20px !important;
   text-decoration: none;
-  background-color: rgba(205,180,123,0.8);
-  width: 200%;
+  background-color: #cdb47b;
+  width: 180% !important;
   box-sizing: border-box;
   border-bottom: 1px solid #000;
   clear: both;
   display: inline-block;
 }
-
-#child li a{
-  padding: 10px;
+.child li:hover{
+  background-color: #b09558;
 }
 
-#child li:last-child{
-  border-radius: 0 0 5px 3px;
+.child li a{
+  padding: 5px 10px;
+}
+
+.child li:first-child{
+  border-radius: 5px 5px 0 0;
+}
+
+.child li:last-child{
+  border-radius: 0 0 5px 5px;
   border-bottom: : none;
 }
 
-#child li:hover{
-  background-color: rgba(205,180,123,1);
-}
-
-.close{
-  display: none;
+.open{
+  display: block;
 }

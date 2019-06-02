@@ -174,14 +174,28 @@ function get_user($user_id){
   }
 }
 // ユーザーの投稿を取得する
-function get_post($page_id){
+function get_posts($page_id){
   debug('ユーザー投稿を取得します');
+  global $current_user;
   try{
     $dbh = dbConnect();
-    $sql = "SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
-            FROM users u INNER JOIN posts p ON u.id = p.user_id
-            WHERE :id = p.user_id AND p.delete_flg = 0
-            ORDER BY p.created_at DESC";
+    //自分のページならフォロー中のユーザーの投稿も取得
+    if($current_user['id'] === $page_id){
+      $sql = "SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
+              FROM users u INNER JOIN posts p ON u.id = p.user_id
+              WHERE  p.user_id = :id AND p.delete_flg = 0
+              UNION
+              SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
+              FROM users u INNER JOIN posts p ON u.id = p.user_id
+              INNER JOIN follows ON follows.followed_id = p.user_id
+              WHERE follows.follow_id = :id AND p.delete_flg = 0
+              ORDER BY created_at DESC";
+    }else{
+      $sql = "SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
+              FROM users u INNER JOIN posts p ON u.id = p.user_id
+              WHERE p.user_id = :id AND p.delete_flg = 0
+              ORDER BY p.created_at DESC";
+    }
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $page_id));
     query_result($stmt);
@@ -191,7 +205,7 @@ function get_post($page_id){
   }
 }
 // 全ての投稿を取得する
-function get_all_post(){
+function get_all_posts(){
   debug('全ての投稿を取得します');
   try{
     $dbh = dbConnect();
@@ -208,7 +222,7 @@ function get_all_post(){
   }
 }
 // お気に入り登録されている投稿を取得する
-function get_favorite_post($page_id){
+function get_favorite_posts($page_id){
   debug('お気に入り投稿を取得します');
   try{
     $dbh = dbConnect();
@@ -226,11 +240,6 @@ function get_favorite_post($page_id){
   }
 }
 
-function get_follow_user_post(){
-  debug('');
-  $dbh = dbConnect();
-  $sql = "SELECT ";
-}
 // delete_flgを変更する
 function change_delete_flg($user,$flg){
   $dbh = dbConnect();

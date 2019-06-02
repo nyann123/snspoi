@@ -1,4 +1,6 @@
 <?php
+$prev_page = basename($_SERVER['HTTP_REFERER']);
+
 // すでに登録されているか確認
 if(check_follow($current_user['id'],$page_user)){
   $action = '解除';
@@ -30,15 +32,18 @@ try {
   // 全てのクエリが成功していたら結果を保存する
   if (query_result($stmt1) && query_result($stmt2)) {
     $dbh->commit();
+    debug("フォロー${action}成功");
+    set_flash("$flash_type","フォロー${action}しました");
+
+    header("Location:$prev_page");
+    exit();
   }
 } catch (\Exception $e) {
   $dbh->rollback();
   error_log('エラー発生:' . $e->getMessage());
   set_flash('error',ERR_MSG1);
 }
+debug("フォロー${action}失敗");
 
-debug("フォロー${action}成功");
-set_flash("$flash_type","フォロー${action}しました");
-
-header("Location:mypage.php?page_id=${current_user['id']}");
+header("Location:$prev_page");
 exit();

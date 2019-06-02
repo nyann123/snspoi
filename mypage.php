@@ -12,9 +12,9 @@ $page_user = $_GET['page_id'];
 //ログイン中のユーザー情報を取得
 $current_user = get_user($_SESSION['user_id']);
 //ユーザーの投稿を取得
-$user_posts = get_post($page_user);
+$user_posts = get_posts($page_user);
 // お気に入り登録した投稿を取得
-$favorite_posts = get_favorite_post($page_user);
+$favorite_posts = get_favorite_posts($page_user);
 
 //フォロー機能
 if(!empty($_POST['folo'])){
@@ -61,7 +61,15 @@ debug('------------------------------');
         <?php  echo $current_user['name']; ?>
         さん
         <p>id = <?php echo $current_user['id'] ?></p>
+
+        <?php if ($current_user['id'] !== $page_user): ?>
+          <form class="" action="#" method="post">
+            <input type="submit" name="folo" value="フォロー">
+          </form>
+        <?php endif; ?>
+
       </div>
+
         <div class="mypage_right">
           <!-- 自分のページのみ投稿フォームを表示 -->
         <?php if ($current_user['id'] === $page_user): ?>
@@ -111,9 +119,7 @@ debug('------------------------------');
                 <?php endif; ?>
               </form>
 
-              <form class="" action="#" method="post">
-                <input type="submit" name="folo" value="folo">
-              </form>
+
             </div>
 
         <?php endforeach ?>

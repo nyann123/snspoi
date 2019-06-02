@@ -11,7 +11,7 @@ require_once('auth.php');
 //sessionからログインユーザー情報を復元
 $current_user = get_user($_SESSION['user_id']);
 //全投稿を取得
-$user_posts = get_all_post();
+$user_posts = get_all_posts();
 
 //投稿
 if(!empty($_POST['post'])){

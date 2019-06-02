@@ -1,9 +1,30 @@
 //================================
 // ヘッダー
 //================================
-// メニューボタン
-$('#toggle_menu').on('click',function(){
-  $('#child').toggleClass('close');
+
+function toggle_updown(classname){
+  $(`${'.'+classname} > span > i`).toggleClass('fa-caret-down');
+  $(`${'.'+classname} > span > i`).toggleClass('fa-caret-up');
+}
+
+// メニュー
+$('.toggle_menu.menu').on('click',function(){
+  if ( $('.timeline_child').hasClass('open')){
+    $('.timeline_child').toggleClass('open');
+    toggle_updown('timeline');
+  }
+  $('.menu_child').toggleClass('open');
+  toggle_updown('menu');
+});
+
+//タイムライン
+$('.toggle_menu.timeline').on('click',function(){
+  if ( $('.menu_child').hasClass('open')){
+    $('.menu_child').toggleClass('open');
+    toggle_updown('menu');
+  }
+  $('.timeline_child').toggleClass('open');
+    toggle_updown('timeline');
 });
 
 // メッセージ表示
