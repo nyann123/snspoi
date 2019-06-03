@@ -53,25 +53,57 @@ debug('------------------------------');
     </p>
   <?php endif; ?>
 
-
+  <h2 class="site_title"><?php echo $site_title ?></h2>
   <div class="container">
     <div class ="mypage">
-      <div class="mypage_left">
+      <div class="profile">
         ようこそ
         <?php  echo $current_user['name']; ?>
         さん
         <p>id = <?php echo $current_user['id'] ?></p>
-
+        <!-- 自分のページにはフォローボタンを表示しない -->
         <?php if ($current_user['id'] !== $page_user): ?>
           <form class="" action="#" method="post">
             <input type="submit" name="folo" value="フォロー">
           </form>
         <?php endif; ?>
 
+        <div class="profile_counts">
+          <div class="count">
+            <a href="#">
+              <div class="count_label">投稿数</div>
+              <span class="count_num"><?php echo current(get_count('post',$page_user)) ?></span>
+            </a>
+          </div>
+          <div class="count">
+            <a href="#">
+            <div class="count_label">フォロー</div>
+            <span class="count_num"><?php echo current(get_count('follow',$page_user)) ?></span>
+            </a>
+          </div>
+          <div class="count">
+            <a href="#">
+            <div class="count_label">フォロワー</div>
+            <span class="count_num"><?php echo current(get_count('follower',$page_user)) ?></span>
+            </a>
+          </div>
+          <div class="count">
+            <a href="#">
+            <div class="count_label">お気に入り</div>
+            <span class="count_num"><?php echo current(get_count('favorite',$page_user)) ?></span>
+            </a>
+          </div>
+          <div class="count">
+            <a href="#">
+            <div class="count_label">test</div>
+            <span class="count_num"></span>
+            </a>
+          </div>
+        </div>
       </div>
 
         <div class="mypage_right">
-          <!-- 自分のページのみ投稿フォームを表示 -->
+        <!-- 自分のページのみ投稿フォームを表示 -->
         <?php if ($current_user['id'] === $page_user): ?>
           <form class ="post_form" action="#" method="post">
             <textarea class="text_area" placeholder="投稿する" name="content"></textarea><br>

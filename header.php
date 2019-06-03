@@ -22,7 +22,7 @@
           </li>
           <li class="toggle_menu timeline">タイムライン <span><i class="fas fa-caret-down"></i></span>
             <ul class="child timeline_child">
-              <li><a href="#">test</a></li>
+              <li><a href="timeline.php">test</a></li>
               <li><a href="#">test</a></li>
               <li><a href="#">test</a></li>
               <li>test</li>

@@ -30,7 +30,7 @@ if(!empty($_POST['favorite'])){
 
 debug('------------------------------');
 
- $site_title = 'マイページ';
+ $site_title = 'タイムライン';
  $css_file_title = 'mypage';
  require_once('head.php');
   ?>
@@ -45,10 +45,10 @@ debug('------------------------------');
    </p>
  <?php endif; ?>
 
-
+ <h2 class="site_title"><?php echo $site_title ?></h2>
  <div class="container">
    <div class ="mypage">
-     <div class="mypage_left">
+     <div class="profile">
        ようこそ
        <?php  echo $current_user['name']; ?>
        さん

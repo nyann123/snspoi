@@ -11,6 +11,16 @@ body{
   background-color: #121212;
 }
 
+a{
+  text-decoration: none;
+  outline: none;
+}
+
+.site_title{
+  color: #fff;
+  text-align: center;
+  margin: 10px 0;
+}
 .message_slide{
   background-color: #fff;
   font-size: 16px;
@@ -167,7 +177,7 @@ display: inline;
 /* ///////////////////////// */
 
 header {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   height: 40px;
   padding: 0 0 10px;
   background-color: #cdb47b;

@@ -143,8 +143,7 @@ function dbConnect(){
     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
   );
   // PDOオブジェクト生成（DBへ接続）
-  $dbh = new PDO($dsn, $user, $password, $options);
-  return $dbh;
+  return new PDO($dsn, $user, $password, $options);
 }
 
 function query_result($stmt){
@@ -162,7 +161,7 @@ function get_user($user_id){
   debug('ユーザー情報を取得します');
   try {
     $dbh = dbConnect();
-    $sql = "SELECT id,name,email,delete_flg
+    $sql = "SELECT id,name,email
             FROM users
             WHERE id = :id AND delete_flg = 0 ";
     $stmt = $dbh->prepare($sql);
@@ -239,7 +238,6 @@ function get_favorite_posts($page_id){
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-
 // delete_flgを変更する
 function change_delete_flg($user,$flg){
   $dbh = dbConnect();
@@ -264,7 +262,7 @@ function change_delete_flg($user,$flg){
     $dbh->rollback();
   }
 }
-
+//既にフォローされているか確認する
 function check_follow($follow_user,$followed_user){
   $dbh = dbConnect();
   $sql = "SELECT follow_id,followed_id
@@ -272,28 +270,36 @@ function check_follow($follow_user,$followed_user){
           WHERE :follow_id =follow_id AND :followed_id = followed_id";
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':follow_id' => $follow_user, ':followed_id' => $followed_user));
-  $follow = $stmt->fetch();
-  return $follow;
+  return  $stmt->fetch();
 }
 
-function set_old_form_data($str){
-  global ${'old'.$str};
-  if(isset($_SESSION[$str])){
-    ${'old'.$str} = $_SESSION[$str];
-  }
-  unset($_SESSION[$str]);
-}
+function get_count($object,$user_id){
+  $dbh = dbConnect();
 
-function get_form_data($str){
-  global $current_user;
-  global ${'old'.$str};
-  //入力フォームにエラーがあれば送信したデータを表示
-  //なければDBのデーターを表示
-  if(isset(${'old'.$str}) && ${'old'.$str} !== $current_user[$str]){
-    return ${'old'.$str};
-  }else{
-    return $current_user[$str];
+  switch ($object) {
+    case 'post':
+    $sql ="SELECT COUNT(post_content)
+          FROM posts
+          WHERE user_id = :id";
+      break;
+    case 'follow':
+    $sql ="SELECT COUNT(followed_id)
+          FROM follows
+          WHERE follow_id = :id";
+      break;
+    case 'follower':
+    $sql ="SELECT COUNT(follow_id)
+          FROM followers
+          WHERE followed_id = :id";
+      break;
+    case 'favorite':
+    $sql ="SELECT COUNT(post_id)
+          FROM favorite
+          WHERE user_id = :id";
   }
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':id' => $user_id));
+  return $stmt->fetch();
 }
 
 //================================
@@ -323,6 +329,27 @@ function check_logged_in(){
     exit();
   }
 }
+
+function set_old_form_data($str){
+  global ${'old'.$str};
+  if(isset($_SESSION[$str])){
+    ${'old'.$str} = $_SESSION[$str];
+  }
+  unset($_SESSION[$str]);
+}
+
+function get_form_data($str){
+  global $current_user;
+  global ${'old'.$str};
+  //入力フォームにエラーがあれば送信したデータを表示
+  //なければDBのデーターを表示
+  if(isset(${'old'.$str}) && ${'old'.$str} !== $current_user[$str]){
+    return ${'old'.$str};
+  }else{
+    return $current_user[$str];
+  }
+}
+
 // フラッシュメッセージ用処理
 function set_flash($type,$message){
   $_SESSION['flash']['type'] = "flash_${type}";
