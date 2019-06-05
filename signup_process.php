@@ -68,7 +68,7 @@ if(!empty($_POST)){
 
         debug('新規登録成功');
         debug(print_r($_SESSION['flash'],true));
-        header("Location:mypage.php?page_id=${new_user_id}");
+        header("Location:user_page.php?page_id=${new_user_id}");
         exit();
       }
     } catch (\Exception $e) {

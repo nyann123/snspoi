@@ -12,9 +12,7 @@ $page_user = $_GET['page_id'];
 //ログイン中のユーザー情報を取得
 $current_user = get_user($_SESSION['user_id']);
 //ユーザーの投稿を取得
-$user_posts = get_posts($page_user);
-// お気に入り登録した投稿を取得
-$favorite_posts = get_favorite_posts($page_user);
+$user_posts = get_favorite_posts($page_user);
 
 //フォロー機能
 if(!empty($_POST['folo'])){
@@ -39,7 +37,7 @@ if(!empty($_POST['favorite'])){
 debug('------------------------------');
 
  $site_title = 'マイページ';
- $css_file_title = 'mypage';
+ $css_file_title = 'user_page';
  require_once('head.php');
   ?>
 
@@ -55,7 +53,7 @@ debug('------------------------------');
 
   <h2 class="site_title"><?php echo $site_title ?></h2>
   <div class="container">
-    <div class ="mypage">
+    <div class ="flex">
       <div class="profile">
         ようこそ
         <?php  echo $current_user['name']; ?>
@@ -102,7 +100,7 @@ debug('------------------------------');
         </div>
       </div>
 
-        <div class="mypage_right">
+        <div class="main_items">
         <!-- 自分のページのみ投稿フォームを表示 -->
         <?php if ($current_user['id'] === $page_user): ?>
           <form class ="post_form" action="#" method="post">
@@ -123,10 +121,10 @@ debug('------------------------------');
 
                 <!-- ユーザーによって名前を色替え -->
                 <?php if ($current_user['id'] === $post['user_id']): ?>
-                  <a href="mypage.php?page_id=<?php echo $post['user_id']?>"
+                  <a href="user_page.php?page_id=<?php echo $post['user_id']?>"
                     class="post_user_name myself"><?php echo $post['name']; ?></a>
                 <?php else: ?>
-                  <a href="mypage.php?page_id=<?php echo $post['user_id']?>"
+                  <a href="user_page.php?page_id=<?php echo $post['user_id']?>"
                     class="post_user_name other"><?php echo $post['name']; ?></a>
                 <?php endif; ?>
 

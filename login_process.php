@@ -58,7 +58,7 @@ if(!empty($_POST)){
 
             debug('セッション変数の中身：'.print_r($_SESSION,true));
 
-            header("Location:mypage.php?page_id=${user['id']}");
+            header("Location:user_page.php?page_id=${user['id']}");
             exit();
           } catch (\Exception $e) {
             error_log('エラー発生:' . $e->getMessage());
@@ -71,7 +71,7 @@ if(!empty($_POST)){
 
           debug('セッション変数の中身：'.print_r($_SESSION,true));
 
-          header("Location:mypage.php?page_id=${user['id']}");
+          header("Location:user_page.php?page_id=${user['id']}");
           exit();
         }
       }else{

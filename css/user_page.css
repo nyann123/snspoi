@@ -1,5 +1,5 @@
-.user_page{
-  display: flex;
+.flex{
+  display:flex;
   align-items: flex-start;
 }
 
@@ -31,7 +31,14 @@
 
 .count{
   width: 33%;
+  padding: 5px 0 ;
   margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.count:hover{
+  background-color:rgba(205,180,123,0.5);
+  transition: 0.3s;
 }
 
 .count_label{
@@ -41,17 +48,21 @@
 
 .count_num{
   font-size: 18px;
-  color: #CDB47B;
+  color: #3FBFFF;
   display: block;
 }
 
-.user_page_right{
+.main_items{
   color: #fff;
   border: 2px solid #fff;
   border-radius: 8px;
   width: 80%;
   height: auto;
   padding: 10px;
+}
+
+.active{
+  background-color:rgba(205,180,123,0.5);
 }
 
 .post_form{
