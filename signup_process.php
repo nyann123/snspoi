@@ -48,8 +48,7 @@ if(!empty($_POST)){
       $sql = 'INSERT INTO users(name,email,password,created_at)
               VALUES(:name,:email,:password,:created_at)';
       $stmt = $dbh->prepare($sql);
-      $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => $pass , ':created_at' => date('Y-m-d H:i:s')));
-
+      $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => password_hash($pass,PASSWORD_DEFAULT) , ':created_at' => date('Y-m-d H:i:s')));
       if (query_result($stmt)) {
         debug('クエリ成功しました');
 

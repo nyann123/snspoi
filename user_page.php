@@ -55,28 +55,26 @@ debug('------------------------------');
   <?php endif; ?>
 
   <h2 class="site_title"><?php echo $site_title ?></h2>
-  <div class="container">
-    <div class ="flex">
+  <div class="container flex">
       <!-- プロフィール -->
       <?php require_once('profile.php') ?>
 
-        <div class="main_items">
+        <div class="main_items border_white">
         <!-- 自分のページのみ投稿フォームを表示 -->
         <?php if ($current_user['id'] === $page_user['id']): ?>
-          <form class ="post_form" action="#" method="post">
-            <textarea class="text_area" placeholder="投稿する" name="content"></textarea><br>
+          <form class ="post_form border_white" action="#" method="post">
+            <textarea class="text_area border_white" placeholder="投稿する" name="content"></textarea><br>
             <input id="post_btn" type="submit" name="post" value="投稿" disabled>
           </form>
         <?php endif; ?>
 
-        <!-- 投稿がなければ表示する -->
+        <!-- データがなければ表示する -->
         <?php if (empty($user_posts)): ?>
           <p>投稿がありません</p>
         <?php endif; ?>
 
         <?php foreach($user_posts as $post): ?>
-          <!-- <?php var_dump($post)?> -->
-            <div class="posts_container">
+            <div class="item_container border_white">
               <div class="post_data">
 
                 <!-- ユーザーによって名前を色替え -->
@@ -116,6 +114,5 @@ debug('------------------------------');
 
 
       </div>
-    </div>
   </div>
 <?php require_once('footer.php'); ?>

@@ -48,16 +48,16 @@ debug('------------------------------');
  <h2 class="site_title"><?php echo $site_title ?></h2>
  <div class="container">
    <div class ="flex">
-     <div class="profile">
+     <div class="profile border_white">
        ようこそ
        <?php  echo $current_user['name']; ?>
        さん
        <p>id = <?php echo $current_user['id'] ?></p>
      </div>
 
-       <div class="main_items">
-         <form class ="post_form" action="#" method="post">
-           <textarea class="text_area" placeholder="投稿する" name="content"></textarea><br>
+       <div class="main_items border_white">
+         <form class ="post_form border_white" action="#" method="post">
+           <textarea class="text_area border_white" placeholder="投稿する" name="content"></textarea><br>
            <input id="post_btn" type="submit" name="post" value="投稿" disabled>
          </form>
 
@@ -68,7 +68,7 @@ debug('------------------------------');
 
        <?php foreach($user_posts as $post): ?>
          <!-- <?php var_dump($post)?> -->
-           <div class="posts_container">
+           <div class="item_container border_white">
              <div class="post_data">
 
                <!-- ユーザーによって名前を色替え -->

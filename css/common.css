@@ -16,11 +16,23 @@ a{
   outline: none;
 }
 
+.flex{
+  display:flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.border_white{
+  border: 2px solid #fff;
+  border-radius: 8px;
+}
+
 .site_title{
   color: #fff;
   text-align: center;
   margin: 10px 0;
 }
+
 .message_slide{
   background-color: #fff;
   font-size: 16px;
@@ -69,8 +81,6 @@ margin-top: 0;
   max-width: 800px;
   width: calc(100% - 100px);
   padding: 10px 50px 50px 50px;;
-  border: 2px solid #fff;
-  border-radius: 8px;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -83,7 +93,7 @@ margin-top: 0;
   padding: 5px 10px;
   margin: 2px 0 20px;
   height: 30px;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: transparent;
   display: inline-block;
   outline: none;

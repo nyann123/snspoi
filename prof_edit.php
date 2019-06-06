@@ -75,7 +75,7 @@ require_once('head.php');
 <body>
 <?php require('header.php'); ?>
 
-<div class="form_container">
+<div class="form_container border_white">
   <h2 class="page_title">プロフィール編集</h2>
 
   <?php if (isset($flash_messages)): ?>

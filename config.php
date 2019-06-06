@@ -108,9 +108,7 @@ function valid_email($email){
 // パスワードのバリデーション
 function valid_password($pass){
   global $error_messages;
-  if (preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i', $pass)) {
-    $pass = password_hash($pass, PASSWORD_DEFAULT);
-  }else{
+  if (!preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i', $pass)) {
     $error_messages['pass'] = 'パスワードは半角英数字をそれぞれ1文字以上含んだ6文字以上で設定してください。';
   }
 }
@@ -273,9 +271,28 @@ function check_follow($follow_user,$followed_user){
   return  $stmt->fetch();
 }
 
+function get_follows($page_id){
+  $dbh = dbConnect();
+  $sql = "SELECT followed_id
+          FROM follows
+          WHERE :follow_id = follow_id";
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':follow_id' => $page_id));
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function get_followers($page_id){
+  $dbh = dbConnect();
+  $sql = "SELECT follow_id
+          FROM followers
+          WHERE :followed_id = followed_id";
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':followed_id' => $page_id));
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function get_count($object,$user_id){
   $dbh = dbConnect();
-
   switch ($object) {
     case 'post':
     $sql ="SELECT COUNT(post_content)

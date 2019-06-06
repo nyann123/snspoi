@@ -1,42 +1,28 @@
-.flex{
-  display:flex;
-  align-items: flex-start;
-}
-
-.top_title{
-  max-width: 1170px;
-  font-family: "dqfont";
-  color: #fff;
-  font-size: 50px;
-  letter-spacing: 0.08em;
-  margin: 0 auto;
-  vertical-align: middle;
-  width: 180px;
-}
+/* ///////////////////////// */
+/*        共通          */
+/* ///////////////////////// */
 
 .profile{
   color:#fff;
-  border: 2px solid #fff;
-  border-radius: 8px;
   min-width: 230px;
   width: 20%;
   padding: 10px;
   margin-right: 10px;
 }
 
-.profile_counts{
+.profile_counts,.user_counts{
   display: flex;
   flex-wrap: wrap;
 }
 
-.count{
+.profile_count{
   width: 33%;
   padding: 5px 0 ;
   margin-bottom: 5px;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
-.count:hover{
+.profile_count:hover{
   background-color:rgba(205,180,123,0.5);
   transition: 0.3s;
 }
@@ -52,35 +38,55 @@
   display: block;
 }
 
-.main_items{
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: 8px;
-  width: 80%;
-  height: auto;
-  padding: 10px;
-}
-
 .active{
   background-color:rgba(205,180,123,0.5);
 }
 
+.main_items{
+  color: #fff;
+  width: 80%;
+  padding: 10px;
+}
+
+.item_container{
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  padding: 10px 20px;
+  margin-bottom: 5px;
+}
+
+.follow_btn{
+  color: #fff;
+  background-color: transparent;
+
+}
+
+.user_name{
+  margin: 0;
+  color:#fff;
+}
+
+/* ///////////////////////// */
+/*     user_page.php         */
+/* ///////////////////////// */
+
+
+
 .post_form{
   width: 100%;
-  border: 2px solid #fff;
-  border-radius: 8px;
   box-sizing: border-box;
   padding: 10px 0;
+  margin-bottom: 5px;
 }
 
 .post_form textarea{
   color: #fff;
-  border: 2px solid #fff;
   font-size: 16px;
   width: 90%;
   padding: 10px;
   margin: 0 0 10px;
-  border-radius: 5px;
   background-color: transparent;
   resize: none;
 }
@@ -102,7 +108,7 @@
   height: 40px;
   padding: 5px;
   margin: 0;
-  border-radius: 5px;
+  border-radius: 8px;
   border: 2px solid #3FBFFF;
   background-color: inherit;
   display: none;
@@ -116,18 +122,6 @@
   color: #b8b8b8;
   border-color: #b8b8b8;
   cursor: default;
-}
-
-.posts_container{
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  border: 2px solid #fff;
-  border-radius: 8px;
-  padding: 10px 20px;
-  margin-top: 5px;
 }
 
 .post_date{
@@ -181,7 +175,7 @@ button i:hover{
   cursor: pointer;
 }
 
-.far.fa-star:hover{
+button > .far.fa-star:hover{
   color: #CDB47B;
 }
 
@@ -190,4 +184,32 @@ button i:hover{
 }
 .fa-trash-alt:hover{
   color: #FF7763;
+}
+
+/* ///////////////////////// */
+/* follow.php & follower.php */
+/* ///////////////////////// */
+
+.flex_wrap{
+  flex-wrap: wrap;
+}
+
+.user_container{
+  width: 49.7%;
+  height: 150px;
+}
+
+.user_container > .user_name{
+  width: 50%;
+  font-size: 20px;
+  text-align: left;
+}
+
+.user_count > .count_label{
+  font-size: 16px;
+}
+
+.user_count > .count_num{
+  margin: 0 5px 0 2px;
+  cursor: default;
 }

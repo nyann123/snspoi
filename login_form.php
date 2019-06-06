@@ -8,7 +8,7 @@ require_once('head.php');
 
 <body>
 <?php require_once('header.php'); ?>
-  <div class="form_container">
+  <div class="form_container border_white">
     <h2 class="page_title dq">ログイン</h2>
 
     <?php if (isset($flash_messages)): ?>
