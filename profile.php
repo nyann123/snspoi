@@ -28,8 +28,8 @@
       <span class="count_num"><?php echo current(get_count('follower',$page_user['id'])) ?></span>
       </a>
     </div>
-    <div class="profile_count">
-      <a href="#">
+    <div class="profile_count <?php if( basename($_SERVER['PHP_SELF']) === 'favorites.php') echo 'active' ?>">
+      <a href="favorites.php?page_id=<?php echo $page_user['id'] ?>">
       <div class="count_label">お気に入り</div>
       <span class="count_num"><?php echo current(get_count('favorite',$page_user['id'])) ?></span>
       </a>

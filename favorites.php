@@ -12,22 +12,12 @@ $page_user = get_user($_GET['page_id']);
 
 //ログイン中のユーザー情報を取得
 $current_user = get_user($_SESSION['user_id']);
-//ユーザーの投稿を取得
-$user_posts = get_posts($page_user['id']);
+// // お気に入り登録した投稿を取得
+$user_posts = get_favorite_posts($page_user['id']);
 
 //フォロー機能
 if(!empty($_POST['folo'])){
   require_once('follow_process.php');
-}
-
-//投稿機能
-if(!empty($_POST['post'])){
-  require_once('post_process.php');
-}
-
-//投稿削除機能
-if(!empty($_POST['delete'])){
-  require_once('post_delete_process.php');
 }
 
 //お気に入り追加機能
@@ -58,17 +48,10 @@ debug('------------------------------');
       <?php require_once('profile.php') ?>
 
         <div class="main_items border_white">
-        <!-- 自分のページのみ投稿フォームを表示 -->
-        <?php if ($current_user['id'] === $page_user['id']): ?>
-          <form class ="post_form border_white" action="#" method="post">
-            <textarea class="text_area border_white" placeholder="投稿する" name="content"></textarea><br>
-            <input id="post_btn" type="submit" name="post" value="投稿" disabled>
-          </form>
-        <?php endif; ?>
 
         <!-- データがなければ表示する -->
         <?php if (empty($user_posts)): ?>
-          <p>投稿がありません</p>
+          <p>お気に入りが登録されていません</p>
         <?php endif; ?>
 
         <?php foreach($user_posts as $post): ?>

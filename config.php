@@ -223,9 +223,9 @@ function get_favorite_posts($page_id){
   debug('お気に入り投稿を取得します');
   try{
     $dbh = dbConnect();
-    $sql = "SELECT  u.name,p.id,p.user_id,p.post_content,p.created_at
-            FROM users u INNER JOIN favorite f ON u.id = f.user_id
-            INNER JOIN posts p ON p.id = f.post_id
+    $sql = "SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
+            FROM posts p INNER JOIN favorite f ON p.id = f.post_id
+            INNER JOIN users u ON u.id = p.user_id
             WHERE f.user_id = :id AND p.delete_flg = 0
             ORDER BY f.id DESC";
     $stmt = $dbh->prepare($sql);
