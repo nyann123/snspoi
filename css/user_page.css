@@ -186,6 +186,21 @@ button > .far.fa-star:hover{
   color: #FF7763;
 }
 
+.post_count{
+  color: #fff;
+  font-size: 12px;
+}
+.favorite_btn{
+  margin: 0;
+}
+
+.favorite_btn:active {
+  animation: scale .2s ease-in-out;
+}
+
+@keyframes scale {
+  20% { transform: scale(1.6); }
+}
 /* ///////////////////////// */
 /* follow.php & follower.php */
 /* ///////////////////////// */

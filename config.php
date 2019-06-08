@@ -291,7 +291,7 @@ function get_followers($page_id){
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function get_count($object,$user_id){
+function get_user_count($object,$user_id){
   $dbh = dbConnect();
   switch ($object) {
     case 'post':
@@ -316,6 +316,16 @@ function get_count($object,$user_id){
   }
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':id' => $user_id));
+  return $stmt->fetch();
+}
+
+function get_post_count($post_id){
+  $dbh = dbConnect();
+  $sql = "SELECT COUNT(user_id)
+          FROM favorite
+          WHERE post_id = :post_id";
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':post_id' => $post_id));
   return $stmt->fetch();
 }
 

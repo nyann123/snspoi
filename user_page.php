@@ -30,11 +30,6 @@ if(!empty($_POST['delete'])){
   require_once('post_delete_process.php');
 }
 
-//お気に入り追加機能
-if(!empty($_POST['favorite'])){
-  require_once('post_favorite_process.php');
-}
-
 debug('------------------------------');
 
  $site_title = 'マイページ';
@@ -91,21 +86,27 @@ debug('------------------------------');
               </div>
               <p class ="post_content"><?php echo wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
 
+              <!-- お気に入りボタン -->
+              <form class="" action="#" method="post">
+                <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
+                <button type="button" name="favorite" class="favorite_btn">
+                <!-- 登録済みか判定してアイコンを変える -->
+                <?php if (check_favolite_duplicate($current_user['id'],$post['id'])): ?>
+                  <i class="fas fa-star"></i>
+                <?php else: ?>
+                  <i class="far fa-star"></i>
+                <?php endif; ?>
+                </button>
+                <span class="post_count"><?php echo current(get_post_count($post['id'])) ?></span>
+              </form>
+
+
+              <!-- 投稿削除ボタン -->
               <form class="" action="#" method="post">
                 <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
                 <input type="hidden" name="user_id" value="<?php echo $post['user_id']?>">
                 <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
               </form>
-
-              <form class="" action="#" method="post">
-                <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
-                <?php if (check_favolite_duplicate($current_user['id'],$post['id'])): ?>
-                  <button type="submit" name="favorite" value="favorite"><i class="fas fa-star"></i></button>
-                <?php else: ?>
-                  <button type="submit" name="favorite" value="favorite"><i class="far fa-star"></i></button>
-                <?php endif; ?>
-              </form>
-
 
             </div>
 

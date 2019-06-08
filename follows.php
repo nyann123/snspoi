@@ -60,19 +60,19 @@ debug('------------------------------');
           <div class="user_counts">
             <div class="user_count flex">
                 <div class="count_label"><i class="far fa-comment-dots"></i></div>
-                <span class="count_num"><?php echo current(get_count('post',$followed_user['id'])) ?></span>
+                <span class="count_num"><?php echo current(get_user_count('post',$followed_user['id'])) ?></span>
             </div>
             <div class="user_count flex">
                 <div class="count_label"><i class="far fa-star"></i></div>
-                <span class="count_num"><?php echo current(get_count('favorite',$followed_user['id'])) ?></span>
+                <span class="count_num"><?php echo current(get_user_count('favorite',$followed_user['id'])) ?></span>
             </div>
             <div class="user_count flex">
               <div class="count_label"><i class="fas fa-user"></i></div>
-              <span class="count_num"><?php echo current(get_count('follow',$followed_user['id'])) ?></span>
+              <span class="count_num"><?php echo current(get_user_count('follow',$followed_user['id'])) ?></span>
             </div>
             <div class="user_count flex">
               <div class="count_label"><i class="fas fa-users"></i></div>
-              <span class="count_num"><?php echo current(get_count('follower',$followed_user['id'])) ?></span>
+              <span class="count_num"><?php echo current(get_user_count('follower',$followed_user['id'])) ?></span>
             </div>
           </div>
 
