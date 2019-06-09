@@ -1,9 +1,12 @@
 <?php
 $prev_page = basename($_SERVER['HTTP_REFERER']);
+$user_id = $_POST['follow_user_id'];
+debug('test:'.$user_id);
+
 // 自分をフォローできないように
-if ( $current_user['id'] !== $page_user['id']){
+if ( $current_user['id'] !== $user_id){
   // すでに登録されているか確認
-  if(check_follow($current_user['id'],$page_user['id'])){
+  if(check_follow($current_user['id'],$user_id)){
     $action = '解除';
     $flash_type = 'error';
     $sql1 ="DELETE
@@ -26,10 +29,10 @@ if ( $current_user['id'] !== $page_user['id']){
     $dbh->beginTransaction();
     //followsテーブル
     $stmt1 = $dbh->prepare($sql1);
-    $stmt1->execute(array(':follow_id' => $current_user['id'] , ':followed_id' => $page_user['id']));
+    $stmt1->execute(array(':follow_id' => $current_user['id'] , ':followed_id' => $user_id));
     //followersテーブル
     $stmt2 = $dbh->prepare($sql2);
-    $stmt2->execute(array(':follow_id' => $current_user['id'] , ':followed_id' => $page_user['id']));
+    $stmt2->execute(array(':follow_id' => $current_user['id'] , ':followed_id' => $user_id));
     // 全てのクエリが成功していたら結果を保存する
     if (query_result($stmt1) && query_result($stmt2)) {
       $dbh->commit();

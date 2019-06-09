@@ -3,6 +3,7 @@
     <!-- 自分のページにはフォローボタンを表示しない -->
     <?php if ($current_user['id'] !== $page_user['id']): ?>
       <form action="#" method="post">
+        <input type="hidden" name="follow_user_id" value="<?php echo $page_user['id'] ?>">
         <input class="follow_btn btn border_white" type="submit" name="folo" value="フォロー">
       </form>
     <?php endif; ?>

@@ -53,7 +53,9 @@ debug('------------------------------');
           <a href="user_page.php?page_id=<?php echo $followed_user['id'] ?>" class="user_name">
             <p class ="user_name"><?php echo $followed_user['name'] ?></p>
           </a>
+
           <form action="#" method="post">
+            <input type="hidden" name="follow_user_id" value="<?php echo $followed_user['id'] ?>">
             <input class="follow_btn border_white btn" type="submit" name="folo" value="フォロー">
           </form>
 
