@@ -2,7 +2,7 @@
 require_once('config.php');
 
 debug('「「「「「「「「「「「');
-debug('「　マイページ     「');
+debug('「　お気に入り一覧  「');
 debug('「「「「「「「「「「「');
 debugLogStart();
 
@@ -20,14 +20,9 @@ if(!empty($_POST['folo'])){
   require_once('follow_process.php');
 }
 
-//お気に入り追加機能
-if(!empty($_POST['favorite'])){
-  require_once('post_favorite_process.php');
-}
-
 debug('------------------------------');
 
- $site_title = 'マイページ';
+ $site_title = $page_user['name'];
  $css_file_title = 'user_page';
  require_once('head.php');
   ?>
@@ -35,14 +30,7 @@ debug('------------------------------');
 <body>
   <?php require_once('header.php'); ?>
 
-  <!-- フラッシュメッセージ -->
-  <?php if(isset($flash_messages)): ?>
-    <p id ="js_show_msg" class="message_slide <?php echo $flash_type ?>">
-      <?php echo $flash_messages ?>
-    </p>
-  <?php endif; ?>
-
-  <h2 class="site_title"><?php echo $site_title ?></h2>
+  <h2 class="site_title"><?php echo $site_title."のページ" ?></h2>
   <div class="container flex">
       <!-- プロフィール -->
       <?php require_once('profile.php') ?>
@@ -55,7 +43,6 @@ debug('------------------------------');
         <?php endif; ?>
 
         <?php foreach($user_posts as $post): ?>
-          <!-- <?php print_r($post) ?> -->
             <div class="item_container border_white">
               <div class="post_data">
 
@@ -96,10 +83,7 @@ debug('------------------------------');
               </form>
 
             </div>
-
         <?php endforeach ?>
-
-
       </div>
   </div>
 <?php require_once('footer.php'); ?>

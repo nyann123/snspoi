@@ -2,9 +2,9 @@
 require_once('config.php');
 $current_user = get_user($_SESSION['user_id']);
 
-  if(!empty($_POST['favorite'])){
-  debug('お気に入りのPOST送信があります');
-  $post_id = $_POST['post_id'];
+if(!empty($_POST['favorite'])){
+debug('お気に入りのPOST送信があります');
+$post_id = $_POST['post_id'];
 
   //既に登録されているか確認
   if(check_favolite_duplicate($current_user['id'],$post_id)){

@@ -5,7 +5,7 @@ debug('test:'.$user_id);
 
 // 自分をフォローできないように
 if ( $current_user['id'] !== $user_id){
-  // すでに登録されているか確認
+  // すでに登録されているか確認して登録、削除のSQL切り替え
   if(check_follow($current_user['id'],$user_id)){
     $action = '解除';
     $flash_type = 'error';

@@ -1,6 +1,4 @@
 <?php
-
-//共通変数・関数ファイルを読込み
 require('config.php');
 
 debug('「「「「「「「「「');

@@ -1,5 +1,21 @@
 <?php
-require_once('login_process.php');
+require_once('config.php');
+
+debug('「「「「「「「「「「「');
+debug('「　ログインページ 「');
+debug('「「「「「「「「「「「');
+debugLogStart();
+
+require_once('auth.php');
+
+//ログイン中ならマイページへ
+check_logged_in();
+
+// 送信されていればログイン処理
+if(!empty($_POST)){
+  debug('POST送信があります。');
+  require_once('login_process.php');
+}
 
 $site_title = 'ログイン';
 $css_file_title = $js_file_title = 'login';
@@ -23,7 +39,7 @@ require_once('head.php');
         <input id="email" type="email" name="email" placeholder="メールアドレス">
         <input id="password" type="password" name="password" placeholder="パスワード"><br>
         <label id="pass_save" for="checkbox">
-          <input id="checkbox" type="checkbox" name="pass_save">ログインを維持する
+        <input id="checkbox" type="checkbox" name="pass_save">ログインを維持する
         </label><br>
         <input id="login_btn" class="btn dq" type="submit" name="" value="ログイン">
         <a href="signup_form.php" class="signup">新規登録はこちら</a>

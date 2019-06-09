@@ -4,7 +4,7 @@ $post_id = $_POST['post_id'];
 $user_id = $_POST['user_id'];
 $prev_page = basename($_SERVER['HTTP_REFERER']);
 
-//自分の投稿であるか確認
+//ログイン中のユーザーの投稿であれば削除処理
 if ($user_id === $current_user['id']) {
   try {
     $dbh = dbConnect();

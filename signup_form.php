@@ -1,5 +1,24 @@
 <?php
-require_once("signup_process.php");
+require_once("config.php");
+
+debug('「「「「「「「「「「「');
+debug('「　新規登録ページ 「');
+debug('「「「「「「「「「「「');
+debugLogStart();
+
+// ログイン中ならマイページへ
+check_logged_in();
+
+//エラー発生時の入力保持
+set_old_form_data('name');
+set_old_form_data('email');
+set_old_form_data('pass');
+
+//送信されていれば新規登録処理
+if(!empty($_POST)){
+  debug('POST送信があります。');
+  require_once("signup_process.php");
+}
 
 $site_title = '新規登録';
 $css_file_title = $js_file_title = 'signup';

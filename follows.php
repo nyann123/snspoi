@@ -2,7 +2,7 @@
 require_once('config.php');
 
 debug('「「「「「「「「「「「');
-debug('「　フォローページ   「');
+debug('「　フォロー一覧   「');
 debug('「「「「「「「「「「「');
 debugLogStart();
 
@@ -20,7 +20,7 @@ if(!empty($_POST['folo'])){
 
 debug('------------------------------');
 
- $site_title = 'マイページ';
+ $site_title = $page_user['name'];
  $css_file_title = 'user_page';
  require_once('head.php');
   ?>
@@ -28,14 +28,7 @@ debug('------------------------------');
 <body>
   <?php require_once('header.php'); ?>
 
-  <!-- フラッシュメッセージ -->
-  <?php if(isset($flash_messages)): ?>
-    <p id ="js_show_msg" class="message_slide <?php echo $flash_type ?>">
-      <?php echo $flash_messages ?>
-    </p>
-  <?php endif; ?>
-
-  <h2 class="site_title"><?php echo $site_title ?></h2>
+  <h2 class="site_title"><?php echo $site_title.'のページ' ?></h2>
   <div class="container flex">
     <!-- プロフィール -->
     <?php require_once('profile.php') ?>
