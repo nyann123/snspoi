@@ -59,8 +59,27 @@
 
 .follow_btn{
   color: #fff;
+  font-weight: bold;
+  width: 100px;
+  height: 30px;
   background-color: transparent;
+}
 
+.follow_btn:hover{
+  border-color:#3FBFFF;
+  color:#3FBFFF;
+}
+
+.following{
+  color:#fff !important;
+  border-color: #3FBFFF;
+  background-color:#3FBFFF;
+}
+
+.unfollow{
+  color:#fff !important;
+  border-color: #FF7763 !important;
+  background-color: #FF7763;
 }
 
 .user_name{
@@ -162,7 +181,6 @@
 button{
   background-color: transparent;
   border: none;
-  outline: none;
   padding: 0;
   margin: 0 5px;
 }

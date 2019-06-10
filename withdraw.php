@@ -40,7 +40,7 @@ require('head.php');
     <div class="form_container border_white">
       <h2 class="page_title">退会</h2>
       <form action="" method="post" class="form">
-        <input id="btn" class="btn normal"type="submit" class="btn btn-mid" value="退会する" name="submit">
+        <input id="btn" class="btn normal" type="submit" class="btn btn-mid" value="退会する" name="submit">
       </form>
       <a href="user_page.php?page_id=<?php echo $user['id'] ?>"></a>
     </div>

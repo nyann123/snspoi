@@ -7,13 +7,16 @@
   src: url("../DragonQuestFC.ttf");
 }
 
+*{
+  outline: none;
+}
+
 body{
   background-color: #121212;
 }
 
 a{
   text-decoration: none;
-  outline: none;
 }
 
 .flex{
@@ -96,7 +99,6 @@ margin-top: 0;
   border-radius: 8px;
   background-color: transparent;
   display: inline-block;
-  outline: none;
 }
 
 /* dqフォント使用の場合 */

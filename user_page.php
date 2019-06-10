@@ -15,11 +15,6 @@ $current_user = get_user($_SESSION['user_id']);
 //ユーザーの投稿を取得
 $user_posts = get_posts($page_user['id']);
 
-//フォロー機能
-if(!empty($_POST['folo'])){
-  require_once('follow_process.php');
-}
-
 //投稿機能
 if(!empty($_POST['post'])){
   require_once('post_process.php');
@@ -83,12 +78,14 @@ debug('------------------------------');
               <form class="" action="#" method="post">
                 <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
                 <button type="button" name="favorite" class="favorite_btn">
+
                 <!-- 登録済みか判定してアイコンを変える -->
                 <?php if (check_favolite_duplicate($current_user['id'],$post['id'])): ?>
                   <i class="fas fa-star"></i>
                 <?php else: ?>
                   <i class="far fa-star"></i>
                 <?php endif; ?>
+
                 </button>
                 <span class="post_count"><?php echo current(get_post_count($post['id'])) ?></span>
               </form>

@@ -58,3 +58,24 @@ $('.text_area').on('input',function(){
     $('#post_btn').prop('disabled',true);
   }
 })
+
+//================================
+// フォローボタン
+//================================
+let first_flg = 0;
+$(document).on('mouseenter','.following',function(){
+  $(this).text('解除');
+  $(this).toggleClass('following');
+  $(this).toggleClass('unfollow');
+  first_flg = 1
+});
+
+$(document).on('mouseleave','.unfollow',function(){
+
+  if (aflg === 1) {
+    $(this).text('フォロー中');
+    $(this).toggleClass('following');
+    $(this).toggleClass('unfollow');
+    first_flg = 0
+  }
+});

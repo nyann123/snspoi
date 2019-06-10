@@ -13,11 +13,6 @@ $page_user = get_user($_GET['page_id']);
 //ログイン中のユーザー情報を取得
 $current_user = get_user($_SESSION['user_id']);
 
-//フォロー機能
-if(!empty($_POST['folo'])){
-  require_once('follow_process.php');
-}
-
 debug('------------------------------');
 
  $site_title = $page_user['name'];
@@ -47,25 +42,36 @@ debug('------------------------------');
             <p class ="user_name"><?php echo $follow_user['name'] ?></p>
           </a>
 
-          <form action="#" method="post">
-            <input type="hidden" name="follow_user_id" value="<?php echo $follow_user['id'] ?>">
-            <input class="follow_btn border_white btn" type="submit" name="folo" value="フォロー">
-          </form>
+          <!-- フォローボタン -->
+          <!-- 自分にはフォローボタンを表示しない -->
+          <?php if ($current_user['id'] !== $follow_user['id']): ?>
+            <form action="#" method="post">
+              <input type="hidden" name="follow_user_id" value="<?php echo $follow_user['id'] ?>">
+
+              <!-- フォロー中か確認してボタンを変える -->
+              <?php if (check_follow($current_user['id'],$follow_user['id'])): ?>
+                <button class="follow_btn border_white btn following" type="button" name="folo">フォロー中</button>
+              <?php else: ?>
+                <button class="follow_btn border_white btn" type="button" name="folo">フォロー</button>
+              <?php endif; ?>
+
+            </form>
+          <?php endif; ?>
 
           <div class="user_counts">
-            <div class="user_count flex">
+            <div class="user_count post flex">
                 <div class="count_label"><i class="far fa-comment-dots"></i></div>
                 <span class="count_num"><?php echo current(get_user_count('post',$follow_user['id'])) ?></span>
             </div>
-            <div class="user_count flex">
+            <div class="user_count favorite flex">
                 <div class="count_label"><i class="far fa-star"></i></div>
                 <span class="count_num"><?php echo current(get_user_count('favorite',$follow_user['id'])) ?></span>
             </div>
-            <div class="user_count flex">
+            <div class="user_count follow flex">
               <div class="count_label"><i class="fas fa-user"></i></div>
               <span class="count_num"><?php echo current(get_user_count('follow',$follow_user['id'])) ?></span>
             </div>
-            <div class="user_count flex">
+            <div class="user_count follower flex">
               <div class="count_label"><i class="fas fa-users"></i></div>
               <span class="count_num"><?php echo current(get_user_count('follower',$follow_user['id'])) ?></span>
             </div>
@@ -73,7 +79,6 @@ debug('------------------------------');
 
         </div>
       <?php endforeach; ?>
-
     </div>
   </div>
 <?php require_once('footer.php'); ?>
