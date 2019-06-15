@@ -4,7 +4,7 @@
   <?php if(empty($_SESSION['user_id'])):?>
     <h1><a href="login_form.php">タイトルタイトル</a></h1>
   <?php else: ?>
-    <h1><a href="user_page.php?page_id=<?php echo $_SESSION['user_id'] ?>">タイトルタイトル</a></h1>
+    <h1><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>">タイトルタイトル</a></h1>
   <?php endif ?>
 
     <nav id="top-nav">
@@ -29,7 +29,7 @@
               <li>test</li>
             </ul>
           </li>
-          <li><a href="user_page.php?page_id=<?php echo $_SESSION['user_id'] ?>">マイページ</a></li>
+          <li><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>">マイページ</a></li>
         <?php endif ?>
       </ul>
     </nav>
@@ -37,10 +37,12 @@
 
   <!-- フラッシュメッセージ -->
   <!-- ログインと新規登録ページでは表示しない -->
-  <?php if(basename($_SERVER['PHP_SELF']) !== 'login_form.php' && basename($_SERVER['PHP_SELF']) !=='signup_form.php'): ?>
+  <?php if(basename($_SERVER['PHP_SELF']) !== 'login_form.php'
+        && basename($_SERVER['PHP_SELF']) !== 'signup_form.php'
+        && basename($_SERVER['PHP_SELF']) !== 'prof_edit.php' ): ?>
     <?php if(isset($flash_messages)): ?>
-      <p id ="js_show_msg" class="message_slide <?php echo $flash_type ?>">
-        <?php echo $flash_messages ?>
+      <p id ="js_show_msg" class="message_slide <?= $flash_type ?>">
+        <?= ($flash_messages) ?>
       </p>
     <?php endif; ?>
   <?php endif ?>

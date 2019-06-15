@@ -7,13 +7,14 @@ debug('「「「「「「「「「「「');
 debugLogStart();
 
 require_once('auth.php');
-
+debug(print_r($_SESSION,true));
 //ログイン中ならマイページへ
 check_logged_in();
 
 // 送信されていればログイン処理
 if(!empty($_POST)){
   debug('POST送信があります。');
+  debug('post内容:'.print_r($_POST,true));
   require_once('login_process.php');
 }
 
@@ -29,7 +30,7 @@ require_once('head.php');
 
     <?php if (isset($flash_messages)): ?>
       <?php foreach ((array)$flash_messages as $message): ?>
-        <p class ="flash_message <?php echo $flash_type ?>"><?php echo $message?></p>
+        <p class ="flash_message <?= $flash_type ?>"><?= $message?></p>
       <?php endforeach ?>
     <?php endif ?>
 

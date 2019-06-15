@@ -22,7 +22,7 @@ a{
 .flex{
   display:flex;
   align-items: flex-start;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .border_white{
@@ -210,7 +210,7 @@ header h1 a {
 }
 
 nav a{
-  color: #fff;
+  color: #000;
   text-decoration: none;
   font-weight: bold;
   font-size: 14px;
@@ -238,7 +238,7 @@ nav a:hover {
 
 
 .toggle_menu{
-  color: #fff;
+  color: #000;
   font-size: 14px;
   font-weight: bold;
   position: relative;
@@ -275,6 +275,7 @@ nav a:hover {
   clear: both;
   display: inline-block;
 }
+
 .child li:hover{
   background-color: #b09558;
 }
@@ -293,5 +294,5 @@ nav a:hover {
 }
 
 .open{
-  display: block;
+  display: block !important;
 }

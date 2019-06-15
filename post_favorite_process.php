@@ -1,6 +1,8 @@
 <?php
 require_once('config.php');
+require_once('auth.php');
 $current_user = get_user($_SESSION['user_id']);
+debug(print_r($_POST,true));
 
 if(!empty($_POST['favorite'])){
   debug('お気に入りのPOST送信があります');

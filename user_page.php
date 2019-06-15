@@ -12,6 +12,7 @@ $page_user = get_user($_GET['page_id']);
 
 //ログイン中のユーザー情報を取得
 $current_user = get_user($_SESSION['user_id']);
+debug(print_r($current_user,true));
 //ユーザーの投稿を取得
 $user_posts = get_posts($page_user['id']);
 
@@ -35,7 +36,7 @@ debug('------------------------------');
 <body>
   <?php require_once('header.php'); ?>
 
-  <h2 class="site_title"><?php echo $site_title.'のページ' ?></h2>
+  <h2 class="site_title"><?= $site_title.'のページ' ?></h2>
   <div class="container flex">
       <!-- プロフィール -->
       <?php require_once('profile.php') ?>
@@ -55,28 +56,34 @@ debug('------------------------------');
         <?php endif; ?>
 
         <?php foreach($user_posts as $post): ?>
-          <!-- <?php print_r($post) ?> -->
             <div class="item_container border_white">
-              <div class="post_data">
 
+              <!-- アイコン -->
+              <div class="icon border_white">
+                <a href="user_page.php?page_id=<?= $post['user_id']?>">
+                  <img src=<?= 'img/'.$post['user_icon_small'] ?> alt="">
+                </a>
+              </div>
+
+              <div class="post_data">
                 <!-- ユーザーによって名前を色替え -->
                 <?php if ($current_user['id'] === $post['user_id']): ?>
-                  <a href="user_page.php?page_id=<?php echo $post['user_id']?>"
-                    class="post_user_name myself"><?php echo $post['name']; ?></a>
+                  <a href="user_page.php?page_id=<?= $post['user_id']?>"
+                    class="post_user_name myself"><?= $post['name']; ?></a>
                 <?php else: ?>
-                  <a href="user_page.php?page_id=<?php echo $post['user_id']?>"
-                    class="post_user_name other"><?php echo $post['name']; ?></a>
+                  <a href="user_page.php?page_id=<?= $post['user_id']?>"
+                    class="post_user_name other"><?= $post['name']; ?></a>
                 <?php endif; ?>
 
                 <?php $time = new DateTime($post['created_at']) ?>
                 <?php $post_date = $time->format('Y-m-d H:i') ?>
-                <p class="post_date"><?php echo $post_date ?></p>
+                <p class="post_date"><?= $post_date ?></p>
               </div>
-              <p class ="post_content"><?php echo wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
+              <p class ="post_content"><?= wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
 
               <!-- お気に入りボタン -->
               <form class="" action="#" method="post">
-                <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
+                <input type="hidden" name="post_id" value="<?= $post['id']?>">
                 <button type="button" name="favorite" class="favorite_btn">
 
                 <!-- 登録済みか判定してアイコンを変える -->
@@ -87,14 +94,14 @@ debug('------------------------------');
                 <?php endif; ?>
 
                 </button>
-                <span class="post_count"><?php echo current(get_post_count($post['id'])) ?></span>
+                <span class="post_count"><?= current(get_post_count($post['id'])) ?></span>
               </form>
 
 
               <!-- 投稿削除ボタン -->
               <form class="" action="#" method="post">
-                <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
-                <input type="hidden" name="user_id" value="<?php echo $post['user_id']?>">
+                <input type="hidden" name="post_id" value="<?= $post['id']?>">
+                <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
                 <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
               </form>
 

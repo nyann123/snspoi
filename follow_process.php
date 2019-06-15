@@ -1,7 +1,8 @@
 <?php
 require_once('config.php');
+require_once('auth.php');
 
-if(!empty($_POST['folo'])){
+if(!empty($_POST['follow'])){
   debug('お気に入りのPOST送信があります');
   $current_user = get_user($_SESSION['user_id']);
   $user_id = $_POST['user_id'];

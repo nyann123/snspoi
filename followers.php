@@ -23,7 +23,7 @@ debug('------------------------------');
 <body>
   <?php require_once('header.php'); ?>
 
-  <h2 class="site_title"><?php echo $site_title.'のページ' ?></h2>
+  <h2 class="site_title"><?= $site_title.'のページ' ?></h2>
   <div class="container flex">
     <!-- プロフィール -->
     <?php require_once('profile.php') ?>
@@ -38,21 +38,21 @@ debug('------------------------------');
         <?php $follow_user= get_user($followed_users['follow_id']) ?>
         <div class="item_container user_container border_white flex">
 
-          <a href="user_page.php?page_id=<?php echo $follow_user['id'] ?>" class="user_name">
-            <p class ="user_name"><?php echo $follow_user['name'] ?></p>
+          <a href="user_page.php?page_id=<?= $follow_user['id'] ?>" class="user_name">
+            <?= $follow_user['name'] ?>
           </a>
 
           <!-- フォローボタン -->
           <!-- 自分にはフォローボタンを表示しない -->
           <?php if ($current_user['id'] !== $follow_user['id']): ?>
             <form action="#" method="post">
-              <input type="hidden" name="follow_user_id" value="<?php echo $follow_user['id'] ?>">
+              <input type="hidden" name="follow_user_id" value="<?= $follow_user['id'] ?>">
 
               <!-- フォロー中か確認してボタンを変える -->
               <?php if (check_follow($current_user['id'],$follow_user['id'])): ?>
-                <button class="follow_btn border_white btn following" type="button" name="folo">フォロー中</button>
+                <button class="follow_btn border_white btn following" type="button" name="follow">フォロー中</button>
               <?php else: ?>
-                <button class="follow_btn border_white btn" type="button" name="folo">フォロー</button>
+                <button class="follow_btn border_white btn" type="button" name="follow">フォロー</button>
               <?php endif; ?>
 
             </form>
@@ -61,19 +61,19 @@ debug('------------------------------');
           <div class="user_counts">
             <div class="user_count post flex">
                 <div class="count_label"><i class="far fa-comment-dots"></i></div>
-                <span class="count_num"><?php echo current(get_user_count('post',$follow_user['id'])) ?></span>
+                <span class="count_num"><?= current(get_user_count('post',$follow_user['id'])) ?></span>
             </div>
             <div class="user_count favorite flex">
                 <div class="count_label"><i class="far fa-star"></i></div>
-                <span class="count_num"><?php echo current(get_user_count('favorite',$follow_user['id'])) ?></span>
+                <span class="count_num"><?= current(get_user_count('favorite',$follow_user['id'])) ?></span>
             </div>
             <div class="user_count follow flex">
               <div class="count_label"><i class="fas fa-user"></i></div>
-              <span class="count_num"><?php echo current(get_user_count('follow',$follow_user['id'])) ?></span>
+              <span class="count_num"><?= current(get_user_count('follow',$follow_user['id'])) ?></span>
             </div>
             <div class="user_count follower flex">
               <div class="count_label"><i class="fas fa-users"></i></div>
-              <span class="count_num"><?php echo current(get_user_count('follower',$follow_user['id'])) ?></span>
+              <span class="count_num"><?= current(get_user_count('follower',$follow_user['id'])) ?></span>
             </div>
           </div>
 

@@ -46,7 +46,6 @@ if(!empty($_POST)){
               WHERE id = :id';
       $stmt = $dbh->prepare($sql);
       $stmt->execute(array(':name' => $name , ':email' => $email, ':id' => $current_user['id']));
-      $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
       if(query_result($stmt)){
         set_flash('sucsess','プロフィールの編集が完了しました');
@@ -67,7 +66,7 @@ if(!empty($_POST)){
 debug('------------------------------');
 
 $site_title = 'プロフィール編集';
-$css_file_title = $js_file_title =  'prof_edit';
+$js_file_title =  'prof_edit';
 require_once('head.php');
 ?>
 
@@ -79,17 +78,17 @@ require_once('head.php');
 
   <?php if (isset($flash_messages)): ?>
     <?php foreach ((array)$flash_messages as $message): ?>
-      <p class ="flash_message <?php echo $flash_type ?>"><?php echo $message?></p>
+      <p class ="flash_message <?= $flash_type ?>"><?= $message?></p>
     <?php endforeach ?>
   <?php endif ?>
 
   <form action="" method="post">
     <label for="name">名前</label><br>
-    <input id="name" type="text" name="name" value="<?php echo get_form_data('name'); ?>">
+    <input id="name" type="text" name="name" value="<?= get_form_data('name'); ?>">
     <span class="js_error_message"></span><br>
 
     <label for="email">Email</label><br>
-    <input id="email" type="email" name="email" value="<?php echo get_form_data('email'); ?>">
+    <input id="email" type="email" name="email" value="<?= get_form_data('email'); ?>">
     <span class="js_error_message"></span><br>
 
     <input id ="btn" class="btn normal" type="submit"  value="変更する" disabled>

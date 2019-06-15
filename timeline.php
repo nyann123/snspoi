@@ -40,19 +40,19 @@ debug('------------------------------');
 
  <!-- フラッシュメッセージ -->
  <?php if(isset($flash_messages)): ?>
-   <p id ="js_show_msg" class="message_slide <?php echo $flash_type ?>">
-     <?php echo $flash_messages ?>
+   <p id ="js_show_msg" class="message_slide <?= $flash_type ?>">
+     <?= $flash_messages ?>
    </p>
  <?php endif; ?>
 
- <h2 class="site_title"><?php echo $site_title ?></h2>
+ <h2 class="site_title"><?= $site_title ?></h2>
  <div class="container">
    <div class ="flex">
      <div class="profile border_white">
        ようこそ
-       <?php  echo $current_user['name']; ?>
+       <?= $current_user['name']; ?>
        さん
-       <p>id = <?php echo $current_user['id'] ?></p>
+       <p>id = <?= $current_user['id'] ?></p>
      </div>
 
        <div class="main_items border_white">
@@ -73,28 +73,28 @@ debug('------------------------------');
 
                <!-- ユーザーによって名前を色替え -->
                <?php if ($current_user['id'] === $post['user_id']): ?>
-                 <a href="user_page.php?page_id=<?php echo $post['user_id']?>"
-                   class="post_user_name myself"><?php echo $post['name']; ?></a>
+                 <a href="user_page.php?page_id=<?= $post['user_id']?>"
+                   class="post_user_name myself"><?= $post['name']; ?></a>
                <?php else: ?>
-                 <a href="user_page.php?page_id=<?php echo $post['user_id']?>"
-                   class="post_user_name other"><?php echo $post['name']; ?></a>
+                 <a href="user_page.php?page_id=<?= $post['user_id']?>"
+                   class="post_user_name other"><?= $post['name']; ?></a>
                <?php endif; ?>
 
                <?php $time = new DateTime($post['created_at']) ?>
                <?php $post_date = $time->format('Y-m-d H:i') ?>
-               <p class="post_date"><?php echo $post_date ?></p>
+               <p class="post_date"><?= $post_date ?></p>
              </div>
-             <p class ="post_content"><?php echo wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
+             <p class ="post_content"><?= wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
 
              <form class="" action="#" method="post">
-               <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
-               <input type="hidden" name="user_id" value="<?php echo $post['user_id']?>">
+               <input type="hidden" name="post_id" value="<?= $post['id']?>">
+               <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
                <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
              </form>
 
 
              <form class="" action="#" method="post">
-               <input type="hidden" name="post_id" value="<?php echo $post['id']?>">
+               <input type="hidden" name="post_id" value="<?= $post['id']?>">
                <?php if (check_favolite_duplicate($current_user['id'],$post['id'])): ?>
                  <button type="submit" name="favorite" value="favorite"><i class="fas fa-star"></i></button>
                <?php else: ?>

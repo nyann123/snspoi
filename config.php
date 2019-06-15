@@ -83,7 +83,8 @@ function check_favolite_duplicate($user_id,$post_id){
           FROM favorite
           WHERE user_id = :user_id AND post_id = :post_id";
   $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':user_id' => $user_id , ':post_id' => $post_id));
+  $stmt->execute(array(':user_id' => $user_id ,
+                       ':post_id' => $post_id));
   $favorite = $stmt->fetch();
   return $favorite;
 }
@@ -159,7 +160,7 @@ function get_user($user_id){
   debug('ユーザー情報を取得します');
   try {
     $dbh = dbConnect();
-    $sql = "SELECT id,name,email
+    $sql = "SELECT id,name,email,user_icon,user_icon_small
             FROM users
             WHERE id = :id AND delete_flg = 0 ";
     $stmt = $dbh->prepare($sql);
@@ -178,17 +179,17 @@ function get_posts($page_id){
     $dbh = dbConnect();
     //自分のページならフォロー中のユーザーの投稿も取得
     if($current_user['id'] === $page_id){
-      $sql = "SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
+      $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
               FROM users u INNER JOIN posts p ON u.id = p.user_id
               WHERE  p.user_id = :id AND p.delete_flg = 0
               UNION
-              SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
+              SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
               FROM users u INNER JOIN posts p ON u.id = p.user_id
               INNER JOIN follows ON follows.followed_id = p.user_id
               WHERE follows.follow_id = :id AND p.delete_flg = 0
               ORDER BY created_at DESC";
     }else{
-      $sql = "SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
+      $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
               FROM users u INNER JOIN posts p ON u.id = p.user_id
               WHERE p.user_id = :id AND p.delete_flg = 0
               ORDER BY p.created_at DESC";
@@ -241,15 +242,15 @@ function change_delete_flg($user,$flg){
   $dbh = dbConnect();
   $dbh->beginTransaction();
 
-  $sql1 = 'UPDATE users SET  delete_flg = :flg WHERE id = :id';
+  $sql1 = 'UPDATE users SET delete_flg = :flg WHERE id = :id';
   $stmt1 = $dbh->prepare($sql1);
   $stmt1->execute(array(':flg' => $flg , ':id' => $user['id']));
   //postsテーブル
-  $sql2 = 'UPDATE posts SET  delete_flg = :flg WHERE user_id = :id';
+  $sql2 = 'UPDATE posts SET delete_flg = :flg WHERE user_id = :id';
   $stmt2 = $dbh->prepare($sql2);
   $stmt2->execute(array(':flg' => $flg , ':id' => $user['id']));
   //favoriteテーブル
-  $sql3 = 'UPDATE favorite SET  delete_flg = :flg WHERE user_id = :id';
+  $sql3 = 'UPDATE favorite SET delete_flg = :flg WHERE user_id = :id';
   $stmt3 = $dbh->prepare($sql3);
   $stmt3->execute(array(':flg' => $flg , ':id' => $user['id']));
 
@@ -267,7 +268,8 @@ function check_follow($follow_user,$followed_user){
           FROM follows
           WHERE :follow_id =follow_id AND :followed_id = followed_id";
   $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':follow_id' => $follow_user, ':followed_id' => $followed_user));
+  $stmt->execute(array(':follow_id' => $follow_user,
+                       ':followed_id' => $followed_user));
   return  $stmt->fetch();
 }
 
@@ -382,7 +384,8 @@ function set_flash($type,$message){
   $_SESSION['flash']['type'] = "flash_${type}";
   $_SESSION['flash']['message'] = $message;
 }
-//セッション内容を1回だけ取得する
+
+//セッション内容を1回だけ取得して破棄する
 if( isset($_SESSION['flash']) ){
   $flash_messages = $_SESSION['flash']['message'];
   $flash_type = $_SESSION['flash']['type'];

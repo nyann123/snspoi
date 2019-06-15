@@ -1,47 +1,6 @@
 /* ///////////////////////// */
 /*        共通          */
 /* ///////////////////////// */
-
-.profile{
-  color:#fff;
-  min-width: 230px;
-  width: 20%;
-  padding: 10px;
-  margin-right: 10px;
-}
-
-.profile_counts,.user_counts{
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.profile_count{
-  width: 33%;
-  padding: 5px 0 ;
-  margin-bottom: 5px;
-  border-radius: 8px;
-}
-
-.profile_count:hover{
-  background-color:rgba(205,180,123,0.5);
-  transition: 0.3s;
-}
-
-.count_label{
-  color: #fff;
-  font-size: 14px;
-}
-
-.count_num{
-  font-size: 18px;
-  color: #3FBFFF;
-  display: block;
-}
-
-.active{
-  background-color:rgba(205,180,123,0.5);
-}
-
 .main_items{
   color: #fff;
   width: 80%;
@@ -53,8 +12,19 @@
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
-  padding: 10px 20px;
+  padding: 10px;
   margin-bottom: 5px;
+}
+
+.count_label{
+  color: #fff;
+  font-size: 14px;
+}
+
+.count_num{
+  font-size: 18px;
+  color: #3FBFFF;
+  display: block;
 }
 
 .follow_btn{
@@ -82,16 +52,176 @@
   background-color: #FF7763;
 }
 
-.user_name{
-  margin: 0;
+/* ///////////////////////// */
+/*        profile            */
+/* ///////////////////////// */
+
+.profile{
   color:#fff;
+  min-width: 230px;
+  width: 20%;
+  padding: 10px;
+  margin-right: 10px;
+  position: relative;
 }
 
-/* ///////////////////////// */
-/*     user_page.php         */
-/* ///////////////////////// */
+.profile > .flex{
+  justify-content: flex-start;
+}
+
+.profile_counts,.user_counts{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.follow_btn_form{
+  margin: 10px 0;
+}
+
+.profile_count{
+  width: 33%;
+  padding: 5px 0 ;
+  margin-bottom: 5px;
+  border-radius: 8px;
+}
+
+.profile_count:hover{
+  background-color:rgba(205,180,123,0.5);
+  transition: 0.3s;
+}
+
+.active{
+  background-color:rgba(205,180,123,0.5);
+}
+
+.profile > .flex > .user_name{
+  font-size: 20px;
+  margin: 0;
+  color:#fff;
+  align-self: center;
+  margin-left: 10px;
+}
+
+/* /////// */
+.profile_icon{
+  width: 68px;
+  height: 68px;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.edit_icon{
+  width: 64px;
+  height: 64px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: none;
+}
+
+.edit_icon:hover{
+  cursor: pointer;
+}
+
+.profile_icon > img{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.space{
+  margin-bottom: 50px;
+}
+
+.edit_icon_menu{
+  position: absolute;
+  top :64px;
+  width: 150px;
+  padding: 0;
+  z-index: 10;
+  border-radius: 8px;
+  display: none;
+}
+
+.edit_icon_menu li{
+  color: #000;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  text-decoration: none;
+  background-color: #cdb47b;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #000;
+  display: inline-block;
+}
+
+.edit_icon_menu li:first-child{
+  border-radius: 5px 5px 0 0;
+}
+
+.edit_icon_menu li:last-child{
+  border-radius: 0 0 5px 5px;
+}
+
+.edit_icon_menu li:hover{
+  background-color: #b09558;
+  cursor: pointer;
+}
+
+.icon_upload{
+  display: none;
+}
+
+.icon_upload_btn{
+  display:block;
+  line-height: 24px;
+  width: 100%;
+  margin: 0;
+}
+
+.icon_save{
+  display:block;
+  line-height: 24px;
+  width: 100%;
+}
+
+.icon_save:hover{
+  cursor: pointer;
+}
+
+.icon_save:disabled{
+  cursor: not-allowed;
+}
+
+.icon_upload_btn:hover{
+  cursor: pointer;
+}
+/* ////////////// */
+
+.icon{
+  width: 52px;
+  height: 52px;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
 
 
+
+
+/* ///////////////////////// */
+/*     user_page             */
+/* ///////////////////////// */
 
 .post_form{
   width: 100%;
@@ -220,7 +350,7 @@ button > .far.fa-star:hover{
   20% { transform: scale(1.6); }
 }
 /* ///////////////////////// */
-/* follow.php & follower.php */
+/* follow.php & follower    */
 /* ///////////////////////// */
 
 .flex_wrap{
@@ -233,9 +363,11 @@ button > .far.fa-star:hover{
 }
 
 .user_container > .user_name{
-  width: 70%;
   font-size: 20px;
+  color:#fff;
   text-align: left;
+  margin: 0;
+  width: 70%;
 }
 
 .user_count > .count_label{
@@ -245,4 +377,8 @@ button > .far.fa-star:hover{
 .user_count > .count_num{
   margin: 0 5px 0 2px;
   cursor: default;
+}
+
+.user_container:nth-child(odd){
+  margin-right: 4px;
 }

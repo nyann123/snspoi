@@ -2,7 +2,7 @@
 // ヘッダー
 //================================
 
-function toggle_updown(classname){
+function toggle_cursor(classname){
   $(`${'.'+classname} > span > i`).toggleClass('fa-caret-down');
   $(`${'.'+classname} > span > i`).toggleClass('fa-caret-up');
 }
@@ -11,20 +11,20 @@ function toggle_updown(classname){
 $('.toggle_menu.menu').on('click',function(){
   if ( $('.timeline_child').hasClass('open')){
     $('.timeline_child').toggleClass('open');
-    toggle_updown('timeline');
+    toggle_cursor('timeline');
   }
   $('.menu_child').toggleClass('open');
-  toggle_updown('menu');
+  toggle_cursor('menu');
 });
 
 //タイムライン
 $('.toggle_menu.timeline').on('click',function(){
   if ( $('.menu_child').hasClass('open')){
     $('.menu_child').toggleClass('open');
-    toggle_updown('menu');
+    toggle_cursor('menu');
   }
   $('.timeline_child').toggleClass('open');
-    toggle_updown('timeline');
+    toggle_cursor('timeline');
 });
 
 // メッセージ表示
@@ -32,6 +32,7 @@ if($('#js_show_msg').text().replace(/^[\s　]+|[\s　]+$/g, "").length){
   $('#js_show_msg').slideToggle('slow');
   setTimeout(function(){ $('#js_show_msg').slideToggle('slow'); }, 2000);
   }
+
 
 //================================
 // 投稿フォーム
@@ -67,15 +68,39 @@ $(document).on('mouseenter','.following',function(){
   $(this).text('解除');
   $(this).toggleClass('following');
   $(this).toggleClass('unfollow');
-  first_flg = 1
+  first_flg = 1;
 });
 
 $(document).on('mouseleave','.unfollow',function(){
-
-  if (aflg === 1) {
+  if (first_flg === 1) {
     $(this).text('フォロー中');
     $(this).toggleClass('following');
     $(this).toggleClass('unfollow');
-    first_flg = 0
+    first_flg = 0;
   }
+});
+
+//================================
+// アイコン変更
+//================================
+
+$('.profile_icon > img').on('mouseenter',function(){
+  $('.edit_icon').css('display','block');
+})
+
+//画像が無くなった時も操作できるように
+$('.profile_icon').on('mouseenter',function(){
+  $('.edit_icon').css('display','block');
+})
+
+$('.edit_icon').on('mouseleave',function(){
+  $('.edit_icon').css('display','none');
+})
+
+$('.icon_upload_btn').on('click',function(){
+  $('.icon_upload').click();
+})
+
+$('.edit_icon').on('click',function(){
+  $('.edit_icon_menu').toggleClass('open');
 });
