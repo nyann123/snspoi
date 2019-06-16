@@ -44,8 +44,15 @@ debug('------------------------------');
 
         <?php foreach($user_posts as $post): ?>
             <div class="item_container border_white">
-              <div class="post_data">
 
+              <!-- アイコン -->
+              <div class="icon border_white">
+                <a href="user_page.php?page_id=<?= $post['user_id']?>">
+                  <img src=<?= 'img/'.$post['user_icon_small'] ?> alt="">
+                </a>
+              </div>
+              
+              <div class="post_data">
                 <!-- ユーザーによって名前を色替え -->
                 <?php if ($current_user['id'] === $post['user_id']): ?>
                   <a href="user_page.php?page_id=<?= $post['user_id'] ?>"

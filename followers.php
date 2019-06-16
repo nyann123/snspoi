@@ -38,6 +38,14 @@ debug('------------------------------');
         <?php $follow_user= get_user($followed_users['follow_id']) ?>
         <div class="item_container user_container border_white flex">
 
+
+          <!-- アイコン -->
+          <div class="icon border_white">
+            <a href="user_page.php?page_id=<?= $follow_user['id']?>">
+              <img src=<?= 'img/'.$follow_user['user_icon_small'] ?> alt="">
+            </a>
+          </div>
+
           <a href="user_page.php?page_id=<?= $follow_user['id'] ?>" class="user_name">
             <?= $follow_user['name'] ?>
           </a>

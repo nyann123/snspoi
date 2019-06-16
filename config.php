@@ -177,23 +177,10 @@ function get_posts($page_id){
   global $current_user;
   try{
     $dbh = dbConnect();
-    //自分のページならフォロー中のユーザーの投稿も取得
-    if($current_user['id'] === $page_id){
-      $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
-              FROM users u INNER JOIN posts p ON u.id = p.user_id
-              WHERE  p.user_id = :id AND p.delete_flg = 0
-              UNION
-              SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
-              FROM users u INNER JOIN posts p ON u.id = p.user_id
-              INNER JOIN follows ON follows.followed_id = p.user_id
-              WHERE follows.follow_id = :id AND p.delete_flg = 0
-              ORDER BY created_at DESC";
-    }else{
       $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
               FROM users u INNER JOIN posts p ON u.id = p.user_id
               WHERE p.user_id = :id AND p.delete_flg = 0
               ORDER BY p.created_at DESC";
-    }
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $page_id));
     query_result($stmt);
@@ -202,12 +189,24 @@ function get_posts($page_id){
     error_log('エラー発生:' . $e->getMessage());
   }
 }
+
+// 自分とフォロー中のユーザー投稿取得
+// $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
+//         FROM users u INNER JOIN posts p ON u.id = p.user_id
+//         WHERE  p.user_id = :id AND p.delete_flg = 0
+//         UNION
+//         SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
+//         FROM users u INNER JOIN posts p ON u.id = p.user_id
+//         INNER JOIN follows ON follows.followed_id = p.user_id
+//         WHERE follows.follow_id = :id AND p.delete_flg = 0
+//         ORDER BY created_at DESC";
+
 // 全ての投稿を取得する
 function get_all_posts(){
   debug('全ての投稿を取得します');
   try{
     $dbh = dbConnect();
-    $sql = "SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
+    $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
             FROM users u INNER JOIN posts p ON u.id = p.user_id
             WHERE p.delete_flg = 0
             ORDER BY p.created_at DESC";
@@ -224,7 +223,7 @@ function get_favorite_posts($page_id){
   debug('お気に入り投稿を取得します');
   try{
     $dbh = dbConnect();
-    $sql = "SELECT u.name,p.id,p.user_id,p.post_content,p.created_at
+    $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
             FROM posts p INNER JOIN favorite f ON p.id = f.post_id
             INNER JOIN users u ON u.id = p.user_id
             WHERE f.user_id = :id AND p.delete_flg = 0

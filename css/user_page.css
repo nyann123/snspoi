@@ -360,6 +360,7 @@ button > .far.fa-star:hover{
 .user_container{
   width: 49.7%;
   height: 150px;
+  justify-content: space-between;
 }
 
 .user_container > .user_name{
@@ -367,7 +368,7 @@ button > .far.fa-star:hover{
   color:#fff;
   text-align: left;
   margin: 0;
-  width: 70%;
+  width: 60%;
 }
 
 .user_count > .count_label{
