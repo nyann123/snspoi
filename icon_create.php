@@ -3,6 +3,13 @@ require_once('config.php');
 debugLogStart();
 debug(print_r($_FILES,true));
 
+$max_file_size = 10485760;
+
+if($max_file_size < $_SERVER["CONTENT_LENGTH"]){
+  set_flash('error','ファイルサイズは10M以下にしてください');
+  exit();
+}
+
 //元の画像のサイズを取得する
 $file = $_FILES["icon"]["tmp_name"];
 

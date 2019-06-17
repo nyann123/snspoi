@@ -13,17 +13,24 @@ if(!empty($_POST['icon_save'])){
   debug($icon_data);
   debug($small_icon_data);
 
-  $dbh = dbConnect();
-  $sql = "UPDATE users
-          SET user_icon = :icon_data,
-              user_icon_small = :small_icon_data
-          WHERE id = :user_id";
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':icon_data' => $icon_data,
-                       ':small_icon_data' => $small_icon_data,
-                       ':user_id' => $user_id));
-  if (query_result($stmt)) {
-    debug('アイコン更新成功');
-    set_flash('sucsess','アイコンを更新しました');
+  try {
+    $dbh = dbConnect();
+    $sql = "UPDATE users
+            SET user_icon = :icon_data,
+                user_icon_small = :small_icon_data
+            WHERE id = :user_id";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(array(':icon_data' => $icon_data,
+                         ':small_icon_data' => $small_icon_data,
+                         ':user_id' => $user_id));
+    if (query_result($stmt)) {
+      debug('アイコン更新成功');
+      set_flash('sucsess','アイコンを更新しました');
+    }
+  } catch (\Exception $e) {
+    debug('アイコン更新失敗');
+    set_flash('error',ERR_MSG1);
   }
+
+
 }

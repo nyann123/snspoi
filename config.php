@@ -366,6 +366,12 @@ function set_old_form_data($str){
   unset($_SESSION[$str]);
 }
 
+function is_myself($user){
+  global $current_user;
+  $result = $current_user['id'] === $user ? true : false;
+  return $result;
+}
+
 function get_form_data($str){
   global $current_user;
   global ${'old'.$str};

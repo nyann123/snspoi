@@ -1,11 +1,32 @@
 $(function(){
+
+  function show_slide_message(flash_type,flash_message){
+    $message = ('#js_show_msg');
+    // クラスがまだない場合渡されたクラスを入れる
+    if(!$($message).hasClass('flash_error')
+    && !$($message).hasClass('flash_sucsess')){
+      $($message).addClass(flash_type);
+    // すでにクラスがあって同じクラスを渡していた場合は何もしない
+  }else if( $($message).hasClass('flash_error') && flash_type === 'flash_error'
+    || $($message).hasClass('flash_sucsess') && flash_type === 'flash_sucsess'){
+    // 既にクラスがあって別のクラスを渡していた場合は入れ替える
+    }else{
+      $($message).toggleClass('flash_error');
+      $($message).toggleClass('flash_sucsess');
+    }
+    // 渡されたメッセージを表示させる
+    $($message).text(flash_message);
+    $($message).slideToggle('slow');
+    setTimeout(function(){ $($message).slideToggle('slow'); }, 2000);
+  }
+
   //お気に入り登録処理
   $('.favorite_btn').on('click',function(e){
+    e.stopPropagation();
     let $this = $(this),
         $profile_count = $('.profile_count + .favorite > a > .count_num'),
         post_id = $this.prev().val();
 
-    e.stopPropagation();
     $.ajax({
         type: 'POST',
         url: 'post_favorite_process.php',
@@ -26,19 +47,18 @@ $(function(){
         $this.children('i').toggleClass('far');
       }
     }).fail(function() {
-      console.log('ajax error');
       location.reload();
     });
   });
 
   // フォロー登録、解除処理
   $('.follow_btn').on('click',function(e){
+    e.stopPropagation();
     let $this = $(this),
         $profile_count = $('.profile_count + .follow > a > .count_num'),
         $user_count = $this.parent().next().children('.user_count + .follower').children('.count_num');
         user_id = $this.prev().val();
 
-    e.stopPropagation();
     $.ajax({
         type: 'POST',
         url: 'follow_process.php',
@@ -62,40 +82,46 @@ $(function(){
       // 相手のカウントを更新する
       $user_count.text(phpreturn['user_count']);
     }).fail(function() {
-      console.log('ajax error');
       location.reload();
     });
   });
 
+  //アイコン加工
+  $('.icon_upload').on('change',function(e){
+   e.stopPropagation();
+   let max_file_size = 10485760;
 
- $('.icon_upload').on('change',function(e){
-      // フォームデータを取得
-      let formdata = new FormData($('#icon_form').get(0));
-
-      e.stopPropagation();
-      $.ajax({
-        type: 'POST',
-        url: 'icon_create.php',
-        dataType: 'json',
-        data: formdata,
-        dataType    : "json",
-        cache       : false,
-        contentType : false,
-        processData : false
-      }).done(function(data){
-        $('.profile_icon > img').attr('src',data);
-        $(".icon_save").prop('disabled', false);
-      }).fail(function(){
-        console.log('error');
-      });
+   // ファイルサイズ制限
+   if (max_file_size < this.files[0].size){
+     show_slide_message('flash_error','ファイルサイズは10M以下にしてください');
+     $(this).val('');
+   }else{
+     // フォームデータを取得
+     let formdata = new FormData($('#icon_form').get(0));
+     $.ajax({
+       type: 'POST',
+       url: 'icon_create.php',
+       dataType: 'json',
+       data: formdata,
+       cache       : false,
+       contentType : false,
+       processData : false
+     }).done(function(data){
+       // アイコンを返ってきた加工済みアイコンと入れ替える
+       $('.profile_icon > img').attr('src',data);
+       $(".icon_save").prop('disabled', false);
+     }).fail(function(){
+      location.reload();
+     });
+   }
   });
 
 
   $('.icon_save').on('click',function(e){
+    e.stopPropagation();
     let icon_data = $('.profile_icon > img').attr('src'),
         user_id = $(this).data('user_id');
 
-    e.stopPropagation();
     $.ajax({
       type: 'POST',
       url: 'icon_save.php',
@@ -105,12 +131,9 @@ $(function(){
              user_id: user_id}
     })
     .done(function(){
-      console.log('sucsess');
       location.reload();
     }).fail(function(){
-      console.log('error');
       location.reload();
-
     });
   });
 

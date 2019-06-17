@@ -20,6 +20,11 @@ if(!empty($_POST['follow'])){
   require_once('follow_process.php');
 }
 
+//投稿削除機能
+if(!empty($_POST['delete'])){
+  require_once('post_delete_process.php');
+}
+
 debug('------------------------------');
 
  $site_title = $page_user['name'];
@@ -32,7 +37,9 @@ debug('------------------------------');
 
   <h2 class="site_title"><?=$site_title."のページ" ?></h2>
   <div class="container flex">
+
       <!-- プロフィール -->
+      <?php $profile_user = $page_user; ?>
       <?php require_once('profile.php') ?>
 
         <div class="main_items border_white">
@@ -51,10 +58,10 @@ debug('------------------------------');
                   <img src=<?= 'img/'.$post['user_icon_small'] ?> alt="">
                 </a>
               </div>
-              
+
               <div class="post_data">
                 <!-- ユーザーによって名前を色替え -->
-                <?php if ($current_user['id'] === $post['user_id']): ?>
+                <?php if (is_myself($post['user_id'])): ?>
                   <a href="user_page.php?page_id=<?= $post['user_id'] ?>"
                     class="post_user_name myself"><?= $post['name'] ?></a>
                 <?php else: ?>
@@ -83,12 +90,13 @@ debug('------------------------------');
               </form>
 
               <!-- 投稿削除ボタン -->
-              <form class="" action="#" method="post">
-                <input type="hidden" name="post_id" value="<?= $post['id']?>">
-                <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
-                <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
-              </form>
-
+              <?php if (is_myself($post['user_id'])): ?>
+                <form class="" action="#" method="post">
+                  <input type="hidden" name="post_id" value="<?= $post['id']?>">
+                  <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
+                  <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
+                </form>
+              <?php endif ?>
             </div>
         <?php endforeach ?>
       </div>

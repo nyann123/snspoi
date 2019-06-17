@@ -8,7 +8,7 @@ debugLogStart();
 
 require_once('auth.php');
 
-//sessionからログインユーザー情報を復元
+//ログイン中のユーザー情報を取得
 $current_user = get_user($_SESSION['user_id']);
 //全投稿を取得
 $user_posts = get_all_posts();
@@ -35,78 +35,86 @@ debug('------------------------------');
  require_once('head.php');
   ?>
 
-<body>
- <?php require_once('header.php'); ?>
+  <body>
+    <?php require_once('header.php'); ?>
 
- <!-- フラッシュメッセージ -->
- <?php if(isset($flash_messages)): ?>
-   <p id ="js_show_msg" class="message_slide <?= $flash_type ?>">
-     <?= $flash_messages ?>
-   </p>
- <?php endif; ?>
+    <h2 class="site_title"><?= $site_title ?></h2>
+    <div class="container flex">
 
- <h2 class="site_title"><?= $site_title ?></h2>
- <div class="container">
-   <div class ="flex">
-     <div class="profile border_white">
-       ようこそ
-       <?= $current_user['name']; ?>
-       さん
-       <p>id = <?= $current_user['id'] ?></p>
-     </div>
+        <!-- プロフィール -->
+        <?php $profile_user = $current_user; ?>
+        <?php require_once('profile.php') ?>
 
-       <div class="main_items border_white">
-         <form class ="post_form border_white" action="#" method="post">
-           <textarea class="text_area border_white" placeholder="投稿する" name="content"></textarea><br>
-           <input id="post_btn" type="submit" name="post" value="投稿" disabled>
-         </form>
+          <div class="main_items border_white">
 
-       <!-- 投稿がなければ表示する -->
-       <?php if (empty($user_posts)): ?>
-         <p>投稿がありません</p>
-       <?php endif; ?>
+          <!-- 投稿フォーム -->
+            <form class ="post_form border_white" action="#" method="post">
+              <textarea class="text_area border_white" placeholder="投稿する" name="content"></textarea><br>
+              <input id="post_btn" type="submit" name="post" value="投稿" disabled>
+            </form>
 
-       <?php foreach($user_posts as $post): ?>
-         <!-- <?php var_dump($post)?> -->
-           <div class="item_container border_white">
-             <div class="post_data">
+          <!-- データがなければ表示する -->
+          <?php if (empty($user_posts)): ?>
+            <p>投稿がありません</p>
+          <?php endif; ?>
 
-               <!-- ユーザーによって名前を色替え -->
-               <?php if ($current_user['id'] === $post['user_id']): ?>
-                 <a href="user_page.php?page_id=<?= $post['user_id']?>"
-                   class="post_user_name myself"><?= $post['name']; ?></a>
-               <?php else: ?>
-                 <a href="user_page.php?page_id=<?= $post['user_id']?>"
-                   class="post_user_name other"><?= $post['name']; ?></a>
-               <?php endif; ?>
+          <?php foreach($user_posts as $post): ?>
+              <div class="item_container border_white">
 
-               <?php $time = new DateTime($post['created_at']) ?>
-               <?php $post_date = $time->format('Y-m-d H:i') ?>
-               <p class="post_date"><?= $post_date ?></p>
-             </div>
-             <p class ="post_content"><?= wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
+                <!-- アイコン -->
+                <div class="icon border_white">
+                  <a href="user_page.php?page_id=<?= $post['user_id']?>">
+                    <img src=<?= 'img/'.$post['user_icon_small'] ?> alt="">
+                  </a>
+                </div>
 
-             <form class="" action="#" method="post">
-               <input type="hidden" name="post_id" value="<?= $post['id']?>">
-               <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
-               <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
-             </form>
+                <div class="post_data">
+
+                  <!-- ユーザーによって名前を色替え -->
+                  <?php if ($current_user['id'] === $post['user_id']): ?>
+                    <a href="user_page.php?page_id=<?= $post['user_id']?>"
+                      class="post_user_name myself"><?= $post['name']; ?></a>
+                  <?php else: ?>
+                    <a href="user_page.php?page_id=<?= $post['user_id']?>"
+                      class="post_user_name other"><?= $post['name']; ?></a>
+                  <?php endif; ?>
+
+                  <?php $time = new DateTime($post['created_at']) ?>
+                  <?php $post_date = $time->format('Y-m-d H:i') ?>
+                  <p class="post_date"><?= $post_date ?></p>
+                </div>
+                <p class ="post_content"><?= wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
+
+                <!-- お気に入りボタン -->
+                <form class="" action="#" method="post">
+                  <input type="hidden" name="post_id" value="<?= $post['id']?>">
+                  <button type="button" name="favorite" class="favorite_btn">
+
+                  <!-- 登録済みか判定してアイコンを変える -->
+                  <?php if (check_favolite_duplicate($current_user['id'],$post['id'])): ?>
+                    <i class="fas fa-star"></i>
+                  <?php else: ?>
+                    <i class="far fa-star"></i>
+                  <?php endif; ?>
+
+                  </button>
+                  <span class="post_count"><?= current(get_post_count($post['id'])) ?></span>
+                </form>
+
+                <!-- 投稿削除ボタン -->
+                <?php if (is_myself($post['user_id'])): ?>
+                  <form action="#" method="post">
+                    <input type="hidden" name="post_id" value="<?= $post['id']?>">
+                    <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
+                    <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
+                  </form>
+                <?php endif ?>
+
+              </div>
+
+          <?php endforeach ?>
 
 
-             <form class="" action="#" method="post">
-               <input type="hidden" name="post_id" value="<?= $post['id']?>">
-               <?php if (check_favolite_duplicate($current_user['id'],$post['id'])): ?>
-                 <button type="submit" name="favorite" value="favorite"><i class="fas fa-star"></i></button>
-               <?php else: ?>
-                 <button type="submit" name="favorite" value="favorite"><i class="far fa-star"></i></button>
-               <?php endif; ?>
-             </form>
-           </div>
-
-       <?php endforeach ?>
-
-
-     </div>
-   </div>
- </div>
-<?php require_once('footer.php'); ?>
+        </div>
+    </div>
+  <?php require_once('footer.php'); ?>

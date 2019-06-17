@@ -25,8 +25,11 @@ debug('------------------------------');
 
   <h2 class="site_title"><?= $site_title.'のページ' ?></h2>
   <div class="container flex">
+
     <!-- プロフィール -->
+    <?php $profile_user = $page_user; ?>
     <?php require_once('profile.php') ?>
+    
     <div class="main_items border_white flex_wrap <?php if(!empty(get_followers($page_user['id']))) echo 'flex' ?>">
 
       <!-- データがなければ表示する -->

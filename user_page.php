@@ -38,12 +38,14 @@ debug('------------------------------');
 
   <h2 class="site_title"><?= $site_title.'のページ' ?></h2>
   <div class="container flex">
+
       <!-- プロフィール -->
+      <?php $profile_user = $page_user; ?>
       <?php require_once('profile.php') ?>
 
         <div class="main_items border_white">
         <!-- 自分のページのみ投稿フォームを表示 -->
-        <?php if ($current_user['id'] === $page_user['id']): ?>
+        <?php if (is_myself($page_user['id'])): ?>
           <form class ="post_form border_white" action="#" method="post">
             <textarea class="text_area border_white" placeholder="投稿する" name="content"></textarea><br>
             <input id="post_btn" type="submit" name="post" value="投稿" disabled>
@@ -66,14 +68,8 @@ debug('------------------------------');
               </div>
 
               <div class="post_data">
-                <!-- ユーザーによって名前を色替え -->
-                <?php if ($current_user['id'] === $post['user_id']): ?>
-                  <a href="user_page.php?page_id=<?= $post['user_id']?>"
-                    class="post_user_name myself"><?= $post['name']; ?></a>
-                <?php else: ?>
-                  <a href="user_page.php?page_id=<?= $post['user_id']?>"
-                    class="post_user_name other"><?= $post['name']; ?></a>
-                <?php endif; ?>
+                <a href="user_page.php?page_id=<?= $post['user_id']?>"
+                  class="post_user_name myself"><?= $post['name']; ?></a>
 
                 <?php $time = new DateTime($post['created_at']) ?>
                 <?php $post_date = $time->format('Y-m-d H:i') ?>
@@ -97,13 +93,14 @@ debug('------------------------------');
                 <span class="post_count"><?= current(get_post_count($post['id'])) ?></span>
               </form>
 
-
               <!-- 投稿削除ボタン -->
-              <form class="" action="#" method="post">
-                <input type="hidden" name="post_id" value="<?= $post['id']?>">
-                <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
-                <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
-              </form>
+              <?php if (is_myself($post['user_id'])): ?>
+                <form action="#" method="post">
+                  <input type="hidden" name="post_id" value="<?= $post['id']?>">
+                  <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
+                  <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
+                </form>
+              <?php endif ?>
 
             </div>
 

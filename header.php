@@ -40,11 +40,11 @@
   <?php if(basename($_SERVER['PHP_SELF']) !== 'login_form.php'
         && basename($_SERVER['PHP_SELF']) !== 'signup_form.php'
         && basename($_SERVER['PHP_SELF']) !== 'prof_edit.php' ): ?>
-    <?php if(isset($flash_messages)): ?>
-      <p id ="js_show_msg" class="message_slide <?= $flash_type ?>">
-        <?= ($flash_messages) ?>
+
+      <p id ="js_show_msg" class="message_slide <?php if(isset($flash_type)) echo $flash_type ?>">
+        <?php if(isset($flash_messages)) echo $flash_messages ?>
       </p>
-    <?php endif; ?>
+
   <?php endif ?>
 
 </header>

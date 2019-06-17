@@ -16,10 +16,10 @@ if(empty($error_messages)){
   debug('バリデーションOK');
   try {
     $dbh = dbConnect();
-    $sql = 'INSERT INTO users(name,email,password,created_at)
-            VALUES(:name,:email,:password,:created_at)';
+    $sql = 'INSERT INTO users(name,email,password)
+            VALUES(:name,:email,:password)';
     $stmt = $dbh->prepare($sql);
-    $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => password_hash($pass,PASSWORD_DEFAULT) , ':created_at' => date('Y-m-d H:i:s')));
+    $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => password_hash($pass,PASSWORD_DEFAULT)));
     if (query_result($stmt)) {
       debug('クエリ成功しました');
 
