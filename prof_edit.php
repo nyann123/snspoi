@@ -49,7 +49,7 @@ if(!empty($_POST)){
 
       if(query_result($stmt)){
         set_flash('sucsess','プロフィールの編集が完了しました');
-        header("Location:user_page.php?page_id=${current_user['id']}");
+        header("Location:user_page.php?page_id=${current_user['id']}&type=main");
         exit();
       }
     } catch (Exception $e) {

@@ -8,13 +8,36 @@ debugLogStart();
 
 require_once('auth.php');
 debug("ページID：${_GET['page_id']}");
+debug("ページID：${_GET['type']}");
+
 $page_user = get_user($_GET['page_id']);
+$type = $_GET['type'];
 
 //ログイン中のユーザー情報を取得
 $current_user = get_user($_SESSION['user_id']);
 debug(print_r($current_user,true));
-//ユーザーの投稿を取得
-$user_posts = get_posts($page_user['id']);
+
+
+// getパラメータに合わせて必要なデータを用意する
+switch ($type) {
+  case 'main':
+    $posts = get_posts($page_user['id']);
+  break;
+
+  case 'favorites':
+    $posts = get_favorite_posts($page_user['id']);
+  break;
+
+  case 'follows':
+    $follow_users = get_follows($page_user['id']);
+    $id_type = 'followed';
+  break;
+
+  case 'followers':
+    $follow_users = get_followers($page_user['id']);
+    $id_type = 'follow';
+  break;
+}
 
 //投稿機能
 if(!empty($_POST['post'])){
@@ -26,6 +49,7 @@ if(!empty($_POST['delete'])){
   require_once('post_delete_process.php');
 }
 
+debug($type);
 debug('------------------------------');
 
  $site_title = $page_user['name'];
@@ -44,68 +68,35 @@ debug('------------------------------');
       <?php require_once('profile.php') ?>
 
         <div class="main_items border_white">
+
         <!-- 自分のページのみ投稿フォームを表示 -->
-        <?php if (is_myself($page_user['id'])): ?>
+        <?php if (is_myself($page_user['id']) && $type === 'main'): ?>
           <form class ="post_form border_white" action="#" method="post">
             <textarea class="text_area border_white" placeholder="投稿する" name="content"></textarea><br>
             <input id="post_btn" type="submit" name="post" value="投稿" disabled>
           </form>
         <?php endif; ?>
 
-        <!-- データがなければ表示する -->
-        <?php if (empty($user_posts)): ?>
+        <!-- それぞれデータがなければ表示する -->
+        <?php if (empty($posts) && $type === 'main'): ?>
           <p>投稿がありません</p>
         <?php endif; ?>
 
-        <?php foreach($user_posts as $post): ?>
-            <div class="item_container border_white">
+        <?php if (empty($posts) && $type === 'favorites'): ?>
+          <p>お気に入りが登録されていません</p>
+        <?php endif; ?>
 
-              <!-- アイコン -->
-              <div class="icon border_white">
-                <a href="user_page.php?page_id=<?= $post['user_id']?>">
-                  <img src=<?= 'img/'.$post['user_icon_small'] ?> alt="">
-                </a>
-              </div>
+        <?php if (empty(get_follows($page_user['id'])) && $type === 'follows'): ?>
+          <p>ユーザーがいません</p>
+        <?php endif; ?>
 
-              <div class="post_data">
-                <a href="user_page.php?page_id=<?= $post['user_id']?>"
-                  class="post_user_name myself"><?= $post['name']; ?></a>
+        <?php if (empty(get_followers($page_user['id'])) && $type === 'followers'): ?>
+          <p>ユーザーがいません</p>
+        <?php endif; ?>
 
-                <?php $time = new DateTime($post['created_at']) ?>
-                <?php $post_date = $time->format('Y-m-d H:i') ?>
-                <p class="post_date"><?= $post_date ?></p>
-              </div>
-              <p class ="post_content"><?= wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
-
-              <!-- お気に入りボタン -->
-              <form class="" action="#" method="post">
-                <input type="hidden" name="post_id" value="<?= $post['id']?>">
-                <button type="button" name="favorite" class="favorite_btn">
-
-                <!-- 登録済みか判定してアイコンを変える -->
-                <?php if (check_favolite_duplicate($current_user['id'],$post['id'])): ?>
-                  <i class="fas fa-star"></i>
-                <?php else: ?>
-                  <i class="far fa-star"></i>
-                <?php endif; ?>
-
-                </button>
-                <span class="post_count"><?= current(get_post_count($post['id'])) ?></span>
-              </form>
-
-              <!-- 投稿削除ボタン -->
-              <?php if (is_myself($post['user_id'])): ?>
-                <form action="#" method="post">
-                  <input type="hidden" name="post_id" value="<?= $post['id']?>">
-                  <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
-                  <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
-                </form>
-              <?php endif ?>
-
-            </div>
-
-        <?php endforeach ?>
-
+        <!-- getパラメータに合わせたページを表示 -->
+        <?php if($type === 'main' || $type === 'favorites') require_once('post_list.php') ?>
+        <?php if($type === 'follows' || $type === 'followers') require_once('user_list.php') ?>
 
       </div>
   </div>

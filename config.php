@@ -213,7 +213,7 @@ function get_all_posts(){
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
     query_result($stmt);
-    return $user_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   } catch (\Exception $e) {
     echo $e->getMessage() . PHP_EOL;
   }
@@ -353,7 +353,7 @@ function login($user_id,$pass_save){
 function check_logged_in(){
   if (isset($_SESSION['user_id'])){
     debug('ログイン中のユーザーはアクセスできません');
-    header("Location:mypage.php?page_id=${_SESSION['user_id']}");
+    header("Location:user_page.php?page_id=${_SESSION['user_id']}&type=main");
     exit();
   }
 }

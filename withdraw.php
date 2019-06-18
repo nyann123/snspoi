@@ -42,8 +42,7 @@ require('head.php');
       <form action="" method="post" class="form">
         <input id="btn" class="btn normal" type="submit" class="btn btn-mid" value="退会する" name="submit">
       </form>
-      <a href="user_page.php?page_id=<?php echo $user['id'] ?>"></a>
+      <a href="user_page.php?page_id=<?= $current_user['id'] ?>&type=main"><戻る</a>
     </div>
 
-    <!-- footer -->
     <?php require('footer.php'); ?>

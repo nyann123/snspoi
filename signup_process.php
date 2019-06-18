@@ -38,7 +38,7 @@ if(empty($error_messages)){
 
       debug('新規登録成功');
       debug(print_r($_SESSION['flash'],true));
-      header("Location:user_page.php?page_id=${new_user_id}");
+      header("Location:user_page.php?page_id=${new_user_id}&type=main");
       exit();
     }
   } catch (\Exception $e) {

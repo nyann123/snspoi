@@ -42,7 +42,7 @@ if(empty($error_messages)){
 
           debug('セッション変数の中身：'.print_r($_SESSION,true));
 
-          header("Location:user_page.php?page_id=${user['id']}");
+          header("Location:user_page.php?page_id=${user['id']}&type=main");
           exit();
         } catch (\Exception $e) {
           error_log('エラー発生:' . $e->getMessage());
@@ -55,7 +55,7 @@ if(empty($error_messages)){
 
         debug('セッション変数の中身：'.print_r($_SESSION,true));
 
-        header("Location:user_page.php?page_id=${user['id']}");
+        header("Location:user_page.php?page_id=${user['id']}&type=main");
         exit();
       }
     }else{
