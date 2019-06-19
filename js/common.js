@@ -64,6 +64,7 @@ $('.text_area').on('input',function(){
 // フォローボタン
 //================================
 let first_flg = 0;
+
 $(document).on('mouseenter','.following',function(){
   $(this).text('解除');
   $(this).toggleClass('following');

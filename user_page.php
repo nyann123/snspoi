@@ -49,7 +49,6 @@ if(!empty($_POST['delete'])){
   require_once('post_delete_process.php');
 }
 
-debug($type);
 debug('------------------------------');
 
  $site_title = $page_user['name'];

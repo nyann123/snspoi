@@ -3,10 +3,12 @@ require_once('config.php');
 require_once('auth.php');
 
 if(!empty($_POST['follow'])){
-  debug('お気に入りのPOST送信があります');
+  debug('フォローのPOST送信があります');
   $current_user = get_user($_SESSION['user_id']);
-  $user_id = $_POST['user_id'];
 
+  $user_id = $_POST['user_id'];
+  $profile_user_id = $_POST['profile_user_id'] ?? $user_id;
+  
   // 自分をフォローできないように
   if ( $current_user['id'] !== $user_id){
     // すでに登録されているか確認して登録、削除のSQL切り替え
@@ -43,8 +45,8 @@ if(!empty($_POST['follow'])){
         debug("フォロー${action}成功");
 
         $return = array('action' => $action,
-                        'profile_count' => current(get_user_count('follow',$current_user['id'])) ,
-                        'user_count' => current(get_user_count('follower',$user_id)));
+                        'follow_count' => current(get_user_count('follow',$profile_user_id)),
+                        'follower_count' => current(get_user_count('follower',$profile_user_id)));
         echo json_encode($return);
 
       }
