@@ -29,7 +29,7 @@ $(function(){
 
     $.ajax({
         type: 'POST',
-        url: 'post_favorite_process.php',
+        url: 'ajax_post_favorite_process.php',
         dataType: 'json',
         data: { favorite: true,
                 post_id: post_id}
@@ -62,7 +62,7 @@ $(function(){
 
     $.ajax({
         type: 'POST',
-        url: 'follow_process.php',
+        url: 'ajax_follow_process.php',
         dataType: 'json',
         data: { follow: true,
                 profile_user_id: profile_user_id,
@@ -102,7 +102,7 @@ $(function(){
      let formdata = new FormData($('#icon_form').get(0));
      $.ajax({
        type: 'POST',
-       url: 'icon_create.php',
+       url: 'ajax_icon_create.php',
        dataType: 'json',
        data: formdata,
        cache       : false,
@@ -126,7 +126,7 @@ $(function(){
 
     $.ajax({
       type: 'POST',
-      url: 'icon_save.php',
+      url: 'ajax_icon_save.php',
       dataType: 'json',
       data: {icon_save: true,
              icon_data: icon_data,

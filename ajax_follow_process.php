@@ -2,13 +2,16 @@
 require_once('config.php');
 require_once('auth.php');
 
-if(!empty($_POST['follow'])){
-  debug('フォローのPOST送信があります');
+if(isset($_POST['follow'])){
+  debugLogStart();
+  debug('POST送信があります');
+  debug('POST内容:'.print_r($_POST,true));
+
   $current_user = get_user($_SESSION['user_id']);
 
   $user_id = $_POST['user_id'];
   $profile_user_id = $_POST['profile_user_id'] ?? $user_id;
-  
+
   // 自分をフォローできないように
   if ( $current_user['id'] !== $user_id){
     // すでに登録されているか確認して登録、削除のSQL切り替え
@@ -42,6 +45,7 @@ if(!empty($_POST['follow'])){
       // 全てのクエリが成功していたら結果を保存する
       if (query_result($stmt1) && query_result($stmt2)) {
         $dbh->commit();
+        debug('user'.$current_user['id'].' → user'.$user_id);
         debug("フォロー${action}成功");
 
         $return = array('action' => $action,
@@ -59,4 +63,5 @@ if(!empty($_POST['follow'])){
     }
   }
 }
+
 debug('------------------------------');

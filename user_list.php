@@ -22,7 +22,7 @@
     </div>
 
 
-    <!-- フォローボタン -->
+    <!-- フォローボタン ajaxで処理-->
     <!-- 自分にはフォローボタンを表示しない -->
     <?php if ($current_user['id'] !== $user['id']): ?>
       <form action="#" method="post">

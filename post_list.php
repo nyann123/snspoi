@@ -24,7 +24,7 @@
       </div>
       <p class ="post_content"><?= wordwrap($post['post_content'], 60, "<br>\n", true)?></p>
 
-      <!-- お気に入りボタン -->
+      <!-- お気に入りボタン ahaxで処理-->
       <form class="" action="#" method="post">
         <input type="hidden" name="post_id" value="<?= $post['id']?>">
         <button type="button" name="favorite" class="favorite_btn">

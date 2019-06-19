@@ -30,7 +30,7 @@
     <p class="user_name"><?= $profile_user['name']; ?></p>
   </div>
 
-    <!-- フォローボタン -->
+    <!-- フォローボタン ajaxで処理-->
     <!-- 自分のページにはフォローボタンを表示しない -->
     <?php if ($current_user['id'] !== $profile_user['id']): ?>
       <form class="follow_btn_form" action="#" method="post">

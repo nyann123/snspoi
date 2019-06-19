@@ -358,6 +358,10 @@ function check_logged_in(){
   }
 }
 
+function h($str){
+  return htmlspecialchars($str,ENT_QUOTES);
+}
+
 function set_old_form_data($str){
   global ${'old'.$str};
   if(isset($_SESSION[$str])){
@@ -366,6 +370,7 @@ function set_old_form_data($str){
   unset($_SESSION[$str]);
 }
 
+//ログイン中のユーザーであるか確認
 function is_myself($user){
   global $current_user;
   $result = $current_user['id'] === $user ? true : false;
