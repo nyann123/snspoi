@@ -7,6 +7,11 @@
   src: url("../DragonQuestFC.ttf");
 }
 
+@font-face {
+  font-family: 'dot';
+  src: url("../JF-Dot-MPlusH12.ttf");
+}
+
 *{
   outline: none;
 }
@@ -145,7 +150,10 @@ margin-top: 0;
   padding: 5px 5px 20px;
   margin: 0;
   border: 2px solid #3FBFFF;
+  border-radius: 8px;
+  background-color: transparent;
   display: inline;
+  text-align: center;
 }
 
 /* dqフォント未使用の場合 */
@@ -159,7 +167,42 @@ width: 120px;
 height: 40px;
 margin: 0;
 border: 2px solid #3FBFFF;
+border-radius: 8px;
+background-color: transparent;
 display: inline;
+text-align: center;
+}
+
+.btn.red{
+  color: #FF7763;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 5px;
+  letter-spacing: 0.08em;
+  width: 120px;
+  height: 40px;
+  margin: 0;
+  border: 2px solid #FF7763;
+  border-radius: 8px;
+  background-color: transparent;
+  display: inline;
+  text-align: center;
+}
+
+.btn.blue{
+color: #3FBFFF;
+font-size: 20px;
+font-weight: bold;
+line-height: 5px;
+letter-spacing: 0.08em;
+width: 120px;
+height: 40px;
+margin: 0;
+border: 2px solid #3FBFFF;
+border-radius: 8px;
+background-color: transparent;
+display: inline;
+text-align: center;
 }
 
 .btn:disabled{
@@ -168,13 +211,13 @@ display: inline;
   cursor: default;
 }
 
-#btn:disabled{
+#js_btn:disabled{
   color: #b8b8b8;
   border-color: #b8b8b8;
   cursor: default;
 }
 
-#btn{
+#js_btn{
   cursor: pointer;
 }
 

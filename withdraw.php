@@ -39,8 +39,8 @@ require('head.php');
 
     <div class="form_container border_white">
       <h2 class="page_title">退会</h2>
-      <form action="" method="post" class="form">
-        <input id="btn" class="btn normal" type="submit" class="btn btn-mid" value="退会する" name="submit">
+      <form action="" method="post">
+        <button class="btn normal" name="withdraw" type="submit">退会する</button>
       </form>
       <a href="user_page.php?page_id=<?= $current_user['id'] ?>&type=main"><戻る</a>
     </div>

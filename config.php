@@ -236,6 +236,7 @@ function get_favorite_posts($page_id){
     error_log('エラー発生:' . $e->getMessage());
   }
 }
+
 // delete_flgを変更する
 function change_delete_flg($user,$flg){
   $dbh = dbConnect();
@@ -260,6 +261,7 @@ function change_delete_flg($user,$flg){
     $dbh->rollback();
   }
 }
+
 //既にフォローされているか確認する
 function check_follow($follow_user,$followed_user){
   $dbh = dbConnect();

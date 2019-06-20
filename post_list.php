@@ -40,13 +40,25 @@
         <span class="post_count"><?= current(get_post_count($post['id'])) ?></span>
       </form>
 
-      <!-- 投稿削除ボタン -->
+      <!-- 投稿削除 -->
       <?php if (is_myself($post['user_id'])): ?>
-        <form action="#" method="post">
-          <input type="hidden" name="post_id" value="<?= $post['id']?>">
-          <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
-          <button type="submit" name="delete" value="delete"><i class="far fa-trash-alt"></i></button>
-        </form>
+        <!-- モーダルウィンドウを開く -->
+        <button data-target="#modal<?= $post['id'] ?>" class="delete_btn" type="button"><i class="far fa-trash-alt"></i></button>
+        <!-- モーダルウィンドウ -->
+        <div class="modal" id="modal<?= $post['id'] ?>">
+          <div class="overlay modal_close"></div>
+          <div class="delete_confirmation border_white">
+            <p>投稿を削除しますか？</p>
+            <p><?= wordwrap($post['post_content'], 45, "<br>\n", true) ?></p>
+            <form id="test" action="" method="post" class="btn_flex">
+              <input type="hidden" name="post_id" value="<?= $post['id']?>">
+              <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
+              <button class="btn blue hoge" type="submit" name="delete" value="delete">削除</button>
+              <button class="btn red modal_close" type="button">キャンセル</button>
+            </form>
+          </div>
+        </div>
+
       <?php endif ?>
 
     </div>

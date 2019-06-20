@@ -91,7 +91,7 @@ require_once('head.php');
     <input id="email" type="email" name="email" value="<?= get_form_data('email'); ?>">
     <span class="js_error_message"></span><br>
 
-    <input id ="btn" class="btn normal" type="submit"  value="変更する" disabled>
+    <button id="js_btn" class="btn normal" type="submit" disabled>変更する</button>
   </form>
 </div>
 
