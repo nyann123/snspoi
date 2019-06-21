@@ -1,4 +1,6 @@
 <?php
+// db接続情報の読み込み
+require_once('db_connect.php');
 
 error_reporting(E_ALL); //E_STRICTレベル以外のエラーを報告する
 ini_set('display_errors','On'); //画面にエラーを表示させるか
@@ -126,25 +128,6 @@ function valid_post_length($post){
 //================================
 // データベース
 //================================
-// データベースの接続準備
-function dbConnect(){
-  //DBへの接続準備
-  $dsn = 'mysql:host=localhost;dbname=hogetest';
-  $user = 'hoge';
-  $password = 'hoge';
-  $options = array(
-    // SQL実行失敗時にはエラーコードのみ設定
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    // デフォルトフェッチモードを連想配列形式に設定
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    // バッファードクエリを使う(一度に結果セットをすべて取得し、サーバー負荷を軽減)
-    // SELECTで得た結果に対してもrowCountメソッドを使えるようにする
-    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
-  );
-  // PDOオブジェクト生成（DBへ接続）
-  return new PDO($dsn, $user, $password, $options);
-}
-
 function query_result($stmt){
   if($stmt){
     debug('クエリ成功しました');

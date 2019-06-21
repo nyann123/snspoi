@@ -70,15 +70,12 @@
 
 .post_form textarea{
   color: #fff;
-  font-size: 24px;
+  font-size: 20px;
   width: 90%;
   padding: 10px;
   margin: 0 0 10px;
   background-color: transparent;
   resize: none;
-}
-.post_form textarea::-webkit-scrollbar{
-  display: none;
 }
 
 .text_area{
@@ -147,13 +144,12 @@
 .post_content{
   font-family: sans-serif;
   font-size: 20px;
-  font-weight: normal;
   text-align: left;
   letter-spacing: 0.06em;
   width: 100%;
   box-sizing: border-box;
   margin: 10px 0;
-  word-wrap: break-word
+  word-wrap: break-word;
 }
 
 .favorite_count{
@@ -394,6 +390,13 @@ button > .far.fa-star:hover{
   box-sizing: border-box;
 }
 
+/* 背景固定用 */
+body.fixed {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+}
 
 /* モーダルウィンドウのスタイル */
 .modal {
@@ -407,7 +410,7 @@ button > .far.fa-star:hover{
   left:0;
   background-color:rgba(152,152,152,0.7);
   width:100%;
-  height:100vh;
+  height:100%;
   z-index:10;
 }
 
@@ -421,13 +424,34 @@ button > .far.fa-star:hover{
   padding: 10px;
   background-color: #121212;
   border-radius: 8px;
-  transform:translate(-50%,-50%);
+  transform:translate(-50%,-10%);
 }
 
-.modal p{
+.modal_title{
   font-size: 20px;
-  word-wrap:break-word;
+}
+
+.delete_confirmation >.post_content{
+  font-size: 18px;
   margin: 20px;
+  max-height: 200px;
+  width: auto;
+  /* overflow: auto; */
+}
+
+.post_content::-webkit-scrollbar{
+  width: 12px;
+}
+.post_content::-webkit-scrollbar-track{
+  background: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: inset 0 0 2px #777;
+}
+.post_content::-webkit-scrollbar-thumb{
+  background: #aaa;
+  border-radius: 10px;
+  box-shadow: none;
 }
 
 .btn_flex{

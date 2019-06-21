@@ -52,7 +52,7 @@ if(!empty($_POST['delete'])){
 debug('------------------------------');
 
  $site_title = $page_user['name'];
- $css_file_title = 'user_page';
+ $css_file_title = $js_file_title= 'user_page';
  require_once('head.php');
   ?>
 
