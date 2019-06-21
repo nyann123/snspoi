@@ -12,7 +12,7 @@
 
     <div class="user_data">
       <a href="user_page.php?page_id=<?= $user['id'] ?>&type=main" class="user_name">
-        <?= $user['name'] ?>
+        <?= h($user['name']) ?>
       </a>
 
       <div class="user_count flex">

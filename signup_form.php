@@ -28,7 +28,7 @@ require_once('head.php');
 <body>
   <?php require_once('header.php') ?>
   <div class="form_container border_white">
-    <h2 class="page_title dq">とうろく</h2>
+    <h2 class="page_title">新規登録</h2>
 
     <?php if (isset($flash_messages)): ?>
       <?php foreach ((array)$flash_messages as $message): ?>
@@ -40,19 +40,19 @@ require_once('head.php');
       <form action="#" method="post">
         <span class="flash_cursor">｝</span>
 
-        <label for="name">おなまえ</label><br>
-        <input id="name" type="text" name="name" value="<?php if (isset($oldname)) echo $oldname; ?>">
+        <label for="name">おなまえ <span class="text_small">※最大８文字</span></label><br>
+        <input id="name" type="text" name="name" value="<?php if (isset($oldname)) echo h($oldname); ?>">
         <span class="js_error_message"></span><br>
 
         <label for="email">メールアドレス</label><br>
-        <input id="email" autocomplete="false" type="text" name="email" value="<?php if (isset($oldemail)) echo $oldemail?>">
+        <input id="email" autocomplete="false" type="text" name="email" value="<?php if (isset($oldemail)) echo h($oldemail) ?>">
         <span class="js_error_message"></span> <br>
 
-        <label for="password">パスワード</label><br>
-        <input id="password" autocomplete="flase" type="password" name="pass" value="<?php if (isset($oldpass)) echo $oldpass ?>">
+        <label for="password">パスワード <span class="text_small">※半角英数６文字以上</span> </label><br>
+        <input id="password" autocomplete="flase" type="password" name="pass" value="<?php if (isset($oldpass)) echo h($oldpass) ?>">
         <span class="js_error_message"></span><br>
 
-        <input id="js_btn" class="btn dq" type="submit" name="" value="とうろくする" disabled>
+        <button id="js_btn" class="btn blue" type="submit" disabled>登録</button>
       </form>
     </div>
   </div>

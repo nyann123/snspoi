@@ -26,7 +26,7 @@ require_once('head.php');
 <body>
 <?php require_once('header.php'); ?>
   <div class="form_container border_white">
-    <h2 class="page_title dq">ログイン</h2>
+    <h2 class="page_title">ログイン</h2>
 
     <?php if (isset($flash_messages)): ?>
       <?php foreach ((array)$flash_messages as $message): ?>
@@ -42,7 +42,7 @@ require_once('head.php');
         <label id="pass_save" for="checkbox">
         <input id="checkbox" type="checkbox" name="pass_save">ログインを維持する
         </label><br>
-        <button id="login_btn" class="btn dq" type="submit" value="ログイン">ログイン</button> 
+        <button id="login_btn" class="btn" type="submit" value="ログイン">ログイン</button>
         <a href="signup_form.php" class="signup">新規登録はこちら</a>
       </form>
     </div>

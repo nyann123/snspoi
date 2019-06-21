@@ -1,3 +1,15 @@
+.page_title{
+  width: 200px;
+}
+
+label{
+  font-size: 18px;
+}
+.text_small{
+  color:#DEDEDE;
+  font-size: 14px;
+}
+
 .err{
   background-color: #500 !important;;
 }

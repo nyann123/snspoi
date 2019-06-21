@@ -84,14 +84,14 @@ require_once('head.php');
 
   <form action="" method="post">
     <label for="name">名前</label><br>
-    <input id="name" type="text" name="name" value="<?= get_form_data('name'); ?>">
+    <input id="name" type="text" name="name" value="<?= h(get_form_data('name')); ?>">
     <span class="js_error_message"></span><br>
 
     <label for="email">Email</label><br>
-    <input id="email" type="email" name="email" value="<?= get_form_data('email'); ?>">
+    <input id="email" type="email" name="email" value="<?= h(get_form_data('email')); ?>">
     <span class="js_error_message"></span><br>
 
-    <button id="js_btn" class="btn normal" type="submit" disabled>変更する</button>
+    <button id="js_btn" class="btn blue" type="submit" disabled>変更する</button>
   </form>
 </div>
 

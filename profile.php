@@ -27,7 +27,7 @@
       </ul>
     <?php endif ?>
 
-    <p class="user_name"><?= $profile_user['name']; ?></p>
+    <p class="user_name"><?= h($profile_user['name']); ?></p>
   </div>
 
     <!-- フォローボタン ajaxで処理-->

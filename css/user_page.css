@@ -1,5 +1,6 @@
 .main_items{
   color: #fff;
+  max-width: 882px;
   width: 80%;
   padding: 10px;
   display: flex;
@@ -69,16 +70,19 @@
 
 .post_form textarea{
   color: #fff;
-  font-size: 16px;
+  font-size: 24px;
   width: 90%;
   padding: 10px;
   margin: 0 0 10px;
   background-color: transparent;
   resize: none;
 }
+.post_form textarea::-webkit-scrollbar{
+  display: none;
+}
 
 .text_area{
-  height: 18px;
+  height: 24px;
 }
 
 .show_text_area{
@@ -87,7 +91,7 @@
 
 #post_btn{
   color: #3FBFFF;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 400;
   letter-spacing: 0.08em;
   width: 100px;
@@ -112,11 +116,11 @@
 
 .post_date{
   margin: 0;
+  font-size: 18px;
 }
 
 .post_user_name{
   font-size: 20px;
-  font-weight: bold;
   margin: 0;
   text-align: left;
   text-decoration: none;
@@ -137,18 +141,25 @@
 
 .post_date{
   color: #B8B8B8;
+  text-align: left;
 }
 
 .post_content{
-  font-size: 18px;
+  font-family: sans-serif;
+  font-size: 20px;
   font-weight: normal;
   text-align: left;
   letter-spacing: 0.06em;
   width: 100%;
   box-sizing: border-box;
   margin: 10px 0;
+  word-wrap: break-word
 }
 
+.favorite_count{
+  width: 70px;
+  text-align: left;
+}
 button{
   background-color: transparent;
   border: none;
@@ -177,10 +188,12 @@ button > .far.fa-star:hover{
 
 .post_count{
   color: #fff;
-  font-size: 12px;
+  font-size: 16px;
 }
+
 .favorite_btn{
-  margin: 0;
+  margin: 0 -5px 0 0 ;
+  font-size: 18px;
 }
 
 .favorite_btn:active {
@@ -191,13 +204,16 @@ button > .far.fa-star:hover{
   20% { transform: scale(1.6); }
 }
 
+.delete_btn{
+  font-size: 18px;
+}
 .user_data{
   margin-left: 3px;
   width: 60%;
 }
 
 .user_data > .user_name{
-  font-size: 20px;
+  font-size: 24px;
   color:#fff;
   text-align: left;
   display: block;
@@ -260,11 +276,11 @@ button > .far.fa-star:hover{
 }
 
 .profile > .flex > .user_name{
-  font-size: 20px;
+  font-size: 18px;
   margin: 0;
   color:#fff;
   align-self: center;
-  margin-left: 3px;
+  margin-left: 5px;
 }
 
 .profile_icon{
@@ -401,11 +417,17 @@ button > .far.fa-star:hover{
   z-index:11;
   top:30%;
   left:50%;
-  width: 400px;
+  width: 600px;
   padding: 10px;
   background-color: #121212;
   border-radius: 8px;
   transform:translate(-50%,-50%);
+}
+
+.modal p{
+  font-size: 20px;
+  word-wrap:break-word;
+  margin: 20px;
 }
 
 .btn_flex{

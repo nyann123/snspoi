@@ -1,5 +1,5 @@
 $(function(){
-  
+
   var emailregex = new RegExp(/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/);
   let name_flg
   let email_flg
@@ -32,7 +32,7 @@ $(function(){
       $(error_message).text("なまえをにゅうりょくしてください");
         name_flg = 0;
 
-    }else if ( input_name.length > 10){   //11文字以上をエラーに
+    }else if ( input_name.length > 8){   //9文字以上をエラーに
       $(name).addClass('error');
       $(error_message).text("なまえがながすぎます");
       name_flg = 0;

@@ -93,7 +93,7 @@ function valid_name($name){
   global $error_messages;
   if ( empty($name) ){
     $error_messages['name'] = 'なまえを入力してください';
-  }elseif( strlen($name) > 10 ){
+  }elseif( mb_strlen($name, $post, "UTF-8") > 8 ){
     $error_messages['name'] = 'なまえは10文字以内で入力してください';
   }
 }
@@ -118,7 +118,7 @@ function valid_post_length($post){
   global $error_messages;
   if (empty($post)){
     $error_messages = '投稿の内容がありません';
-  }else if(strlen($post) >= 150){
+  }else if(mb_strlen($post, "UTF-8" ) > 150){
     $error_messages = '内容が長すぎます';
   }
 }
@@ -364,19 +364,19 @@ function h($str){
   return htmlspecialchars($str,ENT_QUOTES);
 }
 
+//ログイン中のユーザーであるか確認
+function is_myself($user){
+  global $current_user;
+  $result = $current_user['id'] === $user ? true : false;
+  return $result;
+}
+
 function set_old_form_data($str){
   global ${'old'.$str};
   if(isset($_SESSION[$str])){
     ${'old'.$str} = $_SESSION[$str];
   }
   unset($_SESSION[$str]);
-}
-
-//ログイン中のユーザーであるか確認
-function is_myself($user){
-  global $current_user;
-  $result = $current_user['id'] === $user ? true : false;
-  return $result;
 }
 
 function get_form_data($str){
