@@ -45,7 +45,7 @@ debug('------------------------------');
 
           <!-- 投稿フォーム -->
             <form class ="post_form border_white" action="#" method="post">
-              <textarea class="text_area border_white" placeholder="投稿する" name="content"></textarea><br>
+              <textarea class="textarea border_white" placeholder="投稿する" name="content"></textarea><br>
               <input id="post_btn" type="submit" name="post" value="投稿" disabled>
             </form>
 

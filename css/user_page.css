@@ -37,7 +37,7 @@
 }
 
 .follow_btn{
-  color: #fff;
+  font-size: 16px;
   font-weight: bold;
   width: 100px;
   height: 30px;
@@ -68,7 +68,7 @@
   margin-bottom: 5px;
 }
 
-.post_form textarea{
+.textarea{
   color: #fff;
   font-size: 20px;
   width: 90%;
@@ -76,14 +76,12 @@
   margin: 0 0 10px;
   background-color: transparent;
   resize: none;
-}
-
-.text_area{
   height: 24px;
 }
 
-.show_text_area{
-  height: 80px;
+.show_textarea{
+  min-height: 80px;
+  line-height: 24px;
 }
 
 #post_btn{
@@ -150,6 +148,24 @@
   box-sizing: border-box;
   margin: 10px 0;
   word-wrap: break-word;
+}
+
+.show_all{
+  color: #3FBFFF;
+  width: 100%;
+  text-align: left;
+  margin: 0 0 10px;;
+}
+
+.show_all:hover{
+  cursor:pointer;
+}
+
+.ellipsis{
+  overflow: hidden;
+  display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 10;
 }
 
 .favorite_count{
@@ -436,7 +452,6 @@ body.fixed {
   margin: 20px;
   max-height: 200px;
   width: auto;
-  /* overflow: auto; */
 }
 
 .post_content::-webkit-scrollbar{

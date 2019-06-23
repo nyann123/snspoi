@@ -1,48 +1,90 @@
 $(function(){
 
   //================================
+  // 投稿全文表示機能
+  //================================
+  //投稿の高さが一定以上なら続きを表示するボタンを出す
+  $('.item_container > .post_content').each(function(){
+    let content_height =  $(this).height();
+    if(content_height >= 230){
+      $(this).after('<button class="show_all">続きを表示する</button>');
+    }
+  });
+
+  $(document).on('click','.show_all',function(){
+    // 省略されている投稿の高さを取得
+    omit_height = $(this).parent().height();
+    //投稿の省略を解除
+    $(this).prev().removeClass('ellipsis');
+    // 全文表示された投稿の高さを取得
+    all_height = $(this).parent().height();
+    //一度高さを戻して
+    $(this).parent().height(omit_height);
+    //スライドで全文表示させる
+    $(this).parent().animate({
+      height: all_height
+    },"slow","swing");
+
+    //ボタンを消す
+    $(this).remove()
+  });
+
+  //================================
   // 投稿フォーム
   //================================
   // フォーカス時に入力フォームを拡大して投稿ボタンを出す
-  $('.text_area').on('focus',function(){
-    $('.text_area').addClass('show_text_area');
+  $('.textarea').on('focus',function(){
+    $(this).addClass('show_textarea');
     $('#post_btn').show();
   });
 
   //フォームに入力がなければ入力フォームとボタンを戻す
-  $('.text_area').on('focusout',function(){
-    if ($('.text_area').val().length === 0){
-      $('.text_area').toggleClass('show_text_area');
+  $('.textarea').on('focusout',function(){
+    if ($('.textarea').val().length === 0){
+      $(this).removeClass('show_textarea');
+      $(this).css('height','24px');
       $('#post_btn').hide();
     }
   });
 
   //フォームに入力があるときだけ投稿ボタンを活性化
-  $('.text_area').on('input',function(){
-    if ($('.text_area').val().length !== 0){
+  $('.textarea').on('input',function(){
+    if ($('.textarea').val().length !== 0){
       $('#post_btn').prop('disabled',false);
     }else{
       $('#post_btn').prop('disabled',true);
     }
   })
 
+  // フォームの高さを自動調整(拡大のみ、縮小も実装したい)
+  $('.textarea').on('input',function(){
+  scroll_height = $(this).get(0).scrollHeight;
+  offset_height = $(this).get(0).offsetHeight;
+
+  if( scroll_height > offset_height ){
+    $(this).css('height',scroll_height +"px");
+  }
+
+})
+
+
   //================================
   // 投稿削除
   //================================
   // モーダルウィンドウを開く処理
   $(".delete_btn").on('click',function(){
-      let target_modal = $(this).data("target"),
-          modal_content =$('.delete_confirmation > .post_content');
+      let $target_modal = $(this).data("target"),
+          $modal_content = $(this).next().find('.post_content')
       //背景をスクロールできないように　&　スクロール場所を維持
       scroll_position = $(window).scrollTop();
       $('body').addClass('fixed').css({'top': -scroll_position});
       // モーダルウィンドウを開く
-      $(target_modal).fadeIn();
-      //高さが一定以上ならスクロールできるように
-      if( $(modal_content).height() >= 200){
-        $(modal_content).css('overflow','auto');
+      $($target_modal).fadeIn();
+      //投稿の高さが一定以上ならスクロールできるように
+      if( $(this).next().find('.post_content').height() >= 200){
+        $modal_content.css('overflow','auto');
       }else{
-        $(modal_content).css('overflow','');
+        $modal_content.css('overflow','');
       }
         return false;
   });

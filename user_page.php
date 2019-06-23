@@ -71,7 +71,7 @@ debug('------------------------------');
         <!-- 自分のページのみ投稿フォームを表示 -->
         <?php if (is_myself($page_user['id']) && $type === 'main'): ?>
           <form class ="post_form border_white" action="#" method="post">
-            <textarea class="text_area border_white" placeholder="投稿する" name="content"></textarea><br>
+            <textarea class="textarea border_white" placeholder="投稿する" name="content"></textarea><br>
             <input id="post_btn" type="submit" name="post" value="投稿" disabled>
           </form>
         <?php endif; ?>

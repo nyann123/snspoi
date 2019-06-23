@@ -22,7 +22,7 @@
         <?php $post_date = $time->format('Y-m-d H:i') ?>
         <p class="post_date"><?= $post_date ?></p>
       </div>
-      <p class ="post_content"><?= nl2br(h($post['post_content']))?></p>
+      <p class ="post_content ellipsis"><?= nl2br(h($post['post_content']))?></p>
 
       <!-- お気に入りボタン ahaxで処理-->
       <form class="favorite_count" action="#" method="post">
