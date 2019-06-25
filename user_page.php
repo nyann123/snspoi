@@ -8,7 +8,7 @@ debugLogStart();
 
 require_once('auth.php');
 debug("ページID：${_GET['page_id']}");
-debug("ページID：${_GET['type']}");
+debug("ページtype：${_GET['type']}");
 
 $page_user = get_user($_GET['page_id']);
 $type = $_GET['type'];

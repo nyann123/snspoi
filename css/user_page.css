@@ -79,6 +79,10 @@
   height: 24px;
 }
 
+.textarea::-webkit-scrollbar{
+  display: none;
+}
+
 .show_textarea{
   min-height: 80px;
   line-height: 24px;

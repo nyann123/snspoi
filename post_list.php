@@ -1,4 +1,5 @@
 <?php foreach($posts as $post): ?>
+
     <div class="item_container post_container border_white">
 
       <!-- アイコン -->
@@ -23,6 +24,11 @@
         <p class="post_date"><?= $post_date ?></p>
       </div>
       <p class ="post_content ellipsis"><?= nl2br(h($post['post_content']))?></p>
+
+      <!-- 改行をカウントして１０行以上なら表示する -->
+      <?php if (substr_count($post['post_content'],"\n") +1 > 10):?>
+        <button class="show_all">続きを表示する</button>
+      <?php endif ?>
 
       <!-- お気に入りボタン ahaxで処理-->
       <form class="favorite_count" action="#" method="post">

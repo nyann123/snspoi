@@ -1,23 +1,21 @@
 $(function(){
 
+  // 改行コードをカウントして行数を取得する
+  function get_line_count(str){
+    return str.match(/\n/g) ? str.match(/\n/g).length + 1 : 1;
+  }
+
   //================================
   // 投稿全文表示機能
   //================================
-  //投稿の高さが一定以上なら続きを表示するボタンを出す
-  $('.item_container > .post_content').each(function(){
-    let content_height =  $(this).height();
-    if(content_height >= 230){
-      $(this).after('<button class="show_all">続きを表示する</button>');
-    }
-  });
 
   $(document).on('click','.show_all',function(){
     // 省略されている投稿の高さを取得
-    omit_height = $(this).parent().height();
+    let omit_height = $(this).parent().height();
     //投稿の省略を解除
     $(this).prev().removeClass('ellipsis');
     // 全文表示された投稿の高さを取得
-    all_height = $(this).parent().height();
+    let all_height = $(this).parent().height();
     //一度高さを戻して
     $(this).parent().height(omit_height);
     //スライドで全文表示させる
@@ -58,8 +56,8 @@ $(function(){
 
   // フォームの高さを自動調整(拡大のみ、縮小も実装したい)
   $('.textarea').on('input',function(){
-  scroll_height = $(this).get(0).scrollHeight;
-  offset_height = $(this).get(0).offsetHeight;
+  let scroll_height = $(this).get(0).scrollHeight;
+  let offset_height = $(this).get(0).offsetHeight;
 
   if( scroll_height > offset_height ){
     $(this).css('height',scroll_height +"px");
@@ -72,16 +70,17 @@ $(function(){
   // 投稿削除
   //================================
   // モーダルウィンドウを開く処理
-  $(".delete_btn").on('click',function(){
+  $(document).on('click',".delete_btn",function(){
       let $target_modal = $(this).data("target"),
-          $modal_content = $(this).next().find('.post_content')
+          $modal_content = $(this).next().find('.post_content'),
+          line_count = get_line_count($modal_content.text());
       //背景をスクロールできないように　&　スクロール場所を維持
       scroll_position = $(window).scrollTop();
       $('body').addClass('fixed').css({'top': -scroll_position});
       // モーダルウィンドウを開く
       $($target_modal).fadeIn();
-      //投稿の高さが一定以上ならスクロールできるように
-      if( $(this).next().find('.post_content').height() >= 200){
+      //投稿の行数が一定以上ならスクロールできるように
+      if( line_count > 10){
         $modal_content.css('overflow','auto');
       }else{
         $modal_content.css('overflow','');
@@ -90,7 +89,7 @@ $(function(){
   });
 
   // モーダルウィンドウを閉じる処理
-  $(".modal_close").on('click',function(){
+  $(document).on('click',".modal_close",function(){
     // スクロール場所を維持
     $('body').removeClass('fixed').css({'top': 0});
     window.scrollTo( 0 , scroll_position );

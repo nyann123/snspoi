@@ -148,30 +148,57 @@ function get_user($user_id){
             WHERE id = :id AND delete_flg = 0 ";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $user_id));
-    query_result($stmt);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    if(query_result($stmt)){
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-// ユーザーの投稿を取得する
+
+// ユーザーの投稿を取得する（最初の１０件）
 function get_posts($page_id){
-  debug('ユーザー投稿を取得します');
+  debug('1~10件目ユーザー投稿を取得します');
   global $current_user;
   try{
     $dbh = dbConnect();
       $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
               FROM users u INNER JOIN posts p ON u.id = p.user_id
               WHERE p.user_id = :id AND p.delete_flg = 0
-              ORDER BY p.created_at DESC";
+              ORDER BY p.created_at DESC
+              LIMIT 10";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $page_id));
-    query_result($stmt);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if(query_result($stmt)){
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
   }
 }
+
+  // ユーザーの投稿を取得する（続き）
+  function get_more_posts($page_id,$offset_count){
+    debug(($offset_count + 1).'~'.($offset_count + 10).'件目のユーザー投稿を取得します');
+    global $current_user;
+    try{
+      $dbh = dbConnect();
+        $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
+                FROM users u INNER JOIN posts p ON u.id = p.user_id
+                WHERE p.user_id = :id AND p.delete_flg = 0
+                ORDER BY p.created_at DESC
+                LIMIT 10 OFFSET :offset_count";
+      $stmt = $dbh->prepare($sql);
+      $stmt->bindValue(':id', $page_id);
+      $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
+      $stmt->execute();
+      if(query_result($stmt)){
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      }
+    } catch (\Exception $e) {
+      error_log('エラー発生:' . $e->getMessage());
+    }
+  }
 
 // 自分とフォロー中のユーザー投稿取得
 // $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
@@ -195,8 +222,9 @@ function get_all_posts(){
             ORDER BY p.created_at DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
-    query_result($stmt);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if(query_result($stmt)){
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
   } catch (\Exception $e) {
     echo $e->getMessage() . PHP_EOL;
   }
@@ -213,8 +241,9 @@ function get_favorite_posts($page_id){
             ORDER BY f.id DESC";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $page_id));
-    query_result($stmt);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if(query_result($stmt)){
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
   }
@@ -345,6 +374,10 @@ function check_logged_in(){
 
 function h($str){
   return htmlspecialchars($str,ENT_QUOTES);
+}
+
+function get_line_count($str){
+  return substr_count($str,"\n") + 1;
 }
 
 //ログイン中のユーザーであるか確認
