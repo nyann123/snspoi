@@ -1,5 +1,10 @@
 php.log
+<<<<<<< HEAD
 
+=======
+img/
+db_connect.php
+>>>>>>> b6f0a1486ce840388377d08f04da64c96bd0ecc3
 
 composer.lock
 composer.json
