@@ -27,14 +27,14 @@ if(!empty($_POST['delete'])){
 debug('------------------------------');
 
  $site_title = 'タイムライン';
- $css_file_title = 'user_page';
+ $css_file_title = $js_file_title= 'user_page';
  require_once('head.php');
   ?>
 
   <body>
     <?php require_once('header.php'); ?>
 
-    <h2 class="site_title"><?= $site_title ?></h2>
+    <h2 class="site_title"><?= $site_title ?> <span><i class="fas fa-cog" style="font-size:14px;"></i></span> </h2>
     <div class="container flex">
 
         <!-- プロフィール -->

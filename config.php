@@ -156,49 +156,47 @@ function get_user($user_id){
   }
 }
 
-// ユーザーの投稿を取得する（最初の１０件）
-function get_posts($page_id){
-  debug('1~10件目ユーザー投稿を取得します');
+
+// ユーザーの投稿を取得する
+function get_posts($page_id,$type,$offset_count=0){
+  debug(($offset_count + 1).'~'.($offset_count + 10).'件目のユーザー投稿を取得します');
   global $current_user;
+  $dbh = dbConnect();
+
+  switch ($type) {
+    //自分の投稿を取得する
+    case 'my_post':
+    $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
+            FROM users u INNER JOIN posts p ON u.id = p.user_id
+            WHERE p.user_id = :id AND p.delete_flg = 0
+            ORDER BY p.created_at DESC
+            LIMIT 10 OFFSET :offset_count";
+    break;
+
+    //お気に入り登録した投稿を取得する
+    case 'favorite':
+    $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
+            FROM posts p INNER JOIN favorite f ON p.id = f.post_id
+            INNER JOIN users u ON u.id = p.user_id
+            WHERE f.user_id = :id AND p.delete_flg = 0
+            ORDER BY f.id DESC
+            LIMIT 10 OFFSET :offset_count";
+      break;
+  }
+
   try{
-    $dbh = dbConnect();
-      $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
-              FROM users u INNER JOIN posts p ON u.id = p.user_id
-              WHERE p.user_id = :id AND p.delete_flg = 0
-              ORDER BY p.created_at DESC
-              LIMIT 10";
     $stmt = $dbh->prepare($sql);
-    $stmt->execute(array(':id' => $page_id));
+    $stmt->bindValue(':id', $page_id);
+    $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
+    $stmt->execute();
     if(query_result($stmt)){
+      debug($stmt->rowCount().'件取得しました');
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-
-  // ユーザーの投稿を取得する（続き）
-  function get_more_posts($page_id,$offset_count){
-    debug(($offset_count + 1).'~'.($offset_count + 10).'件目のユーザー投稿を取得します');
-    global $current_user;
-    try{
-      $dbh = dbConnect();
-        $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
-                FROM users u INNER JOIN posts p ON u.id = p.user_id
-                WHERE p.user_id = :id AND p.delete_flg = 0
-                ORDER BY p.created_at DESC
-                LIMIT 10 OFFSET :offset_count";
-      $stmt = $dbh->prepare($sql);
-      $stmt->bindValue(':id', $page_id);
-      $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
-      $stmt->execute();
-      if(query_result($stmt)){
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-      }
-    } catch (\Exception $e) {
-      error_log('エラー発生:' . $e->getMessage());
-    }
-  }
 
 // 自分とフォロー中のユーザー投稿取得
 // $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
@@ -229,25 +227,7 @@ function get_all_posts(){
     echo $e->getMessage() . PHP_EOL;
   }
 }
-// お気に入り登録されている投稿を取得する
-function get_favorite_posts($page_id){
-  debug('お気に入り投稿を取得します');
-  try{
-    $dbh = dbConnect();
-    $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
-            FROM posts p INNER JOIN favorite f ON p.id = f.post_id
-            INNER JOIN users u ON u.id = p.user_id
-            WHERE f.user_id = :id AND p.delete_flg = 0
-            ORDER BY f.id DESC";
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute(array(':id' => $page_id));
-    if(query_result($stmt)){
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-  } catch (\Exception $e) {
-    error_log('エラー発生:' . $e->getMessage());
-  }
-}
+
 
 // delete_flgを変更する
 function change_delete_flg($user,$flg){

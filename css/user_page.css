@@ -119,6 +119,7 @@
 }
 
 .post_user_name{
+  font-family: sans-serif;
   font-size: 20px;
   margin: 0;
   text-align: left;
@@ -229,6 +230,7 @@ button > .far.fa-star:hover{
 }
 
 .user_data > .user_name{
+  font-family: sans-serif;
   font-size: 24px;
   color:#fff;
   text-align: left;
@@ -292,6 +294,7 @@ button > .far.fa-star:hover{
 }
 
 .profile > .flex > .user_name{
+  font-family: sans-serif;
   font-size: 18px;
   margin: 0;
   color:#fff;

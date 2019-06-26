@@ -4,12 +4,12 @@
 
 @font-face {
   font-family: 'dqfont';
-  src: url("../DragonQuestFC.ttf");
+  src: url("../font/DragonQuestFC.ttf");
 }
 
 @font-face {
   font-family: 'dot';
-  src: url("../JF-Dot-MPlusH12.ttf");
+  src: url("../font/JF-Dot-MPlusH12.ttf");
 }
 
 *{

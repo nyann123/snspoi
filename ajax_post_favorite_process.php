@@ -11,7 +11,7 @@ if(isset($_POST['favorite'])){
   $page_id = $_POST['page_id'];
   $post_id = $_POST['post_id'];
 
-  $profile_user_id = $_POST['page_id'] ?? $current_user;
+  $profile_user_id = $_POST['page_id'] ?: $current_user['id'];
 
   //既に登録されているか確認
   if(check_favolite_duplicate($current_user['id'],$post_id)){

@@ -47,25 +47,25 @@
     <?php endif; ?>
 
   <div class="profile_counts">
-    <div class="profile_count post <?php if( $type === 'main') echo 'active' ?>">
+    <div class="profile_count post <?php if( $page_type === 'main') echo 'active' ?>">
       <a href="user_page.php?page_id=<?= $profile_user['id'] ?>&type=main">
         <div class="count_label">投稿数</div>
         <span class="count_num"><?= current(get_user_count('post',$profile_user['id'])) ?></span>
       </a>
     </div>
-    <div class="profile_count follow <?php if( $type === 'follows') echo 'active' ?>">
+    <div class="profile_count follow <?php if( $page_type === 'follows') echo 'active' ?>">
       <a href="user_page.php?page_id=<?= $profile_user['id'] ?>&type=follows">
         <div class="count_label">フォロー</div>
         <span class="count_num"><?= current(get_user_count('follow',$profile_user['id'])) ?></span>
       </a>
     </div>
-    <div class="profile_count follower <?php if( $type === 'followers') echo 'active' ?>">
+    <div class="profile_count follower <?php if( $page_type === 'followers') echo 'active' ?>">
       <a href="user_page.php?page_id=<?= $profile_user['id'] ?>&type=followers">
         <div class="count_label">フォロワー</div>
         <span class="count_num"><?= current(get_user_count('follower',$profile_user['id'])) ?></span>
       </a>
     </div>
-    <div class="profile_count favorite <?php if( $type === 'favorites') echo 'active' ?>">
+    <div class="profile_count favorite <?php if( $page_type === 'favorites') echo 'active' ?>">
       <a href="user_page.php?page_id=<?= $profile_user['id'] ?>&type=favorites">
         <div class="count_label">お気に入り</div>
         <span class="count_num"><?= current(get_user_count('favorite',$profile_user['id'])) ?></span>
