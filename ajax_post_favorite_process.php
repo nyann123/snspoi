@@ -6,9 +6,12 @@ require_once('auth.php');
 if(isset($_POST['favorite'])){
   debug('POST送信があります');
   debug('POST内容:'.print_r($_POST,true));
-  
+
   $current_user = get_user($_SESSION['user_id']);
+  $page_id = $_POST['page_id'];
   $post_id = $_POST['post_id'];
+
+  $profile_user_id = $_POST['page_id'] ?? $current_user;
 
   //既に登録されているか確認
   if(check_favolite_duplicate($current_user['id'],$post_id)){
@@ -31,8 +34,8 @@ if(isset($_POST['favorite'])){
     if(query_result($stmt)){
       debug("お気に入り${action}成功");
 
-      $return = array('profile_count' => current(get_user_count('favorite',$current_user['id'])),
-                      'post_count' => current(get_post_count($post_id)));
+      $return = array('profile_count' => current(get_user_count('favorite',$profile_user_id)),
+                      'post_count' => current(get_post_favorite_count($post_id)));
       echo json_encode($return);
 
     }

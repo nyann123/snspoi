@@ -37,6 +37,7 @@ $(function(){
     e.stopPropagation();
     let $this = $(this),
         $profile_count = $('.profile_count + .favorite > a > .count_num'),
+        page_id = get_param('page_id'),
         post_id = $this.prev().val();
 
     $.ajax({
@@ -44,6 +45,7 @@ $(function(){
         url: 'ajax_post_favorite_process.php',
         dataType: 'json',
         data: { favorite: true,
+                page_id: page_id,
                 post_id: post_id}
     }).done(function(phpreturn){
       // php側でエラーが発生したらリロードしてエラーメッセージを表示させる
@@ -170,7 +172,7 @@ $(function(){
 
     $.ajax({
       type: 'POST',
-      url: 'ajax_text.php',
+      url: 'ajax_more_post.php',
       dataType: 'json',
       data: {more_posts: true,
              offset: offset,

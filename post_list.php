@@ -43,7 +43,7 @@
         <?php endif; ?>
 
         </button>
-        <span class="post_count"><?= current(get_post_count($post['id'])) ?></span>
+        <span class="post_count"><?= current(get_post_favorite_count($post['id'])) ?></span>
       </form>
 
       <!-- 投稿削除 -->

@@ -306,6 +306,7 @@ function get_followers($page_id){
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+//ユーザーの各種カウントを取得する
 function get_user_count($object,$user_id){
   $dbh = dbConnect();
   switch ($object) {
@@ -334,7 +335,8 @@ function get_user_count($object,$user_id){
   return $stmt->fetch();
 }
 
-function get_post_count($post_id){
+//投稿のお気に入り数を取得する
+function get_post_favorite_count($post_id){
   $dbh = dbConnect();
   $sql = "SELECT COUNT(user_id)
           FROM favorite
