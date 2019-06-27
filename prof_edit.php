@@ -66,33 +66,38 @@ if(!empty($_POST)){
 debug('------------------------------');
 
 $site_title = 'プロフィール編集';
-$js_file_title =  'prof_edit';
+$css_file_title = $js_file_title =  'setting';
 require_once('head.php');
 ?>
 
 <body>
-<?php require('header.php'); ?>
+  <?php require('header.php'); ?>
+  <div class="container flex">
+    <!-- メニュー -->
+    <?php require_once('setting_menu.php'); ?>
 
-<div class="form_container border_white">
-  <h2 class="page_title">プロフィール編集</h2>
+    <div class="setting_container border_white">
+      <h2 class="page_title">プロフィール編集</h2>
 
-  <?php if (isset($flash_messages)): ?>
-    <?php foreach ((array)$flash_messages as $message): ?>
-      <p class ="flash_message <?= $flash_type ?>"><?= $message?></p>
-    <?php endforeach ?>
-  <?php endif ?>
+      <?php if (isset($flash_messages)): ?>
+        <?php foreach ((array)$flash_messages as $message): ?>
+          <p class ="flash_message <?= $flash_type ?>"><?= $message?></p>
+        <?php endforeach ?>
+      <?php endif ?>
 
-  <form action="" method="post">
-    <label for="name">名前</label><br>
-    <input id="name" type="text" name="name" value="<?= h(get_form_data('name')); ?>">
-    <span class="js_error_message"></span><br>
+      <form action="" method="post">
+        <label for="name">名前</label><br>
+        <input id="name" type="text" name="name" value="<?= h(get_form_data('name')); ?>">
+        <span class="js_error_message"></span><br>
 
-    <label for="email">Email</label><br>
-    <input id="email" type="email" name="email" value="<?= h(get_form_data('email')); ?>">
-    <span class="js_error_message"></span><br>
+        <label for="email">Email</label><br>
+        <input id="email" type="email" name="email" value="<?= h(get_form_data('email')); ?>">
+        <span class="js_error_message"></span><br>
 
-    <button id="js_btn" class="btn blue" type="submit" disabled>変更する</button>
-  </form>
-</div>
+        <button id="js_btn" class="btn blue" type="submit" disabled>変更する</button>
+      </form>
+    </div>
+  </div>
+
 
 <?php require_once('footer.php'); ?>

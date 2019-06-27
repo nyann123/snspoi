@@ -30,19 +30,22 @@ if(!empty($_POST)){
 debug('------------------------------');
 
 $site_title = '退会';
-$css_file_title = 'withdraw';
+$css_file_title = 'setting';
 require('head.php');
 ?>
 
-  <body>
-    <?php require('header.php'); ?>
+<body>
+  <?php require('header.php'); ?>
+  <div class="container flex">
+    <!-- メニュー -->
+  <?php require_once('setting_menu.php'); ?>
 
-    <div class="form_container border_white">
-      <h2 class="page_title">退会</h2>
+    <div class="setting_container border_white">
+      <h2 class="page_title withdraw">退会</h2>
       <form action="" method="post">
         <button class="btn red" name="withdraw" type="submit">退会する</button>
       </form>
-      <a href="user_page.php?page_id=<?= $current_user['id'] ?>&type=main"><戻る</a>
     </div>
 
-    <?php require('footer.php'); ?>
+  </div>
+  <?php require('footer.php'); ?>

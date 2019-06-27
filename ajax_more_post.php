@@ -19,7 +19,7 @@ if(isset($_POST['more_posts'])){
     $posts = get_posts($page_id,'favorite',$offset_count);
       break;
     default:
-      // code...
+
       break;
   }
   $posts_count = count($posts);

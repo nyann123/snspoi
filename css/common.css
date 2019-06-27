@@ -21,6 +21,11 @@ body{
   background-color: #121212;
 }
 
+ul{
+    list-style: none;
+    padding: 0;
+}
+
 a{
   text-decoration: none;
 }
@@ -67,9 +72,9 @@ margin-top: 0;
 }
 
 .js_error_message{
-  font-family: "dqfont";
+  font-family: "dot";
   color: #FF7763;
-  font-size: 28px;
+  font-size: 18px;
   margin-left: 10px;
 }
 
@@ -210,7 +215,6 @@ nav a:hover {
 }
 
 #top-nav ul {
-  list-style: none;
   margin: 0;
 }
 

@@ -29,12 +29,12 @@ $(function(){
 
     if ( input_name === '' ){
       $(name).addClass('error');
-      $(error_message).text("なまえをにゅうりょくしてください");
+      $(error_message).text("名前を入力してください");
         name_flg = 0;
 
     }else if ( input_name.length > 8){   //9文字以上をエラーに
       $(name).addClass('error');
-      $(error_message).text("なまえがながすぎます");
+      $(error_message).text("名前が長すぎます");
       name_flg = 0;
 
     }else{
@@ -51,12 +51,12 @@ $(function(){
 
     if ( input_email === '' ){
       $(email).addClass('error');
-      $(error_message).text("めーるあどれすをにゅうりょくしてください");
+      $(error_message).text("メールアドレスを入力してください");
       email_flg = 0;
 
     }else if ( !emailregex.test(input_email)){     //正規表現を使ってemail形式以外はエラーに
         $(email).addClass('error');
-        $(error_message).text("めーるあどれすがいじょうです");
+        $(error_message).text("メールアドレスが異常です");
         email_flg = 0;
 
     }else{
@@ -73,12 +73,12 @@ $(function(){
 
     if ( input_pass === ''){
       $(password).addClass('error');
-      $(error_message).text("ぱすわーどをにゅうりょくしてください");
+      $(error_message).text("パスワードを入力してください");
       password_flg = 0;
 
     }else if ( input_pass.length < 6 ){
       $(password).addClass('error');
-      $(error_message).text("ぱすわーどがみじかすぎます");
+      $(error_message).text("パスワードが短かすぎます");
       password_flg = 0;
 
     }else{

@@ -413,7 +413,7 @@ button > .far.fa-star:hover{
   box-sizing: border-box;
 }
 
-/* 背景固定用 */
+/* モーダル時背景固定用 */
 body.fixed {
     position: fixed;
     width: 100%;
