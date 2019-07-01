@@ -5,7 +5,7 @@
       <!-- アイコン -->
       <div class="icon border_white">
         <a href="user_page.php?page_id=<?= $post['user_id'] ?>&type=main">
-          <img src=<?= 'img/'.$post['user_icon_small'] ?> alt="">
+          <img src=<?= 'img/small'.$post['user_icon'] ?> alt="">
         </a>
       </div>
 
@@ -51,12 +51,11 @@
         <!-- モーダルウィンドウを開く -->
         <button data-target="#modal<?= $post['id'] ?>" class="delete_btn" type="button"><i class="far fa-trash-alt"></i></button>
         <!-- モーダルウィンドウ -->
-        <div class="modal" id="modal<?= $post['id'] ?>">
-          <div class="overlay modal_close"></div>
+        <div class="modal modal_close" id="modal<?= $post['id'] ?>">
           <div class="delete_confirmation border_white">
             <p class="modal_title" >こちらの投稿を削除しますか？</p>
             <p class="post_content"><?= nl2br(h($post['post_content'])) ?></p>
-            <form id="test" action="" method="post" class="btn_flex">
+            <form action="" method="post" class="btn_flex">
               <input type="hidden" name="post_id" value="<?= $post['id']?>">
               <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
               <button class="btn red" type="submit" name="delete" value="delete">削除</button>

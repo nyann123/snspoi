@@ -1,7 +1,7 @@
 .main_items{
   color: #fff;
-  max-width: 882px;
-  width: 80%;
+  max-width: 855px;
+  width: 75%;
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -61,6 +61,11 @@
   background-color: #FF7763;
 }
 
+.edit_btn{
+  width: auto;
+  padding: 0 5px;
+  margin: 15px;
+}
 .post_form{
   width: 100%;
   box-sizing: border-box;
@@ -257,28 +262,36 @@ button > .far.fa-star:hover{
 
 .profile{
   color:#fff;
-  min-width: 230px;
-  width: 20%;
+  min-width: 280px;
+  width: 25%;
   padding: 10px;
   margin-right: 10px;
   position: relative;
+  box-sizing: border-box;
 }
 
 .profile > .flex{
   justify-content: flex-start;
 }
 
-.profile_counts,.user_counts{
+.profile_counts{
+  margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
 }
 
 .follow_btn_form{
-  margin: 10px 0;
+  margin: 15px 0;
+}
+
+.profile_comment{
+  font-family: sans-serif;
+  text-align: left;
+  margin: 15px 0;
 }
 
 .profile_count{
-  width: 33%;
+  width: 50%;
   padding: 5px 0 ;
   margin-bottom: 5px;
   border-radius: 8px;
@@ -293,7 +306,7 @@ button > .far.fa-star:hover{
   background-color:rgba(205,180,123,0.5);
 }
 
-.profile > .flex > .user_name{
+.profile .user_name{
   font-family: sans-serif;
   font-size: 18px;
   margin: 0;
@@ -338,42 +351,6 @@ button > .far.fa-star:hover{
 
 .space{
   margin-bottom: 50px;
-}
-
-.edit_icon_menu{
-  position: absolute;
-  top :64px;
-  width: 150px;
-  padding: 0;
-  z-index: 10;
-  border-radius: 8px;
-  display: none;
-}
-
-.edit_icon_menu li{
-  color: #000;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 24px;
-  text-decoration: none;
-  background-color: #cdb47b;
-  width: 100%;
-  box-sizing: border-box;
-  border-bottom: 1px solid #000;
-  display: inline-block;
-}
-
-.edit_icon_menu li:first-child{
-  border-radius: 5px 5px 0 0;
-}
-
-.edit_icon_menu li:last-child{
-  border-radius: 0 0 5px 5px;
-}
-
-.edit_icon_menu li:hover{
-  background-color: #b09558;
-  cursor: pointer;
 }
 
 .icon_upload{
@@ -421,13 +398,9 @@ body.fixed {
     left: 0;
 }
 
-/* モーダルウィンドウのスタイル */
-.modal {
-  display:none;
-}
-
 /* オーバーレイのスタイル */
-.overlay {
+.modal {
+  display: none;
   position:fixed;
   top:0;
   left:0;
@@ -438,7 +411,7 @@ body.fixed {
 }
 
 /* モーダルウィンドウの中身 */
-.modal .delete_confirmation {
+.delete_confirmation {
   position:fixed;
   z-index:11;
   top:30%;
@@ -479,4 +452,44 @@ body.fixed {
 .btn_flex{
   justify-content: space-evenly;
   display: flex;
+  margin: 15px 0 ;
+}
+
+.profile .btn_flex{
+  display: none;
+}
+
+.gotop{
+  color: #fff;
+  font-size: 24px;
+  margin: 15px auto;
+}
+
+.gotop:hover{
+  cursor: pointer;
+}
+
+.editing{
+  z-index: 15;
+  background-color: #000;
+}
+
+.edit_name{
+  color: #fff;
+  width: 160px;
+  margin-left: 5px;
+  align-self: center;
+  background-color: transparent;
+  padding: 5px;
+  font-family: sans-serif;
+}
+
+.edit_comment{
+  color: #fff;
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+  background-color: transparent;
+  resize: none;
+  font-family: sans-serif;
 }

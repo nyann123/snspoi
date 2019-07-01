@@ -6,7 +6,7 @@
     <!-- アイコン -->
     <div class="icon border_white">
       <a href="user_page.php?page_id=<?= $user['id'] ?>&type=main">
-        <img src=<?= 'img/'.$user['user_icon_small'] ?> alt="">
+        <img src=<?= 'img/small'.$user['user_icon'] ?> alt="">
       </a>
     </div>
 
@@ -35,9 +35,8 @@
         <?php else: ?>
           <button class="follow_btn border_white btn" type="button" name="follow">フォロー</button>
         <?php endif; ?>
-
       </form>
     <?php endif; ?>
-
+        <p class="profile_comment"><?= $user['profile_comment'] ?></p>
   </div>
 <?php endforeach; ?>

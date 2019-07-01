@@ -98,7 +98,7 @@ $(function(){
 
 
   //================================
-  // 投稿削除
+  // 投稿削除確認
   //================================
   // モーダルウィンドウを開く処理
   $(document).on('click',".delete_btn",function(){
@@ -119,13 +119,75 @@ $(function(){
         return false;
   });
 
+  //================================
+  // プロフィール編集
+  //================================
+
+  $(document).on('mouseenter','.editing .profile_icon > img',function(){
+    $('.edit_icon').css('display','block');
+  })
+
+  //画像が無くなった時も操作できるように
+  $(document).on('mouseenter','.editing .profile_icon',function(){
+    $('.edit_icon').css('display','block');
+  })
+
+  $(document).on('mouseleave','.editing .edit_icon',function(){
+    $('.edit_icon').css('display','none');
+  })
+
+  $('.edit_icon').on('click',function(){
+    $('.icon_upload').click();
+  })
+
+
+  user_name = $('.profile .user_name').text(),
+  user_comment = $('.profile .profile_comment').text(),
+  user_icon = $('.profile img').attr('src');
+
+  $('.edit_btn').on('click',function(){
+    //背景をスクロールできないように　&　スクロール場所を維持
+    scroll_position = $(window).scrollTop();
+    $('body').addClass('fixed').css({'top': -scroll_position});
+    // 編集箇所以外を操作できないように
+    $('.profile').addClass('editing');
+    $('#profile_edit').fadeIn();
+
+    $('.profile .user_name').replaceWith(`<input class="edit_name border_white" type="text" value="${user_name}">`);
+    $('.profile .profile_comment').replaceWith('<textarea class="edit_comment border_white" type="text">'+user_comment);
+    $('.edit_icon').css('display','block');
+
+    //ボタンの切り替え
+    $(this).toggle();
+    $('.profile .btn_flex').css('display','flex');
+    return false;
+  })
+
+
+
   // モーダルウィンドウを閉じる処理
   $(document).on('click',".modal_close",function(){
     // スクロール場所を維持
     $('body').removeClass('fixed').css({'top': 0});
     window.scrollTo( 0 , scroll_position );
     // モーダルウィンドウを閉じる
-    $(this).parents(".modal").fadeOut();
+    $(".modal").fadeOut();
+
+    //↓↓↓プロフィール編集終了時の処理↓↓↓
+    // 各種データを編集前に戻す
+    $('.profile .edit_name').replaceWith(`<p class="user_name">${user_name}</p>`);
+    $('.profile .edit_comment').replaceWith(`<p class="profile_comment">${user_comment}</p>`);
+    $('.profile img').attr('src',user_icon);
+    $('.icon_upload').val('');
+
+    $('.edit_icon').css('display','none');
+    $('.edit_icon_menu').removeClass('open');
+
+    // ボタンの切り替え
+    $('.edit_btn').css('display','inline');
+    $('.profile .btn_flex').css('display','none');
+
+    $('.profile').removeClass('editing');
       return false;
   });
 
@@ -150,31 +212,15 @@ $(function(){
     }
   });
 
+
   //================================
-  // アイコン変更
+  // その他
   //================================
-
-  $('.profile_icon > img').on('mouseenter',function(){
-    $('.edit_icon').css('display','block');
+  //トップへスクロール
+  $(document).on('click','.gotop',function(){
+    $('body, html').animate({ scrollTop: 0 }, 500);
+    return false;
   })
-
-  //画像が無くなった時も操作できるように
-  $('.profile_icon').on('mouseenter',function(){
-    $('.edit_icon').css('display','block');
-  })
-
-  $('.edit_icon').on('mouseleave',function(){
-    $('.edit_icon').css('display','none');
-  })
-
-  $('.icon_upload_btn').on('click',function(){
-    $('.icon_upload').click();
-  })
-
-  $('.edit_icon').on('click',function(){
-    $('.edit_icon_menu').toggleClass('open');
-  });
-
 
   //================================
   // ajax処理
@@ -274,6 +320,8 @@ $(function(){
      }).done(function(data){
        // アイコンを返ってきた加工済みアイコンと入れ替える
        $('.profile_icon > img').attr('src',data);
+         $('.edit_icon').css('display','none');
+
        $(".icon_save").prop('disabled', false);
      }).fail(function(){
       location.reload();
@@ -281,22 +329,30 @@ $(function(){
    }
   });
 
-  //アイコン保存
-  $('.icon_save').on('click',function(e){
+  //プロフィール編集
+  $('.profile_save').on('click',function(e){
     e.stopPropagation();
-    let icon_data = $('.profile_icon > img').attr('src'),
+    let name_data = $('.profile .edit_name').val(),
+        comment_data = $('.profile .edit_comment').val(),
+        icon_data = $('.profile_icon > img').attr('src'),
         user_id = $(this).data('user_id');
 
     $.ajax({
       type: 'POST',
-      url: 'ajax_icon_save.php',
+      url: 'ajax_edit_profile.php',
       dataType: 'json',
-      data: {icon_save: true,
+      data: {name_data: name_data,
+             comment_data: comment_data,
              icon_data: icon_data,
              user_id: user_id}
     })
-    .done(function(){
-      location.reload();
+    .done(function(data){
+      console.log(data);
+      if(data['flash_message']){
+        show_slide_message(data['flash_type'],data['flash_message']);
+      }else{
+        location.reload();
+      }
     }).fail(function(){
       location.reload();
     });
@@ -309,7 +365,8 @@ $(function(){
       winh = $(window).innerHeight(), //ウィンドウの高さ
       bottom = doch - winh, //ページ全体の高さ - ウィンドウの高さ = ページの最下部位置
       page_id = get_param('page_id'),
-      page_type = get_param('type');
+      page_type = get_param('type'),
+      end_post_flg = 0;
 
   if (bottom <= $(window).scrollTop()) {
 
@@ -322,9 +379,17 @@ $(function(){
               page_id: page_id,
               page_type: page_type}
     }).done(function(data){
-      //投稿が返されていれば表示する
-      $('.main_items').append(data['posts_html']);
       offset += data['posts_count'];
+      //投稿が返されていれば追加する
+      if (data[('posts_html')]) {
+        $('.main_items').append(data['posts_html']);
+      }else{
+        end_post_flg = 1
+      }
+      // 投稿が全て読み込み終わったらトップへ戻るボタンを追加する
+      if(end_post_flg === 1 && !$('.item_container:last').next().hasClass('gotop')){
+        $('.main_items').append("<button type='button' class='gotop'>トップへ戻る <i class='fas fa-caret-up'></i></button>");
+      }
     }).fail(function(){
 
     })

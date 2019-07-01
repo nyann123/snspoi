@@ -66,7 +66,7 @@ if(!empty($_POST)){
 debug('------------------------------');
 
 $site_title = 'プロフィール編集';
-$css_file_title = $js_file_title =  'setting';
+$css_file_title = $js_file_title = 'setting';
 require_once('head.php');
 ?>
 

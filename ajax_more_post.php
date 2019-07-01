@@ -15,11 +15,13 @@ if(isset($_POST['more_posts'])){
     case 'main':
     $posts = get_posts($page_id,'my_post',$offset_count);
       break;
+
     case 'favorites':
     $posts = get_posts($page_id,'favorite',$offset_count);
       break;
-    default:
 
+    case 'timeline':
+    $posts = get_posts($current_user['id'],'timeline',$offset_count);
       break;
   }
   $posts_count = count($posts);

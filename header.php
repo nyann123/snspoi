@@ -18,17 +18,9 @@
               <li><a href="prof_edit.php">プロフィール編集</a></li>
               <li><a href="logout_process.php">ログアウト</a></li>
               <li><a href="withdraw.php">退会</a></li>
-              <li>test</li>
             </ul>
           </li>
-          <li class="toggle_menu timeline">タイムライン <span><i class="fas fa-caret-down"></i></span>
-            <ul class="child timeline_child">
-              <li><a href="timeline.php">test</a></li>
-              <li><a href="#">test</a></li>
-              <li><a href="#">test</a></li>
-              <li>test</li>
-            </ul>
-          </li>
+          <li><a href="user_page.php?type=timeline" class="toggle_menu timeline">タイムライン</a></li>
           <li><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>&type=main">マイページ</a></li>
         <?php endif ?>
       </ul>

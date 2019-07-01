@@ -7,14 +7,22 @@ debug('「「「「「「「「「「「');
 debugLogStart();
 
 require_once('auth.php');
-debug("ページID：${_GET['page_id']}");
+$current_user = get_user($_SESSION['user_id']);
+
+if(isset($_GET['page_id'])){
+  debug("ページID：${_GET['page_id']}");
+}
 debug("ページtype：${_GET['type']}");
 
-$page_user = get_user($_GET['page_id']);
+if(isset($_GET['page_id'])){
+  $page_user = get_user($_GET['page_id']);
+}else{
+  $page_user = $current_user;
+}
+
 $page_type = $_GET['type'];
 
 //ログイン中のユーザー情報を取得
-$current_user = get_user($_SESSION['user_id']);
 debug(print_r($current_user,true));
 
 
@@ -27,6 +35,10 @@ switch ($page_type) {
   case 'favorites':
     $posts = get_posts($page_user['id'],'favorite',0);
   break;
+
+  case 'timeline':
+    $posts = get_posts($current_user['id'],'timeline',0);
+    break;
 
   case 'follows':
     $follow_users = get_follows($page_user['id']);
@@ -59,7 +71,11 @@ debug('------------------------------');
 <body>
   <?php require_once('header.php'); ?>
 
-  <h2 class="site_title"><?= $site_title.'のページ' ?></h2>
+  <?php if ($page_type === 'timeline'): ?>
+    <h2 class="site_title">タイムライン</h2>
+  <?php else: ?>
+    <h2 class="site_title"><?= $site_title.'のページ' ?></h2>
+  <?php endif; ?>
   <div class="container flex">
 
       <!-- プロフィール -->
@@ -69,7 +85,7 @@ debug('------------------------------');
         <div class="main_items border_white">
 
         <!-- 自分のページのみ投稿フォームを表示 -->
-        <?php if (is_myself($page_user['id']) && $page_type === 'main'): ?>
+        <?php if (is_myself($page_user['id']) && $page_type === 'main' || $page_type === 'timeline'): ?>
           <form class ="post_form border_white" action="#" method="post">
             <textarea class="textarea border_white" placeholder="投稿する" name="content"></textarea><br>
             <input id="post_btn" type="submit" name="post" value="投稿" disabled>
@@ -94,7 +110,7 @@ debug('------------------------------');
         <?php endif; ?>
 
         <!-- getパラメータに合わせたページを表示 -->
-        <?php if($page_type === 'main' || $page_type === 'favorites') require_once('post_list.php') ?>
+        <?php if($page_type === 'main' || $page_type === 'favorites' || $page_type === 'timeline') require_once('post_list.php') ?>
         <?php if($page_type === 'follows' || $page_type === 'followers') require_once('user_list.php') ?>
 
       </div>

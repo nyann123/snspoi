@@ -90,13 +90,23 @@ function check_favolite_duplicate($user_id,$post_id){
   $favorite = $stmt->fetch();
   return $favorite;
 }
+
+// 長さチェック
+function valid_length($str,$length){
+  if (mb_strlen($str) >= $length) {
+    return true;
+  }else{
+    return false;
+  }
+}
+
 // 名前のバリデーション
 function valid_name($name){
   global $error_messages;
   if ( empty($name) ){
     $error_messages['name'] = 'なまえを入力してください';
-  }elseif( mb_strlen($name, $post, "UTF-8") > 8 ){
-    $error_messages['name'] = 'なまえは10文字以内で入力してください';
+  }elseif(valid_length($name,8) ){
+    $error_messages['name'] = 'なまえは8文字以内で入力してください';
   }
 }
 // メールアドレスのバリデーション
@@ -116,11 +126,11 @@ function valid_password($pass){
   }
 }
 // 投稿内容のバリデーション
-function valid_post_length($post){
+function valid_post($post){
   global $error_messages;
   if (empty($post)){
     $error_messages = '投稿の内容がありません';
-  }else if(mb_strlen($post, "UTF-8" ) > 150){
+  }else if(valid_length($post,150)){
     $error_messages = '内容が長すぎます';
   }
 }
@@ -143,7 +153,7 @@ function get_user($user_id){
   debug('ユーザー情報を取得します');
   try {
     $dbh = dbConnect();
-    $sql = "SELECT id,name,email,user_icon,user_icon_small
+    $sql = "SELECT id,name,email,user_icon,profile_comment
             FROM users
             WHERE id = :id AND delete_flg = 0 ";
     $stmt = $dbh->prepare($sql);
@@ -156,7 +166,6 @@ function get_user($user_id){
   }
 }
 
-
 // ユーザーの投稿を取得する
 function get_posts($page_id,$type,$offset_count=0){
   debug(($offset_count + 1).'~'.($offset_count + 10).'件目のユーザー投稿を取得します');
@@ -166,7 +175,7 @@ function get_posts($page_id,$type,$offset_count=0){
   switch ($type) {
     //自分の投稿を取得する
     case 'my_post':
-    $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
+    $sql = "SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
             FROM users u INNER JOIN posts p ON u.id = p.user_id
             WHERE p.user_id = :id AND p.delete_flg = 0
             ORDER BY p.created_at DESC
@@ -175,13 +184,27 @@ function get_posts($page_id,$type,$offset_count=0){
 
     //お気に入り登録した投稿を取得する
     case 'favorite':
-    $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
+    $sql = "SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
             FROM posts p INNER JOIN favorite f ON p.id = f.post_id
             INNER JOIN users u ON u.id = p.user_id
             WHERE f.user_id = :id AND p.delete_flg = 0
             ORDER BY f.id DESC
             LIMIT 10 OFFSET :offset_count";
       break;
+
+    // 自分とフォロー中のユーザー投稿取得
+    case 'timeline':
+    $sql = "SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
+            FROM users u INNER JOIN posts p ON u.id = p.user_id
+            WHERE  p.user_id = :id AND p.delete_flg = 0
+            UNION
+            SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
+            FROM users u INNER JOIN posts p ON u.id = p.user_id
+            INNER JOIN follows ON follows.followed_id = p.user_id
+            WHERE follows.follow_id = :id AND p.delete_flg = 0
+            ORDER BY created_at DESC
+            LIMIT 10 OFFSET :offset_count";
+    break;
   }
 
   try{
@@ -198,23 +221,13 @@ function get_posts($page_id,$type,$offset_count=0){
   }
 }
 
-// 自分とフォロー中のユーザー投稿取得
-// $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
-//         FROM users u INNER JOIN posts p ON u.id = p.user_id
-//         WHERE  p.user_id = :id AND p.delete_flg = 0
-//         UNION
-//         SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
-//         FROM users u INNER JOIN posts p ON u.id = p.user_id
-//         INNER JOIN follows ON follows.followed_id = p.user_id
-//         WHERE follows.follow_id = :id AND p.delete_flg = 0
-//         ORDER BY created_at DESC";
 
 // 全ての投稿を取得する
 function get_all_posts(){
   debug('全ての投稿を取得します');
   try{
     $dbh = dbConnect();
-    $sql = "SELECT u.name,u.user_icon_small,p.id,p.user_id,p.post_content,p.created_at
+    $sql = "SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
             FROM users u INNER JOIN posts p ON u.id = p.user_id
             WHERE p.delete_flg = 0
             ORDER BY p.created_at DESC";
