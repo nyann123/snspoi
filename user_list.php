@@ -37,6 +37,6 @@
         <?php endif; ?>
       </form>
     <?php endif; ?>
-        <p class="profile_comment"><?= $user['profile_comment'] ?></p>
+        <p class="profile_comment"><?= h($user['profile_comment']) ?></p>
   </div>
 <?php endforeach; ?>

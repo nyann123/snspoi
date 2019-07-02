@@ -13,7 +13,6 @@
       <form id="icon_form">
         <input type="hidden" name="MAX_FILE_SIZE" value="10485760">
         <input class="icon_upload" type="file" name="icon">
-        <button type="button" class = "icon_upload_btn">アップロード</button>
       </form>
     </div>
 
@@ -35,7 +34,7 @@
 
       </form>
     <?php else: ?>
-      <button class="edit_btn border_white btn" type="button" name="follow">プロフィール編集</button>
+      <button class="btn edit_btn border_white btn" type="button" name="follow">プロフィール編集</button>
       <div class="btn_flex">
         <button class="btn blue profile_save" type="button" data-user_id="<?= $profile_user['id'] ?>">編集完了</button>
         <button class="btn red modal_close" type="button">キャンセル</button>
@@ -43,7 +42,7 @@
 
     <?php endif; ?>
 
-    <p class="profile_comment"><?= $profile_user['profile_comment'] ?></p>
+    <p class="profile_comment"><?= h($profile_user['profile_comment']) ?></p>
 
   <div class="profile_counts">
     <div class="profile_count post <?php if( $page_type === 'main') echo 'active' ?>">

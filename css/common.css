@@ -19,6 +19,7 @@
 
 body{
   background-color: #121212;
+   overflow-y: scroll;
 }
 
 ul{
@@ -87,6 +88,7 @@ margin-top: 0;
   width: 100%;
   margin: 0 auto;
   text-align: center;
+  justify-content: space-between;
 }
 
 .form_container{

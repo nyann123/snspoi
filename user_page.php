@@ -41,12 +41,12 @@ switch ($page_type) {
     break;
 
   case 'follows':
-    $follow_users = get_follows($page_user['id']);
+    $follow_users = get_related_users($page_user['id'],'follows',0);
     $id_type = 'followed';
   break;
 
   case 'followers':
-    $follow_users = get_followers($page_user['id']);
+    $follow_users = get_related_users($page_user['id'],'followers',0);
     $id_type = 'follow';
   break;
 }
@@ -101,11 +101,11 @@ debug('------------------------------');
           <p>お気に入りが登録されていません</p>
         <?php endif; ?>
 
-        <?php if (empty(get_follows($page_user['id'])) && $page_type === 'follows'): ?>
+        <?php if (empty(get_related_users($page_user['id'],'follows')) && $page_type === 'follows'): ?>
           <p>ユーザーがいません</p>
         <?php endif; ?>
 
-        <?php if (empty(get_followers($page_user['id'])) && $page_type === 'followers'): ?>
+        <?php if (empty(get_related_users($page_user['id'],'followers')) && $page_type === 'followers'): ?>
           <p>ユーザーがいません</p>
         <?php endif; ?>
 

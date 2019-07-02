@@ -87,15 +87,13 @@ $(function(){
 
   // フォームの高さを自動調整(拡大のみ、縮小も実装したい)
   $('.textarea').on('input',function(){
-  let scroll_height = $(this).get(0).scrollHeight;
-  let offset_height = $(this).get(0).offsetHeight;
+    let scroll_height = $(this).get(0).scrollHeight;
+    let offset_height = $(this).get(0).offsetHeight;
 
-  if( scroll_height > offset_height ){
-    $(this).css('height',scroll_height +"px");
-  }
-
-})
-
+    if( scroll_height > offset_height ){
+      $(this).css('height',scroll_height +"px");
+    }
+  })
 
   //================================
   // 投稿削除確認
@@ -140,10 +138,20 @@ $(function(){
     $('.icon_upload').click();
   })
 
+  // 高さを自動調整
+  $(document).on('input','.edit_comment',function(){
+    let scroll_height = $(this).get(0).scrollHeight;
+    let offset_height = $(this).get(0).offsetHeight;
+
+    if( scroll_height > offset_height ){
+      $(this).css('height',scroll_height +"px");
+    }
+  })
 
   user_name = $('.profile .user_name').text(),
   user_comment = $('.profile .profile_comment').text(),
   user_icon = $('.profile img').attr('src');
+
 
   $('.edit_btn').on('click',function(){
     //背景をスクロールできないように　&　スクロール場所を維持
@@ -154,8 +162,8 @@ $(function(){
     $('#profile_edit').fadeIn();
 
     $('.profile .user_name').replaceWith(`<input class="edit_name border_white" type="text" value="${user_name}">`);
-    $('.profile .profile_comment').replaceWith('<textarea class="edit_comment border_white" type="text">'+user_comment);
     $('.edit_icon').css('display','block');
+    $('.profile .profile_comment').replaceWith('<textarea class="edit_comment border_white" type="text">'+user_comment);
 
     //ボタンの切り替え
     $(this).toggle();
@@ -261,7 +269,7 @@ $(function(){
   });
 
   // フォロー登録、解除処理
-  $('.follow_btn').on('click',function(e){
+  $(document).on('click','.follow_btn',function(e){
     e.stopPropagation();
     let $this = $(this),
         $follow_count = $('.profile_count + .follow > a > .count_num'),
@@ -360,6 +368,7 @@ $(function(){
 
   //最後までスクロールしたら投稿を取得する
   offset= 10;
+  flg = 0 ;
   $(window).on('scroll', function () {
   let doch = $(document).innerHeight(), //ページ全体の高さ
       winh = $(window).innerHeight(), //ウィンドウの高さ
@@ -368,21 +377,22 @@ $(function(){
       page_type = get_param('type'),
       end_post_flg = 0;
 
-  if (bottom <= $(window).scrollTop()) {
+      if (bottom * 0.9 <= $(window).scrollTop() && flg === 0) {
+        flg = 1;
 
     $.ajax({
       type: 'POST',
-      url: 'ajax_more_post.php',
+      url: 'ajax_more_data.php',
       dataType: 'json',
       data: { more_posts: true,
               offset: offset,
               page_id: page_id,
               page_type: page_type}
     }).done(function(data){
-      offset += data['posts_count'];
+      offset += data['data_count'];
       //投稿が返されていれば追加する
-      if (data[('posts_html')]) {
-        $('.main_items').append(data['posts_html']);
+      if (data[('data_html')]) {
+        $('.main_items').append(data['data_html']);
       }else{
         end_post_flg = 1
       }
@@ -390,6 +400,7 @@ $(function(){
       if(end_post_flg === 1 && !$('.item_container:last').next().hasClass('gotop')){
         $('.main_items').append("<button type='button' class='gotop'>トップへ戻る <i class='fas fa-caret-up'></i></button>");
       }
+      flg = 0
     }).fail(function(){
 
     })

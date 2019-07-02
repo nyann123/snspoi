@@ -13,7 +13,7 @@ if(isset($_POST['follow'])){
   $profile_user_id = $_POST['profile_user_id'] ?? $user_id;
 
   // 自分をフォローできないように
-  if ( $current_user['id'] !== $user_id){
+  if ( !is_myself($user_id)){
     // すでに登録されているか確認して登録、削除のSQL切り替え
     if(check_follow($current_user['id'],$user_id)){
       $action = '解除';

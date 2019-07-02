@@ -15,7 +15,6 @@ if(isset($_POST)){
   // バリデーション
   valid_name($name_data);
   if(isset($error_messages['name'])){
-    debug('a');
     $return = array('flash_type' => 'flash_error',
                     'flash_message' => $error_messages['name']);
     unset($error_messages);
@@ -24,7 +23,6 @@ if(isset($_POST)){
   }
   // バリデーション
   if(valid_length($comment_data,100)){
-    debug('b');
     $return = array('flash_type' => 'flash_error',
                     'flash_message' => 'コメントは１００文字以内で入力してください');
     echo json_encode($return);

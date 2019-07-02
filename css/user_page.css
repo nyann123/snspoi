@@ -1,10 +1,11 @@
 .main_items{
   color: #fff;
-  max-width: 855px;
   width: 75%;
+  max-width: 75%;
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 .item_container{
@@ -21,7 +22,7 @@
 
 .user_container{
   width: 49.7%;
-  height: 150px;
+  height: 180px;
   align-content: space-between;
 }
 
@@ -44,6 +45,17 @@
   background-color: transparent;
 }
 
+.edit_btn{
+  width: auto;
+  padding: 0 5px;
+  margin: 15px 0;
+}
+
+.profile .btn{
+  font-size: 16px;
+  height: 30px;
+}
+
 .follow_btn:hover{
   border-color:#3FBFFF;
   color:#3FBFFF;
@@ -61,11 +73,8 @@
   background-color: #FF7763;
 }
 
-.edit_btn{
-  width: auto;
-  padding: 0 5px;
-  margin: 15px;
-}
+
+
 .post_form{
   width: 100%;
   box-sizing: border-box;
@@ -262,10 +271,9 @@ button > .far.fa-star:hover{
 
 .profile{
   color:#fff;
-  min-width: 280px;
-  width: 25%;
+  min-width: 24%;
+  width: 24%;
   padding: 10px;
-  margin-right: 10px;
   position: relative;
   box-sizing: border-box;
 }
@@ -287,7 +295,9 @@ button > .far.fa-star:hover{
 .profile_comment{
   font-family: sans-serif;
   text-align: left;
-  margin: 15px 0;
+  margin: 0 0 15px;
+  width: 100%;
+  word-wrap: break-word;
 }
 
 .profile_count{
@@ -357,31 +367,6 @@ button > .far.fa-star:hover{
   display: none;
 }
 
-.icon_upload_btn{
-  display:block;
-  line-height: 24px;
-  width: 100%;
-  margin: 0;
-}
-
-.icon_save{
-  display:block;
-  line-height: 24px;
-  width: 100%;
-}
-
-.icon_save:hover{
-  cursor: pointer;
-}
-
-.icon_save:disabled{
-  cursor: not-allowed;
-}
-
-.icon_upload_btn:hover{
-  cursor: pointer;
-}
-
 .icon{
   width: 52px;
   height: 52px;
@@ -413,7 +398,7 @@ body.fixed {
 /* モーダルウィンドウの中身 */
 .delete_confirmation {
   position:fixed;
-  z-index:11;
+  z-index:15;
   top:30%;
   left:50%;
   width: 600px;
@@ -466,9 +451,14 @@ body.fixed {
 }
 
 .gotop:hover{
+  color: #CDB47B;
   cursor: pointer;
 }
 
+.gotop > i:hover{
+  color: #CDB47B;
+
+}
 .editing{
   z-index: 15;
   background-color: #000;
@@ -487,9 +477,13 @@ body.fixed {
 .edit_comment{
   color: #fff;
   width: 100%;
-  height: 100px;
+  height: 150px;
   box-sizing: border-box;
   background-color: transparent;
   resize: none;
   font-family: sans-serif;
+}
+
+.edit_comment::-webkit-scrollbar{
+  display: none;
 }

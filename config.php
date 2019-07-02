@@ -93,11 +93,8 @@ function check_favolite_duplicate($user_id,$post_id){
 
 // 長さチェック
 function valid_length($str,$length){
-  if (mb_strlen($str) >= $length) {
-    return true;
-  }else{
-    return false;
-  }
+  $result = mb_strlen($str) <= $length ? true: false;
+  return !$result;
 }
 
 // 名前のバリデーション
@@ -166,12 +163,128 @@ function get_user($user_id){
   }
 }
 
+
+function get_related_users($user_id, $type, $offset_count=0){
+  $dbh = dbConnect();
+  switch ($type) {
+    case 'follows':
+    $sql = "SELECT followed_id
+            FROM follows
+            WHERE :follow_id = follow_id AND delete_flg = 0
+            LIMIT 20 offset :offset_count";
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':follow_id', $user_id);
+    $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
+      break;
+
+    case 'followers':
+    $sql = "SELECT follow_id
+            FROM followers
+            WHERE :followed_id = followed_id AND delete_flg = 0
+            LIMIT 20 offset :offset_count";
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':followed_id', $user_id);
+    $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
+      break;
+  }
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// delete_flgを変更する
+function change_delete_flg($user,$flg){
+  $dbh = dbConnect();
+  $dbh->beginTransaction();
+
+  $sql1 = 'UPDATE users SET delete_flg = :flg WHERE id = :id';
+  $stmt1 = $dbh->prepare($sql1);
+  $stmt1->execute(array(':flg' => $flg , ':id' => $user['id']));
+  //postsテーブル
+  $sql2 = 'UPDATE posts SET delete_flg = :flg WHERE user_id = :id';
+  $stmt2 = $dbh->prepare($sql2);
+  $stmt2->execute(array(':flg' => $flg , ':id' => $user['id']));
+  //favoriteテーブル
+  $sql3 = 'UPDATE favorite SET delete_flg = :flg WHERE user_id = :id';
+  $stmt3 = $dbh->prepare($sql3);
+  $stmt3->execute(array(':flg' => $flg , ':id' => $user['id']));
+  //followsテーブル
+  $sql4 = 'UPDATE follows SET delete_flg = :flg WHERE follow_id = :id OR followed_id = :id';
+  $stmt4 = $dbh->prepare($sql4);
+  $stmt4->execute(array(':flg' => $flg , ':id' => $user['id']));
+  //followersテーブル
+  $sql5 = 'UPDATE followers SET delete_flg = :flg WHERE follow_id = :id OR followed_id = :id';
+  $stmt5 = $dbh->prepare($sql5);
+  $stmt5->execute(array(':flg' => $flg , ':id' => $user['id']));
+
+  // すべてのクエリが通っていれば保存
+  if (query_result($stmt1) && query_result($stmt2) && query_result($stmt3)
+  &&  query_result($stmt4) && query_result($stmt5) ){
+    $dbh->commit();
+    return $stmt1;
+  }else{
+    $dbh->rollback();
+  }
+}
+
+//既にフォローされているか確認する
+function check_follow($follow_user,$followed_user){
+  $dbh = dbConnect();
+  $sql = "SELECT follow_id,followed_id
+          FROM follows
+          WHERE :follow_id =follow_id AND :followed_id = followed_id";
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':follow_id' => $follow_user,
+                       ':followed_id' => $followed_user));
+  return  $stmt->fetch();
+}
+
+//ユーザーの各種カウントを取得する
+function get_user_count($object,$user_id){
+  $dbh = dbConnect();
+  switch ($object) {
+    case 'post':
+    $sql ="SELECT COUNT(post_content)
+          FROM posts
+          WHERE user_id = :id AND delete_flg = 0";
+      break;
+    case 'follow':
+    $sql ="SELECT COUNT(followed_id)
+          FROM follows
+          WHERE follow_id = :id AND delete_flg = 0";
+      break;
+    case 'follower':
+    $sql ="SELECT COUNT(follow_id)
+          FROM followers
+          WHERE followed_id = :id AND delete_flg = 0";
+      break;
+    case 'favorite':
+    $sql ="SELECT COUNT(post_id)
+          FROM favorite
+          WHERE user_id = :id AND delete_flg = 0";
+  }
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':id' => $user_id));
+  return $stmt->fetch();
+}
+
+//投稿のお気に入り数を取得する
+function get_post_favorite_count($post_id){
+  $dbh = dbConnect();
+  $sql = "SELECT COUNT(user_id)
+          FROM favorite
+          WHERE post_id = :post_id";
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':post_id' => $post_id));
+  return $stmt->fetch();
+}
+
 // ユーザーの投稿を取得する
 function get_posts($page_id,$type,$offset_count=0){
   debug(($offset_count + 1).'~'.($offset_count + 10).'件目のユーザー投稿を取得します');
   global $current_user;
   $dbh = dbConnect();
 
+  // ページに合わせてSQLを変える
   switch ($type) {
     //自分の投稿を取得する
     case 'my_post':
@@ -219,124 +332,6 @@ function get_posts($page_id,$type,$offset_count=0){
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
   }
-}
-
-
-// 全ての投稿を取得する
-function get_all_posts(){
-  debug('全ての投稿を取得します');
-  try{
-    $dbh = dbConnect();
-    $sql = "SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
-            FROM users u INNER JOIN posts p ON u.id = p.user_id
-            WHERE p.delete_flg = 0
-            ORDER BY p.created_at DESC";
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute();
-    if(query_result($stmt)){
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-  } catch (\Exception $e) {
-    echo $e->getMessage() . PHP_EOL;
-  }
-}
-
-
-// delete_flgを変更する
-function change_delete_flg($user,$flg){
-  $dbh = dbConnect();
-  $dbh->beginTransaction();
-
-  $sql1 = 'UPDATE users SET delete_flg = :flg WHERE id = :id';
-  $stmt1 = $dbh->prepare($sql1);
-  $stmt1->execute(array(':flg' => $flg , ':id' => $user['id']));
-  //postsテーブル
-  $sql2 = 'UPDATE posts SET delete_flg = :flg WHERE user_id = :id';
-  $stmt2 = $dbh->prepare($sql2);
-  $stmt2->execute(array(':flg' => $flg , ':id' => $user['id']));
-  //favoriteテーブル
-  $sql3 = 'UPDATE favorite SET delete_flg = :flg WHERE user_id = :id';
-  $stmt3 = $dbh->prepare($sql3);
-  $stmt3->execute(array(':flg' => $flg , ':id' => $user['id']));
-
-  if (query_result($stmt1) && query_result($stmt2) && query_result($stmt3)) {
-    $dbh->commit();
-    return $stmt1;
-  }else{
-    $dbh->rollback();
-  }
-}
-
-//既にフォローされているか確認する
-function check_follow($follow_user,$followed_user){
-  $dbh = dbConnect();
-  $sql = "SELECT follow_id,followed_id
-          FROM follows
-          WHERE :follow_id =follow_id AND :followed_id = followed_id";
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':follow_id' => $follow_user,
-                       ':followed_id' => $followed_user));
-  return  $stmt->fetch();
-}
-
-function get_follows($page_id){
-  $dbh = dbConnect();
-  $sql = "SELECT followed_id
-          FROM follows
-          WHERE :follow_id = follow_id";
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':follow_id' => $page_id));
-  return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-function get_followers($page_id){
-  $dbh = dbConnect();
-  $sql = "SELECT follow_id
-          FROM followers
-          WHERE :followed_id = followed_id";
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':followed_id' => $page_id));
-  return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-//ユーザーの各種カウントを取得する
-function get_user_count($object,$user_id){
-  $dbh = dbConnect();
-  switch ($object) {
-    case 'post':
-    $sql ="SELECT COUNT(post_content)
-          FROM posts
-          WHERE user_id = :id";
-      break;
-    case 'follow':
-    $sql ="SELECT COUNT(followed_id)
-          FROM follows
-          WHERE follow_id = :id";
-      break;
-    case 'follower':
-    $sql ="SELECT COUNT(follow_id)
-          FROM followers
-          WHERE followed_id = :id";
-      break;
-    case 'favorite':
-    $sql ="SELECT COUNT(post_id)
-          FROM favorite
-          WHERE user_id = :id";
-  }
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':id' => $user_id));
-  return $stmt->fetch();
-}
-
-//投稿のお気に入り数を取得する
-function get_post_favorite_count($post_id){
-  $dbh = dbConnect();
-  $sql = "SELECT COUNT(user_id)
-          FROM favorite
-          WHERE post_id = :post_id";
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute(array(':post_id' => $post_id));
-  return $stmt->fetch();
 }
 
 //================================

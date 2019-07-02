@@ -51,7 +51,7 @@
         <!-- モーダルウィンドウを開く -->
         <button data-target="#modal<?= $post['id'] ?>" class="delete_btn" type="button"><i class="far fa-trash-alt"></i></button>
         <!-- モーダルウィンドウ -->
-        <div class="modal modal_close" id="modal<?= $post['id'] ?>">
+        <div class="modal" id="modal<?= $post['id'] ?>">
           <div class="delete_confirmation border_white">
             <p class="modal_title" >こちらの投稿を削除しますか？</p>
             <p class="post_content"><?= nl2br(h($post['post_content'])) ?></p>
