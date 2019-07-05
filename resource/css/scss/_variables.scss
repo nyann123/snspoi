@@ -1,0 +1,30 @@
+// ブレイクポイント
+$breakpoints: (
+  'sm': 'screen and (min-width: 400px)',
+  'md': 'screen and (min-width: 768px)',
+  'lg': 'screen and (min-width: 1000px)',
+  'xl': 'screen and (min-width: 1200px)',
+) !default;
+
+// メディアクエリ呼び出し
+@mixin mq($breakpoint: md) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+//色
+$red: #FF7763;
+$blue: #3FBFFF;
+$green: #4FDF4B;
+$gray: #b8b8b8;
+$gold: #cdb47b;
+$light_gold: rgba(205,180,123,0.5);
+$dark_gold: #b09558;
+
+//フォントサイズ
+$fontXS: 14px;
+$fontS: 16px;
+$fontM: 18px;
+$fontL: 20px;
+$fontXL: 28px;

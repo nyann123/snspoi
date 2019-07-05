@@ -30,7 +30,6 @@ if(!empty($_POST)){
 debug('------------------------------');
 
 $site_title = '退会';
-$css_file_title = 'setting';
 require('head.php');
 ?>
 

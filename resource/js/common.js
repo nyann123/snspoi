@@ -11,22 +11,8 @@ $(function(){
 
   // メニュー
   $('.toggle_menu.menu').on('click',function(){
-    if ( $('.timeline_child').hasClass('open')){
-      $('.timeline_child').toggleClass('open');
-      toggle_cursor('timeline');
-    }
     $('.menu_child').toggleClass('open');
     toggle_cursor('menu');
-  });
-
-  //タイムライン
-  $('.toggle_menu.timeline').on('click',function(){
-    if ( $('.menu_child').hasClass('open')){
-      $('.menu_child').toggleClass('open');
-      toggle_cursor('menu');
-    }
-    $('.timeline_child').toggleClass('open');
-      toggle_cursor('timeline');
   });
 
   // メッセージ表示

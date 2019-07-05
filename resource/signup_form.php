@@ -21,7 +21,7 @@ if(!empty($_POST)){
 }
 
 $site_title = '新規登録';
-$css_file_title = $js_file_title = 'signup';
+$js_file_title = 'signup';
 require_once('head.php');
  ?>
 
@@ -40,7 +40,7 @@ require_once('head.php');
       <form action="#" method="post">
         <span class="flash_cursor">｝</span>
 
-        <label for="name">おなまえ <span class="text_small">※最大８文字</span></label><br>
+        <label for="name">おなまえ <span>※最大８文字</span></label><br>
         <input id="name" type="text" name="name" value="<?php if (isset($oldname)) echo h($oldname); ?>">
         <span class="js_error_message"></span><br>
 
@@ -48,7 +48,7 @@ require_once('head.php');
         <input id="email" autocomplete="false" type="text" name="email" value="<?php if (isset($oldemail)) echo h($oldemail) ?>">
         <span class="js_error_message"></span> <br>
 
-        <label for="password">パスワード <span class="text_small">※半角英数６文字以上</span> </label><br>
+        <label for="password">パスワード <span>※半角英数６文字以上</span> </label><br>
         <input id="password" autocomplete="flase" type="password" name="pass" value="<?php if (isset($oldpass)) echo h($oldpass) ?>">
         <span class="js_error_message"></span><br>
 

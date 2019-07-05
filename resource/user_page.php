@@ -64,7 +64,7 @@ if(!empty($_POST['delete'])){
 debug('------------------------------');
 
  $site_title = $page_user['name'];
- $css_file_title = $js_file_title= 'user_page';
+$js_file_title= 'user_page';
  require_once('head.php');
   ?>
 
@@ -72,9 +72,9 @@ debug('------------------------------');
   <?php require_once('header.php'); ?>
 
   <?php if ($page_type === 'timeline'): ?>
-    <h2 class="site_title">タイムライン</h2>
+    <h2 class="user_page_title">タイムライン</h2>
   <?php else: ?>
-    <h2 class="site_title"><?= $site_title.'のページ' ?></h2>
+    <h2 class="user_page_title"><?= $site_title.'のページ' ?></h2>
   <?php endif; ?>
   <div class="container flex">
 

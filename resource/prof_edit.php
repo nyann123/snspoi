@@ -66,7 +66,7 @@ if(!empty($_POST)){
 debug('------------------------------');
 
 $site_title = 'プロフィール編集';
-$css_file_title = $js_file_title = 'setting';
+$js_file_title = 'setting';
 require_once('head.php');
 ?>
 
@@ -77,7 +77,7 @@ require_once('head.php');
     <?php require_once('setting_menu.php'); ?>
 
     <div class="setting_container border_white">
-      <h2 class="page_title">プロフィール編集</h2>
+      <h2 class="page_title prof_edit">プロフィール編集</h2>
 
       <?php if (isset($flash_messages)): ?>
         <?php foreach ((array)$flash_messages as $message): ?>

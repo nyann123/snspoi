@@ -1,5 +1,5 @@
 $(function(){
-  
+
   function move_cousor(id){
       switch (id) {
       case 'email':
@@ -13,6 +13,8 @@ $(function(){
     }
   }
 
+  //カーソルを初期位置に
+  $('.flash_cursor').css({'top':'-20px'});
 
   $('input').on('focusin',function(){
     move_cousor( $(this).attr('id') );      //フォームのidを取得して関数に渡す

@@ -20,7 +20,7 @@
               <li><a href="withdraw.php">退会</a></li>
             </ul>
           </li>
-          <li><a href="user_page.php?type=timeline" class="toggle_menu timeline">タイムライン</a></li>
+          <li><a href="user_page.php?type=timeline">タイムライン</a></li>
           <li><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>&type=main">マイページ</a></li>
         <?php endif ?>
       </ul>
