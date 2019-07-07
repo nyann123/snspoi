@@ -5,20 +5,23 @@ $(function(){
   let email_flg
   let password_flg
 
+  //カーソルを初期位置に
+  $('.flash_cursor').css({'top':'5px'});
+  
   // 渡されたidで選択中のフォームを判定してカーソルを移動させる
   function move_cousor(id){
       switch (id) {
       case 'name':
-        $('.flash_cursor').css({'top':'0px'});
+        $('.flash_cursor').css({'top':'5px'});
         break;
       case 'email':
-        $('.flash_cursor').css({'top':'85px'});
+        $('.flash_cursor').css({'top':'105px'});
         break;
       case 'password':
-        $('.flash_cursor').css({'top':'170px'});
+        $('.flash_cursor').css({'top':'205px'});
         break;
       case 'js_btn':
-        $('.flash_cursor').css({'top':'230px'});
+        $('.flash_cursor').css({'top':'275px'});
     }
   }
 
@@ -78,7 +81,7 @@ $(function(){
 
     }else if ( input_pass.length < 6 ){
       $(password).addClass('error');
-      $(error_message).text("パスワードが短かすぎます");
+      $(error_message).text("パスワードが短すぎます");
       password_flg = 0;
 
     }else{

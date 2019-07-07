@@ -1,5 +1,4 @@
 <?php foreach($posts as $post): ?>
-
     <div class="item_container post_container border_white">
 
       <!-- アイコン -->
@@ -51,18 +50,17 @@
         <!-- モーダルウィンドウを開く -->
         <button data-target="#modal<?= $post['id'] ?>" class="delete_btn" type="button"><i class="far fa-trash-alt"></i></button>
         <!-- モーダルウィンドウ -->
-        <div class="modal" id="modal<?= $post['id'] ?>">
-          <div class="delete_confirmation border_white">
-            <p class="modal_title" >こちらの投稿を削除しますか？</p>
-            <p class="post_content"><?= nl2br(h($post['post_content'])) ?></p>
-            <form action="" method="post" class="btn_flex">
-              <input type="hidden" name="post_id" value="<?= $post['id']?>">
-              <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
-              <button class="btn red" type="submit" name="delete" value="delete">削除</button>
-              <button class="btn blue modal_close" type="button">キャンセル</button>
-            </form>
-          </div>
+        <div class="delete_confirmation border_white" id="modal<?= $post['id'] ?>">
+          <p class="modal_title" >こちらの投稿を削除しますか？</p>
+          <p class="post_content"><?= nl2br(h($post['post_content'])) ?></p>
+          <form action="" method="post" class="btn_flex">
+            <input type="hidden" name="post_id" value="<?= $post['id']?>">
+            <input type="hidden" name="user_id" value="<?= $post['user_id']?>">
+            <button class="btn red" type="submit" name="delete" value="delete">削除</button>
+            <button class="btn blue modal_close" type="button">キャンセル</button>
+          </form>
         </div>
+
 
       <?php endif ?>
 

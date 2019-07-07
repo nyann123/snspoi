@@ -6,10 +6,8 @@ $(function(){
         $('.flash_cursor').css({'top':'-20px'});
         break;
       case 'password':
-        $('.flash_cursor').css({'top':'45px'});
+        $('.flash_cursor').css({'top':'35px'});
         break;
-      case 'login_btn':
-        $('.flash_cursor').css({'top':'145px'});
     }
   }
 

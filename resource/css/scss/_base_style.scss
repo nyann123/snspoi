@@ -1,0 +1,913 @@
+@import 'variables';
+@import 'test';
+
+
+/* ///////////////////////// */
+/*        共通          */
+/* ///////////////////////// */
+
+@font-face {
+  font-family: 'dqfont';
+  src: url("../font/DragonQuestFC.ttf");
+}
+
+@font-face {
+  font-family: 'dot';
+  src: url("../font/JF-Dot-MPlusH12.ttf");
+}
+
+
+*{
+  outline: none;
+  font-family: "dot";
+}
+
+body{
+  background-color: #121212;
+   overflow-y: scroll;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+
+a{
+  text-decoration: none;
+}
+
+.flex{
+  display:flex;
+  align-items: flex-start;
+}
+
+.border_white{
+  border: 2px solid #fff;
+  border-radius: 8px;
+}
+
+.message_slide{
+  font-size: $fontM;
+  background-color: #fff;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  line-height: 30px;
+  display: none;
+  position: absolute;
+  top: 50px;;
+  z-index: 10;
+}
+
+.flash_error{
+  color: $red;
+}
+
+.flash_sucsess{
+  color: $blue;
+}
+
+.flash_message{
+margin-top: 0;
+}
+
+.js_error_message{
+  font-size: $fontM;
+  font-family: "dot";
+  color: $red;
+  margin-left: 10px;
+}
+
+.error{
+  border: $red solid 2px !important;
+}
+
+.container{
+  max-width: 1170px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.form_container{
+  color: #FFF;
+  max-width: 800px;
+  width: calc(100% - 100px);
+  padding: 10px 50px 50px 50px;;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  input{
+    display: block;
+    font-family: sans-serif;
+    color: #fff;
+    border: 2px solid #fff;
+    font-size: $fontL;
+    width: 360px;
+    padding: 5px 10px;
+    margin: 2px 0 10px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: transparent;
+  }
+
+  #checkbox{
+    display: inline-block;
+  }
+}
+
+.page_title{
+  color: #fff;
+  font-size: $fontXL;
+  letter-spacing: 0.08em;
+  text-align: center;
+  width: 200px;
+  margin: 0 0 10px;;
+  background-color: #121212;
+  position: relative;
+  top: -25px;
+}
+
+.form_inner {
+  position:relative;
+}
+
+.btn{
+  font-size: $fontL;
+  font-weight: bold;
+  line-height: 5px;
+  letter-spacing: 0.08em;
+  width: 120px;
+  height: 40px;
+  margin: 0;
+  border-radius: 8px;
+  background-color: transparent;
+  display: inline;
+  text-align: center;
+  color:#fff;
+  border: 2px solid #FFF;
+
+  &.red{
+    color: $red;
+    border: 2px solid $red;
+  }
+  &.blue{
+    color: $blue;
+    border: 2px solid $blue;
+  }
+  &:disabled{
+    color: $gray;
+    border-color: $gray;
+    cursor: default;
+  }
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.tab_mq_put{
+  display: none;
+}
+
+.sp_mq_put{
+  display: none;
+}
+
+/* ///////////////////////// */
+/*        ヘッダー            */
+/* ///////////////////////// */
+
+header {
+  margin-bottom: 40px;
+  height: 50px;
+  background-color: $gold;
+
+  .container{
+    position: relative;
+
+    >.flex{
+      justify-content: space-between;
+    }
+  }
+
+  h1{
+    position: absolute;
+    left: 40%;
+    float: left;
+    margin: 0;
+    font-size: $fontM;
+    line-height: 50px;
+
+    a{
+      color: #000;
+      text-decoration: none;
+    }
+  }
+}
+
+nav{
+  font-weight: bold;
+
+  li{
+    float: right;
+    padding: 0 10px;
+    cursor: pointer;
+    height: 50px;
+  }
+  a{
+    color: #000;
+    font-weight: bold;
+    display:block;
+  }
+
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+.slide_menu {
+  color: #fff;
+  width: 300px;
+  height: 100%;
+  padding: 100px 10px;
+  background-color: #000;
+  border-left: 2px solid #fff;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 15;
+  transform: translate(400px);
+  transition: all .5s;
+  cursor: default;
+
+  &.open{
+    transform: translateX(0px);
+  }
+
+  li{
+    width: 100%;
+    line-height: 50px;
+    padding: 0;
+    margin-bottom: 10px;
+    border-radius: 8px;
+   a{
+    color: #fff;
+    }
+
+    &:hover{
+      background-color: $light_gold;
+      transition: 0.3s;
+    }
+  }
+}
+
+/* ///////////////////////// */
+/*       ログインページ       */
+/* ///////////////////////// */
+
+#checkbox{
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+}
+
+#pass_save{
+  vertical-align: top;
+}
+
+.signup,.login{
+  color: #fff;
+  padding: 5px 0 0 20px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.flash_cursor{
+  color: #fff;
+  font-family: "dqfont";
+  font-size: 50px;
+  float: left;
+  position: absolute;
+  left: -25px;
+
+  -webkit-animation-name: Flash1;/* 実行する名前 */
+  -webkit-animation-duration: 0.3s;/* 0.3秒かけて実行 */
+  -webkit-animation-iteration-count:infinite;/* 何回実行するか。infiniteで無限 */
+  -webkit-animation-timing-function:ease-in-out;/* イーズインアウト */
+  -webkit-animation-direction: alternate;/* alternateにするとアニメーションが反復 */
+  -webkit-animation-delay: 0s; /* 実行までの待ち時間 */
+}
+
+/* アニメーション */
+@keyframes Flash1{
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }
+
+/* ///////////////////////// */
+/*       新規登録ページ       */
+/* ///////////////////////// */
+
+  label{
+    font-size: $fontM;
+    display: inline-block;
+    margin-top: 5px;
+
+    span{
+      color:$gray;
+      font-size: $fontXS;
+    }
+  }
+
+/* ///////////////////////// */
+/*       設定ページ       */
+/* ///////////////////////// */
+
+.setting_menu_container{
+  color: #fff;
+  min-width: 230px;
+  width: 20%;
+  padding: 10px;
+  margin-right: 10px;
+
+  a{
+    color: #fff;
+    font-size: $fontL;
+    margin-bottom: 5px;
+    padding: 10px 0;
+    border-radius: 8px;
+    display: block;
+
+    &:hover{
+      background-color: $light_gold;
+      transition: 0.3s;
+    }
+  }
+}
+
+.setting_container{
+  color: #fff;
+  width: 80%;
+  padding: 10px 50px 50px 50px;;
+  text-align: left;
+
+   input{
+    color: #fff;
+    font-family: sans-serif;
+    border: 2px solid #fff;
+    font-size: 20px;
+    width: 360px;
+    padding: 5px 10px;
+    margin: 2px 0 20px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: transparent;
+  }
+}
+
+.withdraw{
+  width: 120px;
+}
+
+.prof_edit{
+  width: 280px;
+}
+
+.active{
+  background-color:$light_gold;
+}
+
+/* ///////////////////////// */
+/*       ユーザーページ       */
+/* ///////////////////////// */
+
+//投稿ページ
+.user_page_title{
+  color: #fff;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.main_items{
+  color: #fff;
+  width: 75%;
+  max-width: 75%;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.item_container{
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.post_container{
+  width: 100%;
+  display: flex;
+}
+
+.count_label{
+  color: #fff;
+  font-size: $fontXS;
+}
+
+.count_num{
+  font-size: $fontM;
+  color: $blue;
+  display: block;
+}
+
+.follow_btn{
+  font-size: $fontS;
+  font-weight: bold;
+  width: 100px;
+  height: 30px;
+  background-color: transparent;
+
+  &:hover{
+    border-color:#3FBFFF;
+    color:#3FBFFF;
+  }
+}
+
+.following{
+  color:#fff !important;
+  border-color: $blue;
+  background-color:$blue;
+}
+
+.unfollow{
+  color:#fff !important;
+  border-color: $red !important;
+  background-color: $red;
+}
+
+.post_form{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 0;
+  margin-bottom: 5px;
+}
+
+.textarea{
+  font-family: sans-serif;
+  color: #fff;
+  font-size: 20px;
+  width: 90%;
+  padding: 10px;
+  margin: 0 0 10px;
+  background-color: transparent;
+  resize: none;
+  height: 24px;
+}
+
+.textarea::-webkit-scrollbar{
+  display: none;
+}
+
+.show_textarea{
+  min-height: 80px;
+  line-height: 24px;
+}
+
+#post_btn{
+  color: $blue;
+  font-size: $fontL;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  width: 100px;
+  height: 40px;
+  padding: 5px;
+  margin: 0;
+  border-radius: 8px;
+  border: 2px solid $blue;
+  background-color: transparent;
+  display: none;
+
+  &:hover{
+    cursor: pointer;
+  }
+  &:disabled{
+    color: $gray;
+    border-color: $gray;
+    cursor: default;
+  }
+}
+
+.icon{
+  width: 52px;
+  height: 52px;
+  background-color: #000;
+  display: inline-block;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.post_data{
+  text-align: left;
+  margin-left: 5px;
+}
+
+.post_user_name{
+  font-family: sans-serif;
+  font-size: $fontL;
+  display:block;
+}
+
+.myself{
+  color: $blue;
+}
+
+.other{
+  color: $green;
+}
+
+.post_date{
+  font-size: $fontM;
+  color: $gray;
+  margin: 0;
+}
+
+.post_content{
+  font-family: sans-serif;
+  font-size: $fontM;
+  text-align: left;
+  letter-spacing: 0.08em;
+  width: 100%;
+  margin: 10px 0;
+  word-wrap: break-word;
+}
+
+.ellipsis{
+  overflow: hidden;
+  display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 10;
+}
+
+.show_all{
+  color: $blue;
+  width: 100%;
+  text-align: left;
+  margin: 0 0 10px;;
+
+  &:hover{
+    cursor:pointer;
+  }
+}
+
+.favorite_count{
+  width: 70px;
+  text-align: left;
+}
+
+button{
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0 5px;
+
+  i{
+    color: #fff;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
+
+.fas.fa-star,.far.fa-star:hover{
+  color: $gold;
+}
+
+.fa-trash-alt:hover{
+  color: $red;
+}
+
+.post_count{
+  color: #fff;
+}
+
+.favorite_btn{
+  margin: 0 -5px 0 0 ;
+  font-size: $fontM;
+
+  &:active{
+    animation: scale .2s ease-in-out;
+  }
+}
+
+@keyframes scale {
+  20% { transform: scale(1.6); }
+}
+
+.delete_btn{
+  font-size: $fontM;
+}
+
+//ユーザーページ
+.user_container{
+  width: 49.7%;
+  height: 180px;
+  align-content: space-between;
+  justify-content: space-between;
+
+  &:nth-child(odd){
+    margin-right: 5px;
+  }
+}
+
+.user_data{
+  display: flex;
+
+  .wrapper{
+    margin-left: 3px;
+  }
+  .user_name{
+    font-family: sans-serif;
+    font-size: $fontL;
+    color:#fff;
+    text-align: left;
+    display: block;
+  }
+}
+
+.user_count{
+  >.count_label{
+    font-size: $fontS;
+  }
+
+  >.count_num{
+    margin: 0 5px 0 2px;
+    cursor: default;
+  }
+}
+
+/* ///////////////////////// */
+/*        profile            */
+/* ///////////////////////// */
+
+.profile,.slide_prof{
+  color:#fff;
+  min-width: 24%;
+  width: 24%;
+  padding: 10px;
+  position: relative;
+  box-sizing: border-box;
+
+  .btn{
+    font-size: $fontS;
+    height: 30px;
+  }
+
+  .user_name{
+    font-family: sans-serif;
+    font-size: $fontM;
+    margin: 0;
+    color:#fff;
+    align-self: center;
+    margin-left: 5px;
+  }
+  .btn_flex{
+    display: none;
+  }
+  >.flex{
+    justify-content: flex-start;
+  }
+}
+
+.profile_icon{
+  width: 68px;
+  height: 68px;
+  background-color: #000;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+
+  >img{
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.edit_icon{
+  width: 64px;
+  height: 64px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: none;
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.icon_upload{
+  display: none;
+}
+
+.edit_btn{
+  width: auto;
+  padding: 0 5px;
+  margin: 15px 0;
+}
+
+.follow_btn_form{
+  margin: 15px 0;
+}
+
+.profile_comment{
+  font-family: sans-serif;
+  text-align: left;
+  margin: 0 0 15px;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.profile_counts{
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}
+
+.profile_count{
+  width: 49%;
+  padding: 5px 0 ;
+  margin-bottom: 5px;
+  border-radius: 8px;
+
+  &:hover{
+    background-color:$light_gold;
+    transition: 0.3s;
+  }
+}
+
+.active{
+  background-color:rgba(205,180,123,0.5);
+}
+
+.show_prof{
+  visibility: hidden;
+  font-size: 28px;
+  background-color: $gray;
+  border: 2px solid $dark_gold;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  line-height: 50px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.slide_prof {
+  display: none;
+  width: 300px;
+  height: 100%;
+  padding: 100px 10px;
+  background-color: #000;
+  border-right: 2px solid #fff;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 15;
+  transform: translate(-400px);
+  transition: all .5s;
+
+  .btn{
+    height: 50px;
+  }
+  &.open{
+    transform: translateX(0px);
+  }
+}
+
+.dummy{
+  visibility:hidden;
+}
+
+/* ///////////////////////// */
+/*       モーダル      */
+/* ///////////////////////// */
+
+/* モーダル時背景固定用 */
+body.fixed {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+}
+
+/* オーバーレイのスタイル */
+.modal {
+  display: none;
+  position:fixed;
+  top:0;
+  left:0;
+  background-color:rgba(152,152,152,0.7);
+  width:100%;
+  height:100%;
+  z-index:10;
+}
+
+.delete_confirmation {
+  display: none;
+  position:fixed;
+  z-index:15;
+  top:30%;
+  left:50%;
+  width: 600px;
+  padding: 10px;
+  background-color: #121212;
+  border-radius: 8px;
+  transform:translate(-50%,-10%);
+
+  >.post_content{
+    font-size: 18px;
+    margin: 20px;
+    max-height: 200px;
+    width: auto;
+
+    &::-webkit-scrollbar{
+      width: 12px;
+    }
+    &::-webkit-scrollbar-track{
+      background: #fff;
+      border: none;
+      border-radius: 10px;
+      box-shadow: inset 0 0 2px #777;
+    }
+    &::-webkit-scrollbar-thumb{
+      background: #aaa;
+      border-radius: 10px;
+      box-shadow: none;
+    }
+  }
+}
+
+.modal_title{
+  font-size: $fontL;
+}
+
+.btn_flex{
+  justify-content: space-evenly;
+  display: flex;
+  margin: 15px 0 ;
+}
+
+.gotop{
+  color: #fff;
+  font-size: $fontXL;
+  margin: 15px auto;
+
+  &:hover{
+    color: $gold;
+    cursor: pointer;
+  }
+}
+
+.editing{
+  z-index: 15;
+  background-color: #000;
+}
+
+.edit_name{
+  color: #fff;
+  width: 160px;
+  margin-left: 5px;
+  align-self: center;
+  background-color: transparent;
+  padding: 5px;
+  font-family: sans-serif;
+}
+
+.edit_comment{
+  color: #fff;
+  width: 100%;
+  height: 150px;
+  box-sizing: border-box;
+  background-color: transparent;
+  resize: none;
+  font-family: sans-serif;
+
+  &::-webkit-scrollbar{
+    display: none;
+  }
+}

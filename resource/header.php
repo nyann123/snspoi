@@ -1,32 +1,48 @@
 <header>
   <div class="container">
-    <!-- ログイン中ならマイページ　していなければログインページへ -->
-  <?php if(empty($_SESSION['user_id'])):?>
-    <h1><a href="login_form.php">タイトルタイトル</a></h1>
-  <?php else: ?>
-    <h1><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>&type=main">タイトルタイトル</a></h1>
-  <?php endif ?>
+    <div class="flex">
 
-    <nav id="top-nav">
-      <ul>
-        <?php if(empty($_SESSION['user_id'])):?>
-          <li><a href="signup_form.php">ユーザー登録</a></li>
-          <li><a href="login_form.php">ログイン</a></li>
-        <?php else:?>
-          <li class="toggle_menu menu">メニュー <span><i class="fas fa-caret-down"></i></span>
-            <ul class="child menu_child">
-              <li><a href="prof_edit.php">プロフィール編集</a></li>
-              <li><a href="logout_process.php">ログアウト</a></li>
-              <li><a href="withdraw.php">退会</a></li>
-            </ul>
-          </li>
-          <li><a href="user_page.php?type=timeline">タイムライン</a></li>
-          <li><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>&type=main">マイページ</a></li>
-        <?php endif ?>
-      </ul>
-    </nav>
+      <!-- ログイン中のみ表示 -->
+      <?php if(isset($_SESSION['user_id']) && basename($_SERVER['PHP_SELF']) === 'user_page.php'): ?>
+        <div class="show_prof">
+          <i class="fas fa-user"></i>
+        </div>
+      <?php else: ?>
+        <div class="dummy"></div>
+      <?php endif ?>
+      <!-- ログイン中ならマイページ　していなければログインページへ -->
+      <?php if(empty($_SESSION['user_id'])):?>
+        <h1><a href="login_form.php">タイトルタイトル</a></h1>
+      <?php else: ?>
+        <h1><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>&type=main">タイトルタイトル</a></h1>
+      <?php endif ?>
+
+      <nav>
+        <ul>
+          <?php if(empty($_SESSION['user_id'])):?>
+            <li class="sp_mq_hidden"><a href="signup_form.php">ユーザー登録</a></li>
+            <li class="sp_mq_hidden"><a href="login_form.php">ログイン</a></li>
+          <?php else:?>
+            <li class="show_menu">メニュー
+              <div class="slide_menu">
+                <ul>
+                  <li class="sp_mq_put"><a href="user_page.php?type=timeline">タイムライン</a></li>
+                  <li class="sp_mq_put"><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>&type=main">マイページ</a></li>
+                  <li><a href="prof_edit.php">プロフィール編集</a></li>
+                  <li><a href="logout_process.php">ログアウト</a></li>
+                  <li><a href="withdraw.php">退会</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="sp_mq_hidden"><a href="user_page.php?type=timeline">タイムライン</a></li>
+            <li class="sp_mq_hidden"><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>&type=main">マイページ</a></li>
+          <?php endif ?>
+        </ul>
+      </nav>
+    </div>
+
+
   </div>
-
   <!-- フラッシュメッセージ -->
   <!-- ログインと新規登録ページでは表示しない -->
   <?php if(basename($_SERVER['PHP_SELF']) !== 'login_form.php'

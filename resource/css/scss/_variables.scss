@@ -1,13 +1,11 @@
 // ブレイクポイント
 $breakpoints: (
-  'sm': 'screen and (min-width: 400px)',
-  'md': 'screen and (min-width: 768px)',
-  'lg': 'screen and (min-width: 1000px)',
-  'xl': 'screen and (min-width: 1200px)',
+  'sp': 'screen and (max-width: 768px)',
+  'tab': 'screen and (max-width: 1200px)',
 ) !default;
 
 // メディアクエリ呼び出し
-@mixin mq($breakpoint: md) {
+@mixin mq($breakpoint) {
   @media #{map-get($breakpoints, $breakpoint)} {
     @content;
   }

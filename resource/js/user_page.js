@@ -107,6 +107,7 @@ $(function(){
       scroll_position = $(window).scrollTop();
       $('body').addClass('fixed').css({'top': -scroll_position});
       // モーダルウィンドウを開く
+      $('.modal').fadeIn();
       $($target_modal).fadeIn();
       //投稿の行数が一定以上ならスクロールできるように
       if( line_count > 10){
@@ -116,6 +117,17 @@ $(function(){
       }
         return false;
   });
+
+  //================================
+  // プロフィール表示
+  //================================
+
+  $('.show_prof').on('click',function(){
+    scroll_position = $(window).scrollTop();
+    $('body').addClass('fixed').css({'top': -scroll_position});
+    $('.modal').fadeIn();
+    $('.slide_prof').addClass('open');
+  })
 
   //================================
   // プロフィール編集
@@ -148,18 +160,19 @@ $(function(){
     }
   })
 
+  // 編集用グローバル変数
   user_name = $('.profile .user_name').text(),
   user_comment = $('.profile .profile_comment').text(),
   user_icon = $('.profile img').attr('src');
 
-
-  $('.edit_btn').on('click',function(){
+  $('.profile .edit_btn').on('click',function(){
     //背景をスクロールできないように　&　スクロール場所を維持
     scroll_position = $(window).scrollTop();
     $('body').addClass('fixed').css({'top': -scroll_position});
     // 編集箇所以外を操作できないように
     $('.profile').addClass('editing');
-    $('#profile_edit').fadeIn();
+    $('.modal').removeClass('modal_close');
+    $('.modal').fadeIn();
 
     $('.profile .user_name').replaceWith(`<input class="edit_name border_white" type="text" value="${user_name}">`);
     $('.edit_icon').css('display','block');
@@ -171,7 +184,43 @@ $(function(){
     return false;
   })
 
+  //ドロワープロフィール編集
+  $('.slide_prof .edit_btn').on('click',function(){
+    //背景をスクロールできないように　&　スクロール場所を維持
+    scroll_position = $(window).scrollTop();
+    $('body').addClass('fixed').css({'top': -scroll_position});
+    // 編集箇所以外を操作できないように
+    $('.slide_prof').addClass('editing');
+    $('.modal').removeClass('modal_close');
 
+    $('.slide_prof .user_name').replaceWith(`<input class="edit_name border_white" type="text" value="${user_name}">`);
+    $('.edit_icon').css('display','block');
+    $('.slide_prof .profile_comment').replaceWith('<textarea class="edit_comment border_white" type="text">'+user_comment);
+
+    //ボタンの切り替え
+    $(this).toggle();
+    $('.slide_prof .btn_flex').css('display','flex');
+    return false;
+  })
+
+  //ドロワープロフィール編集終了処理
+  $(document).on('click','.end_edit',function(){
+    // 各種データを編集前に戻す
+    $('.slide_prof .edit_name').replaceWith(`<p class="user_name">${user_name}</p>`);
+    $('.slide_prof .edit_comment').replaceWith(`<p class="profile_comment">${user_comment}</p>`);
+    $('.slide_prof img').attr('src',user_icon);
+    $('.icon_upload').val('');
+
+    $('.edit_icon').css('display','none');
+    $('.slide_prof').removeClass('editing');
+    $('.modal').addClass('modal_close');
+
+    // ボタンの切り替え
+    $('.edit_btn').css('display','inline');
+    $('.slide_prof .btn_flex').css('display','none');
+    // モーダルウィンドウを閉じる
+    $('.profile').removeClass('editing');
+  })
 
   // モーダルウィンドウを閉じる処理
   $(document).on('click',".modal_close",function(){
@@ -180,22 +229,27 @@ $(function(){
     window.scrollTo( 0 , scroll_position );
     // モーダルウィンドウを閉じる
     $(".modal").fadeOut();
+    $('.delete_confirmation').fadeOut();
+    $('.slide_prof').removeClass('open');
+    $('.slide_menu').removeClass('open');
 
     //↓↓↓プロフィール編集終了時の処理↓↓↓
-    // 各種データを編集前に戻す
-    $('.profile .edit_name').replaceWith(`<p class="user_name">${user_name}</p>`);
-    $('.profile .edit_comment').replaceWith(`<p class="profile_comment">${user_comment}</p>`);
-    $('.profile img').attr('src',user_icon);
-    $('.icon_upload').val('');
+    if($('.profile').hasClass('editing')){
+      // 各種データを編集前に戻す
+      $('.profile .edit_name').replaceWith(`<p class="user_name">${user_name}</p>`);
+      $('.profile .edit_comment').replaceWith(`<p class="profile_comment">${user_comment}</p>`);
+      $('.profile img').attr('src',user_icon);
+      $('.icon_upload').val('');
 
-    $('.edit_icon').css('display','none');
-    $('.edit_icon_menu').removeClass('open');
+      $('.edit_icon').css('display','none');
+      $('.modal').addClass('modal_close');
 
-    // ボタンの切り替え
-    $('.edit_btn').css('display','inline');
-    $('.profile .btn_flex').css('display','none');
-
-    $('.profile').removeClass('editing');
+      // ボタンの切り替え
+      $('.edit_btn').css('display','inline');
+      $('.profile .btn_flex').css('display','none');
+      // モーダルウィンドウを閉じる
+      $('.profile').removeClass('editing');
+    }
       return false;
   });
 
@@ -340,8 +394,8 @@ $(function(){
   //プロフィール編集
   $('.profile_save').on('click',function(e){
     e.stopPropagation();
-    let name_data = $('.profile .edit_name').val(),
-        comment_data = $('.profile .edit_comment').val(),
+    let name_data = $('.profile .edit_name').val() || $('.slide_prof .edit_name').val(),
+        comment_data = $('.profile .edit_comment').val() || $('.slide_prof .edit_comment').val(),
         icon_data = $('.profile_icon > img').attr('src'),
         user_id = $(this).data('user_id');
 

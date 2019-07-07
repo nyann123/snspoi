@@ -3,17 +3,12 @@ $(function(){
   //================================
   // ヘッダー
   //================================
-
-  function toggle_cursor(classname){
-    $(`${'.'+classname} > span > i`).toggleClass('fa-caret-down');
-    $(`${'.'+classname} > span > i`).toggleClass('fa-caret-up');
-  }
-
-  // メニュー
-  $('.toggle_menu.menu').on('click',function(){
-    $('.menu_child').toggleClass('open');
-    toggle_cursor('menu');
-  });
+  $('.show_menu').on('click',function(){
+    scroll_position = $(window).scrollTop();
+    $('body').addClass('fixed').css({'top': -scroll_position});
+    $('.modal').fadeIn();
+    $('.slide_menu').addClass('open');
+  })
 
   // メッセージ表示
   if($('#js_show_msg').text().replace(/^[\s　]+|[\s　]+$/g, "").length){

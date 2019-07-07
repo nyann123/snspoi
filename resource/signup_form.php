@@ -46,13 +46,15 @@ require_once('head.php');
 
         <label for="email">メールアドレス</label><br>
         <input id="email" autocomplete="false" type="text" name="email" value="<?php if (isset($oldemail)) echo h($oldemail) ?>">
-        <span class="js_error_message"></span> <br>
+        <span class="js_error_message"></span><br>
 
         <label for="password">パスワード <span>※半角英数６文字以上</span> </label><br>
         <input id="password" autocomplete="flase" type="password" name="pass" value="<?php if (isset($oldpass)) echo h($oldpass) ?>">
         <span class="js_error_message"></span><br>
 
         <button id="js_btn" class="btn blue" type="submit" disabled>登録</button>
+        <a href="login_form.php" class="login">ログインページへ</a>
+
       </form>
     </div>
   </div>

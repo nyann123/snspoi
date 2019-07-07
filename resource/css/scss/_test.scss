@@ -1,0 +1,109 @@
+@include mq(tab){
+
+  .mq_put{
+    display: block;
+  }
+
+  .tab_mq_hidden{
+    display: none;
+  }
+
+
+  .js_error_message{
+    font-size: $fontS;
+  }
+
+  .show_prof{
+    visibility: visible;
+  }
+
+  .message_slide{
+    font-size: $fontS;
+  }
+
+  .main_items{
+    margin-left: -20px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .profile{
+    display: none;
+  }
+
+  .slide_prof {
+    display: block;
+
+    .profile_count{
+      border: 2px solid #fff;
+      box-sizing: border-box;
+    }
+  }
+
+  .slide_menu li{
+    border: 2px solid #fff;
+  }
+
+  .gotop{
+    font-size: $fontL;
+  }
+  .user_container{
+    width: 100%;
+  }
+
+  .setting_menu_container{
+    display: none;
+  }
+
+  .setting_container{
+    margin: 0 auto;
+    
+  .js_error_message{
+    display: block;
+      }
+  }
+}
+
+@include mq(sp){
+
+  .sp_mq_put{
+    display: block;
+  }
+
+  .sp_mq_hidden{
+    display: none;
+  }
+
+  header h1{
+    left:35%;
+  }
+
+  .form_container,.setting_container{
+    width: 100%;
+
+    input{
+      width: 90%;
+    }
+    .btn{
+      width: 95%;
+    }
+  }
+
+  .js_error_message{
+    font-size: $fontXS;
+  }
+
+  .signup,.login{
+    margin-top: 15px;
+  }
+
+  .profile_count{
+    width: 100%;
+  }
+
+  .post_content{
+    font-size: $fontS;
+  }
+
+
+}

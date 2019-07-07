@@ -63,7 +63,7 @@ if(!empty($_POST['delete'])){
 
 debug('------------------------------');
 
- $site_title = $page_user['name'];
+$site_title = $page_user['name'];
 $js_file_title= 'user_page';
  require_once('head.php');
   ?>
@@ -77,7 +77,7 @@ $js_file_title= 'user_page';
     <h2 class="user_page_title"><?= $site_title.'のページ' ?></h2>
   <?php endif; ?>
   <div class="container flex">
-
+  <div class="modal modal_close"></div>
       <!-- プロフィール -->
       <?php $profile_user = $page_user; ?>
       <?php require_once('profile.php') ?>
