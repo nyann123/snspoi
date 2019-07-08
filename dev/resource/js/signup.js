@@ -1,13 +1,13 @@
 $(function(){
 
   var emailregex = new RegExp(/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/);
-  let name_flg
-  let email_flg
-  let password_flg
+  var name_flg
+  var email_flg
+  var password_flg
 
   //カーソルを初期位置に
   $('.flash_cursor').css({'top':'5px'});
-  
+
   // 渡されたidで選択中のフォームを判定してカーソルを移動させる
   function move_cousor(id){
       switch (id) {
@@ -28,7 +28,7 @@ $(function(){
   //名前のバリデーション
   function name_validate(name){
     input_name = $(name).val();
-    error_message = $(`${name} + span`);
+    error_message = $(name + '+ span');
 
     if ( input_name === '' ){
       $(name).addClass('error');
@@ -50,7 +50,7 @@ $(function(){
   //メールのバリデーション
   function email_validate(email){
     input_email = $(email).val();
-    error_message = $(`${email} + span`);
+    error_message = $(email +'+ span');
 
     if ( input_email === '' ){
       $(email).addClass('error');
@@ -72,7 +72,7 @@ $(function(){
   //パスワードのバリデーション
   function password_validate(password){
     input_pass = $(password).val();
-    error_message = $(`${password} + span`);
+    error_message = $(password + '+ span');
 
     if ( input_pass === ''){
       $(password).addClass('error');
@@ -118,7 +118,7 @@ $(function(){
   });
 
   $('input').on('input',function(){
-    let $selector = "#" + $(this).attr('id');     //HTML指定用にidに#をつける
+    var $selector = "#" + $(this).attr('id');     //HTML指定用にidに#をつける
     switch ($selector) {
       case '#name':
         name_validate($selector);

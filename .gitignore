@@ -1,8 +1,7 @@
 php.log
 img/
 node_modules
-db_connect.php
+dev/resource/db_connect.php
 
-composer.lock
-composer.json
+
 /vendor/

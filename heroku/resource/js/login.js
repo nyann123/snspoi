@@ -1,0 +1,1 @@
+$(function(){$(".flash_cursor").css({top:"-20px"}),$("input").on("focusin",function(){!function(s){switch(s){case"email":$(".flash_cursor").css({top:"-20px"});break;case"password":$(".flash_cursor").css({top:"35px"})}}($(this).attr("id"))})});

@@ -1,0 +1,13 @@
+{
+    "name": "nyan/test",
+    "authors": [
+        {
+            "name": "nyan",
+            "email": "apple@gmail.com"
+        }
+    ],
+    "require": {
+  "ext-mbstring": "*",
+  "ext-memcached": "*"
+  }
+}

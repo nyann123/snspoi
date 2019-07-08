@@ -6,7 +6,6 @@ debug('「　ログインページ 「');
 debug('「「「「「「「「「「「');
 debugLogStart();
 
-require_once('auth.php');
 debug(print_r($_SESSION,true));
 //ログイン中ならマイページへ
 check_logged_in();

@@ -42,11 +42,11 @@ $(function(){
 
   $(document).on('click','.show_all',function(){
     // 省略されている投稿の高さを取得
-    let omit_height = $(this).parent().height();
+    var omit_height = $(this).parent().height();
     //投稿の省略を解除
     $(this).prev().removeClass('ellipsis');
     // 全文表示された投稿の高さを取得
-    let all_height = $(this).parent().height();
+    var all_height = $(this).parent().height();
     //一度高さを戻して
     $(this).parent().height(omit_height);
     //スライドで全文表示させる
@@ -87,8 +87,8 @@ $(function(){
 
   // フォームの高さを自動調整(拡大のみ、縮小も実装したい)
   $('.textarea').on('input',function(){
-    let scroll_height = $(this).get(0).scrollHeight;
-    let offset_height = $(this).get(0).offsetHeight;
+    var scroll_height = $(this).get(0).scrollHeight;
+    var offset_height = $(this).get(0).offsetHeight;
 
     if( scroll_height > offset_height ){
       $(this).css('height',scroll_height +"px");
@@ -100,7 +100,7 @@ $(function(){
   //================================
   // モーダルウィンドウを開く処理
   $(document).on('click',".delete_btn",function(){
-      let $target_modal = $(this).data("target"),
+      var $target_modal = $(this).data("target"),
           $modal_content = $(this).next().find('.post_content'),
           line_count = get_line_count($modal_content.text());
       //背景をスクロールできないように　&　スクロール場所を維持
@@ -152,8 +152,8 @@ $(function(){
 
   // 高さを自動調整
   $(document).on('input','.edit_comment',function(){
-    let scroll_height = $(this).get(0).scrollHeight;
-    let offset_height = $(this).get(0).offsetHeight;
+    var scroll_height = $(this).get(0).scrollHeight;
+    var offset_height = $(this).get(0).offsetHeight;
 
     if( scroll_height > offset_height ){
       $(this).css('height',scroll_height +"px");
@@ -174,7 +174,7 @@ $(function(){
     $('.modal').removeClass('modal_close');
     $('.modal').fadeIn();
 
-    $('.profile .user_name').replaceWith(`<input class="edit_name border_white" type="text" value="${user_name}">`);
+    $('.profile .user_name').replaceWith('<input class="edit_name border_white" type="text" value="'+ user_name + '">');
     $('.edit_icon').css('display','block');
     $('.profile .profile_comment').replaceWith('<textarea class="edit_comment border_white" type="text">'+user_comment);
 
@@ -193,7 +193,7 @@ $(function(){
     $('.slide_prof').addClass('editing');
     $('.modal').removeClass('modal_close');
 
-    $('.slide_prof .user_name').replaceWith(`<input class="edit_name border_white" type="text" value="${user_name}">`);
+    $('.slide_prof .user_name').replaceWith('<input class="edit_name border_white" type="text" value="'+ user_name + '">');
     $('.edit_icon').css('display','block');
     $('.slide_prof .profile_comment').replaceWith('<textarea class="edit_comment border_white" type="text">'+user_comment);
 
@@ -206,8 +206,8 @@ $(function(){
   //ドロワープロフィール編集終了処理
   $(document).on('click','.end_edit',function(){
     // 各種データを編集前に戻す
-    $('.slide_prof .edit_name').replaceWith(`<p class="user_name">${user_name}</p>`);
-    $('.slide_prof .edit_comment').replaceWith(`<p class="profile_comment">${user_comment}</p>`);
+    $('.slide_prof .edit_name').replaceWith('<p class="user_name">' + user_name + '</p>');
+    $('.slide_prof .edit_comment').replaceWith('<p class="profile_comment">' + user_comment + '</p>');
     $('.slide_prof img').attr('src',user_icon);
     $('.icon_upload').val('');
 
@@ -236,8 +236,8 @@ $(function(){
     //↓↓↓プロフィール編集終了時の処理↓↓↓
     if($('.profile').hasClass('editing')){
       // 各種データを編集前に戻す
-      $('.profile .edit_name').replaceWith(`<p class="user_name">${user_name}</p>`);
-      $('.profile .edit_comment').replaceWith(`<p class="profile_comment">${user_comment}</p>`);
+      $('.profile .edit_name').replaceWith('<p class="user_name">' + user_name + '</p>');
+      $('.profile .edit_comment').replaceWith('<p class="profile_comment">' + user_comment + '</p>');
       $('.profile img').attr('src',user_icon);
       $('.icon_upload').val('');
 
@@ -256,7 +256,7 @@ $(function(){
   //================================
   // フォローボタン
   //================================
-  let first_flg = 0;
+  var first_flg = 0;
 
   $(document).on('mouseenter','.following',function(){
     $(this).text('解除');
@@ -292,7 +292,7 @@ $(function(){
   //お気に入り登録処理
   $(document).on('click','.favorite_btn',function(e){
     e.stopPropagation();
-    let $this = $(this),
+    var $this = $(this),
         $profile_count = $('.profile_count + .favorite > a > .count_num'),
         page_id = get_param('page_id'),
         post_id = $this.prev().val();
@@ -325,7 +325,7 @@ $(function(){
   // フォロー登録、解除処理
   $(document).on('click','.follow_btn',function(e){
     e.stopPropagation();
-    let $this = $(this),
+    var $this = $(this),
         $follow_count = $('.profile_count + .follow > a > .count_num'),
         $follower_count = $('.profile_count + .follower > a > .count_num'),
         profile_user_id = $('.profile_user_id').val();
@@ -362,7 +362,7 @@ $(function(){
   //アイコン加工
   $('.icon_upload').on('change',function(e){
    e.stopPropagation();
-   let max_file_size = 10485760;
+   var max_file_size = 10485760;
 
    // ファイルサイズ制限
    if (max_file_size < this.files[0].size){
@@ -370,7 +370,7 @@ $(function(){
      $(this).val('');
    }else{
      // フォームデータを取得
-     let formdata = new FormData($('#icon_form').get(0));
+     var formdata = new FormData($('#icon_form').get(0));
      $.ajax({
        type: 'POST',
        url: 'ajax_icon_create.php',
@@ -394,7 +394,7 @@ $(function(){
   //プロフィール編集
   $('.profile_save').on('click',function(e){
     e.stopPropagation();
-    let name_data = $('.profile .edit_name').val() || $('.slide_prof .edit_name').val(),
+    var name_data = $('.profile .edit_name').val() || $('.slide_prof .edit_name').val(),
         comment_data = $('.profile .edit_comment').val() || $('.slide_prof .edit_comment').val(),
         icon_data = $('.profile_icon > img').attr('src'),
         user_id = $(this).data('user_id');
@@ -424,7 +424,7 @@ $(function(){
   offset= 10;
   flg = 0 ;
   $(window).on('scroll', function () {
-  let doch = $(document).innerHeight(), //ページ全体の高さ
+  var doch = $(document).innerHeight(), //ページ全体の高さ
       winh = $(window).innerHeight(), //ウィンドウの高さ
       bottom = doch - winh, //ページ全体の高さ - ウィンドウの高さ = ページの最下部位置
       page_id = get_param('page_id'),

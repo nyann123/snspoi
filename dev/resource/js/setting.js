@@ -1,13 +1,13 @@
 $(function(){
 
-  let emailregex = new RegExp(/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/);
-  let name_flg
-  let email_flg
+  var emailregex = new RegExp(/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/);
+  var name_flg;
+  var email_flg;
 
   //名前のバリデーション
   function name_validate(name){
     input_name = $(name).val();
-    error_message = $(`${name} + span`);
+    error_message = $(name + '+ span');
 
     if ( input_name === '' ){
       $(name).addClass('error');
@@ -29,7 +29,7 @@ $(function(){
   //メールのバリデーション
   function email_validate(email){
     input_email = $(email).val();
-    error_message = $(`${email} + span`);
+    error_message = $(email + '+ span');
 
     if ( input_email === '' ){
       $(email).addClass('error');
@@ -58,13 +58,13 @@ $(function(){
   }
 
   $(window).on('load',function(){
-    name_validate( '#' + $('#name').attr('id') )
-    email_validate( '#' + $('#email').attr('id') )
+    name_validate( '#' + $('#name').attr('id') );
+    email_validate( '#' + $('#email').attr('id') );
     btn_actiovation();
-  })
+  });
 
   $('input').on('input',function(){
-    let $selector = "#" + $(this).attr('id');     //HTML指定用にidに#をつける
+    var $selector = "#" + $(this).attr('id');     //HTML指定用にidに#をつける
     switch ($selector) {
       case '#name':
         name_validate($selector);
