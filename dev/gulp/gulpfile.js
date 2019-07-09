@@ -1,6 +1,9 @@
 // gulpプラグインの読み込み
 const gulp = require("gulp");
-const sass = require("gulp-sass");
+const sass = require("gulp-sass");  //sassをコンパイル
+const rename = require('gulp-rename');  //ファイルリネーム
+const autoprefixer = require('gulp-autoprefixer');  //ベンダープレフィックスを付与
+const sourcemaps = require('gulp-sourcemaps');  //sourcemapsの付与
 const cleanCSS = require('gulp-clean-css'); //css圧縮
 const uglify = require('gulp-uglify'); //js圧縮
 
@@ -8,6 +11,9 @@ const uglify = require('gulp-uglify'); //js圧縮
 gulp.task('js', function(done) {
     gulp.src("../resource/js/*.js")
     .pipe(uglify())
+    .pipe(rename({
+      suffix: '.min',
+    }))
     .pipe(gulp.dest("../../heroku/resource/js"));
     done();
 });
@@ -15,9 +21,16 @@ gulp.task('js', function(done) {
 //scss
 gulp.task('scss', function (done) {
     gulp.src("../resource/css/scss/*.scss")
-    .pipe(sass({outputStyle: "expanded"})
+    .pipe(sourcemaps.init())
+    .pipe(sass({outputStyle: "expanded"}) //sコンパイル
     .on("error", sass.logError))
+    .pipe(autoprefixer())  //ベンダープレフィックス付与
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest("../resource/css"))
+    .pipe(cleanCSS()) //css圧縮
+    .pipe(rename({
+      suffix: '.min',
+    }))
     .pipe(gulp.dest("../../heroku/resource/css"))
     done();
 });
