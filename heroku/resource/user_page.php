@@ -41,13 +41,18 @@ switch ($page_type) {
     break;
 
   case 'follows':
-    $follow_users = get_related_users($page_user['id'],'follows',0);
     $id_type = 'followed';
+    ${$id_type."user"} = get_users($page_user['id'],'follows',0);
   break;
 
   case 'followers':
-    $follow_users = get_related_users($page_user['id'],'followers',0);
     $id_type = 'follow';
+    ${$id_type."user"} = get_users($page_user['id'],'followers',0);
+  break;
+
+  case 'search':
+    $id_type = "";
+    ${$id_type."user"} = get_users($_GET['query'],'search',0);
   break;
 }
 
@@ -73,6 +78,8 @@ $js_file_title= 'user_page';
 
   <?php if ($page_type === 'timeline'): ?>
     <h2 class="user_page_title">タイムライン</h2>
+  <?php elseif ($page_type === 'search'): ?>
+    <h2 class="user_page_title"><?= $_GET['query'].'の検索結果' ?></h2>
   <?php else: ?>
     <h2 class="user_page_title"><?= $site_title.'のページ' ?></h2>
   <?php endif; ?>
@@ -101,17 +108,19 @@ $js_file_title= 'user_page';
           <p>お気に入りが登録されていません</p>
         <?php endif; ?>
 
-        <?php if (empty(get_related_users($page_user['id'],'follows')) && $page_type === 'follows'): ?>
+        <?php if (empty(get_users($page_user['id'],'follows')) && $page_type === 'follows'
+              || empty(get_users($page_user['id'],'followers')) && $page_type === 'followers'): ?>
           <p>ユーザーがいません</p>
         <?php endif; ?>
 
-        <?php if (empty(get_related_users($page_user['id'],'followers')) && $page_type === 'followers'): ?>
-          <p>ユーザーがいません</p>
+        <?php if (empty($user) && $page_type === 'search'): ?>
+          <p>ユーザーが見つかりませんでした</p>
         <?php endif; ?>
+
 
         <!-- getパラメータに合わせたページを表示 -->
         <?php if($page_type === 'main' || $page_type === 'favorites' || $page_type === 'timeline') require_once('post_list.php') ?>
-        <?php if($page_type === 'follows' || $page_type === 'followers') require_once('user_list.php') ?>
+        <?php if($page_type === 'follows' || $page_type === 'followers' || $page_type === 'search') require_once('user_list.php') ?>
 
       </div>
   </div>

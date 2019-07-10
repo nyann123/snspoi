@@ -1,6 +1,7 @@
-<?php foreach ($follow_users as $users): ?>
+<?php foreach (${$id_type."user"} as $users): ?>
 
-  <?php $user = get_user($users["${id_type}"."_id"]) ?>
+  <?php $user = !empty($id_type) ? get_user($users["${id_type}"."_id"]) : get_user($users['id']);?>
+
   <div class="item_container user_container border_white flex">
 
     <div class="user_data">

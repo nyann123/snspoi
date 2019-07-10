@@ -14,11 +14,11 @@ set_old_form_data('name');
 set_old_form_data('email');
 
 //ログイン中のユーザー情報を取得
-$current_user = get_user($_SESSION['user_id']);
+$current_user = get_edit_user($_SESSION['user_id']);
 debug('取得したユーザー情報：'.print_r($current_user,true));
 
 // post送信されていた場合
-if(!empty($_POST)){
+if(!empty($_POST['prof_edit'])){
   debug('POST送信があります。');
   debug('POST情報：'.print_r($_POST,true));
 
@@ -94,7 +94,7 @@ require_once('head.php');
         <input id="email" type="email" name="email" value="<?= h(get_form_data('email')); ?>">
         <span class="js_error_message"></span><br>
 
-        <button id="js_btn" class="btn blue" type="submit" disabled>変更する</button>
+        <button id="js_btn" class="btn blue" name="prof_edit" type="submit" disabled>変更する</button>
       </form>
     </div>
   </div>

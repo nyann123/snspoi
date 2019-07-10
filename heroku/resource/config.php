@@ -56,13 +56,29 @@ function debugLogStart(){
 //================================
 //エラーメッセージを定数に設定
 define('ERR_MSG1','エラーが発生しました。しばらく経ってからやり直してください。');
-define('ERR_MSG2','投稿が見つかりません');
 
 //================================
 // グローバル変数
 //================================
 //エラーメッセージ格納用の配列
 $error_messages = array();
+
+//================================
+// フラッシュメッセージ
+//================================
+
+//セッション内容を1回だけ取得して破棄する
+if( isset($_SESSION['flash']) ){
+  $flash_messages = $_SESSION['flash']['message'];
+  $flash_type = $_SESSION['flash']['type'];
+}
+unset($_SESSION['flash']);
+
+// フラッシュメッセージをセットする
+function set_flash($type,$message){
+  $_SESSION['flash']['type'] = "flash_${type}";
+  $_SESSION['flash']['message'] = $message;
+}
 
 //================================
 // バリデーション関数
@@ -150,6 +166,23 @@ function get_user($user_id){
   debug('ユーザー情報を取得します');
   try {
     $dbh = dbConnect();
+    $sql = "SELECT id,name,user_icon,profile_comment
+            FROM users
+            WHERE id = :id AND delete_flg = 0 ";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute(array(':id' => $user_id));
+    if(query_result($stmt)){
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+  } catch (\Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
+}
+
+function get_edit_user($user_id){
+  debug('ユーザー情報を取得します');
+  try {
+    $dbh = dbConnect();
     $sql = "SELECT id,name,email,user_icon,profile_comment
             FROM users
             WHERE id = :id AND delete_flg = 0 ";
@@ -163,8 +196,7 @@ function get_user($user_id){
   }
 }
 
-
-function get_related_users($user_id, $type, $offset_count=0){
+function get_users($query, $type, $offset_count=0){
   $dbh = dbConnect();
   switch ($type) {
     case 'follows':
@@ -173,8 +205,7 @@ function get_related_users($user_id, $type, $offset_count=0){
             WHERE :follow_id = follow_id AND delete_flg = 0
             LIMIT 20 offset :offset_count";
     $stmt = $dbh->prepare($sql);
-    $stmt->bindValue(':follow_id', $user_id);
-    $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
+    $stmt->bindValue(':follow_id', $query);
       break;
 
     case 'followers':
@@ -183,10 +214,21 @@ function get_related_users($user_id, $type, $offset_count=0){
             WHERE :followed_id = followed_id AND delete_flg = 0
             LIMIT 20 offset :offset_count";
     $stmt = $dbh->prepare($sql);
-    $stmt->bindValue(':followed_id', $user_id);
-    $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
+    $stmt->bindValue(':followed_id', $query);
       break;
+
+    case 'search':
+    $sql = "SELECT id
+            FROM users
+            WHERE name LIKE CONCAT('%',:input,'%') AND delete_flg = 0
+            LIMIT 20 offset :offset_count";
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':input', $query);
+      break;
+
   }
+
+  $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -334,6 +376,17 @@ function get_posts($page_id,$type,$offset_count=0){
   }
 }
 
+function search_user($input){
+  $dbh = dbConnect();
+  $sql = "SELECT id
+          FROM users
+          WHERE name LIKE CONCAT('%',:input,'%')";
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':input' => $input));
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
 //================================
 // その他
 //================================
@@ -366,6 +419,7 @@ function h($str){
   return htmlspecialchars($str,ENT_QUOTES);
 }
 
+// 行数を取得する
 function get_line_count($str){
   return substr_count($str,"\n") + 1;
 }
@@ -396,16 +450,3 @@ function get_form_data($str){
     return $current_user[$str];
   }
 }
-
-// フラッシュメッセージ用処理
-function set_flash($type,$message){
-  $_SESSION['flash']['type'] = "flash_${type}";
-  $_SESSION['flash']['message'] = $message;
-}
-
-//セッション内容を1回だけ取得して破棄する
-if( isset($_SESSION['flash']) ){
-  $flash_messages = $_SESSION['flash']['message'];
-  $flash_type = $_SESSION['flash']['type'];
-}
-unset($_SESSION['flash']);

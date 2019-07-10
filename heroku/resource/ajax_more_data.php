@@ -1,24 +1,23 @@
 <?php
 require_once('config.php');
 
-if(isset($_POST['more_posts'])){
+if(isset($_POST)){
   debug('POST送信があります');
   debug('POST内容:'.print_r($_POST,true));
 
   $current_user = get_user($_SESSION['user_id']);
-  $page_id = $_POST['page_id'];
+  $query = $_POST['query'];
   $page_type = $_POST['page_type'];
   $offset_count = $_POST['offset'];
 
-
   switch ($page_type) {
     case 'main':
-    $posts =  get_posts($page_id,'my_post',$offset_count);
+    $posts =  get_posts($query,'my_post',$offset_count);
     $type = 'post';
       break;
 
     case 'favorites':
-    $posts = get_posts($page_id,'favorite',$offset_count);
+    $posts = get_posts($query,'favorite',$offset_count);
     $type = 'post';
       break;
 
@@ -28,22 +27,29 @@ if(isset($_POST['more_posts'])){
       break;
 
     case 'follows':
-    $follow_users = get_related_users($current_user['id'],'follows',$offset_count*2);
     $id_type ='followed';
+    ${$id_type."user"} = get_users($current_user['id'],'follows',$offset_count*2);
     $type ='user';
       break;
 
     case 'followers':
-    $follow_users = get_followers($current_user['id'],'followers',$offset_count*2);
     $id_type = 'follow';
+    ${$id_type."user"} = get_users($current_user['id'],'followers',$offset_count*2);
     $type ='user';
       break;
 
+    case 'search':
+    $id_type = '';
+    ${$id_type."user"} =  get_users($query,'search',$offset_count*2);
+    $type ='user';
+    break;
+
   }
 
-  $data = $posts ?? $follow_users;
 
-  // 取得した投稿数
+  $data = $posts ?? ${$id_type."user"};
+
+  // 取得した数
   $data_count = count($data);
   //取得したデータをHTMLに加工して返す
     ob_start();

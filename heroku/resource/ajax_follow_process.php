@@ -2,7 +2,7 @@
 require_once('config.php');
 require_once('auth.php');
 
-if(isset($_POST['follow'])){
+if(isset($_POST)){
   debugLogStart();
   debug('POST送信があります');
   debug('POST内容:'.print_r($_POST,true));

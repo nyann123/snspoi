@@ -78,6 +78,14 @@
     left:35%;
   }
 
+  .search_container{
+    width: 300px;
+
+    input[type="text"]{
+      width: 88%;
+    }
+  }
+
   .form_container,.setting_container{
     width: 100%;
 

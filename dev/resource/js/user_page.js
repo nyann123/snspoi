@@ -33,7 +33,7 @@ $(function(){
       var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
           results = regex.exec(url);
       if (!results) return null;
-      if (!results[2]) return '';
+      if (!results[2]) return false;
       return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
   //================================
@@ -301,8 +301,7 @@ $(function(){
         type: 'POST',
         url: 'ajax_post_favorite_process.php',
         dataType: 'json',
-        data: { favorite: true,
-                page_id: page_id,
+        data: { page_id: page_id,
                 post_id: post_id}
     }).done(function(phpreturn){
       // php側でエラーが発生したらリロードしてエラーメッセージを表示させる
@@ -335,8 +334,7 @@ $(function(){
         type: 'POST',
         url: 'ajax_follow_process.php',
         dataType: 'json',
-        data: { follow: true,
-                profile_user_id: profile_user_id,
+        data: { profile_user_id: profile_user_id,
                 user_id: user_id}
     }).done(function(phpreturn){
       // php側の処理に合わせてボタンを更新する
@@ -427,7 +425,7 @@ $(function(){
   var doch = $(document).innerHeight(), //ページ全体の高さ
       winh = $(window).innerHeight(), //ウィンドウの高さ
       bottom = doch - winh, //ページ全体の高さ - ウィンドウの高さ = ページの最下部位置
-      page_id = get_param('page_id'),
+      query = get_param('page_id') || get_param('query') || "";
       page_type = get_param('type'),
       end_post_flg = 0;
 
@@ -438,9 +436,8 @@ $(function(){
       type: 'POST',
       url: 'ajax_more_data.php',
       dataType: 'json',
-      data: { more_posts: true,
-              offset: offset,
-              page_id: page_id,
+      data: { offset: offset,
+              query: query,
               page_type: page_type}
     }).done(function(data){
       offset += data['data_count'];

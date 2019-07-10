@@ -12,7 +12,7 @@ require('auth.php');
 $current_user = get_user($_SESSION['user_id']);
 
 // post送信されていた場合
-if(!empty($_POST)){
+if(!empty($_POST['withdraw'])){
   debug('POST送信があります。');
   try {
     if(query_result(change_delete_flg($current_user,1))){
@@ -42,7 +42,7 @@ require('head.php');
     <div class="setting_container border_white">
       <h2 class="page_title withdraw">退会</h2>
       <form action="" method="post">
-        <button class="btn red" name="withdraw" type="submit">退会する</button>
+        <button class="btn red" name="withdraw" value="withdraw" type="submit">退会する</button>
       </form>
     </div>
 

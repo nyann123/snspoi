@@ -1,3 +1,11 @@
+<?php
+if (!empty($_POST['search_user'])){
+  $hoge = $_POST['search_input'];
+  header("Location:user_page.php?type=search&query=${hoge}");
+}
+?>
+
+
 <header>
   <div class="container">
     <div class="flex">
@@ -34,8 +42,16 @@
                 </ul>
               </div>
             </li>
-            <li class="sp_mq_hidden"><a href="user_page.php?type=timeline">タイムライン</a></li>
-            <li class="sp_mq_hidden"><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>&type=main">マイページ</a></li>
+            <li class="tab_mq_hidden"><a href="user_page.php?type=timeline">タイムライン</a></li>
+            <li class="tab_mq_hidden"><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>&type=main">マイページ</a></li>
+            <li class="search">
+              <form method="post" action="#" class="search_container">
+                <input type="text" name="search_input" placeholder="ユーザー検索">
+                <input type="submit" name="search_user" value="&#xf002;">
+              </form>
+            </li>
+            <li class="show_search">&#xf002;</li>
+            <li class="close_search">&#xf00d;</li>
           <?php endif ?>
         </ul>
       </nav>
