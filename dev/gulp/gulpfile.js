@@ -11,9 +11,9 @@ const uglify = require('gulp-uglify'); //js圧縮
 gulp.task('js', function(done) {
     gulp.src("../resource/js/*.js")
     .pipe(uglify())
-    .pipe(rename({
-      suffix: '.min',
-    }))
+    // .pipe(rename({
+    //   suffix: '.min',
+    // }))
     .pipe(gulp.dest("../../heroku/resource/js"));
     done();
 });
@@ -28,9 +28,9 @@ gulp.task('scss', function (done) {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest("../resource/css"))
     .pipe(cleanCSS()) //css圧縮
-    .pipe(rename({
-      suffix: '.min',
-    }))
+    // .pipe(rename({
+    //   suffix: '.min',
+    // }))
     .pipe(gulp.dest("../../heroku/resource/css"))
     done();
 });

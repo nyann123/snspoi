@@ -11,7 +11,7 @@ $(function(){
   })
 
   //ユーザー検索フォーム
-  $('.show_search').on('click',function()
+  $('.show_search').on('click',function(){
     $(this).hide();
     $('header h1').hide()
     $('.search').show();
