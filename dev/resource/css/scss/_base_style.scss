@@ -226,6 +226,7 @@ nav{
 }
 
 .slide_menu {
+  display: none;
   color: #fff;
   width: 300px;
   height: 100%;
@@ -297,6 +298,7 @@ nav{
     top: 0;
     left: 0;
     border: none;
+    font-family: sans-serif;
   }
    input[type="submit"]{
     cursor: pointer;
@@ -505,7 +507,6 @@ nav{
 }
 
 .textarea{
-  font-family: sans-serif;
   color: #fff;
   font-size: 20px;
   width: 90%;
@@ -514,6 +515,7 @@ nav{
   background-color: transparent;
   resize: none;
   height: 24px;
+  letter-spacing: 0.08em;
 }
 
 .textarea::-webkit-scrollbar{
@@ -564,8 +566,7 @@ nav{
 }
 
 .post_user_name{
-  font-family: sans-serif;
-  font-size: $fontL;
+  font-size: 24px;
   display:block;
 }
 
@@ -584,12 +585,12 @@ nav{
 }
 
 .post_content{
-  font-family: sans-serif;
-  font-size: $fontM;
+  padding: 5px 0;
+  font-size: $fontL;
   text-align: left;
   letter-spacing: 0.08em;
   width: 100%;
-  margin: 10px 0;
+  margin: 5px 0;
   word-wrap: break-word;
 }
 
@@ -679,8 +680,7 @@ button{
     margin-left: 3px;
   }
   .user_name{
-    font-family: sans-serif;
-    font-size: $fontL;
+    font-size: 24px;
     color:#fff;
     text-align: left;
     display: block;
@@ -689,10 +689,11 @@ button{
 
 .user_count{
   >.count_label{
-    font-size: $fontS;
+    font-size: $fontM;
   }
 
   >.count_num{
+    font-size: $fontL;
     margin: 0 5px 0 2px;
     cursor: default;
   }
@@ -716,8 +717,7 @@ button{
   }
 
   .user_name{
-    font-family: sans-serif;
-    font-size: $fontM;
+    font-size: $fontL;
     margin: 0;
     color:#fff;
     align-self: center;
@@ -781,9 +781,9 @@ button{
 }
 
 .profile_comment{
-  font-family: sans-serif;
+  letter-spacing: 0.08em;
   text-align: left;
-  margin: 0 0 15px;
+  margin: 5px 0;
   width: 100%;
   word-wrap: break-word;
 }
@@ -944,7 +944,6 @@ body.fixed {
   align-self: center;
   background-color: transparent;
   padding: 5px;
-  font-family: sans-serif;
 }
 
 .edit_comment{
@@ -954,7 +953,7 @@ body.fixed {
   box-sizing: border-box;
   background-color: transparent;
   resize: none;
-  font-family: sans-serif;
+  letter-spacing: 0.08em;
 
   &::-webkit-scrollbar{
     display: none;

@@ -36,6 +36,10 @@ $(function(){
       if (!results[2]) return false;
       return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
+
+  // 一瞬表示されるのを防止するために読み込み終了後に表示するように
+  $('.slide_menu').show();
+
   //================================
   // 投稿全文表示機能
   //================================
