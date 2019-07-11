@@ -1,0 +1,6 @@
+#ファイル一覧機能を無効にする命令
+Options -Indexes
+
+RewriteEngine on
+RewriteCond %{HTTP:X-Forwarded-Proto} ^http$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]

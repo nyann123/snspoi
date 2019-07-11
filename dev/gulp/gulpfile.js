@@ -14,7 +14,7 @@ gulp.task('js', function(done) {
     // .pipe(rename({
     //   suffix: '.min',
     // }))
-    .pipe(gulp.dest("../../heroku/resource/js"));
+    .pipe(gulp.dest("../../heroku/js"));
     done();
 });
 
@@ -31,20 +31,20 @@ gulp.task('scss', function (done) {
     // .pipe(rename({
     //   suffix: '.min',
     // }))
-    .pipe(gulp.dest("../../heroku/resource/css"))
+    .pipe(gulp.dest("../../heroku/css"))
     done();
 });
 
-gulp.task('php', function(done) {
-    gulp.src(["../resource/*.php","!../resource/db_connect.php"])
-    .pipe(gulp.dest("../../heroku/resource"));
+gulp.task('copy', function(done) {
+    gulp.src(["../resource/*.php","!../resource/db_connect.php","!../resource/index.php"])
+    .pipe(gulp.dest("../../heroku"));
     done();
 });
 
 gulp.task('watch',function(){
   gulp.watch("../resource/css/scss", gulp.task('scss'));
   gulp.watch("../resource/js",  gulp.task('js'));
-  gulp.watch('../resource/*.php', gulp.task('php'));
+  gulp.watch('../**/*.php', gulp.task('copy'));
 });
 
 gulp.task("default",gulp.task('watch'));

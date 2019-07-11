@@ -1,1 +1,3 @@
-<!-- heroku用仮置き -->
+<?php
+
+header('Location:./resource/login_form.php');
