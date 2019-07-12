@@ -9,14 +9,14 @@ require_once('db_connect.php');
 require_once('functions.php');
 
 error_reporting(E_ALL); //E_STRICTレベル以外のエラーを報告する
-ini_set('display_errors','On'); //画面にエラーを表示させるか
+ini_set('display_errors','on'); //画面にエラーを表示させるか
 
 //================================
 //ログを取るか
 //================================
 ini_set('log_errors','on');
 //ログの出力ファイルを指定
-ini_set('error_log','php.log');
+ini_set('error_log','php://stderr');
 
 //================================
 // デバッグ
@@ -34,8 +34,6 @@ function debug($str){
 //================================
 // セッション準備・セッション有効期限を延ばす
 //================================
-//セッションファイルの置き場を変更する（/var/tmp/以下に置くと30日は削除されない）
-// session_save_path("C:/var/tmp");
 //ガーベージコレクションが削除するセッションの有効期限を設定（30日以上経っているものに対してだけ１００分の１の確率で削除）
 ini_set('session.gc_maxlifetime', 60*60*24*30);
 //ブラウザを閉じても削除されないようにクッキー自体の有効期限を延ばす

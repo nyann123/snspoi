@@ -35,16 +35,16 @@ gulp.task('scss', function (done) {
     done();
 });
 
-gulp.task('copy', function(done) {
-    gulp.src(["../resource/*.php","!../resource/db_connect.php","!../resource/index.php","!../resource/config.php"])
-    .pipe(gulp.dest("../../heroku"));
-    done();
-});
+// gulp.task('copy', function(done) {
+//     gulp.src(["../resource/*.php","!../resource/db_connect.php","!../resource/index.php","!../resource/config.php","!../resource/ajax_icon_create.php"])
+//     .pipe(gulp.dest("../../heroku"));
+//     done();
+// });
 
 gulp.task('watch',function(){
   gulp.watch("../resource/css/scss", gulp.task('scss'));
   gulp.watch("../resource/js",  gulp.task('js'));
-  gulp.watch('../**/*.php', gulp.task('copy'));
+  // gulp.watch('../**/*.php', gulp.task('copy'));
 });
 
 gulp.task("default",gulp.task('watch'));

@@ -8,6 +8,9 @@
     ],
     "require": {
   "ext-mbstring": "*",
-  "ext-memcached": "*"
+  "ext-memcached": "*",
+  "ext-exif":"*",
+  "ext-gd": "*",
+  "aws/aws-sdk-php": "^3.107"
   }
 }

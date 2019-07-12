@@ -385,8 +385,6 @@ $(function(){
        // アイコンを返ってきた加工済みアイコンと入れ替える
        $('.profile_icon > img').attr('src',data);
          $('.edit_icon').css('display','none');
-
-       $(".icon_save").prop('disabled', false);
      }).fail(function(){
       location.reload();
      });
