@@ -6,8 +6,16 @@
 //ログインしていない場合
 if( empty($_SESSION['user_id']) ){
   debug('未ログインユーザーです。');
-
-  if(basename($_SERVER['PHP_SELF']) !== 'login_form.php'){
+  //ユーザーページはログインしてなくても見られるように
+  if(basename($_SERVER['PHP_SELF']) === 'user_page.php'){
+    // タイムラインは見れないように
+    //(タイムラインは投稿取得処理にログイン中のユーザーIDを使用しているため)
+    if ($_GET['type'] === 'timeline') {
+      set_flash('error','ログインしてください');
+      header("Location:login_form.php");
+      exit();
+    }
+  }elseif(basename($_SERVER['PHP_SELF']) !== 'login_form.php'){
     set_flash('error','ログインしてください');
     header("Location:login_form.php");
     exit();

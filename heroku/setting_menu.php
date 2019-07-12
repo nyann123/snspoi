@@ -1,3 +1,4 @@
+<div class="modal modal_close"></div>
 <div class="setting_menu_container border_white">
   <ul>
 

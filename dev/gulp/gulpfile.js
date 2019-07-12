@@ -36,7 +36,7 @@ gulp.task('scss', function (done) {
 });
 
 gulp.task('copy', function(done) {
-    gulp.src(["../resource/*.php","!../resource/db_connect.php","!../resource/index.php"])
+    gulp.src(["../resource/*.php","!../resource/db_connect.php","!../resource/index.php","!../resource/config.php"])
     .pipe(gulp.dest("../../heroku"));
     done();
 });

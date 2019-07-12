@@ -1,9 +1,5 @@
 @include mq(tab){
 
-  .mq_put{
-    display: block;
-  }
-
   .tab_mq_hidden{
     display: none;
   }
@@ -18,7 +14,9 @@
   }
 
   .message_slide{
-    font-size: $fontS;
+    font-size: $fontM;
+    top:0;
+    line-height: 80px;
   }
 
   .main_items{
@@ -72,6 +70,10 @@
 
   .sp_mq_hidden{
     display: none;
+  }
+
+  .sp_mq_small{
+    font-size: 12px;
   }
 
   header h1{

@@ -10,8 +10,7 @@ if (!empty($_POST['search_user'])){
   <div class="container">
     <div class="flex">
 
-      <!-- ログイン中のみ表示 -->
-      <?php if(isset($_SESSION['user_id']) && basename($_SERVER['PHP_SELF']) === 'user_page.php'): ?>
+      <?php if(basename($_SERVER['PHP_SELF']) === 'user_page.php'): ?>
         <div class="show_prof">
           <i class="fas fa-user"></i>
         </div>
@@ -28,8 +27,8 @@ if (!empty($_POST['search_user'])){
       <nav>
         <ul>
           <?php if(empty($_SESSION['user_id'])):?>
-            <li class="sp_mq_hidden"><a href="signup_form.php">ユーザー登録</a></li>
-            <li class="sp_mq_hidden"><a href="login_form.php">ログイン</a></li>
+            <li class="sp_mq_small"><a href="signup_form.php">ユーザー登録</a></li>
+            <li class="sp_mq_small"><a href="login_form.php">ログイン</a></li>
           <?php else:?>
             <li class="show_menu">メニュー
               <div class="slide_menu">

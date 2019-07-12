@@ -21,7 +21,7 @@ if(!empty($_POST)){
 }
 
 $site_title = '新規登録';
-$js_file_title = 'signup';
+$js_file = 'signup';
 require_once('head.php');
  ?>
 

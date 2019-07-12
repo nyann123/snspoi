@@ -24,23 +24,24 @@
       </div>
 
     </div>
+    <!-- ログイン中のみ -->
+    <?php if (!is_guest()): ?>
+      <!-- フォローボタン ajaxで処理-->
+      <!-- 自分にはフォローボタンを表示しない -->
+      <?php if ($current_user['id'] !== $user['id']): ?>
+        <form action="#" method="post">
+          <input type="hidden" class="profile_user_id" value="<?= $profile_user['id'] ?>">
+          <input type="hidden" name="follow_user_id" value="<?= $user['id'] ?>">
 
-
-    <!-- フォローボタン ajaxで処理-->
-    <!-- 自分にはフォローボタンを表示しない -->
-    <?php if ($current_user['id'] !== $user['id']): ?>
-      <form action="#" method="post">
-        <input type="hidden" class="profile_user_id" value="<?= $profile_user['id'] ?>">
-        <input type="hidden" name="follow_user_id" value="<?= $user['id'] ?>">
-
-        <!-- フォロー中か確認してボタンを変える -->
-        <?php if (check_follow($current_user['id'],$user['id'])): ?>
-          <button class="follow_btn border_white btn following" type="button" name="follow">フォロー中</button>
-        <?php else: ?>
-          <button class="follow_btn border_white btn" type="button" name="follow">フォロー</button>
-        <?php endif; ?>
-      </form>
+          <!-- フォロー中か確認してボタンを変える -->
+          <?php if (check_follow($current_user['id'],$user['id'])): ?>
+            <button class="follow_btn border_white btn following" type="button" name="follow">フォロー中</button>
+          <?php else: ?>
+            <button class="follow_btn border_white btn" type="button" name="follow">フォロー</button>
+          <?php endif; ?>
+        </form>
+      <?php endif; ?>
     <?php endif; ?>
-        <p class="profile_comment"><?= h($user['profile_comment']) ?></p>
+    <p class="profile_comment"><?= h($user['profile_comment']) ?></p>
   </div>
 <?php endforeach; ?>

@@ -2,13 +2,19 @@
 require_once('config.php');
 
 debug('「「「「「「「「「「「');
-debug('「　マイページ     「');
+debug('「　ユーザーページ  「');
 debug('「「「「「「「「「「「');
 debugLogStart();
 
 require_once('auth.php');
-$current_user = get_user($_SESSION['user_id']);
 
+if (isset($_SESSION['user_id'])) {
+  $current_user = get_user($_SESSION['user_id']);
+}else{
+  $current_user = 'guest';
+}
+
+// get_user($_SESSION['user_id']) ||
 if(isset($_GET['page_id'])){
   debug("ページID：${_GET['page_id']}");
 }
@@ -69,7 +75,7 @@ if(!empty($_POST['delete'])){
 debug('------------------------------');
 
 $site_title = $page_user['name'];
-$js_file_title= 'user_page';
+$js_file= 'user_page';
  require_once('head.php');
   ?>
 
@@ -91,13 +97,17 @@ $js_file_title= 'user_page';
 
         <div class="main_items border_white">
 
-        <!-- 自分のページのみ投稿フォームを表示 -->
-        <?php if (is_myself($page_user['id']) && $page_type === 'main' || $page_type === 'timeline'): ?>
-          <form class ="post_form border_white" action="#" method="post">
-            <textarea class="textarea border_white" placeholder="投稿する" name="content"></textarea><br>
-            <input id="post_btn" type="submit" name="post" value="投稿" disabled>
-          </form>
+        <!-- ログイン中のみ -->
+        <?php if (!is_guest()): ?>
+          <!-- 自分のページのみ投稿フォームを表示 -->
+          <?php if (is_myself($page_user['id']) && $page_type === 'main' || $page_type === 'timeline'): ?>
+            <form class ="post_form border_white" action="#" method="post">
+              <textarea class="textarea border_white" placeholder="投稿する" name="content"></textarea><br>
+              <input id="post_btn" type="submit" name="post" value="投稿" disabled>
+            </form>
+          <?php endif; ?>
         <?php endif; ?>
+
 
         <!-- それぞれデータがなければ表示する -->
         <?php if (empty($posts) && $page_type === 'main'): ?>

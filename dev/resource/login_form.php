@@ -18,7 +18,7 @@ if(!empty($_POST)){
 }
 
 $site_title = 'ログイン';
-$js_file_title = 'login';
+$js_file = 'login';
 require_once('head.php');
 ?>
 

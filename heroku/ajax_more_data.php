@@ -5,7 +5,11 @@ if(isset($_POST)){
   debug('POST送信があります');
   debug('POST内容:'.print_r($_POST,true));
 
-  $current_user = get_user($_SESSION['user_id']);
+  if(isset($_SESSION['user_id'])){
+    $current_user = get_user($_SESSION['user_id']);
+  }else{
+    $current_user = 'guest';
+  }
   $query = $_POST['query'];
   $page_type = $_POST['page_type'];
   $offset_count = $_POST['offset'];
@@ -28,13 +32,13 @@ if(isset($_POST)){
 
     case 'follows':
     $id_type ='followed';
-    ${$id_type."user"} = get_users($current_user['id'],'follows',$offset_count*2);
+    ${$id_type."user"} = get_users($query,'follows',$offset_count*2);
     $type ='user';
       break;
 
     case 'followers':
     $id_type = 'follow';
-    ${$id_type."user"} = get_users($current_user['id'],'followers',$offset_count*2);
+    ${$id_type."user"} = get_users($query,'followers',$offset_count*2);
     $type ='user';
       break;
 

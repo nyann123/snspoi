@@ -66,7 +66,7 @@ if(!empty($_POST['prof_edit'])){
 debug('------------------------------');
 
 $site_title = 'プロフィール編集';
-$js_file_title = 'setting';
+$js_file = array('user_page','setting');
 require_once('head.php');
 ?>
 
@@ -94,7 +94,7 @@ require_once('head.php');
         <input id="email" type="email" name="email" value="<?= h(get_form_data('email')); ?>">
         <span class="js_error_message"></span><br>
 
-        <button id="js_btn" class="btn blue" name="prof_edit" type="submit" disabled>変更する</button>
+        <button id="js_btn" class="btn blue" name="prof_edit" value="prof_edit" type="submit" disabled>変更する</button>
       </form>
     </div>
   </div>
