@@ -30,8 +30,8 @@ if ($image_type === IMAGETYPE_JPEG){
 }
 
 // 画像保存先のパス
-$save_path1 = "img/".sha1_file($_FILES["icon"]["tmp_name"]).image_type_to_extension($image_type);
-$save_path2 = "img/small".sha1_file($_FILES["icon"]["tmp_name"]).image_type_to_extension($image_type);
+$save_path = "img/".sha1_file($_FILES["icon"]["tmp_name"]).image_type_to_extension($image_type);
+
 
 
 //元画像の縦横の大きさを比べてどちらかにあわせる
@@ -56,27 +56,17 @@ if($w > $h){
     $diffY = 0;
     $diffX = 0;
 }
-//大アイコンのサイズ
+//アイコンのサイズ
 $iconW = 64;
 $iconH = 64;
 
-// 小アイコンのサイズ
-$small_iconW = 48;
-$small_iconH = 48;
-
 //アイコンになる土台の画像を作る
 $new_icon = imagecreatetruecolor($iconW, $iconH);
-$new_small_icon = imagecreatetruecolor($small_iconW, $small_iconH);
 
 //アイコンになる土台の画像に合わせて元の画像を縮小しコピーペーストする
 imagecopyresampled($new_icon, $baseImage, 0, 0, $diffX, $diffY, $iconW, $iconH, $diffW, $diffH);
-imagecopyresampled($new_small_icon, $baseImage, 0, 0, $diffX, $diffY, $small_iconW, $small_iconH, $diffW, $diffH);
 
-imagejpeg($new_icon, $save_path1);
-imagejpeg($new_small_icon, $save_path2);
+imagejpeg($new_icon, $save_path);
 
-debug('大アイコン:'.$save_path1);
-debug('小アイコン:'.$save_path2);
-
-echo json_encode($save_path1);
+echo json_encode($save_path);
 debug('------------------------------');

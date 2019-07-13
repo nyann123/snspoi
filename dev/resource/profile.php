@@ -11,7 +11,7 @@
           </div>
          <?php endif ?>
       <?php endif; ?>
-      <img src="<?= "img/".$profile_user['user_icon'] ?>" alt="">
+      <img src="<?= $profile_user['user_icon'] ?>" alt="">
       <form id="icon_form">
         <input type="hidden" name="MAX_FILE_SIZE" value="10485760">
         <input class="icon_upload" type="file" name="icon">
@@ -95,7 +95,7 @@
           </div>
          <?php endif ?>
       <?php endif; ?>
-      <img src="<?= "img/".$profile_user['user_icon'] ?>" alt="">
+      <img src="<?= $profile_user['user_icon'] ?>" alt="">
     </div>
 
     <p class="user_name"><?= h($profile_user['name']); ?></p>

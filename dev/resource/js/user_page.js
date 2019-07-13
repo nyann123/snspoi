@@ -169,6 +169,7 @@ $(function(){
   user_comment = $('.profile .profile_comment').text(),
   user_icon = $('.profile img').attr('src');
 
+  //プロフィール編集
   $('.profile .edit_btn').on('click',function(){
     //背景をスクロールできないように　&　スクロール場所を維持
     scroll_position = $(window).scrollTop();
@@ -213,6 +214,7 @@ $(function(){
     $('.slide_prof .edit_name').replaceWith('<p class="user_name">' + user_name + '</p>');
     $('.slide_prof .edit_comment').replaceWith('<p class="profile_comment">' + user_comment + '</p>');
     $('.slide_prof img').attr('src',user_icon);
+    $('.profile img').attr('src',user_icon);
     $('.icon_upload').val('');
 
     $('.edit_icon').css('display','none');
@@ -242,6 +244,7 @@ $(function(){
       // 各種データを編集前に戻す
       $('.profile .edit_name').replaceWith('<p class="user_name">' + user_name + '</p>');
       $('.profile .edit_comment').replaceWith('<p class="profile_comment">' + user_comment + '</p>');
+      $('.slide_prof img').attr('src',user_icon);
       $('.profile img').attr('src',user_icon);
       $('.icon_upload').val('');
 
@@ -371,6 +374,10 @@ $(function(){
      show_slide_message('flash_error','ファイルサイズは10M以下にしてください');
      $(this).val('');
    }else{
+     //読み込み中のgif表示
+     $('.profile_icon > img').attr('src','img/loading.gif');
+     //読み込み中はボタンを押せないように
+     $('.profile_save').prop("disabled", true);
      // フォームデータを取得
      var formdata = new FormData($('#icon_form').get(0));
      $.ajax({
@@ -384,7 +391,8 @@ $(function(){
      }).done(function(data){
        // アイコンを返ってきた加工済みアイコンと入れ替える
        $('.profile_icon > img').attr('src',data);
-         $('.edit_icon').css('display','none');
+       $('.edit_icon').css('display','none');
+       $('.profile_save').prop('disabled', false);
      }).fail(function(){
       location.reload();
      });

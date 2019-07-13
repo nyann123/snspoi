@@ -8,7 +8,7 @@
       <!-- アイコン -->
       <div class="icon border_white">
         <a href="user_page.php?page_id=<?= $user['id'] ?>&type=main">
-          <img src=<?= 'img/small'.$user['user_icon'] ?> alt="">
+          <img class="icon_small" src=<?= $user['user_icon'] ?> alt="">
         </a>
       </div>
 

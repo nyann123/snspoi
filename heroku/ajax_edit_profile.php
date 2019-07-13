@@ -9,8 +9,7 @@ if(isset($_POST)){
   $user_id = $_POST['user_id'];
   $name_data = $_POST['name_data'];
   $comment_data = $_POST['comment_data'];
-  //ファイル名のみを切り出す
-  $icon_data = substr($_POST['icon_data'],4);
+  $icon_data = $_POST['icon_data'];
 
   // バリデーション
   valid_name($name_data);

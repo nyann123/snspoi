@@ -4,7 +4,7 @@
       <!-- アイコン -->
       <div class="icon border_white">
         <a href="user_page.php?page_id=<?= $post['user_id'] ?>&type=main">
-          <img src=<?= 'img/small'.$post['user_icon'] ?> alt="">
+          <img class="icon_small" src=<?= $post['user_icon'] ?> alt="">
         </a>
       </div>
 

@@ -1,7 +1,7 @@
 <?php
+require_once('vendor/autoload.php');
 require_once('config.php');
 require_once('auth.php');
-require_once('vendor/autoload.php');
 
 debugLogStart();
 debug('ファイル送信があります');
@@ -30,10 +30,8 @@ if ($image_type === IMAGETYPE_JPEG){
   $baseImage = ImageCreateFromPNG($file);
 }
 
-// 画像保存先のパス
-$save_path1 = "/tmp/".sha1_file($_FILES["icon"]["tmp_name"]).image_type_to_extension($image_type);
-$save_path2 = "/tmp/small".sha1_file($_FILES["icon"]["tmp_name"]).image_type_to_extension($image_type);
-
+// 画像一時保存先のパス
+$save_path = sha1_file($_FILES["icon"]["tmp_name"]).image_type_to_extension($image_type);
 
 //元画像の縦横の大きさを比べてどちらかにあわせる
 // なおかつ縦横の差をコピー開始位置として使えるようセット
@@ -57,24 +55,17 @@ if($w > $h){
     $diffY = 0;
     $diffX = 0;
 }
-//大アイコンのサイズ
+//アイコンのサイズ
 $iconW = 64;
 $iconH = 64;
 
-// 小アイコンのサイズ
-$small_iconW = 48;
-$small_iconH = 48;
-
 //アイコンになる土台の画像を作る
 $new_icon = imagecreatetruecolor($iconW, $iconH);
-$new_small_icon = imagecreatetruecolor($small_iconW, $small_iconH);
 
 //アイコンになる土台の画像に合わせて元の画像を縮小しコピーペーストする
 imagecopyresampled($new_icon, $baseImage, 0, 0, $diffX, $diffY, $iconW, $iconH, $diffW, $diffH);
-imagecopyresampled($new_small_icon, $baseImage, 0, 0, $diffX, $diffY, $small_iconW, $small_iconH, $diffW, $diffH);
 
-imagejpeg($new_icon, $save_path1);
-imagejpeg($new_small_icon, $save_path2);
+imagejpeg($new_icon, $save_path);
 
 //================================
 //  S3アップロード
@@ -98,9 +89,9 @@ $s3 = new Aws\S3\S3Client([
 $params = [
   'ACL' => 'public-read',
   'Bucket' => $bucket_name,
-  'Key' => 's3/sample.jpg',
-  'SourceFile'   => $save_path1,
-  'ContentType' => mime_content_type($save_path1)
+  'Key' => 's3/'.$save_path,
+  'SourceFile'   => $save_path,
+  'ContentType' => mime_content_type($save_path)
 ];
 
  $result = $s3 -> putObject($params);

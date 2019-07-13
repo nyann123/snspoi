@@ -35,8 +35,12 @@ gulp.task('scss', function (done) {
     done();
 });
 
+//================================
+//    ↓本番環境書き換え注意↓
+//================================
 // gulp.task('copy', function(done) {
-//     gulp.src(["../resource/*.php","!../resource/db_connect.php","!../resource/index.php","!../resource/config.php","!../resource/ajax_icon_create.php"])
+//     gulp.src(["../resource/*.php","!../resource/db_connect.php","!../resource/index.php",
+//             "!../resource/config.php","!../resource/ajax_icon_create.php","!../ajax_edit_profile.php"])
 //     .pipe(gulp.dest("../../heroku"));
 //     done();
 // });
