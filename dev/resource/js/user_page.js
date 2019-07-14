@@ -43,7 +43,7 @@ $(function(){
   //================================
   // 投稿全文表示機能
   //================================
-
+  // 投稿全文表示
   $(document).on('click','.show_all',function(){
     // 省略されている投稿の高さを取得
     var omit_height = $(this).parent().height();
@@ -154,7 +154,7 @@ $(function(){
     $('.icon_upload').click();
   })
 
-  // 高さを自動調整
+  // テキストエリアの高さを自動調整
   $(document).on('input','.edit_comment',function(){
     var scroll_height = $(this).get(0).scrollHeight;
     var offset_height = $(this).get(0).offsetHeight;
@@ -310,15 +310,15 @@ $(function(){
         dataType: 'json',
         data: { page_id: page_id,
                 post_id: post_id}
-    }).done(function(phpreturn){
+    }).done(function(data){
       // php側でエラーが発生したらリロードしてエラーメッセージを表示させる
-      if(phpreturn ==="error"){
+      if(data ==="error"){
         location.reload();
       }else{
         // プロフィール内のカウントを更新する
-        $profile_count.text(phpreturn['profile_count']);
+        $profile_count.text(data['profile_count']);
         // 投稿内のカウントを更新する
-        $this.next('.post_count').text(phpreturn['post_count']);
+        $this.next('.post_count').text(data['post_count']);
         // アイコンを切り替える
         $this.children('i').toggleClass('fas');
         $this.children('i').toggleClass('far');
@@ -343,22 +343,22 @@ $(function(){
         dataType: 'json',
         data: { profile_user_id: profile_user_id,
                 user_id: user_id}
-    }).done(function(phpreturn){
+    }).done(function(data){
       // php側の処理に合わせてボタンを更新する
       // php側でエラーが発生したらリロードしてエラーメッセージを表示させる
-      if(phpreturn === "error"){
+      if(data === "error"){
         location.reload();
-      }else if(phpreturn['action'] ==="登録"){
+      }else if(data['action'] ==="登録"){
         $this.toggleClass('following')
         $this.text('フォロー中');
-      }else if(phpreturn['action'] ==="解除"){
+      }else if(data['action'] ==="解除"){
         $this.removeClass('following');
         $this.removeClass('unfollow')
         $this.text('フォロー');
       }
       // プロフィール内のカウントを更新する
-      $follow_count.text(phpreturn['follow_count']);
-      $follower_count.text(phpreturn['follower_count']);
+      $follow_count.text(data['follow_count']);
+      $follower_count.text(data['follower_count']);
     }).fail(function() {
       location.reload();
     });

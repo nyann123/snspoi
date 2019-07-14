@@ -1,5 +1,4 @@
 php.log
-img/
 node_modules
 dev/resource/db_connect.php
 

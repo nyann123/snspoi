@@ -11,6 +11,7 @@
   "ext-memcached": "*",
   "ext-exif":"*",
   "ext-gd": "*",
-  "aws/aws-sdk-php": "^3.107"
+  "aws/aws-sdk-php": "^3.107",
+  "sendgrid/sendgrid": "~5.0.9"
   }
 }

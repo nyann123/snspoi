@@ -3,6 +3,7 @@ $(function(){
   //================================
   // ヘッダー
   //================================
+  // メニューを開く処理
   $('.show_menu').on('click',function(){
     scroll_position = $(window).scrollTop();
     $('body').addClass('fixed').css({'top': -scroll_position});
@@ -10,14 +11,14 @@ $(function(){
     $('.slide_menu').addClass('open');
   })
 
-  //ユーザー検索フォーム
+  //ユーザー検索フォーム　開く処理
   $('.show_search').on('click',function(){
     $(this).hide();
     $('header h1').hide()
     $('.search').show();
     $('.close_search').show();
   })
-
+  //ユーザー検索フォーム　閉じる処理
   $('.close_search').on('click',function(){
     $('.show_search').show();
     $('header h1').show();

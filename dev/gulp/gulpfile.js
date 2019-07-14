@@ -6,6 +6,7 @@ const autoprefixer = require('gulp-autoprefixer');  //ベンダープレフィ�
 const sourcemaps = require('gulp-sourcemaps');  //sourcemapsの付与
 const cleanCSS = require('gulp-clean-css'); //css圧縮
 const uglify = require('gulp-uglify'); //js圧縮
+var replace = require('gulp-replace');
 
 //js圧縮
 gulp.task('js', function(done) {
@@ -38,17 +39,20 @@ gulp.task('scss', function (done) {
 //================================
 //    ↓本番環境書き換え注意↓
 //================================
-// gulp.task('copy', function(done) {
-//     gulp.src(["../resource/*.php","!../resource/db_connect.php","!../resource/index.php",
-//             "!../resource/config.php","!../resource/ajax_icon_create.php","!../ajax_edit_profile.php"])
-//     .pipe(gulp.dest("../../heroku"));
-//     done();
+//debug削除
+// gulp.task('replace', function(done) {
+//   gulp.src(["../resource/*.php","!../resource/db_connect.php","!../resource/index.php",
+//           "!../resource/config.php","!../resource/ajax_icon_create.php","!../ajax_edit_profile.php",
+//           "!../resource/signup_process.php"])
+//   .pipe( replace(/debug.*(\r\n|\n|\r)/g,''))
+//   .pipe(gulp.dest("../../heroku"));
+//   done();
 // });
 
 gulp.task('watch',function(){
   gulp.watch("../resource/css/scss", gulp.task('scss'));
   gulp.watch("../resource/js",  gulp.task('js'));
-  // gulp.watch('../**/*.php', gulp.task('copy'));
+  // gulp.watch('../**/*.php', gulp.task('replace'));
 });
 
 gulp.task("default",gulp.task('watch'));

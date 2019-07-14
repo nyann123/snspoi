@@ -42,7 +42,7 @@ require_once('head.php');
         <input id="checkbox" type="checkbox" name="pass_save">ログインを維持する
         </label><br>
         <button id="login_btn" class="btn" type="submit" value="ログイン">ログイン</button>
-        <a href="signup_form.php" class="signup">新規登録はこちら</a>
+        <a href="signup_first.php" class="signup">新規登録はこちら</a>
       </form>
     </div>
   </div>

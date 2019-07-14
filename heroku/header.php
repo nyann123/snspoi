@@ -27,7 +27,7 @@ if (!empty($_POST['search_user'])){
       <nav>
         <ul>
           <?php if(empty($_SESSION['user_id'])):?>
-            <li class="sp_mq_small"><a href="signup_form.php">ユーザー登録</a></li>
+            <li class="sp_mq_small"><a href="signup_first.php">ユーザー登録</a></li>
             <li class="sp_mq_small"><a href="login_form.php">ログイン</a></li>
           <?php else:?>
             <li class="show_menu">メニュー
@@ -61,8 +61,9 @@ if (!empty($_POST['search_user'])){
   <!-- フラッシュメッセージ -->
   <!-- ログインと新規登録ページでは表示しない -->
   <?php if(basename($_SERVER['PHP_SELF']) !== 'login_form.php'
-        && basename($_SERVER['PHP_SELF']) !== 'signup_form.php'
-        && basename($_SERVER['PHP_SELF']) !== 'prof_edit.php' ): ?>
+        && basename($_SERVER['PHP_SELF']) !== 'signup_first.php'
+        && basename($_SERVER['PHP_SELF']) !== 'signup_second.php'
+        && basename($_SERVER['PHP_SELF']) !== 'prof_edit.php'): ?>
 
       <p id ="js_show_msg" class="message_slide <?php if(isset($flash_type)) echo $flash_type ?>">
         <?php if(isset($flash_messages)) echo $flash_messages ?>

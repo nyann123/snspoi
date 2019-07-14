@@ -86,7 +86,7 @@ require_once('head.php');
       <?php endif ?>
 
       <form action="" method="post">
-        <label for="name">名前</label><br>
+        <label for="name">ユーザー名</label><br>
         <input id="name" type="text" name="name" value="<?= h(get_form_data('name')); ?>">
         <span class="js_error_message"></span><br>
 

@@ -40,7 +40,7 @@ require_once('head.php');
       <form action="#" method="post">
         <span class="flash_cursor">｝</span>
 
-        <label for="name">おなまえ <span>※最大８文字</span></label><br>
+        <label for="name">ユーザー名 <span>※最大８文字</span></label><br>
         <input id="name" type="text" name="name" value="<?php if (isset($oldname)) echo h($oldname); ?>">
         <span class="js_error_message"></span><br>
 

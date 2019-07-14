@@ -7,13 +7,12 @@ if(isset($_POST)){
 
   if(isset($_SESSION['user_id'])){
     $current_user = get_user($_SESSION['user_id']);
-  }else{
-    $current_user = 'guest';
   }
   $query = $_POST['query'];
   $page_type = $_POST['page_type'];
   $offset_count = $_POST['offset'];
 
+  // ページに合わせた投稿、ユーザーを取得
   switch ($page_type) {
     case 'main':
     $posts =  get_posts($query,'my_post',$offset_count);
@@ -50,7 +49,7 @@ if(isset($_POST)){
 
   }
 
-
+  //取得した投稿もしくはユーザーを変数にいれる
   $data = $posts ?? ${$id_type."user"};
 
   // 取得した数

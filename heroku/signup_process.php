@@ -1,11 +1,10 @@
 <?php
 $name = $_SESSION['name'] = $_POST['name'];
-$email = $_SESSION['email'] = $_POST['email'];
 $pass = $_SESSION['pass'] = $_POST['pass'];
+$email = $provisional_user['email'];
 
 //入力のバリデーション
 valid_name($name);
-valid_email($email);
 valid_password($pass);
 
 //メッセージをsessionに格納（エラーが発生したら定数で上書きされる）
@@ -15,6 +14,7 @@ set_flash('error',$error_messages);
 if(empty($error_messages)){
   debug('バリデーションOK');
   try {
+    // 新規登録
     $dbh = dbConnect();
     $sql = 'INSERT INTO users(name,email,password)
             VALUES(:name,:email,:password)';
@@ -23,9 +23,15 @@ if(empty($error_messages)){
     if (query_result($stmt)) {
       debug('クエリ成功しました');
 
+      //仮登録テーブルから削除
+      $sql = 'DELETE
+              FROM provisional_users
+              WHERE email = :email';
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute(array(':email' => $email));
+
       //フォーム入力保持用のsession破棄
       unset($_SESSION['name']);
-      unset($_SESSION['email']);
       unset($_SESSION['pass']);
 
       //登録したユーザーをログインさせる
@@ -49,5 +55,5 @@ if(empty($error_messages)){
 debug('新規登録失敗');
 debug(print_r($_SESSION['flash'],true));
 
-header('Location:signup_form.php');
+header("Location:signup_second.php?u_id=${u_id}");
 debug('------------------------------');
