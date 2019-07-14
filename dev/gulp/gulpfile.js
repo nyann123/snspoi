@@ -39,11 +39,21 @@ gulp.task('scss', function (done) {
 //================================
 //    ↓本番環境書き換え注意↓
 //================================
-//debug削除
+
+// var blacklist = [ "!../resource/ajax_icon_create.php",
+//                   "!../resource/config.php",
+//                   "!../resource/db_connect.php",
+//                   "!../resource/header.php",
+//                   "!../resource/index.php",
+//                   "!../resource/login_form.php",
+//                   "!../resource/signup_form.php",
+//                   "!../resource/signup_process.php"];
+//
+// var target = blacklist.unshift("../resource/*.php");
+
+// //debug削除
 // gulp.task('replace', function(done) {
-//   gulp.src(["../resource/*.php","!../resource/db_connect.php","!../resource/index.php",
-//           "!../resource/config.php","!../resource/ajax_icon_create.php","!../ajax_edit_profile.php",
-//           "!../resource/signup_process.php"])
+//   gulp.src(target)
 //   .pipe( replace(/debug.*(\r\n|\n|\r)/g,''))
 //   .pipe(gulp.dest("../../heroku"));
 //   done();
