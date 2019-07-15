@@ -1,5 +1,4 @@
 <?php
-debug('投稿削除のPOST送信があります');
 $post_id = $_POST['post_id'];
 $user_id = $_POST['user_id'];
 $prev_page = basename($_SERVER['HTTP_REFERER']);
@@ -15,8 +14,7 @@ if (is_myself($user_id)) {
     $stmt->execute(array(':id' => $post_id));
 
     if(query_result($stmt)){
-      debug('削除成功');
-      set_flash('error','削除しました');
+            set_flash('error','削除しました');
 
       header("Location:$prev_page");
       exit();
@@ -26,8 +24,7 @@ if (is_myself($user_id)) {
     set_flash('error',ERR_MSG1);
   }
 }else{
-  debug('削除失敗');
-  set_flash('error','他人の投稿は削除できません');
+    set_flash('error','他人の投稿は削除できません');
 
   header("Location:$prev_page");
   exit();

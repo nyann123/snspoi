@@ -1,10 +1,6 @@
 <?php
 require_once('config.php');
 
-debug('「「「「「「「「「「「');
-debug('「　ユーザーページ  「');
-debug('「「「「「「「「「「「');
-debugLogStart();
 
 require_once('auth.php');
 
@@ -16,9 +12,7 @@ if (isset($_SESSION['user_id'])) {
 
 // get_user($_SESSION['user_id']) ||
 if(isset($_GET['page_id'])){
-  debug("ページID：${_GET['page_id']}");
-}
-debug("ページtype：${_GET['type']}");
+  }
 
 if(isset($_GET['page_id'])){
   $page_user = get_user($_GET['page_id']);
@@ -29,7 +23,6 @@ if(isset($_GET['page_id'])){
 $page_type = $_GET['type'];
 
 //ログイン中のユーザー情報を取得
-debug(print_r($current_user,true));
 
 
 // getパラメータに合わせて必要なデータを用意する
@@ -72,7 +65,6 @@ if(!empty($_POST['delete'])){
   require_once('post_delete_process.php');
 }
 
-debug('------------------------------');
 
 $site_title = $page_user['name'];
 $js_file= 'user_page';

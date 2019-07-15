@@ -1,8 +1,6 @@
 $(function(){
 
-  var emailregex = new RegExp(/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/);
   var name_flg
-  var email_flg
   var password_flg
 
   //カーソルを初期位置に
@@ -14,14 +12,11 @@ $(function(){
       case 'name':
         $('.flash_cursor').css({'top':'5px'});
         break;
-      case 'email':
-        $('.flash_cursor').css({'top':'105px'});
-        break;
       case 'password':
-        $('.flash_cursor').css({'top':'205px'});
+        $('.flash_cursor').css({'top':'110px'});
         break;
       case 'js_btn':
-        $('.flash_cursor').css({'top':'275px'});
+        $('.flash_cursor').css({'top':'180px'});
     }
   }
 
@@ -44,28 +39,6 @@ $(function(){
       $(name).removeClass('error');
       $(error_message).text('');
       name_flg = 1;
-    }
-  }
-
-  //メールのバリデーション
-  function email_validate(email){
-    input_email = $(email).val();
-    error_message = $(email +'+ span');
-
-    if ( input_email === '' ){
-      $(email).addClass('error');
-      $(error_message).text("メールアドレスを入力してください");
-      email_flg = 0;
-
-    }else if ( !emailregex.test(input_email)){     //正規表現を使ってemail形式以外はエラーに
-        $(email).addClass('error');
-        $(error_message).text("メールアドレスが異常です");
-        email_flg = 0;
-
-    }else{
-      $(email).removeClass('error');
-      $(error_message).text('');
-      email_flg = 1;
     }
   }
 
@@ -93,7 +66,7 @@ $(function(){
 
   //バリデーションが全て通っていたらボタンを有効にする
   function btn_actiovation(){
-    if( name_flg && email_flg && password_flg ){
+    if( name_flg && password_flg ){
       $('#js_btn').prop('disabled',false);
       move_cousor('js_btn');
     }else {
@@ -105,9 +78,8 @@ $(function(){
 
 
   $(window).on('load',function(){
-    if( $('#name').val() && $('#email').val() && $('#password').val() ){
+    if( $('#name').val() && $('#password').val() ){
       name_validate( '#' + $('#name').attr('id') )
-      email_validate( '#' + $('#email').attr('id') )
       password_validate( '#' + $('#password').attr('id') )
       btn_actiovation();
     }
@@ -122,9 +94,6 @@ $(function(){
     switch ($selector) {
       case '#name':
         name_validate($selector);
-        break;
-      case '#email':
-        email_validate($selector);
         break;
       case '#password':
         password_validate($selector);

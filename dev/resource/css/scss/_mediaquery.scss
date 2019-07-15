@@ -4,7 +4,6 @@
     display: none;
   }
 
-
   .js_error_message{
     font-size: $fontS;
   }
@@ -97,6 +96,10 @@
     .btn{
       width: 95%;
     }
+  }
+
+  .flash_message{
+    font-size: 16px;
   }
 
   .js_error_message{

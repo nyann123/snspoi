@@ -3,29 +3,22 @@ require_once("config.php");
 require_once('vendor/autoload.php');
 
 
-debug('「「「「「「「「「「「');
-debug('「　新規登録ページ 「');
-debug('「「「「「「「「「「「');
-debugLogStart();
-
 // ログイン中ならマイページへ
 check_logged_in();
 
-//エラー発生時の入力保持
-set_old_form_data('name');
-set_old_form_data('email');
-set_old_form_data('pass');
+if(isset($_SESSION['send_to'])){
+  $send_to = $_SESSION['send_to'];
+  unset($_SESSION['send_to']);
+}
 
 //送信されていれば新規登録処理
 if(!empty($_POST)){
-  debug('POST送信があります。');
   $email = $_POST['email'];
 
   valid_email($email);
   set_flash('error',$error_messages);
 
   if(empty($error_messages)){
-    debug('バリデーションOK');
 
   // ユニークid生成
   $unique_id = uniqid(rand());
@@ -56,14 +49,15 @@ if(!empty($_POST)){
         $to = new SendGrid\Email(null, $email);
         $content = new SendGrid\Content("text/plain",
          "Hello, Email!\n
-         https://agile-wave-88047.herokuapp.com/test.php?u_id=${unique_id} ");
+         https://agile-wave-88047.herokuapp.com/signup_second.php?u_id=${unique_id} ");
         $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
         $apiKey = getenv('SENDGRID_API_KEY');
         $sg = new \SendGrid($apiKey);
 
         $response = $sg->client->mail()->send()->post($mail);
-
+        $_SESSION['send_to'] = $email;
+        header('Location:signup_first.php');
       }
     } catch (\Exception $e) {
       error_log('エラー発生:' . $e->getMessage());
@@ -71,11 +65,10 @@ if(!empty($_POST)){
       header('Location:signup_first.php');
     }
   }
-  // require_once("signup_process.php");
 }
 
 $site_title = '新規登録';
-$js_file = 'signup';
+$js_file = 'signup_first';
 require_once('head.php');
  ?>
 
@@ -89,27 +82,28 @@ require_once('head.php');
         <p class ="flash_message <?= $flash_type ?>"><?= $message?></p>
       <?php endforeach ?>
     <?php endif ?>
+    <!-- メール送信前に表示 -->
+    <?php if (empty($send_to)): ?>
+      <div class="form_inner">
+        <form action="#" method="post">
+          <span class="flash_cursor">｝</span>
 
-    <div class="form_inner">
-      <form action="#" method="post">
-        <span class="flash_cursor">｝</span>
+          <label for="email">メールアドレス</label><br>
+          <input id="email" autocomplete="false" type="text" name="email">
+          <span class="js_error_message"></span><br>
 
-        <!-- <label for="name">ユーザー名 <span>※最大８文字</span></label><br>
-        <input id="name" type="text" name="name" value="<?php if (isset($oldname)) echo h($oldname); ?>">
-        <span class="js_error_message"></span><br> -->
+          <button id="js_btn" class="btn blue" type="submit" disabled>メールを送信する</button>
+          <a href="login_form.php" class="login link">>>ログインページへ</a>
 
-        <label for="email">メールアドレス</label><br>
-        <input id="email" autocomplete="false" type="text" name="email" value="<?php if (isset($oldemail)) echo h($oldemail) ?>">
-        <span class="js_error_message"></span><br>
-
-        <!-- <label for="password">パスワード <span>※半角英数６文字以上</span> </label><br>
-        <input id="password" autocomplete="flase" type="password" name="pass" value="<?php if (isset($oldpass)) echo h($oldpass) ?>">
-        <span class="js_error_message"></span><br> -->
-
-        <button id="js_btn" class="btn blue" type="submit" disabled>登録</button>
-        <a href="login_form.php" class="login">ログインページへ</a>
-
-      </form>
-    </div>
+        </form>
+      </div>
+    <!-- メール送信後に表示 -->
+    <?php else: ?>
+      <div class="send_to">
+        <p><?= $send_to ?></p>
+        <p>にメールを送信しました。<br>メールを確認して登録を完了してください。</p>
+      </div>
+      <a href="login_form.php" class="link">>>ログインページへ</a>
+    <?php endif; ?>
   </div>
 <?php require_once('footer.php'); ?>

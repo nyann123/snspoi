@@ -1,5 +1,4 @@
 <?php
-debug('投稿のPOST送信があります');
 $post_content = $_POST['content'];
 $prev_page = basename($_SERVER['HTTP_REFERER']);
 
@@ -9,8 +8,7 @@ valid_post($post_content);
 set_flash('error',$error_messages);
 
 if (empty($error_messages)){
-  debug('バリデーションOK');
-
+  
   try {
     $dbh = dbConnect();
     $sql = "INSERT INTO posts(user_id,post_content)
@@ -19,8 +17,7 @@ if (empty($error_messages)){
     $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content));
     if(query_result($stmt)){
       set_flash('sucsess','投稿しました');
-      debug('投稿成功');
-
+      
       header("Location:$prev_page");
       exit();
     }
@@ -29,7 +26,6 @@ if (empty($error_messages)){
     set_flash('error',ERR_MSG1);
   }
 }
-debug('投稿失敗');
 
 header("Location:$prev_page");
 exit();

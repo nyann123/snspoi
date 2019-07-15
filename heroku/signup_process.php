@@ -12,7 +12,6 @@ set_flash('error',$error_messages);
 
 //エラーがなければ次の処理に進む
 if(empty($error_messages)){
-  debug('バリデーションOK');
   try {
     // 新規登録
     $dbh = dbConnect();
@@ -21,7 +20,6 @@ if(empty($error_messages)){
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => password_hash($pass,PASSWORD_DEFAULT)));
     if (query_result($stmt)) {
-      debug('クエリ成功しました');
 
       //仮登録テーブルから削除
       $sql = 'DELETE
@@ -42,8 +40,6 @@ if(empty($error_messages)){
 
       set_flash('sucsess','登録が完了しました');
 
-      debug('新規登録成功');
-      debug(print_r($_SESSION['flash'],true));
       header("Location:user_page.php?page_id=${new_user_id}&type=main");
       exit();
     }
@@ -52,8 +48,5 @@ if(empty($error_messages)){
     set_flash('error',ERR_MSG1);
   }
 }
-debug('新規登録失敗');
-debug(print_r($_SESSION['flash'],true));
 
 header("Location:signup_second.php?u_id=${u_id}");
-debug('------------------------------');

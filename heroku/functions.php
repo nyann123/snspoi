@@ -13,6 +13,7 @@ function check_email_duplicate($email){
   $user = $stmt->fetch();
   return $user;
 }
+
 //お気に入りの重複チェック
 function check_favolite_duplicate($user_id,$post_id){
   $dbh = dbConnect();
@@ -46,7 +47,7 @@ function valid_email($email){
   global $error_messages;
   if(!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)){
     $error_messages['email'] = 'Emailの形式で入力してください';
-  }elseif ( check_email_duplicate( $email ) ){
+  }elseif ( check_email_duplicate($email) ){
     $error_messages['email'] = 'すでに登録済みのメールアドレスです';
   }
 }
@@ -72,18 +73,15 @@ function valid_post($post){
 //================================
 function query_result($stmt){
   if($stmt){
-    debug('クエリ成功しました');
-    return true;
+        return true;
   }else{
-    debug('クエリ失敗しました。');
-    set_flash('error',ERR_MSG1);
+        set_flash('error',ERR_MSG1);
     return false;
   }
 }
 // ユーザー情報を取得する
 function get_user($user_id){
-  debug('ユーザー情報を取得します');
-  try {
+    try {
     $dbh = dbConnect();
     $sql = "SELECT id,name,user_icon,profile_comment
             FROM users
@@ -99,8 +97,7 @@ function get_user($user_id){
 }
 
 function get_edit_user($user_id){
-  debug('ユーザー情報を取得します');
-  try {
+    try {
     $dbh = dbConnect();
     $sql = "SELECT id,name,email,user_icon,profile_comment
             FROM users
@@ -241,8 +238,7 @@ function get_post_favorite_count($post_id){
 
 // ユーザーの投稿を取得する
 function get_posts($page_id,$type,$offset_count=0){
-  debug(($offset_count + 1).'~'.($offset_count + 10).'件目のユーザー投稿を取得します');
-  global $current_user;
+    global $current_user;
   $dbh = dbConnect();
 
   // ページに合わせてSQLを変える
@@ -287,8 +283,7 @@ function get_posts($page_id,$type,$offset_count=0){
     $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
     $stmt->execute();
     if(query_result($stmt)){
-      debug($stmt->rowCount().'件取得しました');
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
@@ -316,20 +311,16 @@ function login($user_id,$pass_save){
   $_SESSION['login_date'] = time();
   // ログイン保持にチェックがある場合
   if($pass_save){
-    debug('ログイン保持にチェックがあります。');
-    $_SESSION['login_limit'] = $sesLimit * 24 * 30;
+        $_SESSION['login_limit'] = $sesLimit * 24 * 30;
   }else{
-    debug('ログイン保持にチェックはありません。');
-    $_SESSION['login_limit'] = $sesLimit;
+        $_SESSION['login_limit'] = $sesLimit;
   }
   $_SESSION['user_id'] = $user_id;
-  debug('ログイン成功');
-}
+  }
 //ログイン中ユーザーのアクセス制限
 function check_logged_in(){
   if (isset($_SESSION['user_id'])){
-    debug('ログイン中のユーザーはアクセスできません');
-    header("Location:user_page.php?page_id=${_SESSION['user_id']}&type=main");
+        header("Location:user_page.php?page_id=${_SESSION['user_id']}&type=main");
     exit();
   }
 }

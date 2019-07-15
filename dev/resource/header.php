@@ -27,7 +27,7 @@ if (!empty($_POST['search_user'])){
       <nav>
         <ul>
           <?php if(empty($_SESSION['user_id'])):?>
-            <li class="sp_mq_small"><a href="signup_form.php">ユーザー登録</a></li>
+            <li class="sp_mq_small"><a href="signup_form.php">新規登録</a></li>
             <li class="sp_mq_small"><a href="login_form.php">ログイン</a></li>
           <?php else:?>
             <li class="show_menu">メニュー

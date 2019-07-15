@@ -3,6 +3,10 @@ require_once("config.php");
 
 $now = new DateTime();
 $now->setTimeZone(new DateTimeZone('Asia/Tokyo'));
+$now->format('Y-m-d H:i:s');
+
+
+
 $u_id = $_GET['u_id'];
 
 $dbh = dbConnect();
@@ -17,29 +21,29 @@ $provisional_user = $stmt->fetch();
 if ($provisional_user){
 
   // 登録期限確認
-  if($provisional_user['limit_time'] < $now){
+  if($provisional_user['limit_time'] > $now->format('Y-m-d H:i:s')){
     $authentication = true;
   }else{
     set_flash("error",'有効期限切れです。最初からやり直してください。');
     header('Location:login_form.php');
+    exit();
   }
 
 }else{
   set_flash("error",'不正なアクセスです');
   header('Location:login_form.php');
+  exit();
 }
 
 //エラー発生時の入力保持
 set_old_form_data('name');
-set_old_form_data('pass');
 
 if(!empty($_POST)){
-  debug('POST送信があります。');
   require_once("signup_process.php");
 }
 
 $site_title = '新規登録';
-$js_file = 'signup';
+$js_file = 'signup_second';
 require_once('head.php');
  ?>
 
@@ -55,7 +59,7 @@ require_once('head.php');
     <?php endif ?>
 
 
-    <?php if ($authentication): ?>
+    <?php if (isset($authentication)): ?>
       <div class="form_inner">
         <form action="#" method="post">
           <span class="flash_cursor">｝</span>
@@ -65,11 +69,10 @@ require_once('head.php');
           <span class="js_error_message"></span><br>
 
           <label for="password">パスワード <span>※半角英数６文字以上</span> </label><br>
-          <input id="password" autocomplete="flase" type="password" name="pass" value="<?php if (isset($oldpass)) echo h($oldpass) ?>">
+          <input id="password" autocomplete="flase" type="password" name="pass">
           <span class="js_error_message"></span><br>
 
           <button id="js_btn" class="btn blue" type="submit" disabled>登録</button>
-          <a href="login_form.php" class="login">ログインページへ</a>
         </form>
       </div>
     <?php endif; ?>

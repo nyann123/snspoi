@@ -2,9 +2,7 @@
 require_once('config.php');
 
 if(isset($_POST)){
-  debug('POST送信があります');
-  debug('POST内容:'.print_r($_POST,true));
-
+    
   if(isset($_SESSION['user_id'])){
     $current_user = get_user($_SESSION['user_id']);
   }
@@ -62,4 +60,3 @@ if(isset($_POST)){
 
   echo json_encode(array('data_html' => $data_html, 'data_count' => $data_count));
 }
-debug('------------------------------');

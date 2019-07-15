@@ -9,7 +9,7 @@ require_once('db_connect.php');
 require_once('functions.php');
 
 error_reporting(E_ALL); //E_STRICTレベル以外のエラーを報告する
-ini_set('display_errors','on'); //画面にエラーを表示させるか
+ini_set('display_errors','off'); //画面にエラーを表示させるか
 
 //================================
 //ログを取るか

@@ -1,10 +1,6 @@
 <?php
 require('config.php');
 
-debug('「「「「「「「「「「「「「「');
-debug('「　プロフィール編集ページ「');
-debug('「「「「「「「「「「「「「「');
-debugLogStart();
 
 //ログイン認証
 require('auth.php');
@@ -15,13 +11,10 @@ set_old_form_data('email');
 
 //ログイン中のユーザー情報を取得
 $current_user = get_edit_user($_SESSION['user_id']);
-debug('取得したユーザー情報：'.print_r($current_user,true));
 
 // post送信されていた場合
 if(!empty($_POST['prof_edit'])){
-  debug('POST送信があります。');
-  debug('POST情報：'.print_r($_POST,true));
-
+    
   $name = $_SESSION['name'] = $_POST['name'];
   $email = $_SESSION['email'] = $_POST['email'];
 
@@ -37,8 +30,7 @@ if(!empty($_POST['prof_edit'])){
   set_flash('error',$error_messages);
 
   if(empty($error_messages)){
-    debug('バリデーションOK');
-
+    
     try {
       $dbh = dbConnect();
       $sql = 'UPDATE users
@@ -57,13 +49,10 @@ if(!empty($_POST['prof_edit'])){
       set_flash('error',ERR_MSG1);
     }
   }
-  debug('プロフィール編集失敗');
-  debug(print_r($_SESSION['flash'],true));
-
+    
   header('Location:prof_edit.php');
 }
 
-debug('------------------------------');
 
 $site_title = 'プロフィール編集';
 $js_file = array('user_page','setting');

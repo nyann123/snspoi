@@ -1,19 +1,11 @@
 <?php
 require_once('config.php');
 
-debug('「「「「「「「「「「「');
-debug('「　ログインページ 「');
-debug('「「「「「「「「「「「');
-debugLogStart();
-
-debug(print_r($_SESSION,true));
 //ログイン中ならマイページへ
 check_logged_in();
 
 // 送信されていればログイン処理
 if(!empty($_POST)){
-  debug('POST送信があります。');
-  debug('post内容:'.print_r($_POST,true));
   require_once('login_process.php');
 }
 
@@ -42,7 +34,7 @@ require_once('head.php');
         <input id="checkbox" type="checkbox" name="pass_save">ログインを維持する
         </label><br>
         <button id="login_btn" class="btn" type="submit" value="ログイン">ログイン</button>
-        <a href="signup_first.php" class="signup">新規登録はこちら</a>
+        <a href="signup_first.php" class="signup link">>>新規登録はこちら</a>
       </form>
     </div>
   </div>

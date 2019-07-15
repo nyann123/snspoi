@@ -10,7 +10,7 @@ var replace = require('gulp-replace');
 
 //js圧縮
 gulp.task('js', function(done) {
-    gulp.src("../resource/js/*.js")
+    gulp.src(["../resource/js/*.js","!../resource/js/signup.js"])
     .pipe(uglify())
     // .pipe(rename({
     //   suffix: '.min',
@@ -39,7 +39,7 @@ gulp.task('scss', function (done) {
 //================================
 //    ↓本番環境書き換え注意↓
 //================================
-
+// var all = ["../resource/*.php"];
 // var blacklist = [ "!../resource/ajax_icon_create.php",
 //                   "!../resource/config.php",
 //                   "!../resource/db_connect.php",
@@ -49,8 +49,7 @@ gulp.task('scss', function (done) {
 //                   "!../resource/signup_form.php",
 //                   "!../resource/signup_process.php"];
 //
-// var target = blacklist.unshift("../resource/*.php");
-
+// var target = all.concat(blacklist);
 // //debug削除
 // gulp.task('replace', function(done) {
 //   gulp.src(target)
@@ -62,7 +61,6 @@ gulp.task('scss', function (done) {
 gulp.task('watch',function(){
   gulp.watch("../resource/css/scss", gulp.task('scss'));
   gulp.watch("../resource/js",  gulp.task('js'));
-  // gulp.watch('../**/*.php', gulp.task('replace'));
 });
 
 gulp.task("default",gulp.task('watch'));

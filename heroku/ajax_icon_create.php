@@ -3,20 +3,14 @@ require_once('vendor/autoload.php');
 require_once('config.php');
 require_once('auth.php');
 
-debugLogStart();
-debug('ファイル送信があります');
-debug('ファイル内容'.print_r($_FILES,true));
 
 $max_file_size = 10485760;
 
 if($max_file_size < $_SERVER["CONTENT_LENGTH"]){
-  debug('ファイルサイズオーバー');
-  debug('------------------------------');
   set_flash('error','ファイルサイズは10M以下にしてください');
   exit();
 }
 
-debug('アイコンを作成します');
 //元の画像のサイズを取得する
 $file = $_FILES["icon"]["tmp_name"];
 
@@ -103,4 +97,3 @@ $params = [
 
 
 echo json_encode($path);
-debug('------------------------------');

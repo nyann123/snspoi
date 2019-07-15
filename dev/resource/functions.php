@@ -3,23 +3,11 @@
 // バリデーション関数
 //================================
 //メールアドレスの重複チェック
-function check_email_duplicate($email,$type){
+function check_email_duplicate($email){
   $dbh = dbConnect();
-
-  switch ($type) {
-    case 'users':
-    $sql = "SELECT *
-            FROM users
-            WHERE email = :email AND delete_flg = 0 LIMIT 1";
-      break;
-
-    case 'provisional_users':
-    $sql = "SELECT *
-            FROM provisional_users
-            WHERE email = :email";
-      break;
-  }
-
+  $sql = "SELECT *
+          FROM users
+          WHERE email = :email AND delete_flg = 0 LIMIT 1";
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':email' => $email));
   $user = $stmt->fetch();
@@ -59,7 +47,7 @@ function valid_email($email){
   global $error_messages;
   if(!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)){
     $error_messages['email'] = 'Emailの形式で入力してください';
-  }elseif ( check_email_duplicate($email,'users') ){
+  }elseif ( check_email_duplicate($email) ){
     $error_messages['email'] = 'すでに登録済みのメールアドレスです';
   }
 }

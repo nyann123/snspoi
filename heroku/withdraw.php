@@ -1,10 +1,6 @@
 <?php
 require('config.php');
 
-debug('「「「「「「「「「');
-debug('「　退会ページ  「');
-debug('「「「「「「「「「');
-debugLogStart();
 
 //ログイン認証
 require('auth.php');
@@ -13,13 +9,11 @@ $current_user = get_user($_SESSION['user_id']);
 
 // post送信されていた場合
 if(!empty($_POST['withdraw'])){
-  debug('POST送信があります。');
-  try {
+    try {
     if(query_result(change_delete_flg($current_user,1))){
      //セッション削除
       session_destroy();
-      debug('セッション変数の中身：'.print_r($_SESSION,true));
-      header("Location:login_form.php");
+            header("Location:login_form.php");
       exit();
     }
 
@@ -27,7 +21,6 @@ if(!empty($_POST['withdraw'])){
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-debug('------------------------------');
 
 $site_title = '退会';
 require('head.php');
