@@ -1,6 +1,9 @@
 <?php
 require_once("config.php");
 
+//ログイン中はアクセスできないように
+check_logged_in();
+
 $now = new DateTime();
 $now->setTimeZone(new DateTimeZone('Asia/Tokyo'));
 $now->format('Y-m-d H:i:s');
@@ -69,7 +72,7 @@ require_once('head.php');
           <span class="js_error_message"></span><br>
 
           <label for="password">パスワード <span>※半角英数６文字以上</span> </label><br>
-          <input id="password" autocomplete="flase" type="password" name="pass">
+          <input id="password" type="password" name="pass">
           <span class="js_error_message"></span><br>
 
           <button id="js_btn" class="btn blue" type="submit" disabled>登録</button>

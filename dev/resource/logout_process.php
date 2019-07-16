@@ -11,10 +11,8 @@ require_once('auth.php');
 //ログイン中ならログアウトさせる
 if (isset($_SESSION['user_id'])) {
   session_destroy();
-  session_start();
-  set_flash('sucsess','ログアウトしました');
+  $_SESSION = array();
   debug('ログアウト成功');
-  debug('セッション変数の中身：'.print_r($_SESSION,true));
 
   header('Location:login_form.php');
 }

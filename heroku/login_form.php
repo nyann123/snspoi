@@ -1,7 +1,7 @@
 <?php
 require_once('config.php');
 
-//ログイン中ならマイページへ
+//ログイン中はアクセスできないように
 check_logged_in();
 
 // 送信されていればログイン処理

@@ -3,7 +3,7 @@ require_once("config.php");
 require_once('vendor/autoload.php');
 
 
-// ログイン中ならマイページへ
+//ログイン中はアクセスできないように
 check_logged_in();
 
 if(isset($_SESSION['send_to'])){
@@ -44,12 +44,12 @@ if(!empty($_POST)){
       // 成功したらメール送信処理
       if (query_result($stmt)) {
 
-        $from = new SendGrid\Email(null, "test@example.com");
+        $from = new SendGrid\Email(null, "snspoi@example.com");
         $subject = "登録案内メール";
         $to = new SendGrid\Email(null, $email);
         $content = new SendGrid\Content("text/plain",
-         "下記のURLにアクセスして、登録をお願いします\n
-         https://agile-wave-88047.herokuapp.com/signup_second.php?u_id=${unique_id} ");
+         "下記のURLにアクセスして、登録を完了させてください\n
+         https://snspoi.herokuapp.com/signup_second.php?u_id=${unique_id} ");
         $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
         $apiKey = getenv('SENDGRID_API_KEY');
@@ -65,6 +65,7 @@ if(!empty($_POST)){
       header('Location:signup_first.php');
     }
   }
+  header('Location:signup_first.php');
 }
 
 $site_title = '新規登録';
@@ -90,7 +91,7 @@ require_once('head.php');
           <span class="flash_cursor">｝</span>
 
           <label for="email">メールアドレス</label><br>
-          <input id="email" autocomplete="false" type="text" name="email">
+          <input id="email" type="text" name="email">
           <span class="js_error_message"></span><br>
 
           <button id="js_btn" class="btn blue send_btn" type="submit" disabled>メールを送信する</button>

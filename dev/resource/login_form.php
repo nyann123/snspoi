@@ -7,7 +7,7 @@ debug('「「「「「「「「「「「');
 debugLogStart();
 
 debug(print_r($_SESSION,true));
-//ログイン中ならマイページへ
+//ログイン中はアクセスできないように
 check_logged_in();
 
 // 送信されていればログイン処理

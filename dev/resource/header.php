@@ -19,9 +19,9 @@ if (!empty($_POST['search_user'])){
       <?php endif ?>
       <!-- ログイン中ならマイページ　していなければログインページへ -->
       <?php if(empty($_SESSION['user_id'])):?>
-        <h1><a href="login_form.php">タイトルタイトル</a></h1>
+        <h1><a href="login_form.php">SNSっぽいの</a></h1>
       <?php else: ?>
-        <h1><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>&type=main">タイトルタイトル</a></h1>
+        <h1><a href="user_page.php?page_id=<?= $_SESSION['user_id'] ?>&type=main">SNSっぽいの</a></h1>
       <?php endif ?>
 
       <nav>
