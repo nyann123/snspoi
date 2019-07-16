@@ -328,10 +328,12 @@ nav{
   width: 18px;
   height: 18px;
   margin-right: 10px;
+  vertical-align: top;
 }
 
 #pass_save{
   vertical-align: top;
+  margin-top: -10px;
 }
 
 .signup,.login{
@@ -382,6 +384,11 @@ nav{
     font-size:$fontL;
     word-wrap: break-word;
   }
+
+  .send_btn{
+    width: 250px;
+  }
+  
 /* ///////////////////////// */
 /*       設定ページ       */
 /* ///////////////////////// */
