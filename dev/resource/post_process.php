@@ -11,12 +11,17 @@ set_flash('error',$error_messages);
 if (empty($error_messages)){
   debug('バリデーションOK');
 
+  $date = new DateTime();
+  $date->setTimeZone(new DateTimeZone('Asia/Tokyo'));
+
   try {
     $dbh = dbConnect();
-    $sql = "INSERT INTO posts(user_id,post_content)
-            VALUES(:user_id,:post_content)";
+    $sql = "INSERT INTO posts(user_id,post_content,created_at)
+            VALUES(:user_id,:post_content,:created_at)";
     $stmt = $dbh->prepare($sql);
-    $stmt->execute(array(':user_id' => $current_user['id'] , ':post_content' => $post_content));
+    $stmt->execute(array(':user_id' => $current_user['id'] ,
+                         ':post_content' => $post_content,
+                         ':created_at' => $date->format('Y-m-d H:i:s')));
     if(query_result($stmt)){
       set_flash('sucsess','投稿しました');
       debug('投稿成功');

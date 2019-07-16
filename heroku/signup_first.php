@@ -45,10 +45,10 @@ if(!empty($_POST)){
       if (query_result($stmt)) {
 
         $from = new SendGrid\Email(null, "test@example.com");
-        $subject = "Hello World from the SendGrid PHP Library!";
+        $subject = "登録案内メール";
         $to = new SendGrid\Email(null, $email);
         $content = new SendGrid\Content("text/plain",
-         "Hello, Email!\n
+         "下記のURLにアクセスして、登録をお願いします\n
          https://agile-wave-88047.herokuapp.com/signup_second.php?u_id=${unique_id} ");
         $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
@@ -82,6 +82,7 @@ require_once('head.php');
         <p class ="flash_message <?= $flash_type ?>"><?= $message?></p>
       <?php endforeach ?>
     <?php endif ?>
+
     <!-- メール送信前に表示 -->
     <?php if (empty($send_to)): ?>
       <div class="form_inner">
@@ -92,7 +93,7 @@ require_once('head.php');
           <input id="email" autocomplete="false" type="text" name="email">
           <span class="js_error_message"></span><br>
 
-          <button id="js_btn" class="btn blue" type="submit" disabled>メールを送信する</button>
+          <button id="js_btn" class="btn blue send_btn" type="submit" disabled>メールを送信する</button>
           <a href="login_form.php" class="login link">>>ログインページへ</a>
 
         </form>

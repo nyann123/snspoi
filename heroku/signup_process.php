@@ -20,14 +20,6 @@ if(empty($error_messages)){
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => password_hash($pass,PASSWORD_DEFAULT)));
     if (query_result($stmt)) {
-
-      //仮登録テーブルから削除
-      $sql = 'DELETE
-              FROM provisional_users
-              WHERE email = :email';
-      $stmt = $dbh->prepare($sql);
-      $stmt->execute(array(':email' => $email));
-
       //フォーム入力保持用のsession破棄
       unset($_SESSION['name']);
       unset($_SESSION['pass']);
@@ -37,6 +29,13 @@ if(empty($error_messages)){
       $_SESSION['login_date'] = time();
       $_SESSION['login_limit'] = $sesLimit;
       $_SESSION['user_id'] = $new_user_id = $dbh->lastInsertId();
+
+      //仮登録テーブルから削除
+      $sql = 'DELETE
+              FROM provisional_users
+              WHERE email = :email';
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute(array(':email' => $email));
 
       set_flash('sucsess','登録が完了しました');
 
