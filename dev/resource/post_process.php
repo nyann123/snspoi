@@ -1,7 +1,6 @@
 <?php
 debug('投稿のPOST送信があります');
 $post_content = $_POST['content'];
-$prev_page = basename($_SERVER['HTTP_REFERER']);
 
 //投稿の長さチェック
 valid_post($post_content);
@@ -22,19 +21,15 @@ if (empty($error_messages)){
     $stmt->execute(array(':user_id' => $current_user['id'] ,
                          ':post_content' => $post_content,
                          ':created_at' => $date->format('Y-m-d H:i:s')));
-    if(query_result($stmt)){
-      set_flash('sucsess','投稿しました');
-      debug('投稿成功');
 
-      header("Location:$prev_page");
-      exit();
-    }
+    set_flash('sucsess','投稿しました');
+    debug('投稿成功');
+
   } catch (Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
+    debug('投稿失敗');
     set_flash('error',ERR_MSG1);
   }
 }
-debug('投稿失敗');
 
-header("Location:$prev_page");
-exit();
+reload();

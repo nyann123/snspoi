@@ -31,14 +31,11 @@ if(isset($_POST)){
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':user_id' => $current_user['id'] , ':post_id' => $post_id));
 
-    if(query_result($stmt)){
-      debug("お気に入り${action}成功");
+    debug("お気に入り${action}成功");
+    $return = array('profile_count' => current(get_user_count('favorite',$profile_user_id)),
+                    'post_count' => current(get_post_favorite_count($post_id)));
+    echo json_encode($return);
 
-      $return = array('profile_count' => current(get_user_count('favorite',$profile_user_id)),
-                      'post_count' => current(get_post_favorite_count($post_id)));
-      echo json_encode($return);
-
-    }
   } catch (\Exception $e) {
     debug("お気に入り${action}失敗");
     error_log('エラー発生:' . $e->getMessage());

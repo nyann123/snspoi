@@ -18,8 +18,9 @@ if(empty($error_messages)){
     $sql = 'INSERT INTO users(name,email,password)
             VALUES(:name,:email,:password)';
     $stmt = $dbh->prepare($sql);
-    $stmt->execute(array(':name' => $name , ':email' => $email , ':password' => password_hash($pass,PASSWORD_DEFAULT)));
-    if (query_result($stmt)) {
+    $stmt->execute(array(':name' => $name ,
+                         ':email' => $email ,
+                         ':password' => password_hash($pass,PASSWORD_DEFAULT)));
       //フォーム入力保持用のsession破棄
       unset($_SESSION['name']);
       unset($_SESSION['pass']);
@@ -41,11 +42,10 @@ if(empty($error_messages)){
 
       header("Location:user_page.php?page_id=${new_user_id}&type=main");
       exit();
-    }
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
     set_flash('error',ERR_MSG1);
   }
 }
 
-header("Location:signup_second.php?u_id=${u_id}");
+reload();

@@ -14,7 +14,7 @@ $current_user = get_edit_user($_SESSION['user_id']);
 
 // post送信されていた場合
 if(!empty($_POST['prof_edit'])){
-    
+
   $name = $_SESSION['name'] = $_POST['name'];
   $email = $_SESSION['email'] = $_POST['email'];
 
@@ -30,7 +30,7 @@ if(!empty($_POST['prof_edit'])){
   set_flash('error',$error_messages);
 
   if(empty($error_messages)){
-    
+
     try {
       $dbh = dbConnect();
       $sql = 'UPDATE users
@@ -39,18 +39,16 @@ if(!empty($_POST['prof_edit'])){
       $stmt = $dbh->prepare($sql);
       $stmt->execute(array(':name' => $name , ':email' => $email, ':id' => $current_user['id']));
 
-      if(query_result($stmt)){
-        set_flash('sucsess','プロフィールの編集が完了しました');
-        header("Location:user_page.php?page_id=${current_user['id']}&type=main");
-        exit();
-      }
+      set_flash('sucsess','プロフィールの編集が完了しました');
+      header("Location:user_page.php?page_id=${current_user['id']}&type=main");
+      exit();
     } catch (Exception $e) {
       error_log('エラー発生:' . $e->getMessage());
       set_flash('error',ERR_MSG1);
     }
   }
-    
-  header('Location:prof_edit.php');
+
+  reload();
 }
 
 

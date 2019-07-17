@@ -13,7 +13,7 @@ if ( empty($password) ) {
 }
 //バリデーションエラーがなければ処理を続ける
 if(empty($error_messages)){
-  
+
   //emailでユーザー情報を取得
   try {
     $dbh = dbConnect();
@@ -24,32 +24,27 @@ if(empty($error_messages)){
     $stmt->execute(array(':email' => $email));
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    
+
     //パスワードでユーザー認証
     if (isset($user) && password_verify($password, $user['password'])) {
 
       //delete_flgが1ならユーザー復元処理
       if($user['delete_flg']){
-                try {
-          if(query_result(change_delete_flg($user,0)));
+        change_delete_flg($user,0);
 
-          // ログインさせる
-          login($user['id'],$pass_save);
-          set_flash('sucsess','登録されていたユーザーを復元しました');
+        // ログインさせる
+        login($user['id'],$pass_save);
+        set_flash('sucsess','登録されていたユーザーを復元しました');
 
-          
-          header("Location:user_page.php?page_id=${user['id']}&type=main");
-          exit();
-        } catch (\Exception $e) {
-          error_log('エラー発生:' . $e->getMessage());
-          $error_messages = ERR_MSG1;
-        }
+
+        header("Location:user_page.php?page_id=${user['id']}&type=main");
+        exit();
       }else{
         // ログインさせる
         login($user['id'],$pass_save);
         set_flash('sucsess','ログインしました');
 
-        
+
         header("Location:user_page.php?page_id=${user['id']}&type=main");
         exit();
       }
@@ -64,5 +59,4 @@ if(empty($error_messages)){
 set_flash('error',$error_messages);
 
 
-header('Location:login_form.php');
-
+reload();

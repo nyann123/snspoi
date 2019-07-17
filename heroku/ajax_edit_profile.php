@@ -3,7 +3,7 @@ require_once('config.php');
 require_once('auth.php');
 
 if(isset($_POST)){
-    
+
   $user_id = $_POST['user_id'];
   $name_data = $_POST['name_data'];
   $comment_data = $_POST['comment_data'];
@@ -39,12 +39,10 @@ if(isset($_POST)){
                          ':comment_data' => $comment_data,
                          ':icon_data' => $icon_data,
                          ':user_id' => $user_id));
-    if (query_result($stmt)) {
 
-            set_flash('sucsess','プロフィールを更新しました');
-      echo json_encode('sucsess');
-    }
+    set_flash('sucsess','プロフィールを更新しました');
+    echo json_encode('sucsess');
   } catch (\Exception $e) {
-        set_flash('error',ERR_MSG1);
+    set_flash('error',ERR_MSG1);
   }
 }

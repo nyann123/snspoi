@@ -71,14 +71,6 @@ function valid_post($post){
 //================================
 // データベース
 //================================
-function query_result($stmt){
-  if($stmt){
-        return true;
-  }else{
-        set_flash('error',ERR_MSG1);
-    return false;
-  }
-}
 // ユーザー情報を取得する
 function get_user($user_id){
     try {
@@ -88,11 +80,10 @@ function get_user($user_id){
             WHERE id = :id AND delete_flg = 0 ";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $user_id));
-    if(query_result($stmt)){
-      return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+    return $stmt->fetch(PDO::FETCH_ASSOC);
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
+    set_flash('error',ERR_MSG1);
   }
 }
 
@@ -104,83 +95,88 @@ function get_edit_user($user_id){
             WHERE id = :id AND delete_flg = 0 ";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $user_id));
-    if(query_result($stmt)){
-      return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+    return $stmt->fetch(PDO::FETCH_ASSOC);
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
+    set_flash('error',ERR_MSG1);
   }
 }
 
 function get_users($query, $type, $offset_count=0){
-  $dbh = dbConnect();
-  switch ($type) {
-    case 'follows':
-    $sql = "SELECT followed_id
-            FROM follows
-            WHERE :follow_id = follow_id AND delete_flg = 0
-            LIMIT 20 offset :offset_count";
-    $stmt = $dbh->prepare($sql);
-    $stmt->bindValue(':follow_id', $query);
-      break;
+  try {
+    $dbh = dbConnect();
 
-    case 'followers':
-    $sql = "SELECT follow_id
-            FROM followers
-            WHERE :followed_id = followed_id AND delete_flg = 0
-            LIMIT 20 offset :offset_count";
-    $stmt = $dbh->prepare($sql);
-    $stmt->bindValue(':followed_id', $query);
-      break;
+    switch ($type) {
+      case 'follows':
+      $sql = "SELECT followed_id
+              FROM follows
+              WHERE :follow_id = follow_id AND delete_flg = 0
+              LIMIT 20 offset :offset_count";
+      $stmt = $dbh->prepare($sql);
+      $stmt->bindValue(':follow_id', $query);
+        break;
 
-    case 'search':
-    $sql = "SELECT id
-            FROM users
-            WHERE name LIKE CONCAT('%',:input,'%') AND delete_flg = 0
-            LIMIT 20 offset :offset_count";
-    $stmt = $dbh->prepare($sql);
-    $stmt->bindValue(':input', $query);
-      break;
+      case 'followers':
+      $sql = "SELECT follow_id
+              FROM followers
+              WHERE :followed_id = followed_id AND delete_flg = 0
+              LIMIT 20 offset :offset_count";
+      $stmt = $dbh->prepare($sql);
+      $stmt->bindValue(':followed_id', $query);
+        break;
 
+      case 'search':
+      $sql = "SELECT id
+              FROM users
+              WHERE name LIKE CONCAT('%',:input,'%') AND delete_flg = 0
+              LIMIT 20 offset :offset_count";
+      $stmt = $dbh->prepare($sql);
+      $stmt->bindValue(':input', $query);
+        break;
+    }
+
+    $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  } catch (\Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+    set_flash('error',ERR_MSG1);
   }
-
-  $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
-  $stmt->execute();
-  return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 // delete_flgを変更する
 function change_delete_flg($user,$flg){
-  $dbh = dbConnect();
-  $dbh->beginTransaction();
+  try {
+    $dbh = dbConnect();
+    $dbh->beginTransaction();
 
-  $sql1 = 'UPDATE users SET delete_flg = :flg WHERE id = :id';
-  $stmt1 = $dbh->prepare($sql1);
-  $stmt1->execute(array(':flg' => $flg , ':id' => $user['id']));
-  //postsテーブル
-  $sql2 = 'UPDATE posts SET delete_flg = :flg WHERE user_id = :id';
-  $stmt2 = $dbh->prepare($sql2);
-  $stmt2->execute(array(':flg' => $flg , ':id' => $user['id']));
-  //favoriteテーブル
-  $sql3 = 'UPDATE favorite SET delete_flg = :flg WHERE user_id = :id';
-  $stmt3 = $dbh->prepare($sql3);
-  $stmt3->execute(array(':flg' => $flg , ':id' => $user['id']));
-  //followsテーブル
-  $sql4 = 'UPDATE follows SET delete_flg = :flg WHERE follow_id = :id OR followed_id = :id';
-  $stmt4 = $dbh->prepare($sql4);
-  $stmt4->execute(array(':flg' => $flg , ':id' => $user['id']));
-  //followersテーブル
-  $sql5 = 'UPDATE followers SET delete_flg = :flg WHERE follow_id = :id OR followed_id = :id';
-  $stmt5 = $dbh->prepare($sql5);
-  $stmt5->execute(array(':flg' => $flg , ':id' => $user['id']));
+    //usersテーブル
+    $sql1 = 'UPDATE users SET delete_flg = :flg WHERE id = :id';
+    $stmt1 = $dbh->prepare($sql1);
+    $stmt1->execute(array(':flg' => $flg , ':id' => $user['id']));
+    //postsテーブル
+    $sql2 = 'UPDATE posts SET delete_flg = :flg WHERE user_id = :id';
+    $stmt2 = $dbh->prepare($sql2);
+    $stmt2->execute(array(':flg' => $flg , ':id' => $user['id']));
+    //favoriteテーブル
+    $sql3 = 'UPDATE favorite SET delete_flg = :flg WHERE user_id = :id';
+    $stmt3 = $dbh->prepare($sql3);
+    $stmt3->execute(array(':flg' => $flg , ':id' => $user['id']));
+    //followsテーブル
+    $sql4 = 'UPDATE follows SET delete_flg = :flg WHERE follow_id = :id OR followed_id = :id';
+    $stmt4 = $dbh->prepare($sql4);
+    $stmt4->execute(array(':flg' => $flg , ':id' => $user['id']));
+    //followersテーブル
+    $sql5 = 'UPDATE followers SET delete_flg = :flg WHERE follow_id = :id OR followed_id = :id';
+    $stmt5 = $dbh->prepare($sql5);
+    $stmt5->execute(array(':flg' => $flg , ':id' => $user['id']));
 
-  // すべてのクエリが通っていれば保存
-  if (query_result($stmt1) && query_result($stmt2) && query_result($stmt3)
-  &&  query_result($stmt4) && query_result($stmt5) ){
     $dbh->commit();
-    return $stmt1;
-  }else{
+  } catch (\Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+    set_flash('error',ERR_MSG1);
     $dbh->rollback();
+    reload();
   }
 }
 
@@ -199,27 +195,32 @@ function check_follow($follow_user,$followed_user){
 //ユーザーの各種カウントを取得する
 function get_user_count($object,$user_id){
   $dbh = dbConnect();
+
   switch ($object) {
     case 'post':
     $sql ="SELECT COUNT(post_content)
           FROM posts
           WHERE user_id = :id AND delete_flg = 0";
       break;
+
     case 'follow':
     $sql ="SELECT COUNT(followed_id)
           FROM follows
           WHERE follow_id = :id AND delete_flg = 0";
       break;
+
     case 'follower':
     $sql ="SELECT COUNT(follow_id)
           FROM followers
           WHERE followed_id = :id AND delete_flg = 0";
       break;
+
     case 'favorite':
     $sql ="SELECT COUNT(post_id)
           FROM favorite
           WHERE user_id = :id AND delete_flg = 0";
   }
+
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':id' => $user_id));
   return $stmt->fetch();
@@ -238,58 +239,57 @@ function get_post_favorite_count($post_id){
 
 // ユーザーの投稿を取得する
 function get_posts($page_id,$type,$offset_count=0){
-    global $current_user;
-  $dbh = dbConnect();
-
-  // ページに合わせてSQLを変える
-  switch ($type) {
-    //自分の投稿を取得する
-    case 'my_post':
-    $sql = "SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
-            FROM users u INNER JOIN posts p ON u.id = p.user_id
-            WHERE p.user_id = :id AND p.delete_flg = 0
-            ORDER BY p.created_at DESC
-            LIMIT 10 OFFSET :offset_count";
-    break;
-
-    //お気に入り登録した投稿を取得する
-    case 'favorite':
-    $sql = "SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
-            FROM posts p INNER JOIN favorite f ON p.id = f.post_id
-            INNER JOIN users u ON u.id = p.user_id
-            WHERE f.user_id = :id AND p.delete_flg = 0
-            ORDER BY f.id DESC
-            LIMIT 10 OFFSET :offset_count";
+  global $current_user;
+  try {
+    $dbh = dbConnect();
+    // ページに合わせてSQLを変える
+    switch ($type) {
+      //自分の投稿を取得する
+      case 'my_post':
+      $sql = "SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
+              FROM users u INNER JOIN posts p ON u.id = p.user_id
+              WHERE p.user_id = :id AND p.delete_flg = 0
+              ORDER BY p.created_at DESC
+              LIMIT 10 OFFSET :offset_count";
       break;
 
-    // 自分とフォロー中のユーザー投稿取得
-    case 'timeline':
-    $sql = "SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
-            FROM users u INNER JOIN posts p ON u.id = p.user_id
-            WHERE  p.user_id = :id AND p.delete_flg = 0
-            UNION
-            SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
-            FROM users u INNER JOIN posts p ON u.id = p.user_id
-            INNER JOIN follows ON follows.followed_id = p.user_id
-            WHERE follows.follow_id = :id AND p.delete_flg = 0
-            ORDER BY created_at DESC
-            LIMIT 10 OFFSET :offset_count";
-    break;
-  }
+      //お気に入り登録した投稿を取得する
+      case 'favorite':
+      $sql = "SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
+              FROM posts p INNER JOIN favorite f ON p.id = f.post_id
+              INNER JOIN users u ON u.id = p.user_id
+              WHERE f.user_id = :id AND p.delete_flg = 0
+              ORDER BY f.id DESC
+              LIMIT 10 OFFSET :offset_count";
+        break;
 
-  try{
+      // 自分とフォロー中のユーザー投稿取得
+      case 'timeline':
+      $sql = "SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
+              FROM users u INNER JOIN posts p ON u.id = p.user_id
+              WHERE  p.user_id = :id AND p.delete_flg = 0
+              UNION
+              SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
+              FROM users u INNER JOIN posts p ON u.id = p.user_id
+              INNER JOIN follows ON follows.followed_id = p.user_id
+              WHERE follows.follow_id = :id AND p.delete_flg = 0
+              ORDER BY created_at DESC
+              LIMIT 10 OFFSET :offset_count";
+      break;
+    }
+
     $stmt = $dbh->prepare($sql);
     $stmt->bindValue(':id', $page_id);
     $stmt->bindValue(':offset_count', $offset_count, PDO::PARAM_INT);
     $stmt->execute();
-    if(query_result($stmt)){
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    return $stmt->fetchAll();
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
+    set_flash('error',ERR_MSG1);
   }
 }
 
+//ユーザー検索
 function search_user($input){
   $dbh = dbConnect();
   $sql = "SELECT id
@@ -298,7 +298,6 @@ function search_user($input){
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':input' => $input));
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 }
 
 //================================
@@ -371,4 +370,9 @@ function get_form_data($str){
 function set_flash($type,$message){
   $_SESSION['flash']['type'] = "flash_${type}";
   $_SESSION['flash']['message'] = $message;
+}
+
+function reload(){
+  header('Location:'.$_SERVER['REQUEST_URI']);
+  exit();
 }

@@ -42,18 +42,16 @@ if(isset($_POST)){
       //followersテーブル
       $stmt2 = $dbh->prepare($sql2);
       $stmt2->execute(array(':follow_id' => $current_user['id'] , ':followed_id' => $user_id));
-      // 全てのクエリが成功していたら結果を保存する
-      if (query_result($stmt1) && query_result($stmt2)) {
-        $dbh->commit();
-        debug('user'.$current_user['id'].' → user'.$user_id);
-        debug("フォロー${action}成功");
 
-        $return = array('action' => $action,
-                        'follow_count' => current(get_user_count('follow',$profile_user_id)),
-                        'follower_count' => current(get_user_count('follower',$profile_user_id)));
-        echo json_encode($return);
+      $dbh->commit();
+      debug('user'.$current_user['id'].' → user'.$user_id);
+      debug("フォロー${action}成功");
 
-      }
+      $return = array('action' => $action,
+                      'follow_count' => current(get_user_count('follow',$profile_user_id)),
+                      'follower_count' => current(get_user_count('follower',$profile_user_id)));
+      echo json_encode($return);
+
     } catch (\Exception $e) {
       $dbh->rollback();
       debug("フォロー${action}失敗");

@@ -41,31 +41,26 @@ if(!empty($_POST)){
                            ':unique_id' => $unique_id,
                            ':limit_time' => $date->format('Y-m-d H:i:s')));
 
-      // 成功したらメール送信処理
-      if (query_result($stmt)) {
+      // メール送信処理
+      $from = new SendGrid\Email(null, "snspoi@example.com");
+      $subject = "登録案内メール";
+      $to = new SendGrid\Email(null, $email);
+      $content = new SendGrid\Content("text/plain",
+       "下記のURLにアクセスして、登録を完了させてください\n
+       https://snspoi.herokuapp.com/signup_second.php?u_id=${unique_id} ");
+      $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
-        $from = new SendGrid\Email(null, "snspoi@example.com");
-        $subject = "登録案内メール";
-        $to = new SendGrid\Email(null, $email);
-        $content = new SendGrid\Content("text/plain",
-         "下記のURLにアクセスして、登録を完了させてください\n
-         https://snspoi.herokuapp.com/signup_second.php?u_id=${unique_id} ");
-        $mail = new SendGrid\Mail($from, $subject, $to, $content);
+      $apiKey = getenv('SENDGRID_API_KEY');
+      $sg = new \SendGrid($apiKey);
 
-        $apiKey = getenv('SENDGRID_API_KEY');
-        $sg = new \SendGrid($apiKey);
-
-        $response = $sg->client->mail()->send()->post($mail);
-        $_SESSION['send_to'] = $email;
-        header('Location:signup_first.php');
-      }
+      $response = $sg->client->mail()->send()->post($mail);
+      $_SESSION['send_to'] = $email;
     } catch (\Exception $e) {
       error_log('エラー発生:' . $e->getMessage());
       set_flash('error',ERR_MSG1);
-      header('Location:signup_first.php');
     }
   }
-  header('Location:signup_first.php');
+  reload();
 }
 
 $site_title = '新規登録';

@@ -47,11 +47,9 @@ if(!empty($_POST['prof_edit'])){
       $stmt = $dbh->prepare($sql);
       $stmt->execute(array(':name' => $name , ':email' => $email, ':id' => $current_user['id']));
 
-      if(query_result($stmt)){
-        set_flash('sucsess','プロフィールの編集が完了しました');
-        header("Location:user_page.php?page_id=${current_user['id']}&type=main");
-        exit();
-      }
+      set_flash('sucsess','プロフィールの編集が完了しました');
+      header("Location:user_page.php?page_id=${current_user['id']}&type=main");
+      exit();
     } catch (Exception $e) {
       error_log('エラー発生:' . $e->getMessage());
       set_flash('error',ERR_MSG1);
@@ -60,7 +58,7 @@ if(!empty($_POST['prof_edit'])){
   debug('プロフィール編集失敗');
   debug(print_r($_SESSION['flash'],true));
 
-  header('Location:prof_edit.php');
+  reload();
 }
 
 debug('------------------------------');

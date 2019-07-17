@@ -41,12 +41,10 @@ if(isset($_POST)){
                          ':comment_data' => $comment_data,
                          ':icon_data' => $icon_data,
                          ':user_id' => $user_id));
-    if (query_result($stmt)) {
 
-      debug('アイコン更新成功');
-      set_flash('sucsess','プロフィールを更新しました');
-      echo json_encode('sucsess');
-    }
+    debug('アイコン更新成功');
+    set_flash('sucsess','プロフィールを更新しました');
+    echo json_encode('sucsess');
   } catch (\Exception $e) {
     debug('プロフィール更新失敗');
     set_flash('error',ERR_MSG1);

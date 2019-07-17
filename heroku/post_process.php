@@ -1,6 +1,5 @@
 <?php
 $post_content = $_POST['content'];
-$prev_page = basename($_SERVER['HTTP_REFERER']);
 
 //投稿の長さチェック
 valid_post($post_content);
@@ -20,17 +19,12 @@ if (empty($error_messages)){
     $stmt->execute(array(':user_id' => $current_user['id'] ,
                          ':post_content' => $post_content,
                          ':created_at' => $date->format('Y-m-d H:i:s')));
-    if(query_result($stmt)){
-      set_flash('sucsess','投稿しました');
 
-      header("Location:$prev_page");
-      exit();
-    }
+    set_flash('sucsess','投稿しました');
   } catch (Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
     set_flash('error',ERR_MSG1);
   }
 }
 
-header("Location:$prev_page");
-exit();
+reload();
