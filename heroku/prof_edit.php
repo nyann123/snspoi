@@ -26,7 +26,6 @@ if(!empty($_POST['prof_edit'])){
     valid_email($email);
   }
 
-  //メッセージをsessionに格納（エラーが発生したら定数で上書きされる）
   set_flash('error',$error_messages);
 
   if(empty($error_messages)){

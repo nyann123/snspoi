@@ -7,7 +7,6 @@ $email = $provisional_user['email'];
 valid_name($name);
 valid_password($pass);
 
-//メッセージをsessionに格納（エラーが発生したら定数で上書きされる）
 set_flash('error',$error_messages);
 
 //エラーがなければ次の処理に進む

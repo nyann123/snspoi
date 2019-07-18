@@ -10,10 +10,6 @@ if (isset($_SESSION['user_id'])) {
   $current_user = 'guest';
 }
 
-// get_user($_SESSION['user_id']) ||
-if(isset($_GET['page_id'])){
-  }
-
 if(isset($_GET['page_id'])){
   $page_user = get_user($_GET['page_id']);
 }else{
@@ -21,8 +17,6 @@ if(isset($_GET['page_id'])){
 }
 
 $page_type = $_GET['type'];
-
-//ログイン中のユーザー情報を取得
 
 
 // getパラメータに合わせて必要なデータを用意する

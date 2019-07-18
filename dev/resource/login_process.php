@@ -34,25 +34,16 @@ if(empty($error_messages)){
       if($user['delete_flg']){
         debug('ユーザー情報を復元します');
         change_delete_flg($user,0);
-
-        // ログインさせる
-        login($user['id'],$pass_save);
         set_flash('sucsess','登録されていたユーザーを復元しました');
-
-        debug('セッション変数の中身：'.print_r($_SESSION,true));
-
-        header("Location:user_page.php?page_id=${user['id']}&type=main");
-        exit();
       }else{
-        // ログインさせる
-        login($user['id'],$pass_save);
         set_flash('sucsess','ログインしました');
-
-        debug('セッション変数の中身：'.print_r($_SESSION,true));
-
-        header("Location:user_page.php?page_id=${user['id']}&type=main");
-        exit();
       }
+      debug('セッション変数の中身：'.print_r($_SESSION,true));
+      // ログインさせる
+      login($user['id'],$pass_save);
+      header("Location:user_page.php?page_id=${user['id']}&type=main");
+      exit();
+
     }else{
       $error_messages[] = "メールアドレス又はパスワードが間違っています。";
     }

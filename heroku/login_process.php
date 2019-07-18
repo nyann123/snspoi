@@ -31,23 +31,15 @@ if(empty($error_messages)){
       //delete_flgが1ならユーザー復元処理
       if($user['delete_flg']){
         change_delete_flg($user,0);
-
-        // ログインさせる
-        login($user['id'],$pass_save);
         set_flash('sucsess','登録されていたユーザーを復元しました');
-
-
-        header("Location:user_page.php?page_id=${user['id']}&type=main");
-        exit();
       }else{
-        // ログインさせる
-        login($user['id'],$pass_save);
         set_flash('sucsess','ログインしました');
-
-
-        header("Location:user_page.php?page_id=${user['id']}&type=main");
-        exit();
       }
+      // ログインさせる
+      login($user['id'],$pass_save);
+      header("Location:user_page.php?page_id=${user['id']}&type=main");
+      exit();
+
     }else{
       $error_messages[] = "メールアドレス又はパスワードが間違っています。";
     }

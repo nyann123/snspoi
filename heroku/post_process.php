@@ -3,7 +3,7 @@ $post_content = $_POST['content'];
 
 //投稿の長さチェック
 valid_post($post_content);
-//メッセージをsessionに格納（エラーが発生したら定数で上書きされる）
+
 set_flash('error',$error_messages);
 
 if (empty($error_messages)){

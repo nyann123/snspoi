@@ -63,7 +63,7 @@ function valid_post($post){
   global $error_messages;
   if (empty($post)){
     $error_messages = '投稿の内容がありません';
-  }else if(valid_length($post,150)){
+  }else if(valid_length($post,300)){
     $error_messages = '内容が長すぎます';
   }
 }
@@ -81,7 +81,7 @@ function get_user($user_id){
             WHERE id = :id AND delete_flg = 0 ";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $user_id));
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    return $stmt->fetch();
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
     set_flash('error',ERR_MSG1);
@@ -97,7 +97,7 @@ function get_edit_user($user_id){
             WHERE id = :id AND delete_flg = 0 ";
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':id' => $user_id));
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    return $stmt->fetch();
   } catch (\Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
     set_flash('error',ERR_MSG1);
@@ -300,7 +300,7 @@ function search_user($input){
           WHERE name LIKE CONCAT('%',:input,'%')";
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':input' => $input));
-  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  return $stmt->fetchAll();
 }
 
 //================================
@@ -380,6 +380,7 @@ function set_flash($type,$message){
 }
 
 function reload(){
+  debug($_SERVER['REQUEST_URI']);
   header('Location:'.$_SERVER['REQUEST_URI']);
   exit();
 }

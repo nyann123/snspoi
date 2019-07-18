@@ -14,7 +14,7 @@
       <img src="<?= $profile_user['user_icon'] ?>" alt="">
       <form id="icon_form">
         <input type="hidden" name="MAX_FILE_SIZE" value="10485760">
-        <input class="icon_upload" type="file" name="icon">
+        <input class="icon_upload" type="file" name="icon" accept=".png,.jpeg,.jpg">
       </form>
     </div>
 

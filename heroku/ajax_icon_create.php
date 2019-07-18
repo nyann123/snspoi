@@ -92,8 +92,6 @@ $params = [
 
   //読み取り用のパスを返す
  $path = $result['ObjectURL'];
- // file_put_contents("php://stderr", $result);
- // file_put_contents("php://stderr", $path);
 
 
 echo json_encode($path);

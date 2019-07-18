@@ -16,7 +16,6 @@ if(isset($_POST)){
   if(isset($error_messages['name'])){
     $return = array('flash_type' => 'flash_error',
                     'flash_message' => $error_messages['name']);
-    unset($error_messages);
     echo json_encode($return);
    exit();
   }

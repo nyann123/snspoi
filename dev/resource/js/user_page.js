@@ -373,6 +373,9 @@ $(function(){
    if (max_file_size < this.files[0].size){
      show_slide_message('flash_error','ファイルサイズは10M以下にしてください');
      $(this).val('');
+     // ファイルタイプ制限
+   }else if(!this.files[0].name.match(/.(jpg|jpeg|png)$/i)){
+     show_slide_message('flash_error','対応していない拡張子です');
    }else{
      //読み込み中のgif表示
      $('.profile_icon > img').attr('src','img/loading.gif');
@@ -402,8 +405,8 @@ $(function(){
   //プロフィール編集
   $('.profile_save').on('click',function(e){
     e.stopPropagation();
-    var name_data = $('.profile .edit_name').val() || $('.slide_prof .edit_name').val(),
-        comment_data = $('.profile .edit_comment').val() || $('.slide_prof .edit_comment').val(),
+    var name_data = $('.profile .edit_name').val() || $('.slide_prof .edit_name').val() || '',
+        comment_data = $('.profile .edit_comment').val() || $('.slide_prof .edit_comment').val() || '',
         icon_data = $('.profile_icon > img').attr('src'),
         user_id = $(this).data('user_id');
 
@@ -417,7 +420,7 @@ $(function(){
              user_id: user_id}
     })
     .done(function(data){
-      console.log(data);
+      // エラーメッセージがあれば表示
       if(data['flash_message']){
         show_slide_message(data['flash_type'],data['flash_message']);
       }else{
