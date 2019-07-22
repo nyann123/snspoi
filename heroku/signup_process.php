@@ -11,15 +11,20 @@ set_flash('error',$error_messages);
 
 //エラーがなければ次の処理に進む
 if(empty($error_messages)){
+  
+  $date = new DateTime();
+  $date->setTimeZone(new DateTimeZone('Asia/Tokyo'));
+
   try {
     // 新規登録
     $dbh = dbConnect();
-    $sql = 'INSERT INTO users(name,email,password)
-            VALUES(:name,:email,:password)';
+    $sql = 'INSERT INTO users(name,email,password,created_at)
+            VALUES(:name,:email,:password,:created_at)';
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':name' => $name ,
                          ':email' => $email ,
-                         ':password' => password_hash($pass,PASSWORD_DEFAULT)));
+                         ':password' => password_hash($pass,PASSWORD_DEFAULT),
+                         ':created_at' => $date->format('Y-m-d H:i:s')));
       //フォーム入力保持用のsession破棄
       unset($_SESSION['name']);
       unset($_SESSION['pass']);

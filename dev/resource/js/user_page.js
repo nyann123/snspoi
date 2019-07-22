@@ -69,6 +69,7 @@ $(function(){
   $('.textarea').on('focus',function(){
     $(this).addClass('show_textarea');
     $('#post_btn').show();
+    $('.counter').show();
   });
 
   //フォームに入力がなければ入力フォームとボタンを戻す
@@ -77,6 +78,7 @@ $(function(){
       $(this).removeClass('show_textarea');
       $(this).css('height','24px');
       $('#post_btn').hide();
+      $('.counter').hide();
     }
   });
 
@@ -98,6 +100,17 @@ $(function(){
       $(this).css('height',scroll_height +"px");
     }
   })
+
+  //文字数カウント
+  $('.textarea').on('input',function(){
+   var count = $(this).val().length;
+   $('.show_count').text(count);
+   if (count > 300) {
+     $('.show_count').css('color','#FF7763');
+   }else{
+     $('.show_count').css('color','#FFF');
+   }
+ });
 
   //================================
   // 投稿削除確認

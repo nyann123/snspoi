@@ -388,7 +388,7 @@ nav{
   .send_btn{
     width: 250px;
   }
-  
+
 /* ///////////////////////// */
 /*       設定ページ       */
 /* ///////////////////////// */
@@ -566,6 +566,10 @@ nav{
   }
 }
 
+.counter{
+  display: none;
+}
+
 .icon{
   width: 52px;
   height: 52px;
@@ -614,6 +618,7 @@ nav{
 
 .ellipsis{
   overflow: hidden;
+  padding: 0;
   display: -webkit-box;
    -webkit-box-orient: vertical;
    -webkit-line-clamp: 10;

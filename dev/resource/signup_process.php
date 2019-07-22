@@ -13,14 +13,18 @@ set_flash('error',$error_messages);
 //エラーがなければ次の処理に進む
 if(empty($error_messages)){
   debug('バリデーションOK');
+  $date = new DateTime();
+  $date->setTimeZone(new DateTimeZone('Asia/Tokyo'));
+
   try {
     $dbh = dbConnect();
-    $sql = 'INSERT INTO users(name,email,password)
-            VALUES(:name,:email,:password)';
+    $sql = 'INSERT INTO users(name,email,password,created_at)
+            VALUES(:name,:email,:password,:created_at)';
     $stmt = $dbh->prepare($sql);
     $stmt->execute(array(':name' => $name ,
                          ':email' => $email ,
-                         ':password' => password_hash($pass,PASSWORD_DEFAULT)));
+                         ':password' => password_hash($pass,PASSWORD_DEFAULT),
+                         ':created_at' => $date->format('Y-m-d H:i:s')));
       debug('クエリ成功しました');
 
       //フォーム入力保持用のsession破棄

@@ -93,7 +93,10 @@ $js_file= 'user_page';
           <!-- 自分のページのみ投稿フォームを表示 -->
           <?php if (is_myself($page_user['id']) && $page_type === 'main' || $page_type === 'timeline'): ?>
             <form class ="post_form border_white" action="#" method="post">
-              <textarea class="textarea border_white" placeholder="投稿する" name="content"></textarea><br>
+              <textarea class="textarea border_white" placeholder="投稿する" name="content"></textarea>
+              <div class="counter">
+                <span class="show_count">0</span><span>/300</span>
+              </div>
               <input id="post_btn" type="submit" name="post" value="投稿" disabled>
             </form>
           <?php endif; ?>

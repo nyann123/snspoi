@@ -5,13 +5,20 @@ require_once('auth.php');
 
 
 $max_file_size = 10485760;
+$permit_filetype = array('jpg','jpeg','png',);
+
+$file =$_FILES['icon']['name'];
 
 if($max_file_size < $_SERVER["CONTENT_LENGTH"]){
   set_flash('error','ファイルサイズは10M以下にしてください');
   exit();
+//拡張子確認
+}else if(!in_array(pathinfo($file, PATHINFO_EXTENSION),$permit_filetype)){
+  set_flash('error','対応していない拡張子です');
+  exit();
 }
 
-//元の画像のサイズを取得する
+//元の画像を取得する
 $file = $_FILES["icon"]["tmp_name"];
 
  // 画像タイプ判定用
@@ -25,7 +32,7 @@ if ($image_type === IMAGETYPE_JPEG){
 }
 
 // 画像一時保存先のパス
-$save_path = sha1_file($_FILES["icon"]["tmp_name"]).image_type_to_extension($image_type);
+$save_path = sha1_file($file).image_type_to_extension($image_type);
 
 //元画像の縦横の大きさを比べてどちらかにあわせる
 // なおかつ縦横の差をコピー開始位置として使えるようセット

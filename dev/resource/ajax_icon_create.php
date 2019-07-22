@@ -7,20 +7,30 @@ debug('ファイル送信があります');
 debug('ファイル内容'.print_r($_FILES,true));
 
 $max_file_size = 10485760;
+$permit_filetype = array('jpg','jpeg','png',);
 
+$file =$_FILES['icon']['name'];
+
+// ファイルサイズ確認
 if($max_file_size < $_SERVER["CONTENT_LENGTH"]){
   debug('ファイルサイズオーバー');
   debug('------------------------------');
   set_flash('error','ファイルサイズは10M以下にしてください');
   exit();
+//拡張子確認
+}else if(!in_array(pathinfo($file, PATHINFO_EXTENSION),$permit_filetype)){
+  debug('ファイルタイプエラー');
+  set_flash('error','対応していない拡張子です');
+  exit();
 }
 
 debug('アイコンを作成します');
-//元の画像のサイズを取得する
+//元の画像を取得する
 $file = $_FILES["icon"]["tmp_name"];
 
  // 画像タイプ判定用
 $image_type = exif_imagetype($file);
+debug($image_type);
 
 //元の画像を読み込む
 if ($image_type === IMAGETYPE_JPEG){
@@ -30,7 +40,7 @@ if ($image_type === IMAGETYPE_JPEG){
 }
 
 // 画像保存先のパス
-$save_path = "img/".sha1_file($_FILES["icon"]["tmp_name"]).image_type_to_extension($image_type);
+$save_path = "img/".sha1_file($file).image_type_to_extension($image_type);
 
 
 

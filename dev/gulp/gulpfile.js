@@ -6,7 +6,7 @@ const autoprefixer = require('gulp-autoprefixer');  //ベンダープレフィ�
 const sourcemaps = require('gulp-sourcemaps');  //sourcemapsの付与
 const cleanCSS = require('gulp-clean-css'); //css圧縮
 const uglify = require('gulp-uglify'); //js圧縮
-var replace = require('gulp-replace');
+const replace = require('gulp-replace');
 
 //js圧縮
 gulp.task('js', function(done) {
