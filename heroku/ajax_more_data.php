@@ -2,7 +2,7 @@
 require_once('config.php');
 
 if(isset($_POST)){
-    
+
   if(isset($_SESSION['user_id'])){
     $current_user = get_user($_SESSION['user_id']);
   }
@@ -28,7 +28,7 @@ if(isset($_POST)){
       break;
 
     case 'follows':
-    $id_type ='followed';
+    $id_type ='follower';
     ${$id_type."user"} = get_users($query,'follows',$offset_count*2);
     $type ='user';
       break;

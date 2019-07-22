@@ -34,7 +34,7 @@ switch ($page_type) {
     break;
 
   case 'follows':
-    $id_type = 'followed';
+    $id_type = 'follower';
     ${$id_type."user"} = get_users($page_user['id'],'follows',0);
   break;
 

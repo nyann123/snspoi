@@ -15,32 +15,19 @@ if(isset($_POST)){
     if(check_follow($current_user['id'],$user_id)){
       $action = '解除';
       $flash_type = 'error';
-      $sql1 ="DELETE
-              FROM follows
-              WHERE :follow_id = follow_id AND :followed_id = followed_id";
-      $sql2 ="DELETE
-              FROM followers
-              WHERE :follow_id = follow_id AND :followed_id = followed_id";
+      $sql ="DELETE
+              FROM relation
+              WHERE :follow_id = follow_id AND :follower_id = follower_id";
     }else{
       $action = '登録';
       $flash_type = 'sucsess';
-      $sql1 ="INSERT INTO follows(follow_id,followed_id)
-              VALUES(:follow_id,:followed_id)";
-      $sql2 ="INSERT INTO followers(follow_id,followed_id)
-              VALUES(:follow_id,:followed_id)";
-
+      $sql ="INSERT INTO relation(follow_id,follower_id)
+              VALUES(:follow_id,:follower_id)";
     }
     try {
       $dbh = dbConnect();
-      $dbh->beginTransaction();
-      //followsテーブル
-      $stmt1 = $dbh->prepare($sql1);
-      $stmt1->execute(array(':follow_id' => $current_user['id'] , ':followed_id' => $user_id));
-      //followersテーブル
-      $stmt2 = $dbh->prepare($sql2);
-      $stmt2->execute(array(':follow_id' => $current_user['id'] , ':followed_id' => $user_id));
-
-      $dbh->commit();
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute(array(':follow_id' => $current_user['id'] , ':follower_id' => $user_id));
 
       $return = array('action' => $action,
                       'follow_count' => current(get_user_count('follow',$profile_user_id)),
@@ -48,7 +35,6 @@ if(isset($_POST)){
       echo json_encode($return);
 
     } catch (\Exception $e) {
-      $dbh->rollback();
       error_log('エラー発生:' . $e->getMessage());
       set_flash('error',ERR_MSG1);
       echo json_encode("error");

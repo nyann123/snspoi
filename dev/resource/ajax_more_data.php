@@ -30,7 +30,7 @@ if(isset($_POST)){
       break;
 
     case 'follows':
-    $id_type ='followed';
+    $id_type ='follower';
     ${$id_type."user"} = get_users($query,'follows',$offset_count*2);
     $type ='user';
       break;

@@ -108,8 +108,8 @@ function get_users($query, $type, $offset_count=0){
 
     switch ($type) {
       case 'follows':
-      $sql = "SELECT followed_id
-              FROM follows
+      $sql = "SELECT follower_id
+              FROM relation
               WHERE :follow_id = follow_id AND delete_flg = 0
               LIMIT 20 offset :offset_count";
       $stmt = $dbh->prepare($sql);
@@ -118,11 +118,11 @@ function get_users($query, $type, $offset_count=0){
 
       case 'followers':
       $sql = "SELECT follow_id
-              FROM followers
-              WHERE :followed_id = followed_id AND delete_flg = 0
+              FROM relation
+              WHERE :follower_id = follower_id AND delete_flg = 0
               LIMIT 20 offset :offset_count";
       $stmt = $dbh->prepare($sql);
-      $stmt->bindValue(':followed_id', $query);
+      $stmt->bindValue(':follower_id', $query);
         break;
 
       case 'search':
@@ -162,12 +162,12 @@ function change_delete_flg($user,$flg){
     $sql3 = 'UPDATE favorite SET delete_flg = :flg WHERE user_id = :id';
     $stmt3 = $dbh->prepare($sql3);
     $stmt3->execute(array(':flg' => $flg , ':id' => $user['id']));
-    //followsテーブル
-    $sql4 = 'UPDATE follows SET delete_flg = :flg WHERE follow_id = :id OR followed_id = :id';
+    //relationテーブル(フォロー)
+    $sql4 = 'UPDATE relation SET delete_flg = :flg WHERE follow_id = :id';
     $stmt4 = $dbh->prepare($sql4);
     $stmt4->execute(array(':flg' => $flg , ':id' => $user['id']));
-    //followersテーブル
-    $sql5 = 'UPDATE followers SET delete_flg = :flg WHERE follow_id = :id OR followed_id = :id';
+    //relationテーブル(フォロワー)
+    $sql5 = 'UPDATE relation SET delete_flg = :flg WHERE follower_id = :id';
     $stmt5 = $dbh->prepare($sql5);
     $stmt5->execute(array(':flg' => $flg , ':id' => $user['id']));
 
@@ -181,14 +181,14 @@ function change_delete_flg($user,$flg){
 }
 
 //既にフォローされているか確認する
-function check_follow($follow_user,$followed_user){
+function check_follow($follow_user,$follower_user){
   $dbh = dbConnect();
-  $sql = "SELECT follow_id,followed_id
-          FROM follows
-          WHERE :follow_id =follow_id AND :followed_id = followed_id";
+  $sql = "SELECT follow_id,follower_id
+          FROM relation
+          WHERE :follow_id =follow_id AND :follower_id = follower_id";
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':follow_id' => $follow_user,
-                       ':followed_id' => $followed_user));
+                       ':followed_id' => $follower_user));
   return  $stmt->fetch();
 }
 
@@ -204,15 +204,15 @@ function get_user_count($object,$user_id){
       break;
 
     case 'follow':
-    $sql ="SELECT COUNT(followed_id)
-          FROM follows
+    $sql ="SELECT COUNT(follower_id)
+          FROM relation
           WHERE follow_id = :id AND delete_flg = 0";
       break;
 
     case 'follower':
     $sql ="SELECT COUNT(follow_id)
-          FROM followers
-          WHERE followed_id = :id AND delete_flg = 0";
+          FROM relation
+          WHERE follower_id = :id AND delete_flg = 0";
       break;
 
     case 'favorite':
@@ -271,8 +271,8 @@ function get_posts($page_id,$type,$offset_count=0){
               UNION
               SELECT u.name,u.user_icon,p.id,p.user_id,p.post_content,p.created_at
               FROM users u INNER JOIN posts p ON u.id = p.user_id
-              INNER JOIN follows ON follows.followed_id = p.user_id
-              WHERE follows.follow_id = :id AND p.delete_flg = 0
+              INNER JOIN relation ON relation.follower_id = p.user_id
+              WHERE relation.follow_id = :id AND p.delete_flg = 0
               ORDER BY created_at DESC
               LIMIT 10 OFFSET :offset_count";
       break;
