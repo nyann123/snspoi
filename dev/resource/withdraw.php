@@ -26,6 +26,7 @@ if(!empty($_POST['withdraw'])){
 debug('------------------------------');
 
 $site_title = '退会';
+$js_file = 'user_page';
 require('head.php');
 ?>
 
