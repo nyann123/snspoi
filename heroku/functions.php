@@ -188,7 +188,7 @@ function check_follow($follow_user,$follower_user){
           WHERE :follow_id =follow_id AND :follower_id = follower_id";
   $stmt = $dbh->prepare($sql);
   $stmt->execute(array(':follow_id' => $follow_user,
-                       ':followed_id' => $follower_user));
+                       ':follower_id' => $follower_user));
   return  $stmt->fetch();
 }
 
