@@ -84,7 +84,7 @@ $(function(){
 
   //フォームに入力があるときだけ投稿ボタンを活性化
   $('.textarea').on('input',function(){
-    if ($('.textarea').val().length !== 0){
+    if ($(this).val().length !== 0 && $(this).val().length <= 300){
       $('#post_btn').prop('disabled',false);
     }else{
       $('#post_btn').prop('disabled',true);
