@@ -178,9 +178,9 @@ $(function(){
   })
 
   // 編集用グローバル変数
-  user_name = $('.profile .user_name').text(),
-  user_comment = $('.profile .profile_comment').text(),
-  user_icon = $('.profile img').attr('src');
+  var user_name = $('.profile .user_name').text(),
+      user_comment = $('.profile .profile_comment').text(),
+      user_icon = $('.profile img').attr('src');
 
   //プロフィール編集
   $('.profile .edit_btn').on('click',function(){
@@ -445,8 +445,8 @@ $(function(){
   });
 
   //最後までスクロールしたら投稿を取得する
-  offset= 10;
-  more_post_flg = 0 ;
+  var offset= 10;
+  var more_post_flg = 0 ;
   $(window).on('scroll', function () {
   var doch = $(document).innerHeight(), //ページ全体の高さ
       winh = $(window).innerHeight(), //ウィンドウの高さ
