@@ -446,7 +446,7 @@ $(function(){
 
   //最後までスクロールしたら投稿を取得する
   offset= 10;
-  flg = 0 ;
+  more_post_flg = 0 ;
   $(window).on('scroll', function () {
   var doch = $(document).innerHeight(), //ページ全体の高さ
       winh = $(window).innerHeight(), //ウィンドウの高さ
@@ -455,33 +455,33 @@ $(function(){
       page_type = get_param('type'),
       end_post_flg = 0;
 
-      if (bottom * 0.9 <= $(window).scrollTop() && flg === 0) {
-        flg = 1;
+    if (bottom * 0.9 <= $(window).scrollTop() && flg === 0) {
+      more_post_flg = 1;
 
-    $.ajax({
-      type: 'POST',
-      url: 'ajax_more_data.php',
-      dataType: 'json',
-      data: { offset: offset,
-              query: query,
-              page_type: page_type}
-    }).done(function(data){
-      offset += data['data_count'];
-      //投稿が返されていれば追加する
-      if (data[('data_html')]) {
-        $('.main_items').append(data['data_html']);
-      }else{
-        end_post_flg = 1
-      }
-      // 投稿が全て読み込み終わったらトップへ戻るボタンを追加する
-      if(end_post_flg === 1 && !$('.item_container:last').next().hasClass('gotop')){
-        $('.main_items').append("<button type='button' class='gotop'>トップへ戻る <i class='fas fa-caret-up'></i></button>");
-      }
-      flg = 0
-    }).fail(function(){
+      $.ajax({
+        type: 'POST',
+        url: 'ajax_more_data.php',
+        dataType: 'json',
+        data: { offset: offset,
+                query: query,
+                page_type: page_type}
+      }).done(function(data){
+        offset += data['data_count'];
+        //投稿が返されていれば追加する
+        if (data[('data_html')]) {
+          $('.main_items').append(data['data_html']);
+        }else{
+          end_post_flg = 1
+        }
+        // 投稿が全て読み込み終わったらトップへ戻るボタンを追加する
+        if(end_post_flg === 1 && !$('.item_container:last').next().hasClass('gotop')){
+          $('.main_items').append("<button type='button' class='gotop'>トップへ戻る <i class='fas fa-caret-up'></i></button>");
+        }
+        more_post_flg = 0
+      }).fail(function(){
 
-    })
-  }
-
+      })
+    }
   });
+
 });
