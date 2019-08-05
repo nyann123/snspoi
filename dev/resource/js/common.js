@@ -14,7 +14,9 @@ $(function(){
   //ユーザー検索フォーム　開く処理
   $('.show_search').on('click',function(){
     $(this).hide();
-    $('header h1').hide()
+    if($('.show_prof').css('display') != 'none'){
+      $('header h1').hide()
+    }
     $('.search').show();
     $('.close_search').show();
   })

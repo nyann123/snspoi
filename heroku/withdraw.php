@@ -13,7 +13,6 @@ if(!empty($_POST['withdraw'])){
  //セッション削除
   session_destroy();
   $_SESSION = array();
-  debug('セッション変数の中身：'.print_r($_SESSION,true));
 
   header("Location:login_form.php");
   exit();

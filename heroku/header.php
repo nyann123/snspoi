@@ -14,8 +14,6 @@ if (!empty($_POST['search_user'])){
         <div class="show_prof">
           <i class="fas fa-user"></i>
         </div>
-      <?php else: ?>
-        <div class="dummy"></div>
       <?php endif ?>
       <!-- ログイン中ならマイページ　していなければログインページへ -->
       <?php if(empty($_SESSION['user_id'])):?>

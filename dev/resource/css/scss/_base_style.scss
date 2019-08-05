@@ -194,10 +194,10 @@ header {
   }
 
   h1{
-    position: absolute;
-    left: 40%;
-    float: left;
-    margin: 0;
+    // position: absolute;
+    // left: 40%;
+    // float: left;
+    margin: 0 0 0 10px;
     font-size: $fontM;
     line-height: 50px;
 
@@ -838,7 +838,7 @@ button{
 }
 
 .show_prof{
-  visibility: hidden;
+  display: none;
   font-size: 28px;
   background-color: $gray;
   border: 2px solid $dark_gold;
@@ -873,9 +873,6 @@ button{
   }
 }
 
-.dummy{
-  visibility:hidden;
-}
 
 /* ///////////////////////// */
 /*       モーダル      */
